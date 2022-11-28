@@ -1269,7 +1269,7 @@ export default {
         days: [],
       }
 
-      for (let i = 0; i < 42; i++) {
+      for (let i = 0; i < 31; i++) {
         month.days.push({
           date: this.addDays(firstDay, i),
           belongsToThisMonth: this.addDays(firstDay, i).getMonth() === date.getMonth(),
