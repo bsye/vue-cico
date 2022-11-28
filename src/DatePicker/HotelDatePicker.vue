@@ -694,10 +694,9 @@ export default {
       ) {
         this.createMonth(new Date(this.startDate))
         const count = this.getMonthDiff(this.startDate, this.checkIn)
-        const monthCount = this.showSingleMonth ? count - 1 : count
         let nextMonth = new Date(this.startDate)
 
-        for (let i = 0; i <= monthCount; i++) {
+        for (let i = 0; i <= 10; i++) {
           const tempNextMonth = this.getNextMonth(nextMonth)
 
           this.createMonth(tempNextMonth)
@@ -714,6 +713,9 @@ export default {
         this.createMonth(new Date(this.startDate))
 
         if (!this.showSingleMonth) {
+          this.createMonth(this.getNextMonth(new Date(this.startDate)))
+          this.createMonth(this.getNextMonth(new Date(this.startDate)))
+          this.createMonth(this.getNextMonth(new Date(this.startDate)))
           this.createMonth(this.getNextMonth(new Date(this.startDate)))
         }
       }
