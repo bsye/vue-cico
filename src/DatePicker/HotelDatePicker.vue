@@ -638,6 +638,7 @@ export default {
     this.generateInitialMonths()
   },
   mounted() {
+    console.log('test')
     this.handleWindowResize()
 
     window.addEventListener('resize', this.handleWindowResize)

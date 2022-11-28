@@ -9,7 +9,6 @@ module.exports = {
   },
   plugins: ['prettier'],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-plusplus': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'padding-line-between-statements': [
