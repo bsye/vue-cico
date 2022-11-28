@@ -4,20 +4,22 @@
       {{ monthName }}
     </p>
     <week-row v-bind="$props" />
-    <div
-      class="vhd__square"
-      v-for="(day, dayIndex) in month.days"
-      :key="`${dayKey}-${dayIndex}`"
-      @mouseenter="enterDay($event, day)"
-    >
-      <Day
-        v-bind="$props"
-        :belongsToThisMonth="day.belongsToThisMonth"
-        :date="day.date"
-        @clear-selection="clearSelection"
-        @booking-clicked="handleBookingClicked"
-        @day-clicked="handleDayClick"
-      />
+    <div class="vhd__square-wrapper">
+      <div
+        class="vhd__square"
+        v-for="(day, dayIndex) in month.days"
+        :key="`${dayKey}-${dayIndex}`"
+        @mouseenter="enterDay($event, day)"
+      >
+        <Day
+          v-bind="$props"
+          :belongsToThisMonth="day.belongsToThisMonth"
+          :date="day.date"
+          @clear-selection="clearSelection"
+          @booking-clicked="handleBookingClicked"
+          @day-clicked="handleDayClick"
+        />
+      </div>
     </div>
   </div>
 </template>

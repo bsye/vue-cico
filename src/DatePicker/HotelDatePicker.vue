@@ -638,16 +638,11 @@ export default {
     this.generateInitialMonths()
   },
   mounted() {
-    console.log('test')
     this.handleWindowResize()
 
     window.addEventListener('resize', this.handleWindowResize)
 
-    if (!this.isDesktop) {
-      document.addEventListener('touchstart', this.handleTouchStart, false)
-      document.addEventListener('touchmove', this.handleTouchMove, false)
-      document.addEventListener('touchend', this.handleTouchEnd, false)
-    } else {
+    if (this.isDesktop) {
       document.addEventListener('click', this.handleClickOutside, false)
       document.addEventListener('keyup', this.escFunction, false)
     }
@@ -660,11 +655,7 @@ export default {
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize)
 
-    if (!this.isDesktop) {
-      document.removeEventListener('touchstart', this.handleTouchStart)
-      document.removeEventListener('touchmove', this.handleTouchMove)
-      document.removeEventListener('touchend', this.handleTouchEnd)
-    } else {
+    if (this.isDesktop) {
       document.removeEventListener('keyup', this.escFunction, false)
       document.removeEventListener('click', this.handleClickOutside)
     }
@@ -695,9 +686,10 @@ export default {
       ) {
         this.createMonth(new Date(this.startDate))
         const count = this.getMonthDiff(this.startDate, this.checkIn)
+        const monthCount = this.showSingleMonth ? count - 1 : count
         let nextMonth = new Date(this.startDate)
 
-        for (let i = 0; i <= 10; i++) {
+        for (let i = 0; i <= monthCount; i++) {
           const tempNextMonth = this.getNextMonth(nextMonth)
 
           this.createMonth(tempNextMonth)
@@ -714,9 +706,6 @@ export default {
         this.createMonth(new Date(this.startDate))
 
         if (!this.showSingleMonth) {
-          this.createMonth(this.getNextMonth(new Date(this.startDate)))
-          this.createMonth(this.getNextMonth(new Date(this.startDate)))
-          this.createMonth(this.getNextMonth(new Date(this.startDate)))
           this.createMonth(this.getNextMonth(new Date(this.startDate)))
         }
       }

@@ -2175,7 +2175,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a8f8f852-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=71065e21&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a8f8f852-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=24864d58&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2427,7 +2427,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=71065e21&
+// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=24864d58&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
@@ -2844,8 +2844,8 @@ var fecha = {
 
 //# sourceMappingURL=fecha.js.map
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a8f8f852-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/Month.vue?vue&type=template&id=b0c2d724&
-var Monthvue_type_template_id_b0c2d724_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a8f8f852-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/Month.vue?vue&type=template&id=1dd6b465&
+var Monthvue_type_template_id_1dd6b465_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -2858,7 +2858,9 @@ var Monthvue_type_template_id_b0c2d724_render = function render() {
     }
   }, [_c('p', {
     staticClass: "vhd__datepicker__month-name"
-  }, [_vm._v(" " + _vm._s(_vm.monthName) + " ")]), _c('week-row', _vm._b({}, 'week-row', _vm.$props, false)), _vm._l(_vm.month.days, function (day, dayIndex) {
+  }, [_vm._v(" " + _vm._s(_vm.monthName) + " ")]), _c('week-row', _vm._b({}, 'week-row', _vm.$props, false)), _c('div', {
+    staticClass: "vhd__square-wrapper"
+  }, _vm._l(_vm.month.days, function (day, dayIndex) {
     return _c('div', {
       key: `${_vm.dayKey}-${dayIndex}`,
       staticClass: "vhd__square",
@@ -2878,11 +2880,11 @@ var Monthvue_type_template_id_b0c2d724_render = function render() {
         "day-clicked": _vm.handleDayClick
       }
     }, 'Day', _vm.$props, false))], 1);
-  })], 2);
+  }), 0)], 1);
 };
-var Monthvue_type_template_id_b0c2d724_staticRenderFns = [];
+var Monthvue_type_template_id_1dd6b465_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/components/Month.vue?vue&type=template&id=b0c2d724&
+// CONCATENATED MODULE: ./src/DatePicker/components/Month.vue?vue&type=template&id=1dd6b465&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a8f8f852-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/Day.vue?vue&type=template&id=0b134872&
 var Dayvue_type_template_id_0b134872_render = function render() {
@@ -4145,8 +4147,8 @@ var WeekRow_component = normalizeComponent(
 
 var Month_component = normalizeComponent(
   components_Monthvue_type_script_lang_js_,
-  Monthvue_type_template_id_b0c2d724_render,
-  Monthvue_type_template_id_b0c2d724_staticRenderFns,
+  Monthvue_type_template_id_1dd6b465_render,
+  Monthvue_type_template_id_1dd6b465_staticRenderFns,
   false,
   null,
   null,
@@ -4663,14 +4665,9 @@ var DateInput_component = normalizeComponent(
     this.generateInitialMonths();
   },
   mounted() {
-    console.log('test');
     this.handleWindowResize();
     window.addEventListener('resize', this.handleWindowResize);
-    if (!this.isDesktop) {
-      document.addEventListener('touchstart', this.handleTouchStart, false);
-      document.addEventListener('touchmove', this.handleTouchMove, false);
-      document.addEventListener('touchend', this.handleTouchEnd, false);
-    } else {
+    if (this.isDesktop) {
       document.addEventListener('click', this.handleClickOutside, false);
       document.addEventListener('keyup', this.escFunction, false);
     }
@@ -4681,11 +4678,7 @@ var DateInput_component = normalizeComponent(
   },
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize);
-    if (!this.isDesktop) {
-      document.removeEventListener('touchstart', this.handleTouchStart);
-      document.removeEventListener('touchmove', this.handleTouchMove);
-      document.removeEventListener('touchend', this.handleTouchEnd);
-    } else {
+    if (this.isDesktop) {
       document.removeEventListener('keyup', this.escFunction, false);
       document.removeEventListener('click', this.handleClickOutside);
     }
@@ -4711,8 +4704,9 @@ var DateInput_component = normalizeComponent(
       if (this.checkIn && (this.getMonthDiff(this.getNextMonth(new Date(this.startDate)), this.checkIn) > 0 || this.getMonthDiff(this.startDate, this.checkIn) > 0)) {
         this.createMonth(new Date(this.startDate));
         const count = this.getMonthDiff(this.startDate, this.checkIn);
+        const monthCount = this.showSingleMonth ? count - 1 : count;
         let nextMonth = new Date(this.startDate);
-        for (let i = 0; i <= 10; i++) {
+        for (let i = 0; i <= monthCount; i++) {
           const tempNextMonth = this.getNextMonth(nextMonth);
           this.createMonth(tempNextMonth);
           nextMonth = tempNextMonth;
@@ -4725,9 +4719,6 @@ var DateInput_component = normalizeComponent(
       } else {
         this.createMonth(new Date(this.startDate));
         if (!this.showSingleMonth) {
-          this.createMonth(this.getNextMonth(new Date(this.startDate)));
-          this.createMonth(this.getNextMonth(new Date(this.startDate)));
-          this.createMonth(this.getNextMonth(new Date(this.startDate)));
           this.createMonth(this.getNextMonth(new Date(this.startDate)));
         }
       }
