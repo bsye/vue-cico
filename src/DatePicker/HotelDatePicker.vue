@@ -460,7 +460,7 @@ export default {
     paginateMonths() {
       const months = [this.months[this.activeMonthIndex]]
 
-      if (!(this.showSingleMonth || (this.alwaysVisible && !this.isDesktop))) {
+      if (!this.showSingleMonth) {
         months.push(this.months[this.activeMonthIndex + 1])
       }
 
