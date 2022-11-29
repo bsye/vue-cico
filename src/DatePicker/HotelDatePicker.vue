@@ -56,35 +56,6 @@
         'vhd__datepicker--right': positionRight,
       }"
     >
-      <div class="vhd__hide-on-desktop">
-        <div
-          v-if="isOpen"
-          class="vhd__datepicker__dummy-wrapper vhd__datepicker__dummy-wrapper--no-border"
-          :class="{ 'vhd__datepicker__dummy-wrapper--is-active': isOpen }"
-          @click="toggleDatepicker"
-        >
-          <div
-            class="vhd__datepicker__input"
-            tabindex="0"
-            :class="{
-              'vhd__datepicker__dummy-input--is-active': isOpen && checkIn == null,
-            }"
-            type="button"
-          >
-            {{ `${checkIn ? formatDate(checkIn) : i18n['check-in']}` }}
-          </div>
-          <div
-            class="vhd__datepicker__input"
-            tabindex="0"
-            :class="{
-              'vhd__datepicker__dummy-input--is-active': isOpen && checkOut == null && checkIn !== null,
-            }"
-            type="button"
-          >
-            {{ `${checkOut ? formatDate(checkOut) : i18n['check-out']}` }}
-          </div>
-        </div>
-      </div>
       <div v-if="isOpen" class="vhd__datepicker__inner">
         <div
           :class="{
@@ -152,58 +123,6 @@
             @enter-day="enterDay"
             @enter-month="enterMonth"
           />
-        </div>
-        <div
-          v-if="!isDesktop && isOpen"
-          :class="['vhd__datepicker__months-wrapper', { 'vhd__show-tooltip': showCustomTooltip && hoveringTooltip }]"
-        >
-          <div class="vhd__datepicker__tooltip--mobile" v-if="hoveringTooltip">
-            <template v-if="customTooltipMessage">
-              {{ cleanString(customTooltipMessage) }}
-            </template>
-          </div>
-          <div class="vhd__datepicker__months" ref="swiperWrapper">
-            <Month
-              v-for="(month, monthIndex) in paginateMonths"
-              :key="`${datepickerMonthKey}-${monthIndex}-desktop`"
-              ref="datepickerMonth"
-              :month="month"
-              :dayKey="datepickerDayKey"
-              :weekKey="datepickerWeekKey"
-              :isDesktop="isDesktop"
-              :firstDayOfWeek="firstDayOfWeek"
-              :showYear="showYear"
-              :yearBeforeMonth="yearBeforeMonth"
-              :activeMonthIndex="activeMonthIndex"
-              :bookings="sortBookings"
-              :checkIn="checkIn"
-              :checkIncheckOutHalfDay="checkIncheckOutHalfDay"
-              :checkInPeriod="checkInPeriod"
-              :checkOut="checkOut"
-              :disableCheckoutOnCheckin="disableCheckoutOnCheckin"
-              :duplicateBookingDates="duplicateBookingDates"
-              :hoveringDate="hoveringDate"
-              :hoveringPeriod="hoveringPeriod"
-              :i18n="i18n"
-              :isOpen="isOpen"
-              :minNightCount="minNightCount"
-              :nextDisabledDate="nextDisabledDate"
-              :nextPeriodDisableDates="nextPeriodDisableDates"
-              :options="dayOptions"
-              :priceSymbol="priceSymbol"
-              :screenSize="screenSize"
-              :showCustomTooltip="false"
-              :showPrice="showPrice"
-              :sortedDisabledDates="sortedDisabledDates"
-              :sortedPeriodDates="sortedPeriodDates"
-              :tooltipMessage="customTooltipMessage"
-              @clear-selection="clearSelection"
-              @booking-clicked="handleBookingClicked"
-              @day-clicked="handleDayClick"
-              @enter-day="enterDay"
-              @enter-month="enterMonth"
-            />
-          </div>
         </div>
       </div>
       <slot name="content" />
