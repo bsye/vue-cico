@@ -2184,7 +2184,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a8f8f852-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=4db3ea34&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a8f8f852-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=1a8f008e&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2193,8 +2193,7 @@ var render = function render() {
     staticClass: "vhd__datepicker__wrapper",
     class: {
       'vhd__datepicker__wrapper--grid': _vm.gridStyle,
-      'vhd__datepicker__wrapper--booking': _vm.bookings.length > 0,
-      vhd__datepicker__fullview: _vm.alwaysVisible
+      'vhd__datepicker__wrapper--booking': _vm.bookings.length > 0
     }
   }, [_vm.isOpen ? _c('div', {
     staticClass: "vhd__datepicker__close-button vhd__hide-on-desktop",
@@ -2255,8 +2254,8 @@ var render = function render() {
   })])]), _c('div', {
     staticClass: "vhd__datepicker",
     class: {
-      'vhd__datepicker--open': _vm.isOpen && !_vm.alwaysVisible,
-      'vhd__datepicker--closed': !_vm.isOpen && !_vm.alwaysVisible,
+      'vhd__datepicker--open': _vm.isOpen,
+      'vhd__datepicker--closed': !_vm.isOpen,
       'vhd__datepicker--right': _vm.positionRight
     }
   }, [_c('div', {
@@ -2287,7 +2286,7 @@ var render = function render() {
       "tabindex": "0",
       "type": "button"
     }
-  }, [_vm._v(" " + _vm._s(`${_vm.checkOut ? _vm.formatDate(_vm.checkOut) : _vm.i18n['check-out']}`) + " ")])]) : _vm._e()]), _vm.isOpen || _vm.alwaysVisible ? _c('div', {
+  }, [_vm._v(" " + _vm._s(`${_vm.checkOut ? _vm.formatDate(_vm.checkOut) : _vm.i18n['check-out']}`) + " ")])]) : _vm._e()]), _vm.isOpen ? _c('div', {
     staticClass: "vhd__datepicker__inner"
   }, [_c('div', {
     class: {
@@ -2326,7 +2325,7 @@ var render = function render() {
         return _vm.renderNextMonth.apply(null, arguments);
       }
     }
-  })]), _vm.isDesktop || _vm.alwaysVisible ? _c('div', {
+  })]), _c('div', {
     staticClass: "vhd__datepicker__months",
     class: {
       'vhd__datepicker__months--full': _vm.showSingleMonth
@@ -2378,7 +2377,7 @@ var render = function render() {
         "enter-month": _vm.enterMonth
       }
     });
-  }), 1) : _vm._e(), !_vm.isDesktop && _vm.isOpen && !_vm.alwaysVisible ? _c('div', {
+  }), 1), !_vm.isDesktop && _vm.isOpen ? _c('div', {
     class: ['vhd__datepicker__months-wrapper', {
       'vhd__show-tooltip': _vm.showCustomTooltip && _vm.hoveringTooltip
     }]
@@ -2436,7 +2435,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=4db3ea34&
+// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=1a8f008e&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
@@ -4288,10 +4287,6 @@ var DateInput_component = normalizeComponent(
     DateInput: DateInput
   },
   props: {
-    alwaysVisible: {
-      type: Boolean,
-      default: false
-    },
     bookings: {
       type: Array,
       default() {
@@ -4466,7 +4461,7 @@ var DateInput_component = normalizeComponent(
       },
       set(open) {
         this.open = open;
-        if (!this.isDesktop && !this.alwaysVisible) {
+        if (!this.isDesktop) {
           const body = document.querySelector('body');
           if (open) {
             body.style.overflow = 'hidden';
