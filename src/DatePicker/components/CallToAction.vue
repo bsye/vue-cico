@@ -23,12 +23,11 @@
         {{ i18n.activity.calendar.checkOut }}
       </span>
 
-      <span
-        v-if="!extraNights && i18n.checkInCheckOut && i18n.checkInCheckOut.nightsIncluded"
-        class="vhd__datepicker__nights"
-      >
-        {{ `\u00A0${includedNights}` + i18n.checkInCheckOut.nightsIncluded }}
-      </span>
+      <template v-if="i18n.checkInCheckOut && i18n.checkInCheckOut.nightsIncluded">
+        <span v-if="!extraNights" class="vhd__datepicker__nights">
+          {{ `\u00A0${includedNights}` + i18n.checkInCheckOut.nightsIncluded }}
+        </span>
+      </template>
 
       <span class="vhd__datepicker__travel-dates">
         {{ `\u00A0${nightsTotal}` }}
