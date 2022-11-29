@@ -4,7 +4,6 @@
     :class="{
       'vhd__datepicker__wrapper--grid': gridStyle,
       'vhd__datepicker__wrapper--booking': bookings.length > 0,
-      vhd__datepicker__fullview: alwaysVisible,
     }"
     :ref="`DatePicker-${hash}`"
     v-if="value"
@@ -41,8 +40,8 @@
     <div
       class="vhd__datepicker"
       :class="{
-        'vhd__datepicker--open': isOpen && !alwaysVisible,
-        'vhd__datepicker--closed': !isOpen && !alwaysVisible,
+        'vhd__datepicker--open': isOpen,
+        'vhd__datepicker--closed': !isOpen,
         'vhd__datepicker--right': positionRight,
       }"
     >
@@ -75,7 +74,7 @@
           </div>
         </div>
       </div>
-      <div v-if="isOpen || alwaysVisible" class="vhd__datepicker__inner">
+      <div v-if="isOpen" class="vhd__datepicker__inner">
         <div
           :class="{
             vhd__datepicker__header: isDesktop,
@@ -99,11 +98,7 @@
             :tabindex="isOpen ? 0 : -1"
           />
         </div>
-        <div
-          v-if="isDesktop || alwaysVisible"
-          class="vhd__datepicker__months"
-          :class="{ 'vhd__datepicker__months--full': showSingleMonth }"
-        >
+        <div class="vhd__datepicker__months" :class="{ 'vhd__datepicker__months--full': showSingleMonth }">
           <Month
             v-for="(month, monthIndex) in paginateMonths"
             :key="`${datepickerMonthKey}-${monthIndex}-desktop`"
@@ -148,7 +143,7 @@
           />
         </div>
         <div
-          v-if="!isDesktop && isOpen && !alwaysVisible"
+          v-if="!isDesktop && isOpen"
           :class="['vhd__datepicker__months-wrapper', { 'vhd__show-tooltip': showCustomTooltip && hoveringTooltip }]"
         >
           <div class="vhd__datepicker__tooltip--mobile" v-if="hoveringTooltip">
@@ -221,10 +216,6 @@ export default {
     DateInput,
   },
   props: {
-    alwaysVisible: {
-      type: Boolean,
-      default: false,
-    },
     bookings: {
       type: Array,
       default() {
@@ -400,7 +391,7 @@ export default {
       set(open) {
         this.open = open
 
-        if (!this.isDesktop && !this.alwaysVisible) {
+        if (!this.isDesktop) {
           const body = document.querySelector('body')
 
           if (open) {
