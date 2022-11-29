@@ -1147,6 +1147,7 @@ export default {
     },
     showDatepicker() {
       this.isOpen = true
+      console.log('opened')
       this.$emit('cico-opened')
     },
     toggleDatepicker() {
