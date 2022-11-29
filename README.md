@@ -1,36 +1,12 @@
-[![npm](https://img.shields.io/npm/dt/vue-hotel-datepicker.svg)](vue-hotel-datepicker)
-[![Build Status](https://travis-ci.org/krystalcampioni/vue-hotel-datepicker.svg?branch=main)](https://travis-ci.org/krystalcampioni/vue-hotel-datepicker)
-
 A responsive date range picker for Vue.js that displays the number of nights selected and allow several useful options like custom check-in/check-out rules, localisation support and more.
-
-
-![demo gif](https://github.com/ZestfulNation/vue-hotel-datepicker/blob/main/demo.gif?raw=true)
-
-
-
-## Demo
-[https://ZestfulNation.github.io/vue-hotel-datepicker/](https://ZestfulNation.github.io/vue-hotel-datepicker/)
 
 ## Installation
 
 #### NPM
 
 ```bash
-npm install vue-hotel-datepicker
+npm install git+ssh://git@gitlab.production.smartbox.com:npm/smart-ui.git
 ```
-
-#### PNPM
-
-```bash
-pnpm install vue-hotel-datepicker
-```
-
-#### YARN
-
-```bash
-yarn add vue-hotel-datepicker
-```
-
 
 ```javascript
 import HotelDatePicker from 'vue-hotel-datepicker'
@@ -230,4 +206,4 @@ bookings: [
 ```
 
 ## Credits
-This component was originally built as a Vue wrapper component for the [Hotel Datepicker](https://github.com/benitolopez/hotel-datepicker) by @benitolopez. Version 2.0.0 was completely rewritten with Vue, removing the original library, removing some features and introducing others.
+This component is a fork of [ZestfulNation Vue-Hotel-Datepicker](https://github.com/ZestfulNation/vue-hotel-datepicker)
