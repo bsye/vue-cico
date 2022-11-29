@@ -24,7 +24,7 @@
       </span>
 
       <template v-if="i18n.checkInCheckOut && i18n.checkInCheckOut.nightsIncluded">
-        <span v-if="!extraNights" class="vhd__datepicker__nights">
+        <span v-if="extraNights < 1" class="vhd__datepicker__nights">
           {{ `\u00A0${includedNights}` + i18n.checkInCheckOut.nightsIncluded }}
         </span>
       </template>

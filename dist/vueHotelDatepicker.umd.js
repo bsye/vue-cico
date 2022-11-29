@@ -4271,8 +4271,8 @@ var DateInput_component = normalizeComponent(
 )
 
 /* harmony default export */ var DateInput = (DateInput_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6cd7a22a-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/CallToAction.vue?vue&type=template&id=c346ca96&
-var CallToActionvue_type_template_id_c346ca96_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6cd7a22a-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/CallToAction.vue?vue&type=template&id=46b1dc75&
+var CallToActionvue_type_template_id_46b1dc75_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -4289,7 +4289,7 @@ var CallToActionvue_type_template_id_c346ca96_render = function render() {
     staticClass: "vhd__datepicker__checkout"
   }, [_vm._v(" " + _vm._s(`\u00A0${_vm.nightsOut}\u00A0`) + " ")]) : _vm.i18n.activity && _vm.i18n.activity.calendar && _vm.i18n.activity.calendar.checkOut ? _c('span', {
     staticClass: "vhd__datepicker__checkout"
-  }, [_vm._v(" " + _vm._s(_vm.i18n.activity.calendar.checkOut) + " ")]) : _vm._e(), _vm.i18n.checkInCheckOut && _vm.i18n.checkInCheckOut.nightsIncluded ? [!_vm.extraNights ? _c('span', {
+  }, [_vm._v(" " + _vm._s(_vm.i18n.activity.calendar.checkOut) + " ")]) : _vm._e(), _vm.i18n.checkInCheckOut && _vm.i18n.checkInCheckOut.nightsIncluded ? [_vm.extraNights < 1 ? _c('span', {
     staticClass: "vhd__datepicker__nights"
   }, [_vm._v(" " + _vm._s(`\u00A0${_vm.includedNights}` + _vm.i18n.checkInCheckOut.nightsIncluded) + " ")]) : _vm._e()] : _vm._e(), _c('span', {
     staticClass: "vhd__datepicker__travel-dates"
@@ -4297,9 +4297,9 @@ var CallToActionvue_type_template_id_c346ca96_render = function render() {
     staticClass: "vhd__datepicker__extra-nights"
   }, [_vm._v(" - " + _vm._s(_vm.extraNights + _vm.i18n.checkInCheckOut.extraNight) + " ")]) : _vm._e()])], 2)]);
 };
-var CallToActionvue_type_template_id_c346ca96_staticRenderFns = [];
+var CallToActionvue_type_template_id_46b1dc75_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/components/CallToAction.vue?vue&type=template&id=c346ca96&
+// CONCATENATED MODULE: ./src/DatePicker/components/CallToAction.vue?vue&type=template&id=46b1dc75&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/CallToAction.vue?vue&type=script&lang=js&
 /* harmony default export */ var CallToActionvue_type_script_lang_js_ = ({
@@ -4328,8 +4328,8 @@ var CallToActionvue_type_template_id_c346ca96_staticRenderFns = [];
 
 var CallToAction_component = normalizeComponent(
   components_CallToActionvue_type_script_lang_js_,
-  CallToActionvue_type_template_id_c346ca96_render,
-  CallToActionvue_type_template_id_c346ca96_staticRenderFns,
+  CallToActionvue_type_template_id_46b1dc75_render,
+  CallToActionvue_type_template_id_46b1dc75_staticRenderFns,
   false,
   null,
   null,
