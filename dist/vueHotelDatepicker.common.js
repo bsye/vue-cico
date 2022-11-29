@@ -2175,7 +2175,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6cd7a22a-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=1128109a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6cd7a22a-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=42dae725&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2283,35 +2283,7 @@ var render = function render() {
       'vhd__datepicker--closed': !_vm.isOpen,
       'vhd__datepicker--right': _vm.positionRight
     }
-  }, [_c('div', {
-    staticClass: "vhd__hide-on-desktop"
   }, [_vm.isOpen ? _c('div', {
-    staticClass: "vhd__datepicker__dummy-wrapper vhd__datepicker__dummy-wrapper--no-border",
-    class: {
-      'vhd__datepicker__dummy-wrapper--is-active': _vm.isOpen
-    },
-    on: {
-      "click": _vm.toggleDatepicker
-    }
-  }, [_c('div', {
-    staticClass: "vhd__datepicker__input",
-    class: {
-      'vhd__datepicker__dummy-input--is-active': _vm.isOpen && _vm.checkIn == null
-    },
-    attrs: {
-      "tabindex": "0",
-      "type": "button"
-    }
-  }, [_vm._v(" " + _vm._s(`${_vm.checkIn ? _vm.formatDate(_vm.checkIn) : _vm.i18n['check-in']}`) + " ")]), _c('div', {
-    staticClass: "vhd__datepicker__input",
-    class: {
-      'vhd__datepicker__dummy-input--is-active': _vm.isOpen && _vm.checkOut == null && _vm.checkIn !== null
-    },
-    attrs: {
-      "tabindex": "0",
-      "type": "button"
-    }
-  }, [_vm._v(" " + _vm._s(`${_vm.checkOut ? _vm.formatDate(_vm.checkOut) : _vm.i18n['check-out']}`) + " ")])]) : _vm._e()]), _vm.isOpen ? _c('div', {
     staticClass: "vhd__datepicker__inner"
   }, [_c('div', {
     class: {
@@ -2402,65 +2374,11 @@ var render = function render() {
         "enter-month": _vm.enterMonth
       }
     });
-  }), 1), !_vm.isDesktop && _vm.isOpen ? _c('div', {
-    class: ['vhd__datepicker__months-wrapper', {
-      'vhd__show-tooltip': _vm.showCustomTooltip && _vm.hoveringTooltip
-    }]
-  }, [_vm.hoveringTooltip ? _c('div', {
-    staticClass: "vhd__datepicker__tooltip--mobile"
-  }, [_vm.customTooltipMessage ? [_vm._v(" " + _vm._s(_vm.cleanString(_vm.customTooltipMessage)) + " ")] : _vm._e()], 2) : _vm._e(), _c('div', {
-    ref: "swiperWrapper",
-    staticClass: "vhd__datepicker__months"
-  }, _vm._l(_vm.paginateMonths, function (month, monthIndex) {
-    return _c('Month', {
-      key: `${_vm.datepickerMonthKey}-${monthIndex}-desktop`,
-      ref: "datepickerMonth",
-      refInFor: true,
-      attrs: {
-        "month": month,
-        "dayKey": _vm.datepickerDayKey,
-        "weekKey": _vm.datepickerWeekKey,
-        "isDesktop": _vm.isDesktop,
-        "firstDayOfWeek": _vm.firstDayOfWeek,
-        "showYear": _vm.showYear,
-        "yearBeforeMonth": _vm.yearBeforeMonth,
-        "activeMonthIndex": _vm.activeMonthIndex,
-        "bookings": _vm.sortBookings,
-        "checkIn": _vm.checkIn,
-        "checkIncheckOutHalfDay": _vm.checkIncheckOutHalfDay,
-        "checkInPeriod": _vm.checkInPeriod,
-        "checkOut": _vm.checkOut,
-        "disableCheckoutOnCheckin": _vm.disableCheckoutOnCheckin,
-        "duplicateBookingDates": _vm.duplicateBookingDates,
-        "hoveringDate": _vm.hoveringDate,
-        "hoveringPeriod": _vm.hoveringPeriod,
-        "i18n": _vm.i18n,
-        "isOpen": _vm.isOpen,
-        "minNightCount": _vm.minNightCount,
-        "nextDisabledDate": _vm.nextDisabledDate,
-        "nextPeriodDisableDates": _vm.nextPeriodDisableDates,
-        "options": _vm.dayOptions,
-        "priceSymbol": _vm.priceSymbol,
-        "screenSize": _vm.screenSize,
-        "showCustomTooltip": false,
-        "showPrice": _vm.showPrice,
-        "sortedDisabledDates": _vm.sortedDisabledDates,
-        "sortedPeriodDates": _vm.sortedPeriodDates,
-        "tooltipMessage": _vm.customTooltipMessage
-      },
-      on: {
-        "clear-selection": _vm.clearSelection,
-        "booking-clicked": _vm.handleBookingClicked,
-        "day-clicked": _vm.handleDayClick,
-        "enter-day": _vm.enterDay,
-        "enter-month": _vm.enterMonth
-      }
-    });
-  }), 1)]) : _vm._e()]) : _vm._e(), _vm._t("content")], 2)]) : _vm._e();
+  }), 1)]) : _vm._e(), _vm._t("content")], 2)]) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=1128109a&
+// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=42dae725&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
