@@ -1143,11 +1143,15 @@ export default {
     },
     hideDatepicker() {
       this.isOpen = false
-      this.$emit('cico-closed')
+      this.$nextTick(() => {
+        this.$emit('cico-closed')
+      })
     },
     showDatepicker() {
       this.isOpen = true
-      this.$emit('cico-opened')
+      this.$nextTick(() => {
+        this.$emit('cico-opened')
+      })
     },
     toggleDatepicker() {
       this[this.isOpen ? 'hideDatepicker' : 'showDatepicker']()
