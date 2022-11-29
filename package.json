@@ -1,6 +1,5 @@
 {
   "name": "vue-cico",
-  "version": "4.6",
   "description": "Smartbox version of check-in check-out",
   "author": "Smartbox",
   "main": "dist/vueHotelDatepicker.common.js",
