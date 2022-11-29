@@ -5,7 +5,7 @@ A responsive date range picker for Vue.js that displays the number of nights sel
 #### NPM
 
 ```bash
-npm install git+ssh://git@gitlab.production.smartbox.com:npm/smart-ui.git
+npm install git+ssh://git@gitlab.production.smartbox.com:npm/vue-cico.git
 ```
 
 ```javascript
