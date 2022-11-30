@@ -649,6 +649,7 @@ export default {
       return false
     },
     checkIfDisabled() {
+      console.log(this.date, this.options.startDate)
       this.isDisabled =
         // If this day is equal any of the disabled dates
         (this.sortedDisabledDates ? this.sortedDisabledDates.some((i) => this.compareDay(i, this.date) === 0) : null) ||
