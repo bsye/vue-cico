@@ -50,8 +50,8 @@
         <CallToAction
           :included-nights="minNightCount"
           :nights-total="totalNights"
-          :nights-in="dateFormater(checkIn)"
-          :nights-out="dateFormater(checkOut)"
+          :nights-in="dateFormater(checkIn, 'ddd DD MMM.')"
+          :nights-out="dateFormater(checkOut, 'ddd DD MMM.')"
           :i18n="i18n"
         />
         <div
