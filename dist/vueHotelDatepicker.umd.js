@@ -3123,7 +3123,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=11e38484&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=5ecfa861&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -3300,7 +3300,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=11e38484&
+// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=5ecfa861&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
@@ -3763,8 +3763,8 @@ var Monthvue_type_template_id_17f7499c_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./src/DatePicker/components/Month.vue?vue&type=template&id=17f7499c&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/Day.vue?vue&type=template&id=65de6c7f&
-var Dayvue_type_template_id_65de6c7f_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/Day.vue?vue&type=template&id=5509f5ea&
+var Dayvue_type_template_id_5509f5ea_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_vm.showTooltip && _vm.options.hoveringTooltip ? _c('div', {
@@ -3807,9 +3807,9 @@ var Dayvue_type_template_id_65de6c7f_render = function render() {
     }
   }) : _vm._e()], 1);
 };
-var Dayvue_type_template_id_65de6c7f_staticRenderFns = [];
+var Dayvue_type_template_id_5509f5ea_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/components/Day.vue?vue&type=template&id=65de6c7f&
+// CONCATENATED MODULE: ./src/DatePicker/components/Day.vue?vue&type=template&id=5509f5ea&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -4707,6 +4707,7 @@ var Price_component = normalizeComponent(
       return false;
     },
     checkIfDisabled() {
+      console.log(this.date, this.options.startDate);
       this.isDisabled =
       // If this day is equal any of the disabled dates
       (this.sortedDisabledDates ? this.sortedDisabledDates.some(i => this.compareDay(i, this.date) === 0) : null) ||
@@ -4773,8 +4774,8 @@ var Price_component = normalizeComponent(
 
 var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_65de6c7f_render,
-  Dayvue_type_template_id_65de6c7f_staticRenderFns,
+  Dayvue_type_template_id_5509f5ea_render,
+  Dayvue_type_template_id_5509f5ea_staticRenderFns,
   false,
   null,
   null,
@@ -5646,8 +5647,6 @@ var CallToAction_component = normalizeComponent(
       return [this.get(this.i18n, 'date.weekdays.sun'), this.get(this.i18n, 'date.weekdays.mon'), this.get(this.i18n, 'date.weekdays.tue'), this.get(this.i18n, 'date.weekdays.wed'), this.get(this.i18n, 'date.weekdays.thu'), this.get(this.i18n, 'date.weekdays.fri'), this.get(this.i18n, 'date.weekdays.sat')];
     },
     monthNames() {
-      console.log(this.get(this.i18n, 'date'));
-      console.log(this.get(this.i18n, 'date.months'));
       return Object.values(this.get(this.i18n, 'date.months'));
     },
     weekdaysShort() {
