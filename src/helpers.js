@@ -189,6 +189,8 @@ const helpers = {
   shortenString(arr, sLen) {
     const newArr = []
 
+    if (!arr) return null
+
     for (let i = 0, len = arr.length; i < len; i++) {
       newArr.push(arr[i].substr(0, sLen))
     }

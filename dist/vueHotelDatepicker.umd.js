@@ -3123,7 +3123,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=454fa797&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=2a256e1a&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -3300,7 +3300,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=454fa797&
+// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=2a256e1a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
@@ -3961,6 +3961,7 @@ const helpers = {
   },
   shortenString(arr, sLen) {
     const newArr = [];
+    if (!arr) return null;
     for (let i = 0, len = arr.length; i < len; i++) {
       newArr.push(arr[i].substr(0, sLen));
     }
@@ -5645,6 +5646,8 @@ var CallToAction_component = normalizeComponent(
       return [this.get(this.i18n, 'date.weekdays.sun'), this.get(this.i18n, 'date.weekdays.mon'), this.get(this.i18n, 'date.weekdays.tue'), this.get(this.i18n, 'date.weekdays.wed'), this.get(this.i18n, 'date.weekdays.thu'), this.get(this.i18n, 'date.weekdays.fri'), this.get(this.i18n, 'date.weekdays.sat')];
     },
     monthNames() {
+      console.log(this.get(this.i18n, 'date'));
+      console.log(this.get(this.i18n, 'date.months'));
       if (this.get(this.i18n, 'date.months')) {
         return Object.values(this.get(this.i18n, 'date.months'));
       }
