@@ -1,10 +1,10 @@
 <template>
   <div class="vhd__datepicker__cta-panel">
-    <h4 v-if="i18n.checkInCheckOut && i18n.checkInCheckOut.checkIn" class="vhd__datepicker__cta-panel-title">
+    <h4 v-if="get(i18n, 'checkInCheckOut.checkIn')" class="vhd__datepicker__cta-panel-title">
       {{ i18n.checkInCheckOut.checkIn }}
     </h4>
 
-    <p v-if="i18n.checkInCheckOut && i18n.checkInCheckOut.stayLongerOne" class="vhd__datepicker__cta-info">
+    <p v-if="get(i18n, 'checkInCheckOut.stayLongerOne')" class="vhd__datepicker__cta-info">
       {{ i18n.checkInCheckOut.stayLongerOne }}
     </p>
 
@@ -16,14 +16,11 @@
       <span v-if="nightsOut" class="vhd__datepicker__checkout">
         {{ `\u00A0${nightsOut}\u00A0` }}
       </span>
-      <span
-        v-else-if="i18n.activity && i18n.activity.calendar && i18n.activity.calendar.checkOut"
-        class="vhd__datepicker__checkout"
-      >
+      <span v-else-if="get(i18n, 'activity.calendar.checkOut')" class="vhd__datepicker__checkout">
         {{ i18n.activity.calendar.checkOut }}
       </span>
 
-      <template v-if="i18n.checkInCheckOut && i18n.checkInCheckOut.nightsIncluded">
+      <template v-if="get(i18n, 'checkInCheckOut.nightsIncluded')">
         <span v-if="extraNights < 1" class="vhd__datepicker__nights">
           {{ `\u00A0${includedNights}` + i18n.checkInCheckOut.nightsIncluded }}
         </span>
@@ -31,10 +28,10 @@
 
       <span class="vhd__datepicker__travel-dates">
         {{ `\u00A0${nightsTotal}` }}
-        <span v-if="i18n.checkInCheckOut && i18n.checkInCheckOut.nightsIncluded">
+        <span v-if="get(i18n, 'checkInCheckOut.nightsIncluded')">
           {{ `\u00A0${includedNights}` + i18n.checkInCheckOut.nightsIncluded }}
         </span>
-        <span v-if="i18n.checkInCheckOut && i18n.checkInCheckOut.extraNight" class="vhd__datepicker__extra-nights">
+        <span v-if="get(i18n, 'checkInCheckOut.extraNight')" class="vhd__datepicker__extra-nights">
           - {{ extraNights + i18n.checkInCheckOut.extraNight }}
         </span>
       </span>
@@ -43,10 +40,17 @@
 </template>
 
 <script>
+import get from 'lodash.get'
+
 export default {
   props: {
     i18n: Object,
-    includedNights: Number,
+
+    includedNights: {
+      type: Number,
+      default: 0,
+    },
+
     nightsIn: String,
     nightsOut: String,
     nightsTotal: Number,
@@ -56,6 +60,10 @@ export default {
     extraNights() {
       return this.nightsTotal - this.includedNights
     },
+  },
+
+  methods: {
+    get,
   },
 }
 </script>
