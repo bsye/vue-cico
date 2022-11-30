@@ -3114,7 +3114,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=0580cc76&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=58776d8b&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -3194,8 +3194,8 @@ var render = function render() {
     attrs: {
       "included-nights": _vm.minNightCount,
       "nights-total": _vm.totalNights,
-      "nights-in": _vm.dateFormater(_vm.checkIn),
-      "nights-out": _vm.dateFormater(_vm.checkOut),
+      "nights-in": _vm.dateFormater(_vm.checkIn, 'ddd DD MMM.'),
+      "nights-out": _vm.dateFormater(_vm.checkOut, 'ddd DD MMM.'),
       "i18n": _vm.i18n
     }
   }), _c('div', {
@@ -3291,7 +3291,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=0580cc76&
+// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=58776d8b&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
@@ -5201,35 +5201,35 @@ var DateInput_component = normalizeComponent(
 )
 
 /* harmony default export */ var DateInput = (DateInput_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/CallToAction.vue?vue&type=template&id=30432b36&
-var CallToActionvue_type_template_id_30432b36_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/CallToAction.vue?vue&type=template&id=3158e7bc&
+var CallToActionvue_type_template_id_3158e7bc_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     staticClass: "vhd__datepicker__cta-panel"
-  }, [_vm.get(_vm.i18n, 'checkInCheckOut.checkIn') ? _c('h4', {
+  }, [_c('h4', {
     staticClass: "vhd__datepicker__cta-panel-title"
-  }, [_vm._v(" " + _vm._s(_vm.i18n.checkInCheckOut.checkIn) + " ")]) : _vm._e(), _vm.get(_vm.i18n, 'checkInCheckOut.stayLongerOne') ? _c('p', {
+  }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'checkInCheckOut.checkIn')) + " ")]), _c('p', {
     staticClass: "vhd__datepicker__cta-info"
-  }, [_vm._v(" " + _vm._s(_vm.i18n.checkInCheckOut.stayLongerOne) + " ")]) : _vm._e(), _c('p', {
+  }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'checkInCheckOut.stayLongerOne')) + " ")]), _c('p', {
     staticClass: "vhd__datepicker__nights-info"
-  }, [_c('span', {
+  }, [_vm.nightsIn ? _c('span', {
     staticClass: "vhd__datepicker__checkin"
-  }, [_vm._v(" " + _vm._s(_vm.nightsIn) + " ")]), _vm.nightsOut ? _c('span', {
+  }, [_vm._v(" " + _vm._s(_vm.nightsIn) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.calendar.checkIn')) + " ")]), _vm.nightsOut ? _c('span', {
     staticClass: "vhd__datepicker__checkout"
-  }, [_vm._v(" " + _vm._s(`\u00A0${_vm.nightsOut}\u00A0`) + " ")]) : _vm.get(_vm.i18n, 'activity.calendar.checkOut') ? _c('span', {
+  }, [_vm._v(" " + _vm._s(` ${_vm.nightsOut} `) + " ")]) : _c('span', {
     staticClass: "vhd__datepicker__checkout"
-  }, [_vm._v(" " + _vm._s(_vm.i18n.activity.calendar.checkOut) + " ")]) : _vm._e(), _vm.get(_vm.i18n, 'checkInCheckOut.nightsIncluded') ? [_vm.extraNights < 1 ? _c('span', {
+  }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.calendar.checkOut')) + " ")]), [_vm.extraNights < 1 ? _c('span', {
     staticClass: "vhd__datepicker__nights"
-  }, [_vm._v(" " + _vm._s(`\u00A0${_vm.includedNights}` + _vm.i18n.checkInCheckOut.nightsIncluded) + " ")]) : _vm._e()] : _vm._e(), _c('span', {
+  }, [_vm._v(" " + _vm._s(` ${_vm.includedNights}`) + " " + _vm._s(_vm.get(_vm.i18n, 'checkInCheckOut.nightsIncluded')) + " ")]) : _vm._e()], _c('span', {
     staticClass: "vhd__datepicker__travel-dates"
-  }, [_vm._v(" " + _vm._s(`\u00A0${_vm.nightsTotal}`) + " "), _vm.get(_vm.i18n, 'checkInCheckOut.nightsIncluded') ? _c('span', [_vm._v(" " + _vm._s(`\u00A0${_vm.includedNights}` + _vm.i18n.checkInCheckOut.nightsIncluded) + " ")]) : _vm._e(), _vm.get(_vm.i18n, 'checkInCheckOut.extraNight') ? _c('span', {
+  }, [_vm.nightsTotal > 0 ? [_vm._v(" " + _vm._s(` ${_vm.nightsTotal}`) + " "), _vm.nightsTotal > 1 ? _c('span', [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.nights')) + " ")]) : _c('span', [_vm._v(_vm._s(_vm.get(_vm.i18n, 'activity.filter.night')))])] : _vm._e(), _vm.extraNights >= 1 ? _c('div', [_c('span', [_vm._v(" " + _vm._s(` ${_vm.includedNights}`) + " " + _vm._s(_vm.get(_vm.i18n, 'checkInCheckOut.nightsIncluded')) + " ")]), _c('span', {
     staticClass: "vhd__datepicker__extra-nights"
-  }, [_vm._v(" - " + _vm._s(_vm.extraNights + _vm.i18n.checkInCheckOut.extraNight) + " ")]) : _vm._e()])], 2)]);
+  }, [_vm._v(" - " + _vm._s(_vm.extraNights) + " " + _vm._s(_vm.get(_vm.i18n, 'checkInCheckOut.extraNight')) + " ")])]) : _vm._e()], 2)], 2)]);
 };
-var CallToActionvue_type_template_id_30432b36_staticRenderFns = [];
+var CallToActionvue_type_template_id_3158e7bc_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/components/CallToAction.vue?vue&type=template&id=30432b36&
+// CONCATENATED MODULE: ./src/DatePicker/components/CallToAction.vue?vue&type=template&id=3158e7bc&
 
 // EXTERNAL MODULE: ./node_modules/lodash.get/index.js
 var lodash_get = __webpack_require__("c832");
@@ -5269,8 +5269,8 @@ var lodash_get_default = /*#__PURE__*/__webpack_require__.n(lodash_get);
 
 var CallToAction_component = normalizeComponent(
   components_CallToActionvue_type_script_lang_js_,
-  CallToActionvue_type_template_id_30432b36_render,
-  CallToActionvue_type_template_id_30432b36_staticRenderFns,
+  CallToActionvue_type_template_id_3158e7bc_render,
+  CallToActionvue_type_template_id_3158e7bc_staticRenderFns,
   false,
   null,
   null,
@@ -5295,6 +5295,84 @@ var CallToAction_component = normalizeComponent(
     saturdayToSaturday: 'Only Saturday to Saturday',
     sundayToSunday: 'Only Sunday to Sunday',
     minimumRequiredPeriod: '%{minNightInPeriod} %{night} minimum.'
+  },
+  checkInCheckOut: {
+    addDate: 'Add dates',
+    whereToGo: 'Where to?',
+    anywhere: 'Anywhere',
+    stayLongerOne: 'Want to stay for longer?',
+    addExtraNights: 'Add extra nights in the calendar!',
+    checkIn: 'Select a check-in date',
+    checkOut: 'Select a checkout date',
+    included: 'included',
+    extraNight: 'extra night(s)',
+    yourDates: 'Your travel dates',
+    selectCheckInCheckOut: 'Choose a check-in and check-out date to make the most of your getaway and really relax by enjoying an extended stay!',
+    people: 'People',
+    nightsIncluded: 'Night(s) included',
+    nightsResults: '"Showing results for a # night stay ( 1 included, 1 extra)"',
+    upgraded: "You've upgraded your stay by adding more nights",
+    changeDatesOne: 'Change your dates to see results included in your box',
+    changeDatesTwo: 'Change dates',
+    clear: 'Clear',
+    extendedStay: 'Extend your stay',
+    mobileMinNights: 'Your experience is for a minimum of %boxMinNights% nights.'
+  },
+  activity: {
+    calendar: {
+      title: 'Select a date to make a booking',
+      titleQCTerme: 'Select your date',
+      mobileTitle: 'Your arrival date',
+      numberOfNight: '"Your stay is for %number% night(s)"',
+      upSell: 'You can add extra nights or rooms later',
+      error: 'The selected partner has no availability at this time. Please choose another partner.',
+      available: 'Available',
+      provisional: 'On request',
+      checkIn: 'Check-in',
+      checkOut: 'Check-out',
+      instantBookingRibbon: 'This Hotel is <span class="availability-ribbon__instant-booking">%symbol%Instantly Bookable</span>',
+      onRequestBookingRibbon: "This hotel is available by request only. They'll get back to you within 24 hours."
+    },
+    filter: {
+      total: '"Your search: %number% stays"',
+      totalMobile: '"%number% results"',
+      text: 'Where would you like to go?',
+      textPopup: 'Search',
+      textMobileNote: 'Here you can search for an experience or a location',
+      regionAndDepartment: 'Country or county',
+      regionMobileListTitle: 'Choose a destination',
+      departmentMobileListTitle: 'Choose a destination',
+      locatorRegionCountryListTitle: '"Country, county"',
+      locatorNoDepartmentOrRegionSelected: 'No country/county selected',
+      locatorDepartmentListTitle: 'Province',
+      region: 'County',
+      department: 'City or town',
+      date: 'Arrival',
+      noResult: 'We have not found any results matching your search',
+      noResultWithOOB: 'Your current gift box does not contain any experiences corresponding to your search. But good news, we found below plenty of matching available experiences for you from our range! You can book any of these for free with your current gift voucher.',
+      anyPlace: 'Search City or Region',
+      anyDate: 'Any date',
+      whereTo: 'Where to?',
+      when: 'When?',
+      checkIn: 'Check-in',
+      checkOut: 'Check-out',
+      ctaInfo: 'Want to stay for longer? Add extra nights in the calendar!',
+      ctaCI: 'Select a check-in date',
+      ctaCO: 'Select a checkout date',
+      ctaDates: 'Your travel dates',
+      action: 'Add dates',
+      included: 'included',
+      nightIncludedCICO: 'night included',
+      nightsIncludedCICO: 'nights included',
+      night: 'night',
+      nights: 'nights',
+      clear: 'Clear',
+      extraNight: 'extra night',
+      extraNights: 'extra nights',
+      boxMinNights: 'Your experience is for a minimum of',
+      currentLocation: 'Use current location',
+      searching: 'Searching...'
+    }
   }
 });
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=script&lang=js&
