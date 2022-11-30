@@ -1,5 +1,6 @@
 /* eslint-disable vars-on-top */
 import fecha from 'fecha'
+import get from 'lodash.get'
 
 const helpers = {
   getNextDate(datesArray, referenceDate) {
@@ -24,7 +25,16 @@ const helpers = {
     const newReferenceDate = new Date(referenceDate)
     let newWeekDay = weekDay.toLowerCase()
     const daysDefault = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-    const days = i18n ? i18n['day-names'] : daysDefault
+    const translatedDays = [
+      get(i18n, 'date.weekdays.sun'),
+      get(i18n, 'date.weekdays.mon'),
+      get(i18n, 'date.weekdays.tue'),
+      get(i18n, 'date.weekdays.wed'),
+      get(i18n, 'date.weekdays.thu'),
+      get(i18n, 'date.weekdays.fri'),
+      get(i18n, 'date.weekdays.sat'),
+    ]
+    const days = i18n ? translatedDays : daysDefault
     const referenceDateDay = newReferenceDate.getDay()
 
     for (let i = 7; ; i--) {
@@ -209,7 +219,7 @@ const helpers = {
   },
   pluralize(countOfDays, periodType = 'night') {
     if (periodType === 'week') {
-      return countOfDays > 7 ? this.i18n.weeks : this.i18n.week
+      return countOfDays > 7 ? 'weeks' : 'week'
     }
 
     return countOfDays !== 1 ? this.i18n.nights : this.i18n.night

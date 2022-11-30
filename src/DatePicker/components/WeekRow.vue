@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import get from 'lodash.get'
+
 export default {
   name: 'WeekRow',
   props: {
@@ -24,12 +26,28 @@ export default {
     },
   },
   computed: {
+    weekdaysShort() {
+      return [
+        this.get(this.i18n, 'date.weekdays.short.sun'),
+        this.get(this.i18n, 'date.weekdays.short.mon'),
+        this.get(this.i18n, 'date.weekdays.short.tue'),
+        this.get(this.i18n, 'date.weekdays.short.wed'),
+        this.get(this.i18n, 'date.weekdays.short.thu'),
+        this.get(this.i18n, 'date.weekdays.short.fri'),
+        this.get(this.i18n, 'date.weekdays.short.sat'),
+      ]
+    },
+
     dayNames() {
       return [
-        ...this.i18n['day-names'].slice(this.firstDayOfWeek),
-        ...this.i18n['day-names'].slice(0, this.firstDayOfWeek),
+        ...this.weekdaysShort.slice(this.firstDayOfWeek),
+        ...this.weekdaysShort.slice(0, this.firstDayOfWeek),
       ].slice(0, 7)
     },
+  },
+
+  methods: {
+    get,
   },
 }
 </script>

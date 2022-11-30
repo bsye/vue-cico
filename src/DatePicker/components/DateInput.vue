@@ -7,11 +7,13 @@
     :class="inputClass"
     :tabindex="tabIndex"
   >
-    {{ inputDate ? inputDate : i18n[inputDateType] }}
+    {{ text }}
   </div>
 </template>
 
 <script>
+import get from 'lodash.get'
+
 export default {
   props: {
     isOpen: {
@@ -46,9 +48,21 @@ export default {
         'vhd__datepicker__input--single-date': this.singleDaySelection,
       }
     },
+    text() {
+      let plain = null
+
+      if (this.inputDateType === 'check-in') plain = this.get(this.i18n, 'activity.filter.checkIn')
+      if (this.inputDateType === 'check-out') plain = this.get(this.i18n, 'activity.filter.checkOut')
+
+      return this.inputDate || plain
+    },
     tabIndex() {
       return this.inputDateType === 'check-in' ? 0 : -1
     },
+  },
+
+  methods: {
+    get,
   },
 }
 </script>

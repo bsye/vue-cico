@@ -35,6 +35,7 @@
 
 <script>
 import fecha from 'fecha'
+import get from 'lodash.get'
 import Helpers from '../../helpers'
 import BookingBullet from './BookingBullet.vue'
 import Price from './Price.vue'
@@ -493,7 +494,11 @@ export default {
       }
 
       if (this.nightsCount >= 1) {
-        return `${this.nightsCount} ${this.nightsCount !== 1 ? this.i18n.nights : this.i18n.night}`
+        return `${this.nightsCount} ${
+          this.nightsCount !== 1
+            ? this.get(this.i18n, 'activity.filter.nights')
+            : this.get(this.i18n, 'activity.filter.night')
+        }`
       }
 
       return ''
@@ -555,6 +560,7 @@ export default {
   },
   methods: {
     ...Helpers,
+    get,
     notAllowDaysBetweenCheckInAndNextValidDate(dayCode) {
       return (
         this.checkIn &&

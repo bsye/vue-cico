@@ -260,11 +260,7 @@
 <script>
 import './assets/scss/index.scss'
 import DatePicker from './DatePicker/HotelDatePicker.vue'
-import pt from '../public/i18n/pt'
-import fr from '../public/i18n/fr'
 import en from '../public/i18n/en'
-import es from '../public/i18n/es'
-import it from '../public/i18n/it'
 
 export default {
   name: 'Examples',
@@ -387,7 +383,7 @@ export default {
       currentWidth: window.innerWidth,
       boxShow: 0,
       language: 'en',
-      languages: { pt, fr, en, es, it },
+      languages: { en },
       alwaysVisible: false,
       firstDayOfWeek: 0,
       gridStyle: true,

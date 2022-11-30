@@ -173,7 +173,6 @@ export default {
       const month = 'MMMM'
       const year = 'YYYY'
       let format = month
-      // const i18n = { monthNames: this.i18n['month-names'] }
 
       if (this.showYear) {
         format = this.yearBeforeMonth ? `${year} ${month}` : `${month} ${year}`

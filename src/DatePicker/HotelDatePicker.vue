@@ -131,12 +131,14 @@
 import throttle from 'lodash.throttle'
 import fecha from 'fecha'
 
+import get from 'lodash.get'
 import Month from './components/Month.vue'
 import IconCalendar from './icons/IconCalendar.vue'
 import IconArrow from './icons/IconArrow.vue'
 import DateInput from './components/DateInput.vue'
 import CallToAction from './components/CallToAction.vue'
 import Helpers from '../helpers'
+// eslint-disable-next-line import/no-named-as-default
 import i18nDefaults from '../../public/i18n/en'
 
 export default {
@@ -348,6 +350,38 @@ export default {
       },
     },
 
+    weekdays() {
+      return [
+        this.get(this.i18n, 'date.weekdays.sun'),
+        this.get(this.i18n, 'date.weekdays.mon'),
+        this.get(this.i18n, 'date.weekdays.tue'),
+        this.get(this.i18n, 'date.weekdays.wed'),
+        this.get(this.i18n, 'date.weekdays.thu'),
+        this.get(this.i18n, 'date.weekdays.fri'),
+        this.get(this.i18n, 'date.weekdays.sat'),
+      ]
+    },
+
+    monthNames() {
+      if (this.get(this.i18n, 'date.months')) {
+        return Object.values(this.get(this.i18n, 'date.months'))
+      }
+
+      return []
+    },
+
+    weekdaysShort() {
+      return [
+        this.get(this.i18n, 'date.weekdays.short.sun'),
+        this.get(this.i18n, 'date.weekdays.short.mon'),
+        this.get(this.i18n, 'date.weekdays.short.tue'),
+        this.get(this.i18n, 'date.weekdays.short.wed'),
+        this.get(this.i18n, 'date.weekdays.short.thu'),
+        this.get(this.i18n, 'date.weekdays.short.fri'),
+        this.get(this.i18n, 'date.weekdays.short.sat'),
+      ]
+    },
+
     totalNights() {
       if (!this.checkIn) return 0
       if (!this.checkOut) return 0
@@ -453,7 +487,6 @@ export default {
     },
     disabledWeekDaysObject() {
       const disabledDays = this.disabledDaysOfWeek.map((d) => d.toLowerCase())
-      // const names = this.i18n['day-names']
       const names = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
       const SUNDAY = names[0]
       const MONDAY = names[1]
@@ -477,11 +510,9 @@ export default {
     },
     disabledWeekDaysArray() {
       const days = this.disabledWeekDaysObject
-      // const names = this.i18n['day-names']
-      const names = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
       const fn = function fnDisabledWeekDaysArray(day, ix) {
-        return day[1] ? names[ix] : false
+        return day[1] ? this.weekdays[ix] : false
       }
 
       return Object.entries(days)
@@ -592,13 +623,14 @@ export default {
   },
   methods: {
     ...Helpers,
+    get,
     transformDisabledWeekDays() {},
     configureI18n() {
       fecha.setGlobalDateI18n({
-        dayNames: this.i18n['day-names'],
-        dayNamesShort: this.shortenString(this.i18n['day-names'], 3),
-        monthNames: this.i18n['month-names'],
-        monthNamesShort: this.shortenString(this.i18n['month-names'], 3),
+        dayNames: this.weekdays,
+        dayNamesShort: this.shortenString(this.weekdaysShort, 3),
+        monthNames: this.monthNames,
+        monthNamesShort: this.shortenString(this.monthNames, 3),
         amPm: ['am', 'pm'],
         // D is the day of the month, function returns something like...  3rd or 11th
         DoFn(D) {
@@ -766,12 +798,12 @@ export default {
         // Create tooltip
         if (this.hoveringPeriod.periodType === 'weekly_by_saturday') {
           const dayCode = 6
-          const text = this.i18n.tooltip.saturdayToSaturday
+          const text = 'Only Saturday to Saturday'
 
           this.showTooltipWeeklyOnHover(date, dayCode, text)
         } else if (this.hoveringPeriod.periodType === 'weekly_by_sunday') {
           const dayCode = 0
-          const text = this.i18n.tooltip.sundayToSunday
+          const text = 'Only Sunday to Sunday'
 
           this.showTooltipWeeklyOnHover(date, dayCode, text)
         } else if (this.hoveringPeriod.periodType === 'nightly') {
@@ -923,7 +955,7 @@ export default {
             const night = this.pluralize(this.minNightCount, 'week')
 
             this.showCustomTooltip = true
-            this.customTooltip = this.completeTrad(this.i18n.tooltip.minimumRequiredPeriod, {
+            this.customTooltip = this.completeTrad('%{minNightInPeriod} %{night} minimum.', {
               minNightInPeriod: this.minNightCount / 7,
               night,
             })
@@ -937,7 +969,9 @@ export default {
             )}`
           } else if (this.checkInPeriod.periodType === 'nightly') {
             this.customTooltip = `${countDaysBetweenCheckInCurrentDay} ${
-              countDaysBetweenCheckInCurrentDay !== 1 ? this.i18n.nights : this.i18n.night
+              countDaysBetweenCheckInCurrentDay !== 1
+                ? this.get(this.i18n, 'activity.filter.nights')
+                : this.get(this.i18n, 'activity.filter.night')
             }`
           }
         } else {
@@ -955,7 +989,7 @@ export default {
       const night = this.pluralize(this.minNightCount, 'week')
 
       this.showCustomTooltip = true
-      this.customTooltip = this.completeTrad(this.i18n.tooltip.minimumRequiredPeriod, {
+      this.customTooltip = this.completeTrad('%{minNightInPeriod} %{night} minimum.', {
         minNightInPeriod: this.minNightCount / 7,
         night,
       })
@@ -971,7 +1005,7 @@ export default {
           const minNightInPeriod = this.hoveringPeriod.minimumDuration
 
           this.showCustomTooltip = true
-          this.customTooltip = this.completeTrad(this.i18n.tooltip.minimumRequiredPeriod, {
+          this.customTooltip = this.completeTrad('%{minNightInPeriod} %{night} minimum.', {
             minNightInPeriod,
             night,
           })
@@ -987,7 +1021,7 @@ export default {
       const night = this.pluralize(this.minNightCount)
 
       this.showCustomTooltip = true
-      this.customTooltip = this.completeTrad(this.i18n.tooltip.minimumRequiredPeriod, { minNightInPeriod, night })
+      this.customTooltip = this.completeTrad('%{minNightInPeriod} %{night} minimum.', { minNightInPeriod, night })
     },
     createHalfDayTooltip(date) {
       this.customTooltipHalfday = ''
@@ -997,9 +1031,9 @@ export default {
         this.showCustomTooltip = true
 
         if (this.checkIncheckOutHalfDay[formatedHoveringDate].checkIn) {
-          this.customTooltipHalfday = this.i18n.tooltip.halfDayCheckOut
+          this.customTooltipHalfday = 'Available CheckOut'
         } else if (this.checkIncheckOutHalfDay[formatedHoveringDate].checkOut) {
-          this.customTooltipHalfday = this.i18n.tooltip.halfDayCheckIn
+          this.customTooltipHalfday = 'Available CheckIn'
         }
       }
     },
