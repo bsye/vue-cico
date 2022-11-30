@@ -366,11 +366,7 @@ export default {
       console.log(this.get(this.i18n, 'date'))
       console.log(this.get(this.i18n, 'date.months'))
 
-      if (this.get(this.i18n, 'date.months')) {
-        return Object.values(this.get(this.i18n, 'date.months'))
-      }
-
-      return []
+      return Object.values(this.get(this.i18n, 'date.months'))
     },
 
     weekdaysShort() {
