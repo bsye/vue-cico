@@ -1,257 +1,58 @@
 <template>
   <div id="app">
-    <h1 style="flex-grow: 0">Vue Hotel Datepicker v4</h1>
-    <div style="flex-grow: 0; padding: 1em 0">
-      Language Selection:
-      <select v-model="language">
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-        <option value="it">Italiano</option>
-        <option value="pt">Português</option>
-      </select>
-    </div>
     <div class="container">
-      <div class="toggle-menu" @click="toggleMenu">
-        <img src="@/assets/images/menu.svg" alt="..." />
+      <div class="header">
+        <h1>Vue Check-in Check-out Component</h1>
+        <svg width="164" height="27" viewBox="0 0 164 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M87.7128 2.8181C87.7128 -0.24396 91.9146 0.00486295 91.9146 0.00486295V6.79331H97.0464C97.0464 6.79331 97.3488 10.178 93.7994 10.178H91.9146V21.1905C91.9146 21.7203 91.9682 22.1453 92.067 22.4548C92.1718 22.7763 92.3266 23.0084 92.5302 23.1692C92.735 23.3287 92.9922 23.4311 93.2779 23.4847C93.5732 23.5311 93.9018 23.5537 94.265 23.5537H98.3918C98.3918 23.5537 98.8538 26.8574 95.6057 26.8574H92.9493C91.1324 26.8574 89.7964 26.4467 88.9677 25.6241C88.1295 24.8014 87.7128 23.5763 87.7128 21.9524V2.8181H87.7128Z"
+            fill="white"
+          />
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M128.807 26.367C129.98 26.6944 131.27 26.8634 132.682 26.8634C135.583 26.8634 137.881 26.1693 139.573 24.7919C141.251 23.4085 142.09 21.4012 142.09 18.7582V14.8283C142.09 12.19 141.307 10.1745 139.742 8.78272C138.175 7.38503 135.783 6.69452 132.561 6.69452C129.507 6.69452 127.175 7.38503 125.568 8.78272C123.963 10.1745 123.159 12.19 123.159 14.8283V18.7582C123.159 20.1119 123.387 21.3 123.852 22.3191C124.319 23.3335 124.96 24.1835 125.794 24.8609C126.631 25.5395 127.635 26.0431 128.807 26.367ZM136.612 22.3001C135.745 23.1811 134.434 23.618 132.682 23.618C131.061 23.618 129.762 23.2299 128.787 22.4453C127.811 21.6584 127.32 20.3905 127.32 18.6487V14.7949C127.32 13.1282 127.79 11.89 128.712 11.09C129.634 10.2888 130.952 9.88755 132.652 9.88755C134.292 9.88755 135.583 10.3078 136.519 11.1233C137.457 11.9436 137.929 13.1937 137.929 14.8676V18.5761C137.929 20.1738 137.492 21.4072 136.612 22.3001Z"
+            fill="white"
+          />
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M110.01 6.66712C113.235 6.66712 115.626 7.36478 117.196 8.76366C118.762 10.1554 119.542 12.171 119.542 14.8104V18.7356C119.542 21.3774 118.707 23.3858 117.023 24.7728C115.329 26.1503 113.037 26.836 110.134 26.836C108.717 26.836 107.431 26.6765 106.265 26.3527C105.091 26.0241 104.086 25.5205 103.249 24.8431C102.419 24.1633 101.771 23.3132 101.301 22.2929C100.842 21.2822 100.615 20.0928 100.615 18.7356V14.8104C100.615 14.6961 100.615 14.589 100.62 14.4735V2.81692C100.62 -0.239187 104.819 0.00487335 104.819 0.00487335V6.60641V7.991C106.05 6.97309 107.952 6.66712 110.01 6.66712ZM114.067 22.281C114.941 21.3929 115.38 20.15 115.38 18.5534V14.8437C115.38 13.1782 114.911 11.9281 113.974 11.1007C113.037 10.2804 111.74 9.86609 110.102 9.86609C108.399 9.86609 107.086 10.2661 106.162 11.0745C105.413 11.7138 104.964 12.6567 104.819 13.8758V19.5356C104.969 20.8178 105.443 21.7822 106.242 22.4251C107.211 23.2156 108.512 23.6025 110.134 23.6025C111.884 23.6025 113.194 23.1656 114.067 22.281Z"
+            fill="white"
+          />
+          <path
+            d="M156.29 16.651L164 6.95404C164 6.95404 159.769 5.81827 158.036 8.01719C156.702 9.71371 153.743 13.4151 153.743 13.4151L153.702 13.4687L153.665 13.4151C153.665 13.4151 150.706 9.71371 149.373 8.01719C147.635 5.81827 143.407 6.95404 143.407 6.95404L151.12 16.651L151.18 16.7236L143.407 26.7991C143.407 26.7991 147.509 27.7968 149.509 25.3455C151.497 22.9132 153.411 20.269 153.702 19.9023C153.993 20.269 155.913 22.9132 157.898 25.3455C159.897 27.7968 164 26.7991 164 26.7991L156.227 16.7236L156.29 16.651Z"
+            fill="white"
+          />
+          <path
+            d="M17.4434 18.7023C17.1576 17.9832 16.6278 17.3605 15.9694 16.8462C15.9277 16.8105 15.8836 16.7843 15.8372 16.7546C13.4273 15.0997 7.87999 14.2044 5.94992 13.4068C3.59003 12.4115 3.94246 10.7495 6.42262 10.0911C9.88149 9.17202 16.3968 10.9614 16.3968 10.9614C16.3968 10.9614 17.6887 8.04101 14.9156 7.33978C12.7939 6.80999 3.92222 5.41706 1.18012 9.26726C-1.10952 12.4841 0.414528 15.7057 4.76045 16.9903C5.46532 17.2189 6.5143 17.4213 7.88594 17.7641C9.41475 18.157 13.8297 18.7678 13.5797 21.0167C13.3725 22.8406 11.6318 23.2156 8.96945 23.3823C8.47413 23.4251 7.86332 23.4406 7.12511 23.4251C3.52097 23.3335 0.963424 21.9191 0.572887 21.6941C0.402622 22.1322 -0.195091 24.7014 1.90643 25.78C4.04248 26.8777 8.5039 27.2015 11.9402 26.5241C13.1225 26.367 14.556 25.6931 15.3955 25.0717C15.5836 24.9336 15.7634 24.7919 15.9277 24.6371C17.5994 23.1037 18.1757 20.806 17.4434 18.7023Z"
+            fill="white"
+          />
+          <path
+            d="M82.4298 6.6457C82.4298 6.6457 81.8059 6.62665 81.3213 6.62665C76.0657 6.62665 72.9152 9.3887 72.9152 13.583V26.7253H77.2909V14.0366C77.2909 12.5103 77.0302 10.1792 81.7761 10.1792H85.4791C85.4791 10.1792 85.7053 6.83499 82.4298 6.6457Z"
+            fill="white"
+          />
+          <path
+            d="M46.2408 12.5948C46.2408 9.55058 44.5453 7.94931 41.5031 7.19093C40.7697 7.0183 39.8612 6.83258 38.8337 6.83258C38.2312 6.83258 37.6906 6.88973 37.2132 6.96473C35.6903 7.22546 34.4425 7.65167 33.4923 8.29575C32.7779 7.80644 31.8897 7.45404 30.8467 7.19093C30.112 7.0183 29.2012 6.83258 28.1796 6.83258C27.5712 6.83258 27.0342 6.88973 26.5543 6.96473C22.8395 7.60286 20.7391 9.20294 20.7391 12.5948V26.68C20.7391 26.68 24.9434 27.4003 24.9434 24.4192C24.9434 23.3811 24.9374 12.5948 24.9374 12.5948C24.9374 12.4698 24.9374 12.3448 24.9565 12.2221L24.9517 12.2138C24.9517 11.0518 26.39 10.3887 28.1689 10.3887C29.9584 10.3887 31.3765 11.0518 31.3765 12.2138C31.3765 12.2138 31.3646 12.2293 31.3646 12.2412C31.3837 12.3555 31.3837 12.4769 31.3837 12.5948L31.3908 26.68C31.3908 26.68 35.5962 27.4003 35.5962 24.4192C35.5962 23.5632 35.5998 12.5948 35.5998 12.5948C35.5998 12.4698 35.5998 12.3448 35.6141 12.2221V12.2138C35.6141 11.0518 37.0429 10.3887 38.8277 10.3887C40.6113 10.3887 42.0306 11.0518 42.0306 12.2138C42.0306 12.2138 42.0306 12.2293 42.0222 12.2412C42.0401 12.3555 42.0401 12.4769 42.0401 12.5948V26.68C42.0401 26.68 46.2443 27.4003 46.2443 24.4192C46.2443 23.3811 46.2408 12.5948 46.2408 12.5948Z"
+            fill="white"
+          />
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M64.4829 6.84928C64.4829 6.84928 68.63 6.23734 68.63 9.66014V26.7063C68.63 26.7063 65.8867 27.3611 64.9246 25.0895C63.5923 26.0467 62.1813 26.6563 59.2356 26.6563C57.8187 26.6563 56.534 26.4967 55.3576 26.1693C54.1884 25.8419 53.1799 25.3407 52.3429 24.6585C51.5082 23.9823 50.8629 23.1311 50.4021 22.1132C49.9377 21.0953 49.7103 19.9107 49.7103 18.5535V15.0461C49.7103 12.4055 50.5105 10.3959 52.1167 8.99343C53.7264 7.6017 56.0566 6.99214 59.1094 6.9088C61.4669 6.83975 63.1672 7.33978 64.5031 8.08505L64.4829 6.84928ZM63.166 22.0977C64.0376 21.2095 64.4793 19.975 64.4793 18.3773V15.0795C64.4793 13.4103 64.0031 12.1674 63.066 11.3376C62.1325 10.5173 60.8383 10.1054 59.1964 10.1054C57.4997 10.1054 56.1804 10.5066 55.2565 11.3031C54.3349 12.0996 53.8717 13.3425 53.8717 15.0045V18.4427C53.8717 20.1893 54.3575 21.4572 55.3339 22.2429C56.309 23.0323 57.6068 23.4216 59.2357 23.4216C60.9824 23.4216 62.2933 22.9823 63.166 22.0977Z"
+            fill="white"
+          />
+        </svg>
       </div>
-      <div :class="['menu', { hidden: !menu }]">
-        <h3>Examples</h3>
-        <ul>
-          <li @click="selectBox(0)" :class="{ selected: boxShow == 0 }">Sandbox</li>
-          <li @click="selectBox(8)" :class="{ selected: boxShow == 8 }">
-            Blocked different day when clicked on with <strong>periodDates</strong>
-          </li>
-          <li @click="selectBox(9)" :class="{ selected: boxShow == 9 }">
-            Half day, If you have check in at noon and checkout before noon
-          </li>
-          <li @click="selectBox(10)" :class="{ selected: boxShow == 10 }">
-            Disable check-in and check-out on the same day
-          </li>
-          <li @click="selectBox(11)" :class="{ selected: boxShow == 11 }">Allow selection of single day</li>
-          <li @click="selectBox(12)" :class="{ selected: boxShow == 12 }">
-            Check in only on saturday and minimum stay of 10 nights
-          </li>
-          <li @click="selectBox(13)" :class="{ selected: boxShow == 13 }">
-            Block all dates after December 31st of {{ new Date().getUTCFullYear() }}
-          </li>
-          <li @click="selectBox(14)" :class="{ selected: boxShow == 14 }">Block all dates after 15th of next month</li>
-          <li @click="selectBox(15)" :class="{ selected: boxShow == 15 }">
-            Block all date ranges of more than 30 days
-          </li>
-          <li @click="selectBox(16)" :class="{ selected: boxShow == 16 }">Minimum stay of 3 days</li>
-          <li @click="selectBox(17)" :class="{ selected: boxShow == 17 }">Certain dates blocked</li>
-          <li @click="selectBox(18)" :class="{ selected: boxShow == 18 }">Allow setting a default date range</li>
-          <li @click="selectBox(19)" :class="{ selected: boxShow == 19 }">Checkin only on saturdays</li>
-          <li @click="selectBox(20)" :class="{ selected: boxShow == 20 }">Custom tooltip text</li>
-          <li @click="selectBox(22)" :class="{ selected: boxShow == 22 }">Custom date format (MMMM D)</li>
-          <li @click="selectBox(24)" :class="{ selected: boxShow == 24 }">Set startingDateValue value</li>
-          <li @click="selectBox(25)" :class="{ selected: boxShow == 25 }">Set endingDateValue value</li>
-          <li @click="selectBox(26)" :class="{ selected: boxShow == 26 }">
-            Event startingDateValue (check-in-changed) / endingDateValue (check-out-changed)
-          </li>
-        </ul>
-      </div>
-      <div v-show="!menu || currentWidth > 1184" class="box-container">
-        <div v-if="boxShow == 0" class="box">
-          <h3>Sandbox</h3>
-          <div style="width: 48%; display: inline-block">
-            <input type="checkbox" v-model="firstDayOfWeek" :true-value="1" :false-value="0" /> First day Monday<br />
-            <input type="checkbox" v-model="alwaysVisible" /> alwaysVisible<br />
-            <input type="checkbox" v-model="gridStyle" /> gridStyle<br />
-            <input type="checkbox" v-model="showSingleMonth" /> showSingleMonth<br />
-            <input type="checkbox" v-model="positionRight" /> positionRight<br />
-            <input type="checkbox" v-model="singleDaySelection" /> singleDaySelection<br />
-            <input type="checkbox" v-model="showYear" /> showYear<br />
-            <input type="checkbox" v-model="yearBeforeMonth" /> yearBeforeMonth<br />
-          </div>
-          <div style="width: 48%; display: inline-block">
-            <input type="checkbox" v-model="showStartingDateValue" /> startingDateValue:
-            <input type="text" v-model="startingDate" /> <br />
-            <input type="checkbox" v-model="showEndingDateValue" /> endingDateValue:
-            <input type="text" v-model="endingDate" /><br />
-            <input type="checkbox" v-model="showPeriodDates" /> showPeriodDates<br />
-            <input type="checkbox" v-model="showPrice" /> showPrice
-            <span v-if="showPrice">- priceSymbol: <input type="text" v-model="priceSymbol" style="width: 3em" /></span>
-            <br />
-            <input type="checkbox" v-model="showMinNights" :true-value="minNights" :false-value="false" /> minNights
-            <input v-if="showMinNights !== false" type="number" v-model="minNights" min="0" /><br />
-            <input type="checkbox" v-model="showContentSlot" /> showContentSlot<br />
-            <input type="checkbox" v-model="showBookings" /> showBookings<br />
-            <input type="checkbox" v-model="showLastDateAvailable" />Stop pagination two years later
-            (lastDateAvailable)<br />
-          </div>
-          <hr />
-          <DatePicker
-            :startingDateValue="showStartingDateValue ? new Date(startingDateValue) || null : null"
-            :firstDayOfWeek="firstDayOfWeek"
-            :alwaysVisible="alwaysVisible"
-            :gridStyle="gridStyle"
-            :showSingleMonth="showSingleMonth"
-            :showYear="showYear"
-            :showPrice="showPrice"
-            :priceSymbol="priceSymbol"
-            :yearBeforeMonth="yearBeforeMonth"
-            :positionRight="positionRight"
-            :singleDaySelection="singleDaySelection"
-            :lastDateAvailable="showLastDateAvailable ? lastDateAvailable : Infinity"
-            :minNights="showMinNights ? minNights : 0"
-            :periodDates="periodDates"
-            :bookings="showBookings ? bookings : []"
-            :i18n="i18n"
-            @day-clicked="dayClicked"
-          >
-            <!-- Insert content here -->
-            <div
-              slot="content"
-              style="background: #ff8000; color: white; padding: 1rem; font-size: 2rem"
-              v-if="showContentSlot"
-            >
-              Content Slot with style
-            </div>
-          </DatePicker>
-        </div>
-        <div v-if="boxShow == 8" class="box">
-          <h3>
-            Blocked different day when clicked on with <strong>periodDates</strong>&nbsp;
-            <span style="font-weight: 400">Emit day-clicked</span>
-          </h3>
-          <DatePicker
-            :disabledDates="[
-              '2021-10-15',
-              '2021-10-16',
-              '2021-10-17',
-              '2021-10-18',
-              '2021-10-19',
-              '2021-10-20',
-              '2021-10-21',
-              '2021-10-01',
-              '2021-10-02',
-              '2021-10-03',
-              '2021-10-04',
-              '2021-10-05',
-              '2021-10-06',
-              '2021-10-07',
-            ]"
-            :disableCheckoutOnCheckin="true"
-            :minNights="minNights"
-            :i18n="i18n"
-            @day-clicked="dayClicked"
-          />
-        </div>
-        <div v-if="boxShow == 9" class="box">
-          <h3>Half day, If you have check in at noon and checkout before noon</h3>
-          <DatePicker
-            :i18n="i18n"
-            :disabledDates="[
-              '2021-05-01',
-              '2021-05-02',
-              '2021-05-03',
-              '2021-05-04',
-              '2021-05-06',
-              '2021-05-07',
-              '2021-05-08',
-            ]"
-          />
-        </div>
-        <div v-if="boxShow == 10" class="box">
-          <h3>Disable check-in and check-out on the same day</h3>
-          <DatePicker :disableCheckoutOnCheckin="true" :minNights="1" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 11" class="box">
-          <h3>Allow selection of single day</h3>
-          <DatePicker :singleDaySelection="true" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 12" class="box">
-          <h3>Check in only on saturday and minimum stay of 10 nights</h3>
-          <DatePicker
-            :disabledWeekDays="{
-              sunday: true,
-              monday: true,
-              tuesday: true,
-              wednesday: true,
-              thursday: true,
-              friday: true,
-              saturday: false,
-            }"
-            :enableCheckout="true"
-          />
-        </div>
-        <div v-if="boxShow == 13" class="box">
-          <h3>Block all dates after December 31st of the current year</h3>
-          <DatePicker :endDate="new Date(new Date().getFullYear(), 11, 31)" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 14" class="box">
-          <h3>Block all dates after 15th of next month</h3>
-          <DatePicker :endDate="new Date(new Date().getFullYear(), new Date().getMonth() + 1, 15)" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 15" class="box">
-          <h3>Block all date ranges of more than 30 days</h3>
-          <DatePicker :maxNights="30" :selectForward="false" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 16" class="box">
-          <h3>Minimum stay of 3 days</h3>
-          <DatePicker :minNights="3" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 17" class="box">
-          <h3>Certain dates blocked</h3>
-          <DatePicker :disabledDates="['2017-09-14', '2017-09-26']" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 18" class="box">
-          <h3>Allow setting a default date range ( can be used to set a range from a url param )</h3>
-          <DatePicker
-            :startingDateValue="new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())"
-            :endingDateValue="new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 5)"
-            :i18n="i18n"
-          />
-        </div>
-        <div v-if="boxShow == 19" class="box">
-          <h3>Checkin only on saturdays</h3>
-          <DatePicker
-            :disabledWeekDays="{
-              sunday: true,
-              monday: true,
-              tuesday: true,
-              wednesday: true,
-              thursday: true,
-              friday: true,
-              saturday: false,
-            }"
-            :enableCheckout="true"
-            :i18n="i18n"
-          />
-        </div>
-        <div v-if="boxShow == 20" class="box">
-          <h3>Custom tooltip text</h3>
-          <DatePicker tooltipMessage="<strong style='color: red'>Enjoy</strong> your stay!" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 22" class="box">
-          <h3>Custom date format (MMMM D)</h3>
-          <DatePicker format="MMMM D" :i18n="i18n" />
-        </div>
-        <div v-if="boxShow == 24" class="box">
-          <h3>Set startingDateValue value</h3>
-          <DatePicker
-            :firstDayOfWeek="firstDayOfWeek"
-            :alwaysVisible="alwaysVisible"
-            :startingDateValue="new Date()"
-            :i18n="i18n"
-          />
-        </div>
-        <div v-if="boxShow == 25" class="box">
-          <h3>Set endingDateValue value</h3>
-          <DatePicker
-            :startingDateValue="new Date()"
-            :endingDateValue="new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 3)"
-            :i18n="i18n"
-          />
-        </div>
-        <div v-if="boxShow == 26" class="box">
-          <h3>Event startingDateValue / endingDateValue</h3>
-          <DatePicker :i18n="i18n" @check-in-changed="checkIn = $event" @check-out-changed="checkOut = $event" />
-          <p>new startingDateValue Date: {{ checkIn }}</p>
-          <p>new endingDateValue Date : {{ checkOut }}</p>
-        </div>
+      <div class="picker">
+        <DatePicker
+          :hoveringTooltip="false"
+          :startDate="startDate"
+          :endDate="Infinity"
+          :minNights="3"
+          :maxNights="20"
+          :i18n="i18n"
+        />
       </div>
     </div>
   </div>
@@ -267,241 +68,18 @@ export default {
   components: {
     DatePicker,
   },
-  data() {
-    const today = new Date()
-    const month = (today.getMonth() + 1 <= 9 ? '0' : '') + String(today.getMonth() + 1)
-    const periodDatesPrices = []
 
-    window.vueHotelDatepicker = {
-      priceSymbol: '',
-      periodDates: [
-        {
-          startAt: '2021-07-01',
-          endAt: '2021-08-01',
-          minimumDuration: 4,
-          periodType: 'nightly',
-        },
-        {
-          startAt: '2021-08-01',
-          endAt: '2021-09-05',
-          minimumDuration: 2,
-          periodType: 'weekly_by_saturday',
-        },
-        {
-          startAt: '2021-09-05',
-          endAt: '2021-10-04',
-          minimumDuration: 4,
-          periodType: 'nightly',
-        },
-        {
-          startAt: '2021-10-04',
-          endAt: '2021-11-29',
-          minimumDuration: 1,
-          periodType: 'weekly_by_sunday',
-          price: 4000.0,
-        },
-        ...periodDatesPrices,
-      ],
-      bookings: [
-        {
-          id: '1726359',
-          checkInDate: '2021-08-22',
-          checkOutDate: '2021-08-29',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-        {
-          id: '1726360',
-          checkInDate: '2021-08-15',
-          checkOutDate: '2021-08-22',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-        {
-          id: '1726358',
-          checkInDate: '2021-08-01',
-          checkOutDate: '2021-08-15',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-        {
-          id: '1726357',
-          checkInDate: '2021-09-01',
-          checkOutDate: '2021-09-23',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-        {
-          id: '1726356',
-          checkInDate: '2021-06-01',
-          checkOutDate: '2021-06-18',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-        {
-          id: '181412',
-          checkInDate: '2022-09-15',
-          checkOutDate: '2022-10-15',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-        {
-          id: '181491',
-          checkInDate: '2022-07-01',
-          checkOutDate: '2022-08-31',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-        {
-          id: '178234',
-          checkInDate: '2023-08-04',
-          checkOutDate: '2023-08-25',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-        {
-          id: '178235',
-          checkInDate: '2023-07-01',
-          checkOutDate: '2023-07-31',
-          style: {
-            backgroundColor: '#9DC1C9',
-          },
-        },
-      ],
-      checkIn: null,
-      checkOut: null,
-      minNights: 3,
-      menu: false,
-      currentWidth: window.innerWidth,
-      boxShow: 0,
-      language: 'en',
-      languages: { en },
-      alwaysVisible: false,
-      firstDayOfWeek: 0,
-      gridStyle: true,
-      showSingleMonth: false,
-      positionRight: false,
-      singleDaySelection: false,
-      showPrice: false,
-      showYear: true,
-      yearBeforeMonth: false,
-      showMinNights: false,
-      showContentSlot: false,
-      showBookings: false,
-      showLastDateAvailable: false,
-      showPeriodDates: false,
-      showStartingDate: false,
-      startingDate: `${today.getFullYear()}-${month}-${today.getDate()}`,
-      showEndingDate: false,
-      endingDate: `${today.getFullYear()}-${month}-${today.getDate()}`,
-    }
-
-    return window.vueHotelDatepicker
-  },
   computed: {
-    dateFormat() {
-      return 'DD/MM/YYYY'
-    },
-    lastDateAvailable() {
-      return this.addYears(new Date(), 2)
-    },
-    i18n() {
-      return this.languages[this.language] ? this.languages[this.language] : this.languages.en
-    },
-    startingDateValue: {
-      get() {
-        return this.showStartingDate ? `${this.startingDate} 00:00:00.00000` : null
-      },
-      set(date) {
-        this.startingDate = date
-      },
-    },
-    showStartingDateValue: {
-      get() {
-        return this.showStartingDate
-      },
-      set(show) {
-        this.showStartingDate = show
-      },
-    },
-    endingDateValue: {
-      get() {
-        return this.showEndingDate ? `${this.endingDate} 00:00:00.00000` : null
-      },
-      set(date) {
-        this.endingDate = date
-      },
-    },
-    showEndingDateValue: {
-      get() {
-        return this.showEndingDate
-      },
-      set(show) {
-        this.showEndingDate = show
-      },
-    },
-  },
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize)
-    })
-  },
-  methods: {
-    newData() {
-      return {}
-    },
-    selectBox(box) {
-      this.boxShow = -1
-      this.checkIn = null
-      this.checkOut = null
-      this.boxShow = box
-      this.toggleMenu()
-    },
-    toggleMenu() {
-      this.menu = !this.menu
-    },
-    onResize() {
-      this.currentWidth = window.innerWidth
-    },
-    bookingClicked(event, date, currentBooking) {
-      /* eslint-disable-next-line */
-      console.log('bookingClicked', event, date, currentBooking)
-    },
-    periodSelected(event, checkIn, checkOut) {
-      /* eslint-disable-next-line */
-      console.log('periodSelected', event, checkIn, checkOut)
-    },
-    handleCheckIncheckOutHalfDay(checkIncheckOutHalfDay) {
-      /* eslint-disable-next-line */
-      console.log('handleCheckIncheckOutHalfDay', checkIncheckOutHalfDay)
-    },
-    addYears(dt, n) {
-      return new Date(dt.setFullYear(dt.getFullYear() + n))
-    },
-    validateDateBetweenTwoDates(fromDate, toDate, givenDate) {
-      const getvalidDate = (d) => {
-        return new Date(d)
-      }
+    startDate() {
+      const currentDate = new Date()
 
-      return getvalidDate(givenDate) <= getvalidDate(toDate) && getvalidDate(givenDate) >= getvalidDate(fromDate)
+      currentDate.setDate(currentDate.getDate() + 1)
+
+      return currentDate
     },
-    dayClicked(date, formatDate, nextDisabledDate) {
-      /* eslint-disable-next-line */
-      console.log(date, formatDate, nextDisabledDate)
-    },
-    checkInChanged(newDate) {
-      this.checkIn = newDate
-    },
-    checkOutChanged(newDate) {
-      this.checkOut = newDate
+
+    i18n() {
+      return en
     },
   },
 }
@@ -509,149 +87,201 @@ export default {
 
 <style lang="scss">
 html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html,
 body {
   padding: 0;
+  font-family: 'montserrat';
+  border: 0;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   margin: 0;
 }
-body {
-  display: block;
-  font-family: Roboto, 'Source Sans Pro', sans-serif;
-  font-size: 16px;
-  width: 100vw;
-  height: 100vh;
-  max-width: 100vw;
-  max-height: 100vh;
-  overflow: hidden;
-}
-h1 {
-  background-color: #28ca9c;
-  color: white;
-  padding: 1em 0;
-  margin: 0;
-}
+
 #app {
-  text-align: center;
-  max-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
 }
-.container {
-  position: relative;
+
+body {
+  background-color: #eb5f40;
   display: flex;
-  flex-direction: row;
-  overflow-y: hidden;
-  /*
-  @media (min-width: 1441px) {
-    margin: 0 auto;
-    max-width: 1180px;
-    width: 1180px;
-  }
-  */
+  flex-direction: column;
+  height: 100%;
 
-  .toggle-menu {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-    flex: none;
+  .container {
+    max-height: 100vh;
+    height: auto;
+    flex-grow: 1;
+
+    padding: 16px;
+
+    @media screen and (min-width: 480px) {
+      padding: 60px;
+    }
+  }
+
+  .header {
+    width: 100%;
     color: white;
-    padding: 1em 0.5em 1em;
-    img {
-      width: 1.5em;
+    align-items: flex-end;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+
+    h1 {
+      font-weight: 700;
+      font-size: 23px;
+      text-align: left;
+      margin: 0;
+      line-height: 28px;
+
+      @media screen and (max-width: 480px) {
+        font-size: 23px;
+        text-align: left;
+        line-height: 27px;
+      }
     }
-  }
-  @media (min-width: 1441px) {
-    .toggle-menu {
-      display: none;
+
+    svg {
+      height: 27px;
+      margin-bottom: 5px;
+      text-align: right;
     }
   }
 
-  .menu {
+  .picker {
+    flex-grow: 1;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    flex: 1 0 auto;
-    flex-grow: 1;
-    max-width: 300px;
-    text-align: left;
-    max-height: 100%;
-    overflow-y: hidden;
-    @media (max-width: 1440px) {
-      max-width: 100%;
-
-      &.hidden {
-        width: 0;
-        max-width: 0;
-        overflow: hidden;
-        flex-shrink: 1;
-      }
-    }
-
-    ul {
-      padding: 0 0 2em 0;
-      margin: 0 1em 0 0;
-      font-size: 1.17rem;
-      overflow: auto;
-      @media (max-width: 1440px) {
-        margin-left: calc(24px + 1em);
-      }
-      li {
-        font-size: 1rem;
-        padding: 0.25em 0.75em;
-        margin: 0;
-        text-align: left;
-        cursor: pointer;
-        list-style-type: none;
-        border-bottom: 1px dashed rgba(128, 128, 128, 0.425);
-
-        &:hover,
-        &:active,
-        &:focus {
-          background-color: gray;
-          color: white;
-        }
-        &.selected {
-          background-color: #28ca9c;
-          color: white;
-          position: sticky;
-          top: 0;
-          bottom: -2em;
-        }
-      }
-    }
+    justify-content: center;
+    align-items: center;
   }
-
-  .box-container {
-    max-width: 100%;
-    width: 100%;
-    overflow: auto;
-    @media (min-width: 1441px) {
-      text-align: left;
-    }
-    .box {
-      flex-grow: 1;
-    }
-    .box:first-child {
-      flex-grow: 0;
-    }
-  }
-
-  h3 {
-    background-color: gray;
-    color: white;
-    padding: 1em 0 1em calc(1em + 24px);
-    margin-top: 0;
-    text-align: left;
-  }
-}
-.vhd__datepicker__wrapper {
-  max-width: 300px;
-  &.vhd__datepicker__fullview {
-    max-width: 90%;
-  }
-}
-pre.code {
-  background: black;
 }
 </style>

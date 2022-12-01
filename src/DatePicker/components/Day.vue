@@ -287,6 +287,7 @@ export default {
       // If the calendar has a minimum number of nights && !checkOut
       const nextValidDate = this.addDays(this.checkIn, this.minNightCount)
       const isDateAfterMinimumDuration = this.getDayDiff(this.hoveringDate, nextValidDate) <= 0
+      let isNotMinimumDuration = ''
 
       if (
         !isDateAfterMinimumDuration &&
@@ -296,19 +297,25 @@ export default {
         this.minNightCount > 0 &&
         this.compareDay(this.date, this.addDays(this.checkIn, this.minNightCount)) === -1
       ) {
-        return 'vhd__datepicker__month-day--valid vhd__datepicker__month-day--disabled vhd__datepicker__month-day--not-allowed minimumDurationUnvalidDay'
+        isNotMinimumDuration = ' vhd__datepicker__month-day--disabled minimumDurationUnvalidDay'
       }
 
       // Current Day
-      if (!this.isDisabled && this.date === this.hoveringDate && this.checkIn !== null && this.checkOut == null) {
-        return 'vhd__datepicker__month-day--selected vhd__datepicker__month-day--hovering vhd__currentDay'
+      if (
+        !this.isDisabled &&
+        this.date === this.hoveringDate &&
+        this.checkIn !== null &&
+        this.checkOut == null &&
+        this.dateFormater(this.checkIn) !== this.dateFormater(this.date)
+      ) {
+        return `vhd__datepicker__month-day--selected vhd__datepicker__month-day--hovering vhd__currentDay${isNotMinimumDuration}`
       }
 
       // Highlight the selected dates and prevent the user from selecting
       // the same date for checkout and checkin
       if (this.checkIn !== null && this.dateFormater(this.checkIn) === this.dateFormater(this.date)) {
         if (this.minNightCount === 0) {
-          return 'vhd__datepicker__month-day--first-day-selected checkIn'
+          return `vhd__datepicker__month-day--first-day-selected checkIn${isNotMinimumDuration}`
         }
 
         // Good
@@ -649,7 +656,6 @@ export default {
       return false
     },
     checkIfDisabled() {
-      console.log(this.date, this.options.startDate)
       this.isDisabled =
         // If this day is equal any of the disabled dates
         (this.sortedDisabledDates ? this.sortedDisabledDates.some((i) => this.compareDay(i, this.date) === 0) : null) ||

@@ -4,6 +4,7 @@
 $prefix: 'vhd__datepicker';
 $white: #fff;
 $black: #000;
+$offBlack: #1c1c1c;
 $zambezi-grey: #595959;
 $gray: #424b53;
 $primary-text-color: #35343d;
@@ -28,7 +29,7 @@ $colorRollActiveDage: $white;
 
 $font-size: 16px;
 $font-small: #{$font-size * 0.875};
-$font-family: 'Montserrat-medium', 'din-medium', Helvetica;
+$font-family: 'Montserrat', 'din-medium', Helvetica;
 $font-regular: 400;
 $font-bold: 700;
 $tooltip-font-size: 11px;
@@ -77,32 +78,56 @@ $extra-small-screen: '(max-width: 23em)';
   transition: all 0.2s ease-in-out;
   background-color: $background-color;
   font-size: $font-size;
-  font-family: $font-family;
   line-height: 0.875em;
+  height: 400px;
   overflow: hidden;
 
   @media screen and ($up-to-tablet) {
-    padding-bottom: 80px;
-}
+    border-radius: 0;
+    background-color: rgba(0,0,0,0.9);
+  }
 
     &__cta-panel {
         order: -1;
         text-align: center;
-        padding-bottom: 1.1rem;
-        padding-top: 1.25rem;
         border-bottom: 1px solid $disabled-color;
     }
+    &__cta-info {
+        font-size: 15px;
+        font-weight: 400;
+        margin-bottom: 1rem;
+    }
+
     &__cta-panel-title {
-        font-size: 1.25rem;
+        font-size: 18px;
         margin-right: 1rem;
-        font-weight: 600;
-        color: $white;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+        color: $offBlack;
+
+        &.desktop {
+            @media screen and ($up-to-tablet) {
+                display: none;
+            }
+
+            display: block;
+        }
+
+        &.mobile {
+            @media screen and ($desktop) {
+                display: none;
+            }
+
+            display: block;
+        }
     }
     &__checkin, &__checkout {
         text-transform: capitalize;
     }
     &__nights-info {
-        font-weight: 500;
+        margin-bottom: 1rem;
+        font-size: 15px;
+        font-weight: 400;
     }
     &__nights {
         font-size: 0.875rem;
@@ -143,7 +168,6 @@ $extra-small-screen: '(max-width: 23em)';
     display: grid;
     flex-grow: 1;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    margin-bottom: 1.5rem;
 
     @include device($up-to-tablet) {
         margin-bottom: 0;
@@ -190,13 +214,10 @@ $extra-small-screen: '(max-width: 23em)';
   &--open {
     height: 100vh;
     width: calc(100% + 1.5rem);
-    margin-left: -.75rem;
-    max-height: 44em;
     @media screen and (min-width: 720px) {
         width: initial;
         height: initial;
         margin-left: 0;
-        max-height: 56.25em;
     }
 
     box-shadow: 0 15px 30px 10px rgba($black, 0.08);
@@ -208,18 +229,17 @@ $extra-small-screen: '(max-width: 23em)';
       bottom: 0;
       -webkit-overflow-scrolling: touch !important;
       position: fixed;
-      top: 0;
       width: 100%;
     }
   }
 
   &__header {
+    padding-top: 6px;
     text-align: left;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    padding: 0.5em;
   }
 
   &__header-mobile {
@@ -239,6 +259,7 @@ $extra-small-screen: '(max-width: 23em)';
     height: auto;
     width: auto;
     background: none;
+    font-family: $font-family;
     //background: $white url('../images/calendar_icon.regular.svg') no-repeat 1em center / 1em;
 
     & *,
@@ -250,15 +271,13 @@ $extra-small-screen: '(max-width: 23em)';
     &--grid .vhd__square .#{$prefix}__month-day {
       margin: -1px 0 0 -1px;
       border: none;
+      padding: 10px;
+      padding-right: 0;
+      padding-left: 0;
       font-size: 0.75rem;
       font-weight: 500;
 
       &--hovering {
-        background-color: $primary-color;
-        border-radius: 50%;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border: 1px solid $primary-color;
         &.vhd__currentDay {
             &::after {
                 content: '';
@@ -272,6 +291,13 @@ $extra-small-screen: '(max-width: 23em)';
                 left: -1px;
             }
         }
+        > div {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding-right: 0;
+            background-color: $primary-color;
+        }
+
         &:last-child {
             margin-bottom: 0;
         }
@@ -294,44 +320,6 @@ $extra-small-screen: '(max-width: 23em)';
       }
       .#{$prefix}__month-day:before {
         display: none;
-      }
-    }
-  }
-
-  &__fullview {
-    background: none;
-    height: auto;
-
-    .#{$prefix}__close-button,
-    .#{$prefix}__dummy-wrapper,
-    .#{$prefix}__clear-button,
-    .vhd__hide-on-desktop {
-      display: none;
-    }
-    .#{$prefix} {
-      position: relative;
-      top: 0;
-    }
-
-    .vhd__hide-up-to-tablet {
-      display: block;
-    }
-
-    .#{$prefix}__month-button {
-      display: inline-block;
-    }
-
-    .#{$prefix}__months {
-      position: static;
-      margin: 0;
-      width: auto;
-
-      &::before {
-        display: none;
-      }
-
-      &.#{$prefix}__months--full {
-        width: 100% !important;
       }
     }
   }
@@ -422,7 +410,9 @@ $extra-small-screen: '(max-width: 23em)';
 
   &__month-day-wrapper {
     height: 0;
-    padding-top: calc(100% - 1px); //fix for safari
+    width: 32px;
+    margin: 0 auto;
+    padding-top: 32px; //fix for safari
     span.day {
       z-index: 1;
       position: absolute;
@@ -472,9 +462,12 @@ $extra-small-screen: '(max-width: 23em)';
 
     &--valid:hover,
     &--allowed-checkout:hover {
-      background-color: $primary-color;
-      border-radius: 50%;
       color: $colorValidHoverDate;
+
+      > div {
+        background-color: $primary-color;
+        border-radius: 100px;
+      }
     }
 
     &--disabled {
@@ -488,14 +481,46 @@ $extra-small-screen: '(max-width: 23em)';
     }
 
     &--valid#{&}--not-allowed,
+    &.minimumDurationUnvalidDay,
     &--not-allowed.vhd__currentDay,
     &--valid#{&}--not-allowed:hover {
-      color: $primary-text-color;
+      overflow: hidden;
+      color: $disabled-color;
       font-weight: $font-regular;
       cursor: default;
-      background: transparent;
       span {
         text-decoration: none;
+      }
+
+      &.vhd__datepicker__month-day--hovering {
+        &.vhd__currentDay {
+            &.checkIn {
+                > div {
+                    border-top-left-radius: 20px;
+                    padding-left: 0;
+                    padding-right: 100%;
+                    border-bottom-left-radius: 20px;
+                    border-top-right-radius: 0px;
+                    background-color: $primary-color;
+                    border-bottom-right-radius: 0px;
+                }
+            }
+        }
+
+        > div {
+            padding-left: 100%;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            background-color: rgb(255, 207, 179);
+        }
+      }
+
+      > div {
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        padding-left: 100%;
+        padding-right: 100%;
+        background-color: rgb(255, 207, 179);
       }
     }
 
@@ -533,36 +558,46 @@ $extra-small-screen: '(max-width: 23em)';
     }
 
     &--selected {
-      background-color: rgb(255, 207, 179);
       color: $disabled-color;
+      overflow: hidden;
+
+      > div {
+        padding-left: 100%;
+        padding-right: 100%;
+        background-color: rgb(255, 207, 179);
+      }
 
       span {
         text-decoration: none;
       }
       &:hover {
         font-weight: $font-bold;
-        border-radius: 50%;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        background-color: $primary-color;
         color: $colorRollActiveDage;
         z-index: 1;
+
+        > div {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            background-color: $primary-color;
+        }
       }
     }
 
     &--hovering {
-      background-color: $primary-color;
       color: $primary-text-inverse-color;
       font-weight: $font-bold;
       cursor: pointer;
       span {
         text-decoration: none;
       }
+
+      > div {
+        background-color: $primary-color;
+      }
     }
 
     &--first-day-selected,
     &--last-day-selected {
-      background: $primary-color;
       color: $primary-text-inverse-color;
       cursor: pointer;
       font-weight: $font-bold;
@@ -570,19 +605,29 @@ $extra-small-screen: '(max-width: 23em)';
       span {
         text-decoration: none;
       }
+
+      > div {
+        background: $primary-color;
+      }
     }
 
     &--first-day-selected {
         &.checkIn {
-            border-top-left-radius: 50%;
-            border-bottom-left-radius: 50%;
+            > div {
+                padding-right: 100%;
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 20px;
+            }
         }
     }
 
     &--last-day-selected {
         &.checkOut {
-            border-top-right-radius: 50%;
-            border-bottom-right-radius: 50%;
+            > div {
+                padding-left: 100%;
+                border-top-right-radius: 20px;
+                border-bottom-right-radius: 20px;    
+            }
         }
     }
 
@@ -619,14 +664,21 @@ $extra-small-screen: '(max-width: 23em)';
 
   &__month-button {
     background: none;
-    //background: transparent url('../images/ic-arrow-right-green.regular.svg') no-repeat center center / 8px;
     width: 2.5em;
     height: 2.5em;
     outline: none;
     text-align: center;
+    appearance: none;
     cursor: pointer;
+    border: none;
     opacity: 1;
     transition: opacity ease 0.5s;
+
+    svg {
+        path {
+            stroke: $primary-color;
+        }
+    }
 
     &:hover {
       opacity: 0.65;
@@ -649,12 +701,20 @@ $extra-small-screen: '(max-width: 23em)';
     }
   }
   &__inner {
-    padding: 0 0.3rem;
+    padding: 1rem;
+    padding-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     position: relative;
-    height: calc(100% - 3em);
-
+    height: 100%;
+    
     @include device($up-to-tablet) {
       padding: 0;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      flex-grow: 1;
+      background-color: $white;
     }
   }
 
@@ -683,6 +743,12 @@ $extra-small-screen: '(max-width: 23em)';
   }
 
   &__months {
+    position: relative;
+    flex-grow: 1;
+    grid-auto-flow: column;
+    flex-wrap: nowrap;
+    gap: 3rem;
+    display: grid;
     &::before {
         display: none;
     }
@@ -690,12 +756,8 @@ $extra-small-screen: '(max-width: 23em)';
     @include device($desktop) {
       display: flex;
       flex-wrap: wrap;
-      width: 40.625em;
+      width: calc(630px - 2rem);
       justify-content: space-between;
-
-      &.#{$prefix}__months--full {
-        width: 20.3125em !important;
-      }
     }
 
     @include device($up-to-tablet) {
@@ -725,9 +787,8 @@ $extra-small-screen: '(max-width: 23em)';
   &__month {
     font-size: 0.75em;
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
-    width: 50%;
-    padding-right: 0.83334em;
 
     @include device($up-to-tablet) {
       width: 100%;
@@ -752,13 +813,6 @@ $extra-small-screen: '(max-width: 23em)';
             }
         }
     }
-
-    @include device($desktop) {
-      &:last-of-type {
-        padding-right: 0;
-        padding-left: 0.83334em;
-      }
-    }
   }
 
   &__month-caption {
@@ -767,17 +821,15 @@ $extra-small-screen: '(max-width: 23em)';
   }
 
   &__month-name {
-    font-size: $font-size;
+    font-size: 15px;
     font-weight: $font-bold;
     margin: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
     text-transform: capitalize;
-    padding: 0 0 1.625em;
     pointer-events: none;
     text-align: center;
-    line-height: 2em;
-    height: 2.5em;
     font-weight: 500;
-    padding-top: 8px;
 
     @include device($up-to-tablet) {
       height: auto;
@@ -792,11 +844,9 @@ $extra-small-screen: '(max-width: 23em)';
   }
 
   &__week-row {
+    margin-top: 4px;
     display: block;
     box-shadow: none;
-    margin-top: 0.25rem;
-    padding-top: 10px;
-    padding-bottom: 10px;
   }
 
   &__week-name {
@@ -805,6 +855,7 @@ $extra-small-screen: '(max-width: 23em)';
     font-size: 0.875rem;
     font-weight: 500;
     padding-top: 4px;
+    padding-bottom: 8px;
     color: $medium-gray;
     text-align: center;
   }

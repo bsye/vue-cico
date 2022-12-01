@@ -4,11 +4,11 @@
       {{ get(i18n, 'checkInCheckOut.checkIn') }}
     </h4>
 
-    <p class="vhd__datepicker__cta-info">
+    <p v-if="!nightsIn" class="vhd__datepicker__cta-info">
       {{ get(i18n, 'checkInCheckOut.stayLongerOne') }}
     </p>
 
-    <p class="vhd__datepicker__nights-info">
+    <p v-if="nightsIn" class="vhd__datepicker__nights-info">
       <span v-if="nightsIn" class="vhd__datepicker__checkin">
         {{ nightsIn }}
       </span>
@@ -25,29 +25,25 @@
 
       <template>
         <span v-if="extraNights < 1" class="vhd__datepicker__nights">
-          {{ ` ${includedNights}` }}
-          {{ get(i18n, 'checkInCheckOut.nightsIncluded') }}
+          ({{ `${includedNights}` }} {{ get(i18n, 'checkInCheckOut.nightsIncluded') }})
         </span>
       </template>
 
       <span class="vhd__datepicker__travel-dates">
-        <template v-if="nightsTotal > 0">
-          {{ ` ${nightsTotal}` }}
-          <span v-if="nightsTotal > 1">
-            {{ get(i18n, 'activity.filter.nights') }}
-          </span>
-          <span v-else>{{ get(i18n, 'activity.filter.night') }}</span>
+        <template v-if="extraNights >= 1">
+          ({{ ` ${nightsTotal}` }}
+          <span v-if="nightsTotal > 1">{{ get(i18n, 'activity.filter.nights') }} {{ '-' }}</span>
+          <span v-else>{{ get(i18n, 'activity.filter.night') }} </span>
         </template>
-        <div v-if="extraNights >= 1">
+        <template v-if="extraNights >= 1">
           <span>
             {{ ` ${includedNights}` }}
-            {{ get(i18n, 'checkInCheckOut.nightsIncluded') }}
+            {{ get(i18n, 'checkInCheckOut.included') }},
           </span>
           <span class="vhd__datepicker__extra-nights">
-            - {{ extraNights }}
-            {{ get(i18n, 'checkInCheckOut.extraNight') }}
-          </span>
-        </div>
+            {{ extraNights }} {{ get(i18n, 'checkInCheckOut.extraNight') }} </span
+          >)
+        </template>
       </span>
     </p>
   </div>

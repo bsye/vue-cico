@@ -54,30 +54,50 @@
           :nights-out="dateFormater(checkOut, 'ddd DD MMM.')"
           :i18n="i18n"
         />
-        <div
-          :class="{
-            vhd__datepicker__header: isDesktop,
-            'vhd__datepicker__header-mobile': !isDesktop,
-          }"
-        >
-          <button
-            type="button"
-            class="vhd__datepicker__month-button vhd__datepicker__month-button--prev"
-            @click="renderPreviousMonth"
-            @keyup.enter.stop.prevent="renderPreviousMonth"
-            :tabindex="isOpen ? 0 : -1"
-            :disabled="activeMonthIndex === 0"
-          />
-          <button
-            type="button"
-            class="vhd__datepicker__month-button vhd__datepicker__month-button--next"
-            @click="renderNextMonth"
-            @keyup.enter.stop.prevent="renderNextMonth"
-            :disabled="isPreventedMaxMonth"
-            :tabindex="isOpen ? 0 : -1"
-          />
-        </div>
         <div class="vhd__datepicker__months" :class="{ 'vhd__datepicker__months--full': showSingleMonth }">
+          <div
+            :class="{
+              vhd__datepicker__header: isDesktop,
+              'vhd__datepicker__header-mobile': !isDesktop,
+            }"
+          >
+            <button
+              type="button"
+              class="vhd__datepicker__month-button vhd__datepicker__month-button--prev"
+              @click="renderPreviousMonth"
+              @keyup.enter.stop.prevent="renderPreviousMonth"
+              :tabindex="isOpen ? 0 : -1"
+              :disabled="activeMonthIndex === 0"
+            >
+              <svg width="10" height="20" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.5 11L6.5 6L1.5 1"
+                  stroke="#909090"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="vhd__datepicker__month-button vhd__datepicker__month-button--next"
+              @click="renderNextMonth"
+              @keyup.enter.stop.prevent="renderNextMonth"
+              :disabled="isPreventedMaxMonth"
+              :tabindex="isOpen ? 0 : -1"
+            >
+              <svg width="10" height="20" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.5 11L6.5 6L1.5 1"
+                  stroke="#909090"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
           <Month
             v-for="(month, monthIndex) in paginateMonths"
             :key="`${datepickerMonthKey}-${monthIndex}-desktop`"
@@ -205,7 +225,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'YYYY-MM-DD',
+      default: 'ddd DD MMM.',
     },
     gridStyle: {
       type: Boolean,
