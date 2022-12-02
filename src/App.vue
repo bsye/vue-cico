@@ -51,7 +51,7 @@
           :minNights="3"
           :maxNights="20"
           :i18n="i18n"
-          class="landing"
+          class="vhd__style-landing"
         />
         <DatePicker
           style="margin-top: 2rem"
@@ -60,7 +60,7 @@
           :minNights="3"
           :maxNights="20"
           :i18n="i18n"
-          class="search"
+          class="vhd__style-search"
         />
       </div>
     </div>
@@ -290,9 +290,11 @@ body {
     position: relative;
     bottom: 70px;
     display: flex;
+    max-width: 768px;
+    margin: 0 auto;
+    gap: 2rem;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
   }
 }
 </style>
