@@ -1,0 +1,52 @@
+.vhd__datepicker__wrapper {
+    &.search {
+        .vhd__datepicker__dummy-wrapper {
+            background-color: $background-gray;
+            border-radius: 5px;
+            padding: 10px;
+            align-items: center;
+            padding-left: 18px;
+            padding-right: 18px;
+
+            .vhd__datepicker__input {
+                font-size: 1rem;
+                text-transform: none;
+            }
+        }
+
+        svg {
+            margin-bottom: 2px;
+            &.arrow-icon {
+                margin-left: 16px;
+                margin-right: 16px;
+
+                * {
+                    stroke: $disabled-color;
+                }
+
+                @media screen and ($up-to-tablet) {
+                    width: 16px;
+                    height: 13px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                }
+            }
+
+            &.calendar-icon {
+                height: 20px;
+                margin-right: 16px;
+
+                * {
+                    fill: $zambezi-grey;
+                }
+
+                @media screen and ($up-to-tablet) {
+                    position: relative;
+                    bottom: 1px;
+                    margin-right: 10px;
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 @import './variables';
 @import './landing';
+@import './search';
 @import './mobile';
 
 @mixin focusStyle() {
@@ -263,7 +264,8 @@
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     width: 100%;
@@ -292,7 +294,6 @@
 
     @media screen and (min-width: 720px) {
         font-size: 1.25rem;
-        line-height: 1.1;
     }
 
     @include focusStyle();
@@ -787,14 +788,10 @@
     right: 0;
     top: 0;
     width: 1.6em;
-
-    display: none;
-    @media screen and ($desktop) {
-        display: block;
-    }
+    display: block;
 
     svg {
-      fill: none;
+      fill: $zambezi-grey;
       stroke-linecap: round;
       stroke-width: 0.32em;
       stroke: $medium-gray;
@@ -803,6 +800,10 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+
+      path {
+        stroke: $zambezi-grey;
+      }
     }
 
     @include focusStyle();

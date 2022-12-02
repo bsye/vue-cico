@@ -1,43 +1,66 @@
-.vhd__datepicker__dummy-wrapper {
-    width: 100%;
+
+.vhd__datepicker__wrapper {
     &.landing {
-        border-bottom: 1px solid #fafafa;
-        align-items: flex-end;
-        padding-bottom: 3px;
-        color: $white;
+        .vhd__datepicker__dummy-wrapper {
+            width: 100%;
+            border-bottom: 1px solid #fafafa;
+            align-items: flex-end;
+            padding-bottom: 3px;
+            color: $white;
 
-        > * {
-            font-size: 24px;
-            line-height: 1;
-        }
+            > * {
+                font-size: 24px;
+                line-height: 1;
 
-        svg {
-            margin-bottom: 2px;
-            &.arrow-icon {
-                margin-bottom: 5px;
-                margin-left: 16px;
-                margin-right: 16px;
-
-                * {
-                    stroke: white;
+                @media screen and ($up-to-tablet) {
+                    font-size: 16px;
                 }
             }
 
-            &.calendar-icon {
-                height: 20px;
-                margin-right: 16px;
-
-                * {
-                    fill: white;
-                }
-            }
-        }
-
-        .vhd__datepicker__clear-button {
-            width: 25px;
             svg {
-                * {
-                    stroke: white;
+                margin-bottom: 2px;
+                &.arrow-icon {
+                    margin-bottom: 5px;
+                    margin-left: 16px;
+                    margin-right: 16px;
+
+                    * {
+                        stroke: white;
+                    }
+
+                    @media screen and ($up-to-tablet) {
+                        width: 16px;
+                        margin-bottom: 2px;
+                        height: 13px;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+                }
+
+                &.calendar-icon {
+                    height: 20px;
+                    margin-right: 16px;
+
+                    * {
+                        fill: white;
+                    }
+
+                    @media screen and ($up-to-tablet) {
+                        width: 17px;
+                        position: relative;
+                        top: 1px;
+                        margin-right: 10px;
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+
+            .vhd__datepicker__clear-button {
+                width: 25px;
+                svg {
+                    * {
+                        stroke: white;
+                    }
                 }
             }
         }

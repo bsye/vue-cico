@@ -10,15 +10,11 @@
     <div class="vhd__datepicker__close-button vhd__hide-on-desktop" v-if="isOpen" @click="closeMobileDatepicker">
       <i>+</i>
     </div>
-    <div
-      @click="toggleDatepicker()"
-      class="vhd__datepicker__dummy-wrapper landing"
-      :class="{ 'vhd__datepicker__dummy-wrapper--is-active': isOpen }"
-    >
+    <div @click="toggleDatepicker()" class="vhd__datepicker__dummy-wrapper">
       <IconCalendar />
       <date-input
         :i18n="i18n"
-        :input-date="formatDate(checkIn)"
+        :input-date="responsiveFormatter(this.checkIn)"
         input-date-type="check-in"
         :is-open="isOpen"
         :toggle-datepicker="toggleDatepicker"
@@ -28,7 +24,7 @@
       <date-input
         v-if="!singleDaySelection"
         :i18n="i18n"
-        :input-date="formatDate(checkOut)"
+        :input-date="responsiveFormatter(this.checkOut)"
         input-date-type="check-out"
         :is-open="isOpen"
         :toggle-datepicker="toggleDatepicker"
@@ -602,6 +598,13 @@ export default {
           return D + ['th', 'st', 'nd', 'rd'][D % 10 > 3 ? 0 : ((D - (D % 10) !== 10) * D) % 10]
         },
       })
+    },
+    responsiveFormatter(date) {
+      if (this.isDesktop) {
+        return this.dateFormater(date, 'ddd DD MMM')
+      }
+
+      return this.dateFormater(date, 'DD MMM')
     },
     generateInitialMonths() {
       this.months = []

@@ -10,7 +10,7 @@
       @click.prevent.stop="dayClicked($event, date)"
       :class="[
         dayClass,
-        disabledClass,
+        disabledClass, 
         checkinCheckoutClass,
         bookingClass,
         { 'vhd__datepicker__month-day--today': isToday },

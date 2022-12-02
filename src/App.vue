@@ -46,12 +46,21 @@
       </div>
       <div class="picker">
         <DatePicker
-          :hoveringTooltip="false"
           :startDate="startDate"
           :endDate="Infinity"
           :minNights="3"
           :maxNights="20"
           :i18n="i18n"
+          class="landing"
+        />
+        <DatePicker
+          style="margin-top: 2rem"
+          :startDate="startDate"
+          :endDate="Infinity"
+          :minNights="3"
+          :maxNights="20"
+          :i18n="i18n"
+          class="search"
         />
       </div>
     </div>
