@@ -138,10 +138,6 @@ export default {
       type: String,
       default: '',
     },
-    showCustomTooltip: {
-      default: false,
-      type: Boolean,
-    },
     showPrice: {
       type: Boolean,
       default: false,
@@ -157,10 +153,6 @@ export default {
     sortedPeriodDates: {
       type: Array,
       default: () => [],
-    },
-    tooltipMessage: {
-      default: null,
-      type: String,
     },
   },
   computed: {

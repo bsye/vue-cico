@@ -115,7 +115,6 @@
             :activeMonthIndex="activeMonthIndex"
             :bookings="sortBookings"
             :checkIn="checkIn"
-            :checkIncheckOutHalfDay="checkIncheckOutHalfDay"
             :checkInPeriod="checkInPeriod"
             :checkOut="checkOut"
             :disableCheckoutOnCheckin="disableCheckoutOnCheckin"
@@ -130,13 +129,11 @@
             :options="dayOptions"
             :priceSymbol="priceSymbol"
             :screenSize="screenSize"
-            :showCustomTooltip="showCustomTooltip"
             :showPrice="showPrice"
             :disabledDates="disabledDates"
             :periodDates="periodDates"
             :sortedDisabledDates="sortedDisabledDates"
             :sortedPeriodDates="sortedPeriodDates"
-            :tooltipMessage="customTooltipMessage"
             @clear-selection="clearSelection"
             @booking-clicked="handleBookingClicked"
             @day-clicked="handleDayClick"
@@ -230,10 +227,6 @@ export default {
       type: String,
       default: 'dddd DD MMMM',
     },
-    halfDay: {
-      type: Boolean,
-      default: true,
-    },
     hoveringTooltip: {
       default: true,
       type: [Boolean, Function],
@@ -294,10 +287,6 @@ export default {
       type: [Date, null],
       default: null,
     },
-    tooltipMessage: {
-      type: [String, null],
-      default: null,
-    },
     value: {
       type: Boolean,
       default: true,
@@ -311,7 +300,6 @@ export default {
     return {
       activeMonthIndex: 0,
       checkIn: this.startingDateValue,
-      checkIncheckOutHalfDay: {},
       checkInPeriod: {},
       checkOut: this.endingDateValue,
       hoveringPeriod: {},
@@ -420,29 +408,16 @@ export default {
     paginateMonths() {
       const months = []
 
-      this.months.forEach((el, index) => {
-        months.push(el)
-      })
-
-      return months
-    },
-
-    customTooltipMessage() {
-      let tooltip = ''
-
-      if (this.hoveringDate && (this.customTooltip || this.customTooltipHalfday)) {
-        if (this.customTooltip && this.customTooltipHalfday) {
-          tooltip = `${this.customTooltipHalfday}. <br/> ${this.customTooltip}`
-        } else if (this.customTooltipHalfday && !this.customTooltip) {
-          tooltip = this.customTooltipHalfday
-        } else {
-          tooltip = this.customTooltip
-        }
-
-        return tooltip
+      if (this.isDesktop) {
+        months.push(this.months[this.activeMonthIndex])
+        months.push(this.months[this.activeMonthIndex + 1])
+      } else {
+        this.months.forEach((el) => {
+          months.push(el)
+        })
       }
 
-      return this.tooltipMessage
+      return months
     },
     sortedPeriodDates() {
       let periodDates = []
@@ -519,7 +494,9 @@ export default {
       return { ...this.$props, disabledWeekDaysObject: this.disabledWeekDaysObject }
     },
     numberOfMonths() {
-      return this.showSingleMonth ? 1 : 2
+      if (this.isDesktop) return 2
+
+      return 12
     },
     isDesktop() {
       return window.innerWidth > 767
@@ -527,7 +504,6 @@ export default {
   },
   watch: {
     bookings() {
-      this.createHalfDayDates(this.baseHalfDayDates)
       this.reRender()
     },
     checkIn(newDate) {
@@ -541,7 +517,6 @@ export default {
       if (this.checkOut !== null) {
         this.hoveringDate = null
         this.nextDisabledDate = null
-        this.createHalfDayDates(this.baseHalfDayDates)
         this.reRender()
         this.showCustomTooltip = false
       }
@@ -586,7 +561,6 @@ export default {
     },
     disabledDates() {
       this.nextDisabledDate = null
-      this.createHalfDayDates(this.baseHalfDayDates)
       this.reRender()
     },
   },
@@ -603,11 +577,6 @@ export default {
       document.addEventListener('click', this.handleClickOutside, false)
       document.addEventListener('keyup', this.escFunction, false)
     }
-
-    this.onElementHeightChange(document.body, () => {
-      this.emitHeighChangeEvent()
-    })
-    this.createHalfDayDates(this.baseHalfDayDates)
   },
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize)
@@ -661,11 +630,9 @@ export default {
 
         this.activeMonthIndex += count
       } else {
-        let date = this.startDate
-        const isDesktop = window.innerWidth > 767
-        const monthsToShow = isDesktop ? 2 : 12
+        let date = new Date(this.startDate)
 
-        for (let i = 0; i < monthsToShow; i++) {
+        for (let i = 0; i < this.numberOfMonths; i++) {
           this.createMonth(date)
           date = this.getNextMonth(new Date(date))
         }
@@ -673,10 +640,6 @@ export default {
     },
     handleBookingClicked(event, date, currentBooking) {
       this.$emit('booking-clicked', event, date, currentBooking)
-      /**
-       * @deprecated since v4.0.0 beta 11
-       */
-      this.$emit('bookingClicked', event, date, currentBooking)
     },
     escFunction(e) {
       const escTouch = 27
@@ -687,10 +650,6 @@ export default {
     },
     formatDate(date) {
       return this.dateFormater(date, this.format)
-    },
-    cleanString(string) {
-      // eslint-disable-next-line no-useless-escape
-      return string.replace(/\<br\/>/g, '')
     },
     dateIsInCheckInCheckOut(date) {
       const compareDate = this.dateFormater(date)
@@ -727,16 +686,6 @@ export default {
       this.$emit('enter-month', event, month)
     },
     enterDay(event, day) {
-      const formatDate = this.dateFormater(day.date)
-      const halfDays = Object.keys(this.checkIncheckOutHalfDay)
-      const disableDays = this.disabledDates
-        .filter((disableDate) => !halfDays.includes(disableDate))
-        .includes(formatDate)
-
-      if (!this.dayIsDisabled(day.date) && day.belongsToThisMonth && !disableDays) {
-        this.setCustomTooltipOnHover(day)
-      }
-
       this.hoveringDate = this.singleDaySelection ? null : day.date
       this.$emit('enter-day', event, day)
     },
@@ -783,41 +732,6 @@ export default {
           startAt: this.checkIn,
           endAt: this.addDays(this.checkIn, this.minNightCount),
         }
-      }
-    },
-    setCustomTooltipOnHover(day) {
-      const { date } = day
-
-      this.hoveringDate = date
-      if (this.showCustomTooltip) this.showCustomTooltip = false
-
-      this.setCurrentPeriod(date, 'hover')
-
-      if (Object.keys(this.hoveringPeriod).length > 0) {
-        // Create tooltip
-        if (this.hoveringPeriod.periodType === 'weekly_by_saturday') {
-          const dayCode = 6
-          const text = 'Only Saturday to Saturday'
-
-          this.showTooltipWeeklyOnHover(date, dayCode, text)
-        } else if (this.hoveringPeriod.periodType === 'weekly_by_sunday') {
-          const dayCode = 0
-          const text = 'Only Sunday to Sunday'
-
-          this.showTooltipWeeklyOnHover(date, dayCode, text)
-        } else if (this.hoveringPeriod.periodType === 'nightly') {
-          this.showTooltipNightlyOnHover(date)
-        } else {
-          // Clean tooltip
-          this.showCustomTooltip = false
-          this.customTooltip = ''
-        }
-      } else {
-        this.hoveringPeriod = {}
-      }
-
-      if (this.halfDay) {
-        this.createHalfDayTooltip(day.date)
       }
     },
     handleDayClick(event, date, formatDate, resetCheckin) {
@@ -873,7 +787,6 @@ export default {
       if (this.checkIn && !this.checkOut) {
         this.setCurrentPeriod(date, 'click')
         this.checkInPeriod = this.hoveringPeriod
-        this.setCustomTooltipOnClick()
       }
 
       this.nextDisabledDate = nextDisabledDate
@@ -901,151 +814,6 @@ export default {
 
       return closest
     },
-    setCustomTooltipOnClick() {
-      if (Object.keys(this.checkInPeriod).length > 0 && this.checkInPeriod.periodType.includes('weekly')) {
-        const nextValidDate = this.addDays(this.checkIn, this.minNightCount)
-
-        this.checkInPeriod.nextValidDate = nextValidDate
-        this.showTooltipWeeklyOnClick()
-      } else if (this.checkInPeriod.periodType === 'nightly') {
-        this.showTooltipNightlyOnClick()
-      }
-    },
-    showTooltipWeeklyOnHover(date, periodDayType, text) {
-      const countDaysBetweenCheckInCurrentDay = this.countDays(this.checkIn, date)
-      const notOnPeriodDayType = date.getDay() !== periodDayType
-      const isCheckInCheckOut = this.checkIn && this.checkOut
-      const notCheckInNotPeriodDayType = !this.checkIn && notOnPeriodDayType
-      const isCheckInNotCheckOut = this.checkIn && !this.checkOut
-      const isNotBetweenCheckInAndCheckOut = !this.validateDateBetweenTwoDates(this.checkIn, this.checkOut, date)
-      const notAllowDaysBetweenCheckInAndNextValidDate =
-        this.hoveringPeriod.nextValidDate &&
-        this.validateDateBetweenTwoDates(this.checkIn, this.hoveringPeriod.nextValidDate, this.hoveringDate) &&
-        this.dateFormater(this.checkIn) !== this.dateFormater(this.hoveringDate) &&
-        this.dateFormater(this.hoveringPeriod.nextValidDate) !== this.dateFormater(this.hoveringDate)
-      const hasHalfDayOnWeeklyPeriod =
-        Object.keys(this.checkIncheckOutHalfDay).length > 0 &&
-        this.checkIncheckOutHalfDay[this.dateFormater(date)] &&
-        this.checkIncheckOutHalfDay[this.dateFormater(date)].checkIn
-
-      // Show tooltip on not-allowed day
-      if (notCheckInNotPeriodDayType) {
-        this.showCustomTooltip = true
-        this.customTooltip = text
-      } else {
-        this.showCustomTooltip = false
-        this.customTooltip = ''
-      }
-
-      // Show tooltip when CheckIn
-      if (isCheckInNotCheckOut) {
-        const nextDayValid = this.addDays(this.checkIn, this.minNightCount)
-        const isDateAfterMinimumDuration = this.getDayDiff(date, nextDayValid) <= 0
-
-        if (isDateAfterMinimumDuration && notOnPeriodDayType) {
-          this.showCustomTooltip = true
-          this.customTooltip = text
-        } else if (notOnPeriodDayType || notAllowDaysBetweenCheckInAndNextValidDate) {
-          if (this.checkInPeriod && this.checkInPeriod.periodType === 'nightly') {
-            this.showCustomTooltip = false
-            this.customTooltip = ''
-          } else {
-            // Show default message on currentDay
-            const night = this.pluralize(this.minNightCount, 'week')
-
-            this.showCustomTooltip = true
-            this.customTooltip = this.completeTrad('%{minNightInPeriod} %{night} minimum.', {
-              minNightInPeriod: this.minNightCount / 7,
-              night,
-            })
-          }
-        } else if (hasHalfDayOnWeeklyPeriod) {
-          // Show the correct wording in comparison to periodType of this.checkInPeriod equal to "nightly" / "weekly"
-          if (this.checkInPeriod.periodType !== 'nightly') {
-            this.customTooltip = `${countDaysBetweenCheckInCurrentDay / 7} ${this.pluralize(
-              this.minNightCount,
-              'week',
-            )}`
-          } else if (this.checkInPeriod.periodType === 'nightly') {
-            this.customTooltip = `${countDaysBetweenCheckInCurrentDay} ${
-              countDaysBetweenCheckInCurrentDay !== 1
-                ? this.get(this.i18n, 'activity.filter.nights')
-                : this.get(this.i18n, 'activity.filter.night')
-            }`
-          }
-        } else {
-          // Clean tooltip
-          this.showCustomTooltip = false
-          this.customTooltip = ''
-        }
-        // Show tooltip when CheckIn & CheckOut on all the days that are not between checkIn and CheckOut
-      } else if (isCheckInCheckOut && notOnPeriodDayType && isNotBetweenCheckInAndCheckOut) {
-        this.showCustomTooltip = true
-        this.customTooltip = text
-      }
-    },
-    showTooltipWeeklyOnClick() {
-      const night = this.pluralize(this.minNightCount, 'week')
-
-      this.showCustomTooltip = true
-      this.customTooltip = this.completeTrad('%{minNightInPeriod} %{night} minimum.', {
-        minNightInPeriod: this.minNightCount / 7,
-        night,
-      })
-    },
-    showTooltipNightlyOnHover(date) {
-      if (this.checkIn && !this.checkOut) {
-        const nextDayValid = this.addDays(this.checkIn, this.minNightCount)
-        const isDateAfterMinimumDuration = this.getDayDiff(date, nextDayValid) <= 0
-        const countOfDays = this.countDays(this.checkIn, date)
-        const night = this.pluralize(Math.max(this.minNightCount, countOfDays))
-
-        if (!isDateAfterMinimumDuration) {
-          const minNightInPeriod = this.hoveringPeriod.minimumDuration
-
-          this.showCustomTooltip = true
-          this.customTooltip = this.completeTrad('%{minNightInPeriod} %{night} minimum.', {
-            minNightInPeriod,
-            night,
-          })
-        } else {
-          this.customTooltip = `${countOfDays} ${night}`
-        }
-      } else {
-        this.customTooltip = ''
-      }
-    },
-    showTooltipNightlyOnClick() {
-      const minNightInPeriod = this.hoveringPeriod.minimumDuration
-      const night = this.pluralize(this.minNightCount)
-
-      this.showCustomTooltip = true
-      this.customTooltip = this.completeTrad('%{minNightInPeriod} %{night} minimum.', { minNightInPeriod, night })
-    },
-    createHalfDayTooltip(date) {
-      this.customTooltipHalfday = ''
-      const formatedHoveringDate = this.dateFormater(date)
-
-      if (this.checkIncheckOutHalfDay[formatedHoveringDate]) {
-        this.showCustomTooltip = true
-
-        if (this.checkIncheckOutHalfDay[formatedHoveringDate].checkIn) {
-          this.customTooltipHalfday = 'Available CheckOut'
-        } else if (this.checkIncheckOutHalfDay[formatedHoveringDate].checkOut) {
-          this.customTooltipHalfday = 'Available CheckIn'
-        }
-      }
-    },
-    completeTrad(translation, keys) {
-      let newT = translation
-      const keysTranslations = Object.keys(keys)
-
-      keysTranslations.forEach((key) => {
-        newT = newT.replace(`%{${key}}`, keys[key])
-      })
-
-      return newT
-    },
     handleClickOutside(event) {
       const ignoreClickOnMeElement = this.$refs[`DatePicker-${this.hash}`]
 
@@ -1064,30 +832,6 @@ export default {
 
       return 'mobile'
     },
-    onElementHeightChange(el, callback) {
-      let lastHeight = el.clientHeight
-      let newHeight = lastHeight
-      const newEl = el
-
-      ;(function run() {
-        newHeight = el.clientHeight
-
-        if (lastHeight !== newHeight) {
-          callback()
-        }
-
-        lastHeight = newHeight
-
-        if (newEl.onElementHeightChangeTimer) {
-          clearTimeout(el.onElementHeightChangeTimer)
-        }
-
-        newEl.onElementHeightChangeTimer = setTimeout(run, 1000)
-      })()
-    },
-    emitHeighChangeEvent() {
-      this.$emit('height-changed')
-    },
     reRender() {
       this.datepickerDayKey += 1
       this.datepickerMonthKey += 1
@@ -1099,10 +843,8 @@ export default {
       this.checkOut = null
       this.nextDisabledDate = null
       this.nextPeriodDisableDates = []
-      this.showCustomTooltip = false
       this.hoveringPeriod = {}
       this.checkInPeriod = {}
-      this.createHalfDayDates(this.baseHalfDayDates)
       this.reRender()
       this.$emit('clear-selection')
     },
@@ -1242,81 +984,6 @@ export default {
       }
 
       this.months.push(month)
-    },
-    createHalfDayDates(_baseHalfDayDates) {
-      let sortedDates = []
-      const checkIncheckOutHalfDay = {}
-      const baseHalfDayDates = [..._baseHalfDayDates]
-
-      // Sorted disabledDates
-      baseHalfDayDates.sort((a, b) => {
-        const aa = a.split('/').reverse().join()
-        const bb = b.split('/').reverse().join()
-
-        // eslint-disable-next-line no-nested-ternary
-        return aa < bb ? -1 : aa > bb ? 1 : 0
-      })
-
-      if (this.sortBookings.length === 0) {
-        for (let i = 0; i < baseHalfDayDates.length; i++) {
-          const newDate = baseHalfDayDates[i]
-
-          if (this.halfDay) {
-            const newDateIncrementOne = baseHalfDayDates[i + 1]
-
-            if (i === 0) {
-              checkIncheckOutHalfDay[newDate] = {
-                checkIn: true,
-              }
-            }
-
-            if (
-              !checkIncheckOutHalfDay[newDate] &&
-              baseHalfDayDates[i + 1] &&
-              this.getDayDiff(newDate, newDateIncrementOne) > 1
-            ) {
-              checkIncheckOutHalfDay[newDate] = {
-                checkOut: true,
-              }
-              checkIncheckOutHalfDay[newDateIncrementOne] = {
-                checkIn: true,
-              }
-            }
-
-            if (i === baseHalfDayDates.length - 1) {
-              checkIncheckOutHalfDay[baseHalfDayDates[baseHalfDayDates.length - 1]] = {
-                checkOut: true,
-              }
-            }
-          }
-
-          sortedDates[i] = baseHalfDayDates[i]
-        }
-      } else {
-        this.sortBookings.forEach((booking) => {
-          checkIncheckOutHalfDay[booking.checkInDate] = {
-            checkIn: true,
-          }
-          checkIncheckOutHalfDay[booking.checkOutDate] = {
-            checkOut: true,
-          }
-        })
-      }
-
-      if (this.halfDay) {
-        const halfDays = Object.keys(checkIncheckOutHalfDay)
-
-        sortedDates = sortedDates.filter((date) => !halfDays.includes(date))
-      }
-
-      sortedDates = sortedDates.map((date) => new Date(date))
-      this.sortedDisabledDates = sortedDates.sort((a, b) => a - b)
-      this.checkIncheckOutHalfDay = checkIncheckOutHalfDay
-      this.$emit('handle-checkin-checkout-half-day', this.checkIncheckOutHalfDay)
-      /**
-       * @deprecated since v4.0.0 beta 11
-       */
-      this.$emit('handleCheckinCheckoutHalfDay', this.checkIncheckOutHalfDay)
     },
   },
 }
