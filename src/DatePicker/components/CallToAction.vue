@@ -1,7 +1,13 @@
 <template>
   <div class="vhd__datepicker__cta-panel">
-    <h4 class="vhd__datepicker__cta-panel-title">
+    <h4 v-if="!nightsIn" class="vhd__datepicker__cta-panel-title">
       {{ get(i18n, 'checkInCheckOut.checkIn') }}
+    </h4>
+    <h4 v-else-if="!nightsOut" class="vhd__datepicker__cta-panel-title">
+      {{ get(i18n, 'checkInCheckOut.checkOut') }}
+    </h4>
+    <h4 v-else class="vhd__datepicker__cta-panel-title">
+      {{ get(i18n, 'checkInCheckOut.yourDates') }}
     </h4>
 
     <p v-if="!nightsIn" class="vhd__datepicker__cta-info">

@@ -2,7 +2,6 @@
   <div
     class="vhd__datepicker__wrapper"
     :class="{
-      'vhd__datepicker__wrapper--grid': gridStyle,
       'vhd__datepicker__wrapper--booking': bookings.length > 0,
     }"
     :ref="`DatePicker-${hash}`"
@@ -11,7 +10,11 @@
     <div class="vhd__datepicker__close-button vhd__hide-on-desktop" v-if="isOpen" @click="closeMobileDatepicker">
       <i>+</i>
     </div>
-    <div class="vhd__datepicker__dummy-wrapper" :class="{ 'vhd__datepicker__dummy-wrapper--is-active': isOpen }">
+    <div
+      @click="toggleDatepicker()"
+      class="vhd__datepicker__dummy-wrapper landing"
+      :class="{ 'vhd__datepicker__dummy-wrapper--is-active': isOpen }"
+    >
       <IconCalendar />
       <date-input
         :i18n="i18n"
@@ -31,12 +34,12 @@
         :toggle-datepicker="toggleDatepicker"
         :single-day-selection="singleDaySelection"
       />
-    </div>
-    <div class="vhd__datepicker__clear-button" tabindex="0" @click="clearSelection" v-show="showClearSelectionButton">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
-        <title>x</title>
-        <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
-      </svg>
+      <div class="vhd__datepicker__clear-button" tabindex="0" @click="clearSelection" v-show="showClearSelectionButton">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
+          <title>x</title>
+          <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
+        </svg>
+      </div>
     </div>
     <div
       class="vhd__datepicker"
@@ -56,9 +59,9 @@
         />
         <div class="vhd__datepicker__months" :class="{ 'vhd__datepicker__months--full': showSingleMonth }">
           <div
+            v-if="isDesktop"
             :class="{
               vhd__datepicker__header: isDesktop,
-              'vhd__datepicker__header-mobile': !isDesktop,
             }"
           >
             <button
@@ -225,11 +228,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'ddd DD MMM.',
-    },
-    gridStyle: {
-      type: Boolean,
-      default: true,
+      default: 'dddd DD MMMM',
     },
     halfDay: {
       type: Boolean,
@@ -346,26 +345,6 @@ export default {
       set(open) {
         this.open = open
 
-        if (!this.isDesktop) {
-          const body = document.querySelector('body')
-
-          if (open) {
-            body.style.overflow = 'hidden'
-
-            this.$nextTick(() => {
-              if (this.$refs) {
-                const { swiperWrapper } = this.$refs
-                const monthHeihgt = this.$refs.datepickerMonth[0].offsetHeight
-                const currentSelectionIndex = this.checkOut ? this.getMonthDiff(new Date(), this.checkOut) : 0
-
-                swiperWrapper.scrollTop = currentSelectionIndex * monthHeihgt
-              }
-            })
-          } else {
-            body.style.overflow = ''
-          }
-        }
-
         this.$emit('input', this.open)
       },
     },
@@ -439,14 +418,15 @@ export default {
       return this.disabledDates
     },
     paginateMonths() {
-      const months = [this.months[this.activeMonthIndex]]
+      const months = []
 
-      if (!this.showSingleMonth) {
-        months.push(this.months[this.activeMonthIndex + 1])
-      }
+      this.months.forEach((el, index) => {
+        months.push(el)
+      })
 
       return months
     },
+
     customTooltipMessage() {
       let tooltip = ''
 
@@ -542,7 +522,7 @@ export default {
       return this.showSingleMonth ? 1 : 2
     },
     isDesktop() {
-      return this.screenSize === 'desktop'
+      return window.innerWidth > 767
     },
   },
   watch: {
@@ -681,10 +661,13 @@ export default {
 
         this.activeMonthIndex += count
       } else {
-        this.createMonth(new Date(this.startDate))
+        let date = this.startDate
+        const isDesktop = window.innerWidth > 767
+        const monthsToShow = isDesktop ? 2 : 12
 
-        if (!this.showSingleMonth) {
-          this.createMonth(this.getNextMonth(new Date(this.startDate)))
+        for (let i = 0; i < monthsToShow; i++) {
+          this.createMonth(date)
+          date = this.getNextMonth(new Date(date))
         }
       }
     },
@@ -1075,15 +1058,11 @@ export default {
       }
     },
     handleWindowResize() {
-      if (window.innerWidth < 480) {
-        this.screenSize = 'smartphone'
-      } else if (window.innerWidth >= 480 && window.innerWidth < 768) {
-        this.screenSize = 'tablet'
-      } else if (window.innerWidth >= 768) {
-        this.screenSize = 'desktop'
+      if (window.innerWidth >= 768) {
+        return 'desktop'
       }
 
-      return this.screenSize
+      return 'mobile'
     },
     onElementHeightChange(el, callback) {
       let lastHeight = el.clientHeight
@@ -1223,7 +1202,7 @@ export default {
 
       let firstDayOfLastMonth
 
-      if (!this.isDesktop || this.showSingleMonth) {
+      if (!this.isDesktop) {
         firstDayOfLastMonth = this.months[this.months.length - 1].days.filter((day) => day.belongsToThisMonth === true)
       } else {
         firstDayOfLastMonth = this.months[this.activeMonthIndex + 1].days.filter(

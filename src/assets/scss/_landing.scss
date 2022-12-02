@@ -1,0 +1,45 @@
+.vhd__datepicker__dummy-wrapper {
+    width: 100%;
+    &.landing {
+        border-bottom: 1px solid #fafafa;
+        align-items: flex-end;
+        padding-bottom: 3px;
+        color: $white;
+
+        > * {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        svg {
+            margin-bottom: 2px;
+            &.arrow-icon {
+                margin-bottom: 5px;
+                margin-left: 16px;
+                margin-right: 16px;
+
+                * {
+                    stroke: white;
+                }
+            }
+
+            &.calendar-icon {
+                height: 20px;
+                margin-right: 16px;
+
+                * {
+                    fill: white;
+                }
+            }
+        }
+
+        .vhd__datepicker__clear-button {
+            width: 25px;
+            svg {
+                * {
+                    stroke: white;
+                }
+            }
+        }
+    }
+}

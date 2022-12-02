@@ -8,6 +8,7 @@
 
 <script>
 import get from 'lodash.get'
+import helpers from '../../helpers'
 
 export default {
   name: 'WeekRow',
@@ -27,15 +28,18 @@ export default {
   },
   computed: {
     weekdaysShort() {
-      return [
-        this.get(this.i18n, 'date.weekdays.short.sun'),
-        this.get(this.i18n, 'date.weekdays.short.mon'),
-        this.get(this.i18n, 'date.weekdays.short.tue'),
-        this.get(this.i18n, 'date.weekdays.short.wed'),
-        this.get(this.i18n, 'date.weekdays.short.thu'),
-        this.get(this.i18n, 'date.weekdays.short.fri'),
-        this.get(this.i18n, 'date.weekdays.short.sat'),
-      ]
+      return this.shortenString(
+        [
+          this.get(this.i18n, 'date.weekdays.short.sun'),
+          this.get(this.i18n, 'date.weekdays.short.mon'),
+          this.get(this.i18n, 'date.weekdays.short.tue'),
+          this.get(this.i18n, 'date.weekdays.short.wed'),
+          this.get(this.i18n, 'date.weekdays.short.thu'),
+          this.get(this.i18n, 'date.weekdays.short.fri'),
+          this.get(this.i18n, 'date.weekdays.short.sat'),
+        ],
+        2,
+      )
     },
 
     dayNames() {
@@ -48,6 +52,7 @@ export default {
 
   methods: {
     get,
+    ...helpers,
   },
 }
 </script>

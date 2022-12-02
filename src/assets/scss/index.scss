@@ -1,54 +1,6 @@
-/* =============================================================
-* VARIABLES
-* ============================================================*/
-$prefix: 'vhd__datepicker';
-$white: #fff;
-$black: #000;
-$offBlack: #1c1c1c;
-$zambezi-grey: #595959;
-$gray: #424b53;
-$primary-text-color: #35343d;
-$primary-text-inverse-color: #fff;
-$lightest-gray: #f3f5f8;
-$primary-color: #eb5f40;
-$medium-gray: #424b53;
-$light-gray: #eaeaea;
-$disabledBg: #f5f7f8;
-$disabled-color: #c9c9c9;
-$dark-gray: #2d3047;
-$box-shadow: 0 0 10px 3px rgba(red, 0.4);
-$background-color: #fff;
-
-// Bg Date when hover it
-$bgValidHoverDate: $primary-color;
-$colorValidHoverDate: $white;
-
-// Bg Date when range or valid it
-$bgRollActiveDage: $primary-color;
-$colorRollActiveDage: $white;
-
-$font-size: 16px;
-$font-small: #{$font-size * 0.875};
-$font-family: 'Montserrat', 'din-medium', Helvetica;
-$font-regular: 400;
-$font-bold: 700;
-$tooltip-font-size: 11px;
-
-$width-half-day: 120px;
-$bullet-size: 4px;
-
-$tooltip-border-width: 4px;
-$tooltip-border-radius: 2px;
-$border-generic-width: 1px;
-
-/* =============================================================
-* RESPONSIVE LAYOUT HELPERS
-* ============================================================*/
-$tablet: '(min-width: 480px) and (max-width: 767px)';
-$phone: '(max-width: 479px)';
-$desktop: '(min-width: 768px)';
-$up-to-tablet: '(max-width: 767px)';
-$extra-small-screen: '(max-width: 23em)';
+@import './variables';
+@import './landing';
+@import './mobile';
 
 @mixin focusStyle() {
   &:focus {
@@ -70,7 +22,7 @@ $extra-small-screen: '(max-width: 23em)';
   position: absolute;
   color: $zambezi-grey;
   border-radius: 10px;
-  top: auto;
+  top: 180%;
   display: flex;
   flex-direction: column;
   z-index: 999;
@@ -81,11 +33,6 @@ $extra-small-screen: '(max-width: 23em)';
   line-height: 0.875em;
   height: 400px;
   overflow: hidden;
-
-  @media screen and ($up-to-tablet) {
-    border-radius: 0;
-    background-color: rgba(0,0,0,0.9);
-  }
 
     &__cta-panel {
         order: -1;
@@ -167,14 +114,13 @@ $extra-small-screen: '(max-width: 23em)';
   .vhd__square-wrapper {
     display: grid;
     flex-grow: 1;
+    grid-auto-rows: 1fr;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-
-    @include device($up-to-tablet) {
-        margin-bottom: 0;
-    }
   }
 
   & .vhd__square {
+    display: grid;
+    align-items: center;
     position: relative;
   }
 
@@ -221,16 +167,6 @@ $extra-small-screen: '(max-width: 23em)';
     }
 
     box-shadow: 0 15px 30px 10px rgba($black, 0.08);
-
-    @include device($up-to-tablet) {
-      box-shadow: none;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      -webkit-overflow-scrolling: touch !important;
-      position: fixed;
-      width: 100%;
-    }
   }
 
   &__header {
@@ -268,10 +204,9 @@ $extra-small-screen: '(max-width: 23em)';
       box-sizing: border-box;
     }
 
-    &--grid .vhd__square .#{$prefix}__month-day {
+    .vhd__square .#{$prefix}__month-day {
       margin: -1px 0 0 -1px;
       border: none;
-      padding: 10px;
       padding-right: 0;
       padding-left: 0;
       font-size: 0.75rem;
@@ -326,7 +261,6 @@ $extra-small-screen: '(max-width: 23em)';
 
   &__dummy-wrapper {
     border: none;
-    border-bottom: 1px solid #fafafa;
     cursor: pointer;
     font-size: 1rem;
     display: flex;
@@ -414,11 +348,16 @@ $extra-small-screen: '(max-width: 23em)';
     margin: 0 auto;
     padding-top: 32px; //fix for safari
     span.day {
-      z-index: 1;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        height: auto;
+        align-items: center;
+        bottom: 0;
     }
 
     .price {
@@ -708,14 +647,6 @@ $extra-small-screen: '(max-width: 23em)';
     flex-grow: 1;
     position: relative;
     height: 100%;
-    
-    @include device($up-to-tablet) {
-      padding: 0;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      flex-grow: 1;
-      background-color: $white;
-    }
   }
 
   &__months-wrapper {
@@ -760,18 +691,6 @@ $extra-small-screen: '(max-width: 23em)';
       justify-content: space-between;
     }
 
-    @include device($up-to-tablet) {
-      margin-top: 5.625em;
-      height: calc(100% - 5.625em);
-      position: absolute;
-      left: 0;
-      top: 0;
-      overflow-y: scroll;
-      right: 0;
-      bottom: 0;
-      transition: all ease 0.2s;
-    }
-
     &--full {
       .#{$prefix}__month {
         width: 100% !important;
@@ -789,30 +708,6 @@ $extra-small-screen: '(max-width: 23em)';
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-
-    @include device($up-to-tablet) {
-      width: 100%;
-      padding-right: 0;
-
-        .vhd__datepicker__month-name {
-            order: 1;
-        }
-
-        .vhd__datepicker__week-row {
-            display: none;
-            order: 0;
-        }
-
-        .vhd__square-wrapper {
-            order: 2;
-        }
-
-        &:first-of-type {
-            .vhd__datepicker__week-row {
-                display: block;
-            }
-        }
-    }
   }
 
   &__month-caption {
@@ -830,12 +725,6 @@ $extra-small-screen: '(max-width: 23em)';
     pointer-events: none;
     text-align: center;
     font-weight: 500;
-
-    @include device($up-to-tablet) {
-      height: auto;
-      line-height: auto;
-      padding: 0;
-    }
   }
 
   &__week-days {

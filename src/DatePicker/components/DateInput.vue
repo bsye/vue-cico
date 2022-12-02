@@ -1,7 +1,6 @@
 <template>
   <div
     class="vhd__datepicker__input"
-    @click="toggleDatepicker"
     @keyup.enter.stop.prevent="toggleDatepicker"
     data-qa="vhd__datepickerInput"
     :class="inputClass"

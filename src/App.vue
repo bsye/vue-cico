@@ -278,6 +278,8 @@ body {
   .picker {
     flex-grow: 1;
     height: 100%;
+    position: relative;
+    bottom: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
