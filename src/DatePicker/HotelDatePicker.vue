@@ -147,7 +147,14 @@
             @enter-month="enterMonth"
           />
         </div>
-        <MobileActions/>
+        <MobileActions
+          @reset="clearSelection()"
+          @selected="isOpen = !isOpen"
+          :isClearDisabled="!(checkIn || checkOut)"
+          :isSelectDisabled="!checkIn || !checkOut"
+          :i18n="i18n"
+          v-if="!isDesktop"
+        />
       </div>
       <slot name="content" />
     </div>
@@ -160,6 +167,7 @@ import fecha from 'fecha'
 
 import get from 'lodash.get'
 import Month from './components/Month.vue'
+import MobileActions from './components/MobileActions.vue'
 import IconCalendar from './icons/IconCalendar.vue'
 import IconArrow from './icons/IconArrow.vue'
 import DateInput from './components/DateInput.vue'
@@ -173,6 +181,7 @@ export default {
   components: {
     Month,
     CallToAction,
+    MobileActions,
     IconCalendar,
     IconArrow,
     DateInput,

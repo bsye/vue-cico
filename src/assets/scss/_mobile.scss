@@ -3,6 +3,57 @@
         color: white;
     }
 
+    .vhd__datepicker-mobile-actions {
+        display: flex;
+        background-color: white;
+        z-index: 20;
+        box-shadow: 0px 0px 17px 0px rgb(0 0 0 / 10%);
+        padding: 8px;
+        
+
+        .vhd__datepicker-mobile-action-reset
+        .vhd__datepicker-mobile-action-select {
+            appearance: none;
+        }
+
+        .vhd__datepicker-mobile-action-reset {
+            width: 30%;
+            color: $primary-color;
+
+            &.disabled {
+                pointer-events: none;
+                color: $disabled-color;
+            }
+        }
+
+        .vhd__datepicker-mobile-action-select {
+            width: 70%;
+
+            &.disabled {
+                pointer-events: none;
+                background-color: $disabled-color;
+            }
+        }
+
+        .vhd__datepicker-mobile-action-reset,
+        .vhd__datepicker-mobile-action-select {
+            cursor: pointer;
+            font-weight: 600;
+            font-family: "Montserrat","Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+            justify-content: center;
+            padding-left: 1em;
+            padding-right: 1em;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            box-shadow: none;
+            font-size: 1rem;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            text-align: center;
+            white-space: nowrap;
+        }
+    }
+
     div.#{$prefix} {
         border-radius: 0;
         background-color: rgba(0,0,0,0.9);
@@ -48,8 +99,9 @@
             .vhd__datepicker__nights-info {
                 background-color: white;
                 border-top-left-radius: 10px;
-                padding-bottom: 1.5rem;
-                padding-top: 1.5rem;
+                height: 70px;
+                padding-bottom: 1rem;
+                padding-top: 1.2rem;
                 margin-bottom: 0;
                 border-top-right-radius: 10px;
 

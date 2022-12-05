@@ -1,4 +1,7 @@
 export default {
+  cta: {
+    select: 'Select',
+  },
   date: {
     weekdays: {
       sun: 'Sunday',

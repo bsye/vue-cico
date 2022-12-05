@@ -9,6 +9,15 @@
   }
 }
 
+button {
+    background-color: white;
+
+    &.primary {
+        color: white;
+        background-color: $primary-color;
+    }
+}
+
 @mixin device($device-widths) {
   @media screen and #{$device-widths} {
     @content;
