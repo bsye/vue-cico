@@ -339,6 +339,7 @@ export default {
       xUp: null,
       yDown: null,
       yUp: null,
+      windowWidth: window.innerWidth,
     }
   },
   computed: {
@@ -515,7 +516,7 @@ export default {
       return 12
     },
     isDesktop() {
-      return window.innerWidth > 767
+      return this.windowWidth > 767
     },
   },
   watch: {
@@ -585,9 +586,9 @@ export default {
     this.generateInitialMonths()
   },
   mounted() {
-    this.handleWindowResize()
-
-    window.addEventListener('resize', this.handleWindowResize)
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth
+    })
 
     if (this.isDesktop) {
       document.addEventListener('click', this.handleClickOutside, false)
@@ -595,8 +596,6 @@ export default {
     }
   },
   destroyed() {
-    window.removeEventListener('resize', this.handleWindowResize)
-
     if (this.isDesktop) {
       document.removeEventListener('keyup', this.escFunction, false)
       document.removeEventListener('click', this.handleClickOutside)
@@ -847,13 +846,6 @@ export default {
           this.hideDatepicker()
         }
       }
-    },
-    handleWindowResize() {
-      if (window.innerWidth >= 768) {
-        return 'desktop'
-      }
-
-      return 'mobile'
     },
     reRender() {
       this.datepickerDayKey += 1
