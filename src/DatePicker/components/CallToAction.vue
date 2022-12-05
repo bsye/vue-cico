@@ -23,11 +23,9 @@
       </span>
 
       <span v-if="nightsOut" class="vhd__datepicker__checkout">
-        {{ ` ${nightsOut} ` }}
+        {{ `- ${nightsOut} ` }}
       </span>
-      <span v-else class="vhd__datepicker__checkout">
-        {{ get(i18n, 'activity.calendar.checkOut') }}
-      </span>
+      <span v-else class="vhd__datepicker__checkout"> {{ '-' }} {{ get(i18n, 'activity.calendar.checkOut') }} </span>
 
       <template>
         <span v-if="extraNights < 1" class="vhd__datepicker__nights">
