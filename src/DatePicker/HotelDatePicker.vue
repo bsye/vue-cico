@@ -588,6 +588,11 @@ export default {
   mounted() {
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
+
+      if (this.isDesktop) {
+        document.addEventListener('click', this.handleClickOutside, false)
+        document.addEventListener('keyup', this.escFunction, false)
+      }
     })
 
     if (this.isDesktop) {
