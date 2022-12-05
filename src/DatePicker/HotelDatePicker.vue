@@ -147,6 +147,7 @@
             @enter-month="enterMonth"
           />
         </div>
+        <MobileActions/>
       </div>
       <slot name="content" />
     </div>

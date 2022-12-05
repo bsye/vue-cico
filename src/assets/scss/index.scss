@@ -274,6 +274,7 @@
     .vhd__datepicker__dummy-wrapper-input-wrapper {
         .vhd__datepicker__dummy-wrapper-arrival,
         .vhd__datepicker__dummy-wrapper-departure {
+            font-size: 1rem;
             display: none;
         }
     }
@@ -427,8 +428,30 @@
       font-weight: $font-regular;
     }
 
+    &.minimumDurationUnvalidDay {
+        .vhd__datepicker__month-day-wrapper {
+            .day {
+                color: $black;
+            }
+
+            &::after {
+                background-color: $white;
+                box-sizing: border-box;
+                color: $black;
+                border: 1px solid rgb(255, 207, 179);
+            }
+        }
+
+        &.vhd__datepicker__month-day-wrapper {
+            &.vhd__currentDay {
+                padding-left: 100%;
+                padding-right: 100%;
+                background-color: rgb(255, 207, 179);
+            }
+        }
+    }
+
     &--valid#{&}--not-allowed,
-    &.minimumDurationUnvalidDay,
     &--not-allowed.vhd__currentDay,
     &--valid#{&}--not-allowed:hover {
       overflow: hidden;
@@ -443,31 +466,96 @@
         &.vhd__currentDay {
             &.checkIn {
                 > div {
-                    border-top-left-radius: 20px;
                     padding-left: 0;
-                    padding-right: 100%;
-                    border-bottom-left-radius: 20px;
-                    border-top-right-radius: 0px;
-                    background-color: $primary-color;
-                    border-bottom-right-radius: 0px;
+
+                    &::after {
+                        content: "";
+                        width: 100%;
+                        background-color: $primary-color;
+                        height: 100%;
+                        border-radius: 20px;
+                        position: absolute;
+                        display: block;
+                        top: 0;
+                      }
+
+                    &::before {
+                        content: "";
+                        width: 100%;
+                        background-color: rgb(255, 207, 179);
+                        height: 100%;
+                        position: absolute;
+                        display: block;
+                        top: 0;
+                        width: 7vw;
+
+                        @media screen and ($desktop) {
+                            width: 20px;
+                        }
+                    }
                 }
             }
         }
 
         > div {
-            padding-left: 100%;
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-            background-color: rgb(255, 207, 179);
+            position: relative;
+
+            &::after {
+                content: "";
+                width: 100%;
+                background-color: $primary-color;
+                height: 100%;
+                border-radius: 20px;
+                position: absolute;
+                display: block;
+                top: 0;
+              }
+
+            &::before {
+                content: "";
+                width: 100%;
+                background-color: rgb(255, 207, 179);
+                height: 100%;
+                position: absolute;
+                display: block;
+                top: 0;
+                width: 7vw;
+
+                @media screen and ($desktop) {
+                    width: 20px;
+                }
+            }
         }
       }
 
       > div {
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-        padding-left: 100%;
-        padding-right: 100%;
-        background-color: rgb(255, 207, 179);
+        position: relative;
+
+        &::after {
+            content: "";
+            width: 100%;
+            background-color: $primary-color;
+            height: 100%;
+            border-radius: 20px;
+            position: absolute;
+            display: block;
+            top: 0;
+          }
+
+        &::before {
+            content: "";
+            width: 100%;
+            background-color: rgb(255, 207, 179);
+            height: 100%;
+            position: absolute;
+            display: block;
+            top: 0;
+            width: 7vw;
+
+            @media screen and ($desktop) {
+                width: 20px;
+            }
+        }
       }
     }
 
@@ -505,28 +593,47 @@
     }
 
     &--selected {
-      color: $disabled-color;
       overflow: hidden;
+      background-color: rgb(255, 207, 179);
 
-      > div {
-        padding-left: 100%;
-        padding-right: 100%;
-        background-color: rgb(255, 207, 179);
+      &.vhd__datepicker__month-day--hovering {
+        background-color: transparent;
+
+        > div {
+            position: relative;
+            padding-left: 0;
+
+            &::after {
+                content: "";
+                width: 100%;
+                background-color: $primary-color;
+                height: 100%;
+                border-radius: 20px;
+                position: absolute;
+                display: block;
+                top: 0;
+              }
+
+              &::before {
+                content: "";
+                width: 100%;
+                background-color: rgb(255, 207, 179);
+                height: 100%;
+                position: absolute;
+                right: 16px;
+                display: block;
+                top: 0;
+                width: 7vw;
+
+                @media screen and ($desktop) {
+                    width: 20px;
+                }
+              }
+        }
       }
 
       span {
         text-decoration: none;
-      }
-      &:hover {
-        font-weight: $font-bold;
-        color: $colorRollActiveDage;
-        z-index: 1;
-
-        > div {
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-            background-color: $primary-color;
-        }
       }
     }
 
@@ -536,10 +643,6 @@
       cursor: pointer;
       span {
         text-decoration: none;
-      }
-
-      > div {
-        background-color: $primary-color;
       }
     }
 
@@ -552,18 +655,14 @@
       span {
         text-decoration: none;
       }
-
-      > div {
-        background: $primary-color;
-      }
     }
 
     &--first-day-selected {
         &.checkIn {
-            > div {
-                padding-right: 100%;
-                border-top-left-radius: 20px;
-                border-bottom-left-radius: 20px;
+            & > div {
+                &::before {
+                    left: 16px;
+                }
             }
         }
     }
@@ -571,9 +670,47 @@
     &--last-day-selected {
         &.checkOut {
             > div {
-                padding-left: 100%;
-                border-top-right-radius: 20px;
-                border-bottom-right-radius: 20px;    
+                &::before {
+                    right: 16px;
+                }
+            }
+        }
+    }
+
+    &--first-day-selected,
+    &--last-day-selected {
+        &.checkOut,
+        &.checkIn {
+            > div {
+                position: relative;
+                background-color: transparent;
+                z-index: 20;
+
+              &::after {
+                content: "";
+                width: 100%;
+                background-color: $primary-color;
+                height: 100%;
+                border-radius: 20px;
+                position: absolute;
+                display: block;
+                top: 0;
+              }
+
+              &::before {
+                content: "";
+                width: 100%;
+                background-color: rgb(255, 207, 179);
+                height: 100%;
+                position: absolute;
+                display: block;
+                top: 0;
+                width: 7vw;
+
+                @media screen and ($desktop) {
+                    width: 20px;
+                }
+              }
             }
         }
     }
