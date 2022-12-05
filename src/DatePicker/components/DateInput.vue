@@ -50,8 +50,8 @@ export default {
     text() {
       let plain = null
 
-      if (this.inputDateType === 'check-in') plain = this.get(this.i18n, 'activity.filter.checkIn')
-      if (this.inputDateType === 'check-out') plain = this.get(this.i18n, 'activity.filter.checkOut')
+      if (this.inputDateType === 'check-in') plain = this.get(this.i18n, 'activity.filter.action')
+      if (this.inputDateType === 'check-out') plain = this.get(this.i18n, 'activity.filter.action')
 
       return this.inputDate || plain
     },

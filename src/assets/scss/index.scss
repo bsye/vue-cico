@@ -271,6 +271,13 @@
     width: 100%;
     height: 100%;
 
+    .vhd__datepicker__dummy-wrapper-input-wrapper {
+        .vhd__datepicker__dummy-wrapper-arrival,
+        .vhd__datepicker__dummy-wrapper-departure {
+            display: none;
+        }
+    }
+
     &--no-border.#{$prefix}__dummy-wrapper {
       border: 0;
     }

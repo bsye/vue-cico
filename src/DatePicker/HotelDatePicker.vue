@@ -12,24 +12,34 @@
     </div>
     <div @click="toggleDatepicker()" class="vhd__datepicker__dummy-wrapper">
       <IconCalendar />
-      <date-input
-        :i18n="i18n"
-        :input-date="responsiveFormatter(this.checkIn)"
-        input-date-type="check-in"
-        :is-open="isOpen"
-        :toggle-datepicker="toggleDatepicker"
-        :single-day-selection="singleDaySelection"
-      />
+      <div class="vhd__datepicker__dummy-wrapper-input-wrapper">
+        <p v-if="get(i18n, 'activity.filter.checkOut')" class="vhd__datepicker__dummy-wrapper-arrival">
+          {{ get(i18n, 'activity.filter.checkIn') }}
+        </p>
+        <date-input
+          :i18n="i18n"
+          :input-date="responsiveFormatter(this.checkIn)"
+          input-date-type="check-in"
+          :is-open="isOpen"
+          :toggle-datepicker="toggleDatepicker"
+          :single-day-selection="singleDaySelection"
+        />
+      </div>
       <IconArrow />
-      <date-input
-        v-if="!singleDaySelection"
-        :i18n="i18n"
-        :input-date="responsiveFormatter(this.checkOut)"
-        input-date-type="check-out"
-        :is-open="isOpen"
-        :toggle-datepicker="toggleDatepicker"
-        :single-day-selection="singleDaySelection"
-      />
+      <div class="vhd__datepicker__dummy-wrapper-input-wrapper">
+        <p v-if="get(i18n, 'activity.filter.checkOut')" class="vhd__datepicker__dummy-wrapper-departure">
+          {{ get(i18n, 'activity.filter.checkOut') }}
+        </p>
+        <date-input
+          v-if="!singleDaySelection"
+          :i18n="i18n"
+          :input-date="responsiveFormatter(this.checkOut)"
+          input-date-type="check-out"
+          :is-open="isOpen"
+          :toggle-datepicker="toggleDatepicker"
+          :single-day-selection="singleDaySelection"
+        />
+      </div>
       <div class="vhd__datepicker__clear-button" tabindex="0" @click="clearSelection" v-show="showClearSelectionButton">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
           <title>x</title>
