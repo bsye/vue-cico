@@ -22,7 +22,7 @@
 
             &.disabled {
                 pointer-events: none;
-                color: $disabled-color;
+                color: $silver-mid;
             }
         }
 
@@ -31,7 +31,7 @@
 
             &.disabled {
                 pointer-events: none;
-                background-color: $disabled-color;
+                background-color: $silver-mid;
             }
         }
 
@@ -154,7 +154,7 @@
                     left: 0;
                     right: 0;
                     background-color: white;
-                    border-top: 1px solid $disabled-color;
+                    border-top: 1px solid $silver-mid;
                     display: none;
                     order: 0;
                 }

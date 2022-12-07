@@ -5,43 +5,18 @@
 $prefix: 'vhd__datepicker';
 $white: #fff;
 $black: #000;
-$offBlack: #1c1c1c;
+$eerie-black: #1c1c1c;
 $zambezi-grey: #595959;
-$gray: #424b53;
-$primary-text-color: #35343d;
-$primary-text-inverse-color: #fff;
-$lightest-gray: #f3f5f8;
+$oil: #333333;
 $primary-color: #eb5f40;
-$medium-gray: #424b53;
+$tuatara: #444444;
 $light-gray: #eaeaea;
 $background-gray: #F6F6F6;
-$disabledBg: #f5f7f8;
-$disabled-color: #c9c9c9;
-$dark-gray: #2d3047;
-$box-shadow: 0 0 10px 3px rgba(red, 0.4);
-$background-color: #fff;
+$white-smoke: #f5f5f5;
+$silver-mid: #c9c9c9;
+$jet: #222222;
 
-// Bg Date when hover it
-$bgValidHoverDate: $primary-color;
-$colorValidHoverDate: $white;
-
-// Bg Date when range or valid it
-$bgRollActiveDage: $primary-color;
-$colorRollActiveDage: $white;
-
-$font-size: 16px;
-$font-small: #{$font-size * 0.875};
 $font-family: 'Montserrat', 'din-medium', Helvetica;
-$font-regular: 400;
-$font-bold: 700;
-$tooltip-font-size: 11px;
-
-$width-half-day: 120px;
-$bullet-size: 4px;
-
-$tooltip-border-width: 4px;
-$tooltip-border-radius: 2px;
-$border-generic-width: 1px;
 
 /* =============================================================
 * RESPONSIVE LAYOUT HELPERS

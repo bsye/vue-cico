@@ -3123,7 +3123,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=22c71443&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=90b7fef2&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -3145,7 +3145,11 @@ var render = function render() {
         return _vm.toggleDatepicker();
       }
     }
-  }, [_c('IconCalendar'), _c('date-input', {
+  }, [_c('IconCalendar'), _c('div', {
+    staticClass: "vhd__datepicker__dummy-wrapper-input-wrapper"
+  }, [_vm.get(_vm.i18n, 'activity.filter.checkOut') ? _c('p', {
+    staticClass: "vhd__datepicker__dummy-wrapper-arrival"
+  }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.checkIn')) + " ")]) : _vm._e(), _c('date-input', {
     attrs: {
       "i18n": _vm.i18n,
       "input-date": _vm.responsiveFormatter(this.checkIn),
@@ -3154,7 +3158,11 @@ var render = function render() {
       "toggle-datepicker": _vm.toggleDatepicker,
       "single-day-selection": _vm.singleDaySelection
     }
-  }), _c('IconArrow'), !_vm.singleDaySelection ? _c('date-input', {
+  })], 1), _c('IconArrow'), _c('div', {
+    staticClass: "vhd__datepicker__dummy-wrapper-input-wrapper"
+  }, [_vm.get(_vm.i18n, 'activity.filter.checkOut') ? _c('p', {
+    staticClass: "vhd__datepicker__dummy-wrapper-departure"
+  }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.checkOut')) + " ")]) : _vm._e(), !_vm.singleDaySelection ? _c('date-input', {
     attrs: {
       "i18n": _vm.i18n,
       "input-date": _vm.responsiveFormatter(this.checkOut),
@@ -3163,7 +3171,7 @@ var render = function render() {
       "toggle-datepicker": _vm.toggleDatepicker,
       "single-day-selection": _vm.singleDaySelection
     }
-  }) : _vm._e(), _c('div', {
+  }) : _vm._e()], 1), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -3325,11 +3333,25 @@ var render = function render() {
         "enter-month": _vm.enterMonth
       }
     });
-  })], 2)], 1) : _vm._e(), _vm._t("content")], 2)]) : _vm._e();
+  })], 2), !_vm.isDesktop ? _c('MobileActions', {
+    attrs: {
+      "isClearDisabled": !(_vm.checkIn || _vm.checkOut),
+      "isSelectDisabled": !_vm.checkIn || !_vm.checkOut,
+      "i18n": _vm.i18n
+    },
+    on: {
+      "reset": function ($event) {
+        return _vm.clearSelection();
+      },
+      "selected": function ($event) {
+        _vm.isOpen = !_vm.isOpen;
+      }
+    }
+  }) : _vm._e()], 1) : _vm._e(), _vm._t("content")], 2)]) : _vm._e();
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=22c71443&
+// CONCATENATED MODULE: ./src/DatePicker/HotelDatePicker.vue?vue&type=template&id=90b7fef2&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
@@ -5068,6 +5090,81 @@ var Month_component = normalizeComponent(
 )
 
 /* harmony default export */ var Month = (Month_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/MobileActions.vue?vue&type=template&id=458b3d50&
+var MobileActionsvue_type_template_id_458b3d50_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "vhd__datepicker-mobile-actions"
+  }, [_c('button', {
+    staticClass: "button no-margin expanded has-text-weight-semibold vhd__datepicker-mobile-action-reset",
+    class: {
+      disabled: _vm.isClearDisabled
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.$emit('reset');
+      }
+    }
+  }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.clear')) + " ")]), _c('button', {
+    staticClass: "button primary no-margin expanded has-text-weight-semibold vhd__datepicker-mobile-action-select",
+    class: {
+      disabled: _vm.isSelectDisabled
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.$emit('selected');
+      }
+    }
+  }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'cta.select')) + " ")])]);
+};
+var MobileActionsvue_type_template_id_458b3d50_staticRenderFns = [];
+
+// CONCATENATED MODULE: ./src/DatePicker/components/MobileActions.vue?vue&type=template&id=458b3d50&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/MobileActions.vue?vue&type=script&lang=js&
+
+/* harmony default export */ var MobileActionsvue_type_script_lang_js_ = ({
+  props: {
+    i18n: {
+      type: Object,
+      required: true
+    },
+    isSelectDisabled: {
+      type: Boolean,
+      required: true
+    },
+    isClearDisabled: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    get: lodash_get_default.a
+  }
+});
+// CONCATENATED MODULE: ./src/DatePicker/components/MobileActions.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_MobileActionsvue_type_script_lang_js_ = (MobileActionsvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/DatePicker/components/MobileActions.vue
+
+
+
+
+
+/* normalize component */
+
+var MobileActions_component = normalizeComponent(
+  components_MobileActionsvue_type_script_lang_js_,
+  MobileActionsvue_type_template_id_458b3d50_render,
+  MobileActionsvue_type_template_id_458b3d50_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var MobileActions = (MobileActions_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/icons/IconCalendar.vue?vue&type=template&id=100a667f&
 var IconCalendarvue_type_template_id_100a667f_render = function render() {
   var _vm = this,
@@ -5162,8 +5259,8 @@ var IconArrow_component = normalizeComponent(
 )
 
 /* harmony default export */ var IconArrow = (IconArrow_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/DateInput.vue?vue&type=template&id=3b684957&
-var DateInputvue_type_template_id_3b684957_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/DateInput.vue?vue&type=template&id=51f304aa&
+var DateInputvue_type_template_id_51f304aa_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -5183,9 +5280,9 @@ var DateInputvue_type_template_id_3b684957_render = function render() {
     }
   }, [_vm._v(" " + _vm._s(_vm.text) + " ")]);
 };
-var DateInputvue_type_template_id_3b684957_staticRenderFns = [];
+var DateInputvue_type_template_id_51f304aa_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/components/DateInput.vue?vue&type=template&id=3b684957&
+// CONCATENATED MODULE: ./src/DatePicker/components/DateInput.vue?vue&type=template&id=51f304aa&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/DateInput.vue?vue&type=script&lang=js&
 
@@ -5225,8 +5322,8 @@ var DateInputvue_type_template_id_3b684957_staticRenderFns = [];
     },
     text() {
       let plain = null;
-      if (this.inputDateType === 'check-in') plain = this.get(this.i18n, 'activity.filter.checkIn');
-      if (this.inputDateType === 'check-out') plain = this.get(this.i18n, 'activity.filter.checkOut');
+      if (this.inputDateType === 'check-in') plain = this.get(this.i18n, 'activity.filter.action');
+      if (this.inputDateType === 'check-out') plain = this.get(this.i18n, 'activity.filter.action');
       return this.inputDate || plain;
     },
     tabIndex() {
@@ -5249,8 +5346,8 @@ var DateInputvue_type_template_id_3b684957_staticRenderFns = [];
 
 var DateInput_component = normalizeComponent(
   components_DateInputvue_type_script_lang_js_,
-  DateInputvue_type_template_id_3b684957_render,
-  DateInputvue_type_template_id_3b684957_staticRenderFns,
+  DateInputvue_type_template_id_51f304aa_render,
+  DateInputvue_type_template_id_51f304aa_staticRenderFns,
   false,
   null,
   null,
@@ -5259,8 +5356,8 @@ var DateInput_component = normalizeComponent(
 )
 
 /* harmony default export */ var DateInput = (DateInput_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/CallToAction.vue?vue&type=template&id=57bfffc2&
-var CallToActionvue_type_template_id_57bfffc2_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/CallToAction.vue?vue&type=template&id=63d7563d&
+var CallToActionvue_type_template_id_63d7563d_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -5279,9 +5376,9 @@ var CallToActionvue_type_template_id_57bfffc2_render = function render() {
     staticClass: "vhd__datepicker__checkin"
   }, [_vm._v(" " + _vm._s(_vm.nightsIn) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.calendar.checkIn')) + " ")]), _vm.nightsOut ? _c('span', {
     staticClass: "vhd__datepicker__checkout"
-  }, [_vm._v(" " + _vm._s(` ${_vm.nightsOut} `) + " ")]) : _c('span', {
+  }, [_vm._v(" " + _vm._s(`- ${_vm.nightsOut} `) + " ")]) : _c('span', {
     staticClass: "vhd__datepicker__checkout"
-  }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.calendar.checkOut')) + " ")]), [_vm.extraNights < 1 ? _c('span', {
+  }, [_vm._v(" " + _vm._s('-') + " " + _vm._s(_vm.get(_vm.i18n, 'activity.calendar.checkOut')) + " ")]), [_vm.extraNights < 1 ? _c('span', {
     staticClass: "vhd__datepicker__nights"
   }, [_vm._v(" (" + _vm._s(`${_vm.includedNights}`) + " " + _vm._s(_vm.get(_vm.i18n, 'checkInCheckOut.nightsIncluded')) + ") ")]) : _vm._e()], _c('span', {
     staticClass: "vhd__datepicker__travel-dates"
@@ -5289,9 +5386,9 @@ var CallToActionvue_type_template_id_57bfffc2_render = function render() {
     staticClass: "vhd__datepicker__extra-nights"
   }, [_vm._v(" " + _vm._s(_vm.extraNights) + " " + _vm._s(_vm.get(_vm.i18n, 'checkInCheckOut.extraNight')) + " ")]), _vm._v(") ")] : _vm._e()], 2)], 2) : _vm._e()]);
 };
-var CallToActionvue_type_template_id_57bfffc2_staticRenderFns = [];
+var CallToActionvue_type_template_id_63d7563d_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/DatePicker/components/CallToAction.vue?vue&type=template&id=57bfffc2&
+// CONCATENATED MODULE: ./src/DatePicker/components/CallToAction.vue?vue&type=template&id=63d7563d&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/DatePicker/components/CallToAction.vue?vue&type=script&lang=js&
 
@@ -5327,8 +5424,8 @@ var CallToActionvue_type_template_id_57bfffc2_staticRenderFns = [];
 
 var CallToAction_component = normalizeComponent(
   components_CallToActionvue_type_script_lang_js_,
-  CallToActionvue_type_template_id_57bfffc2_render,
-  CallToActionvue_type_template_id_57bfffc2_staticRenderFns,
+  CallToActionvue_type_template_id_63d7563d_render,
+  CallToActionvue_type_template_id_63d7563d_staticRenderFns,
   false,
   null,
   null,
@@ -5339,6 +5436,9 @@ var CallToAction_component = normalizeComponent(
 /* harmony default export */ var CallToAction = (CallToAction_component.exports);
 // CONCATENATED MODULE: ./public/i18n/en.js
 /* harmony default export */ var en = ({
+  cta: {
+    select: 'Select'
+  },
   date: {
     weekdays: {
       sun: 'Sunday',
@@ -5464,6 +5564,7 @@ var CallToAction_component = normalizeComponent(
 
 
 
+
 // eslint-disable-next-line import/no-named-as-default
 
 /* harmony default export */ var HotelDatePickervue_type_script_lang_js_ = ({
@@ -5471,6 +5572,7 @@ var CallToAction_component = normalizeComponent(
   components: {
     Month: Month,
     CallToAction: CallToAction,
+    MobileActions: MobileActions,
     IconCalendar: IconCalendar,
     IconArrow: IconArrow,
     DateInput: DateInput
@@ -5627,7 +5729,8 @@ var CallToAction_component = normalizeComponent(
       xDown: null,
       xUp: null,
       yDown: null,
-      yUp: null
+      yUp: null,
+      windowWidth: window.innerWidth
     };
   },
   computed: {
@@ -5762,7 +5865,7 @@ var CallToAction_component = normalizeComponent(
       return 12;
     },
     isDesktop() {
-      return window.innerWidth > 767;
+      return this.windowWidth > 767;
     }
   },
   watch: {
@@ -5826,15 +5929,19 @@ var CallToAction_component = normalizeComponent(
     this.generateInitialMonths();
   },
   mounted() {
-    this.handleWindowResize();
-    window.addEventListener('resize', this.handleWindowResize);
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth;
+      if (this.isDesktop) {
+        document.addEventListener('click', this.handleClickOutside, false);
+        document.addEventListener('keyup', this.escFunction, false);
+      }
+    });
     if (this.isDesktop) {
       document.addEventListener('click', this.handleClickOutside, false);
       document.addEventListener('keyup', this.escFunction, false);
     }
   },
   destroyed() {
-    window.removeEventListener('resize', this.handleWindowResize);
     if (this.isDesktop) {
       document.removeEventListener('keyup', this.escFunction, false);
       document.removeEventListener('click', this.handleClickOutside);
@@ -6030,12 +6137,6 @@ var CallToAction_component = normalizeComponent(
           this.hideDatepicker();
         }
       }
-    },
-    handleWindowResize() {
-      if (window.innerWidth >= 768) {
-        return 'desktop';
-      }
-      return 'mobile';
     },
     reRender() {
       this.datepickerDayKey += 1;
