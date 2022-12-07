@@ -122,14 +122,14 @@ button {
     right: 0;
   }
 
-  .vhd__square-wrapper {
+  .cico__square-wrapper {
     display: grid;
     flex-grow: 1;
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
-  & .vhd__square {
+  & .cico__square {
     display: grid;
     align-items: center;
     position: relative;
@@ -215,7 +215,7 @@ button {
       box-sizing: border-box;
     }
 
-    .vhd__square .#{$prefix}__month-day {
+    .cico__square .#{$prefix}__month-day {
       margin: -1px 0 0 -1px;
       border: none;
       padding-right: 0;
@@ -224,7 +224,7 @@ button {
       font-weight: 500;
 
       &--hovering {
-        &.vhd__currentDay {
+        &.cico__currentDay {
             &::after {
                 content: '';
                 width: 45px;
@@ -281,9 +281,9 @@ button {
     width: 100%;
     height: 100%;
 
-    .vhd__datepicker__dummy-wrapper-input-wrapper {
-        .vhd__datepicker__dummy-wrapper-arrival,
-        .vhd__datepicker__dummy-wrapper-departure {
+    .cico__dummy-wrapper-input-wrapper {
+        .cico__dummy-wrapper-arrival,
+        .cico__dummy-wrapper-departure {
             font-size: 1rem;
             display: none;
         }
@@ -434,7 +434,7 @@ button {
     }
 
     &.minimumDurationUnvalidDay {
-        .vhd__datepicker__month-day-wrapper {
+        .cico__month-day-wrapper {
             .day {
                 color: $black;
             }
@@ -447,8 +447,8 @@ button {
             }
         }
 
-        &.vhd__datepicker__month-day-wrapper {
-            &.vhd__currentDay {
+        &.cico__month-day-wrapper {
+            &.cico__currentDay {
                 padding-left: 100%;
                 padding-right: 100%;
                 background-color: rgb(255, 207, 179);
@@ -457,7 +457,7 @@ button {
     }
 
     &--valid#{&}--not-allowed,
-    &--not-allowed.vhd__currentDay,
+    &--not-allowed.cico__currentDay,
     &--valid#{&}--not-allowed:hover {
       overflow: hidden;
       color: $silver-mid;
@@ -467,8 +467,8 @@ button {
         text-decoration: none;
       }
 
-      &.vhd__datepicker__month-day--hovering {
-        &.vhd__currentDay {
+      &.cico__month-day--hovering {
+        &.cico__currentDay {
             &.checkIn {
                 > div {
                     padding-left: 0;
@@ -572,7 +572,7 @@ button {
       overflow: hidden;
       background-color: rgb(255, 207, 179);
 
-      &.vhd__datepicker__month-day--hovering {
+      &.cico__month-day--hovering {
         background-color: transparent;
 
         > div {
@@ -781,7 +781,7 @@ button {
     }
   }
 
-  .vhd__show-tooltip {
+  .cico__show-tooltip {
     .#{$prefix}__months {
       margin-top: 10em;
       height: calc(100% - 10em);
@@ -930,23 +930,23 @@ button {
   }
 }
 
-.-vhd__is-hidden {
+.-cico__is-hidden {
   display: none;
 }
 
-.vhd__hide-up-to-tablet {
+.cico__hide-up-to-tablet {
   @include device($up-to-tablet) {
     display: none;
   }
 }
 
-.vhd__hide-on-desktop {
+.cico__hide-on-desktop {
   @include device($desktop) {
     display: none;
   }
 }
 
-.vhd__parent-bullet {
+.cico__parent-bullet {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -956,7 +956,7 @@ button {
   display: block;
   z-index: -1;
 
-  .vhd__bullet {
+  .cico__bullet {
     position: absolute;
     top: 60%;
     left: 50%;
@@ -968,25 +968,25 @@ button {
       top: 50%;
     }
 
-    &.vhd__checkInCheckOut,
-    &.vhd__checkIn,
-    &.vhd__checkOut {
+    &.cico__checkInCheckOut,
+    &.cico__checkIn,
+    &.cico__checkOut {
       width: 0.5em;
       height: 1.125em;
       border-radius: 0.625em;
 
-      &.vhd__bullet--small {
+      &.cico__bullet--small {
         height: 0.375em;
         width: 0.875em;
       }
     }
 
-    &.vhd__checkInCheckOut {
+    &.cico__checkInCheckOut {
       left: calc(50% - 1em);
     }
   }
 
-  .vhd__pipe {
+  .cico__pipe {
     display: block;
     width: 100%;
     height: 4px;
@@ -1002,17 +1002,17 @@ button {
       height: calc(#{4px} * 0.75);
     }
 
-    &.vhd__checkIn {
+    &.cico__checkIn {
       left: calc(50% + #{4px});
       width: calc(50% - #{4px});
     }
 
-    &.vhd__checkOut {
+    &.cico__checkOut {
       left: 0px;
       width: calc(50% - #{4px});
     }
 
-    &.vhd__checkInCheckOut {
+    &.cico__checkInCheckOut {
       width: calc(50% - 1.1875rem);
     }
   }

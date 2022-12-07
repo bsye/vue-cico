@@ -1,20 +1,20 @@
 
-.vhd__datepicker__wrapper {
-    &.vhd__style-landing {
-        .vhd__datepicker__dummy-wrapper {
+.cico__wrapper {
+    &.cico__style-landing {
+        .cico__dummy-wrapper {
             width: 100%;
             border-bottom: 1px solid #fafafa;
             align-items: flex-end;
             padding-bottom: 3px;
             color: $white;
 
-            .vhd__datepicker__dummy-wrapper-input-wrapper {
-                .vhd__datepicker__dummy-wrapper-arrival,
-                .vhd__datepicker__dummy-wrapper-departure {
+            .cico__dummy-wrapper-input-wrapper {
+                .cico__dummy-wrapper-arrival,
+                .cico__dummy-wrapper-departure {
                     display: block;
                 }
 
-                .vhd__datepicker__input {
+                .cico__input {
                     line-height: 1;
                     margin-bottom: 2px;
                     margin-top: 10px;
@@ -68,7 +68,7 @@
                 }
             }
 
-            .vhd__datepicker__clear-button {
+            .cico__clear-button {
                 width: 25px;
                 svg {
                     * {

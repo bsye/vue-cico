@@ -1,7 +1,7 @@
 <template>
-  <div class="vhd__datepicker__warning-container">
-    <span class="vhd__datepicker__nights-warning si si-info-circle hide"> </span>
-    <span class="vhd__datepicker__min-nights hide"></span>
+  <div class="cico__warning-container">
+    <span class="cico__nights-warning si si-info-circle hide"> </span>
+    <span class="cico__min-nights hide"></span>
   </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="vhd__datepicker__week-row vhd__hide-up-to-tablet">
-    <div v-for="(name, ix) in dayNames" :key="`${weekKey}-${ix}`" class="vhd__datepicker__week-name">
+  <div class="cico__week-row cico__hide-up-to-tablet">
+    <div v-for="(name, ix) in dayNames" :key="`${weekKey}-${ix}`" class="cico__week-name">
       {{ name }}
     </div>
   </div>
@@ -8,7 +8,7 @@
 
 <script>
 import get from 'lodash.get'
-import helpers from '../../helpers'
+import helpers from '../src/helpers'
 
 export default {
   name: 'WeekRow',

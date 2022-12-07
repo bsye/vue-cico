@@ -45,22 +45,22 @@
         </svg>
       </div>
       <div class="picker">
-        <DatePicker
+        <Cico
           :startDate="startDate"
           :endDate="Infinity"
           :minNights="3"
           :maxNights="20"
           :i18n="i18n"
-          class="vhd__style-landing"
+          class="cico__style-landing"
         />
-        <DatePicker
+        <Cico
           style="margin-top: 2rem"
           :startDate="startDate"
           :endDate="Infinity"
           :minNights="3"
           :maxNights="20"
           :i18n="i18n"
-          class="vhd__style-search"
+          class="cico__style-search"
         />
       </div>
     </div>
@@ -69,13 +69,13 @@
 
 <script>
 import './assets/scss/index.scss'
-import DatePicker from './DatePicker/HotelDatePicker.vue'
+import Cico from '../components/Cico.vue'
 import en from '../public/i18n/en'
 
 export default {
   name: 'Examples',
   components: {
-    DatePicker,
+    Cico,
   },
 
   computed: {

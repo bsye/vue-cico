@@ -1,12 +1,12 @@
 <template>
-  <div ref="datepickerMonth" class="vhd__datepicker__month" @mouseenter="enterMonth($event)">
-    <p class="vhd__datepicker__month-name">
+  <div ref="datepickerMonth" class="cico__month" @mouseenter="enterMonth($event)">
+    <p class="cico__month-name">
       {{ monthName }}
     </p>
     <week-row v-bind="$props" />
-    <div class="vhd__square-wrapper">
+    <div class="cico__square-wrapper">
       <div
-        class="vhd__square"
+        class="cico__square"
         v-for="(day, dayIndex) in month.days"
         :key="`${dayKey}-${dayIndex}`"
         @mouseenter="enterDay($event, day)"

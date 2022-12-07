@@ -1,19 +1,19 @@
 <template>
   <div
-    class="vhd__datepicker__wrapper"
+    class="cico__wrapper"
     :class="{
-      'vhd__datepicker__wrapper--booking': bookings.length > 0,
+      'cico__wrapper--booking': bookings.length > 0,
     }"
     :ref="`DatePicker-${hash}`"
     v-if="value"
   >
-    <div class="vhd__datepicker__close-button vhd__hide-on-desktop" v-if="isOpen" @click="closeMobileDatepicker">
+    <div class="cico__close-button cico__hide-on-desktop" v-if="isOpen" @click="closeMobileDatepicker">
       <i>+</i>
     </div>
-    <div @click="toggleDatepicker()" class="vhd__datepicker__dummy-wrapper">
+    <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
       <IconCalendar />
-      <div class="vhd__datepicker__dummy-wrapper-input-wrapper">
-        <span v-if="get(i18n, 'activity.filter.checkOut')" class="vhd__datepicker__dummy-wrapper-arrival">
+      <div class="cico__dummy-wrapper-input-wrapper">
+        <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-arrival">
           {{ get(i18n, 'activity.filter.checkIn') }}
         </span>
         <date-input
@@ -26,8 +26,8 @@
         />
       </div>
       <IconArrow />
-      <div class="vhd__datepicker__dummy-wrapper-input-wrapper">
-        <span v-if="get(i18n, 'activity.filter.checkOut')" class="vhd__datepicker__dummy-wrapper-departure">
+      <div class="cico__dummy-wrapper-input-wrapper">
+        <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
           {{ get(i18n, 'activity.filter.checkOut') }}
         </span>
         <date-input
@@ -40,7 +40,7 @@
           :single-day-selection="singleDaySelection"
         />
       </div>
-      <div class="vhd__datepicker__clear-button" tabindex="0" @click="clearSelection" v-show="showClearSelectionButton">
+      <div class="cico__clear-button" tabindex="0" @click="clearSelection" v-show="showClearSelectionButton">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
           <title>x</title>
           <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
@@ -48,14 +48,14 @@
       </div>
     </div>
     <div
-      class="vhd__datepicker"
+      class="cico"
       :class="{
-        'vhd__datepicker--open': isOpen,
-        'vhd__datepicker--closed': !isOpen,
-        'vhd__datepicker--right': positionRight,
+        'cico--open': isOpen,
+        'cico--closed': !isOpen,
+        'cico--right': positionRight,
       }"
     >
-      <div v-if="isOpen" class="vhd__datepicker__inner">
+      <div v-if="isOpen" class="cico__inner">
         <CallToAction
           :included-nights="minNightCount"
           :nights-total="totalNights"
@@ -63,16 +63,16 @@
           :nights-out="dateFormater(checkOut, 'ddd DD MMM.')"
           :i18n="i18n"
         />
-        <div class="vhd__datepicker__months" :class="{ 'vhd__datepicker__months--full': showSingleMonth }">
+        <div class="cico__months" :class="{ 'cico__months--full': showSingleMonth }">
           <div
             v-if="isDesktop"
             :class="{
-              vhd__datepicker__header: isDesktop,
+              cico__header: isDesktop,
             }"
           >
             <button
               type="button"
-              class="vhd__datepicker__month-button vhd__datepicker__month-button--prev"
+              class="cico__month-button cico__month-button--prev"
               @click="renderPreviousMonth"
               @keyup.enter.stop.prevent="renderPreviousMonth"
               :tabindex="isOpen ? 0 : -1"
@@ -90,7 +90,7 @@
             </button>
             <button
               type="button"
-              class="vhd__datepicker__month-button vhd__datepicker__month-button--next"
+              class="cico__month-button cico__month-button--next"
               @click="renderNextMonth"
               @keyup.enter.stop.prevent="renderNextMonth"
               :disabled="isPreventedMaxMonth"
@@ -166,15 +166,15 @@ import throttle from 'lodash.throttle'
 import fecha from 'fecha'
 
 import get from 'lodash.get'
-import Month from './components/Month.vue'
-import MobileActions from './components/MobileActions.vue'
+import Month from './Month.vue'
+import MobileActions from './MobileActions.vue'
 import IconCalendar from './icons/IconCalendar.vue'
 import IconArrow from './icons/IconArrow.vue'
-import DateInput from './components/DateInput.vue'
-import CallToAction from './components/CallToAction.vue'
-import Helpers from '../helpers'
+import DateInput from './DateInput.vue'
+import CallToAction from './CallToAction.vue'
+import Helpers from '../src/helpers'
 // eslint-disable-next-line import/no-named-as-default
-import i18nDefaults from '../../public/i18n/en'
+import i18nDefaults from '../public/i18n/en'
 
 export default {
   name: 'HotelDatePicker',

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Smartbox version of check-in check-out",
   "author": "Smartbox",
-  "main": "dist/vueHotelDatepicker.common.js",
+  "main": "dist/vueCico.common.js",
   "repository": {
     "url": "git@gitlab.production.smartbox.com:npm/vue-cico.git",
     "type": "git"
@@ -26,8 +26,8 @@
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name vueHotelDatepicker ./src/index.js",
-    "build-package": "vue-cli-service build --target lib --name vueHotelDatepicker ./src/index.js",
+    "build": "vue-cli-service build --target lib --name vueCico ./src/index.js",
+    "build-package": "vue-cli-service build --target lib --name vueCico ./src/index.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },

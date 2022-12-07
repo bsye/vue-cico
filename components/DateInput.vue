@@ -1,8 +1,8 @@
 <template>
   <div
-    class="vhd__datepicker__input"
+    class="cico__input"
     @keyup.enter.stop.prevent="toggleDatepicker"
-    data-qa="vhd__datepickerInput"
+    data-qa="cicoInput"
     :class="inputClass"
     :tabindex="tabIndex"
   >
@@ -43,8 +43,8 @@ export default {
   computed: {
     inputClass() {
       return {
-        'vhd__datepicker__input--is-active': this.isOpen && this.inputDate == null,
-        'vhd__datepicker__input--single-date': this.singleDaySelection,
+        'cico__input--is-active': this.isOpen && this.inputDate == null,
+        'cico__input--single-date': this.singleDaySelection,
       }
     },
     text() {

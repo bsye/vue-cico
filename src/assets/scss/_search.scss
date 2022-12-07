@@ -1,6 +1,6 @@
-.vhd__datepicker__wrapper {
-    &.vhd__style-search {
-        .vhd__datepicker__dummy-wrapper {
+.cico__wrapper {
+    &.cico__style-search {
+        .cico__dummy-wrapper {
             background-color: $background-gray;
             border-radius: 5px;
             padding: 10px;
@@ -8,7 +8,7 @@
             padding-left: 18px;
             padding-right: 18px;
 
-            .vhd__datepicker__input {
+            .cico__input {
                 font-size: 1rem;
                 text-transform: none;
             }

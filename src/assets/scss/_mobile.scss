@@ -1,9 +1,9 @@
 @media screen and ($up-to-tablet) {
-    .vhd__datepicker__wrapper .vhd__datepicker__close-button {
+    .cico__wrapper .cico__close-button {
         color: white;
     }
 
-    .vhd__datepicker-mobile-actions {
+    .cico-mobile-actions {
         display: flex;
         background-color: white;
         z-index: 20;
@@ -11,12 +11,12 @@
         padding: 8px;
         
 
-        .vhd__datepicker-mobile-action-reset
-        .vhd__datepicker-mobile-action-select {
+        .cico-mobile-action-reset
+        .cico-mobile-action-select {
             appearance: none;
         }
 
-        .vhd__datepicker-mobile-action-reset {
+        .cico-mobile-action-reset {
             width: 30%;
             color: $primary-color;
 
@@ -26,7 +26,7 @@
             }
         }
 
-        .vhd__datepicker-mobile-action-select {
+        .cico-mobile-action-select {
             width: 70%;
 
             &.disabled {
@@ -35,8 +35,8 @@
             }
         }
 
-        .vhd__datepicker-mobile-action-reset,
-        .vhd__datepicker-mobile-action-select {
+        .cico-mobile-action-reset,
+        .cico-mobile-action-select {
             cursor: pointer;
             font-weight: 600;
             font-family: "Montserrat","Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
@@ -58,7 +58,7 @@
         border-radius: 0;
         background-color: rgba(0,0,0,0.9);
 
-        .vhd__square-wrapper {
+        .cico__square-wrapper {
             margin-bottom: 0;
             grid-auto-rows: 44px;
         }
@@ -80,11 +80,11 @@
             flex-grow: 1;
             background-color: transparent;
 
-            .vhd__datepicker__cta-panel {
+            .cico__cta-panel {
                 border-bottom: 0px;
             }
 
-            .vhd__datepicker__cta-panel-title {
+            .cico__cta-panel-title {
                 padding-top: 50px;
                 margin-left: 1.5rem;
                 line-height: 1.2;
@@ -95,8 +95,8 @@
                 text-align: left;
             }
 
-            .vhd__datepicker__cta-info,
-            .vhd__datepicker__nights-info {
+            .cico__cta-info,
+            .cico__nights-info {
                 background-color: white;
                 border-top-left-radius: 10px;
                 height: 70px;
@@ -105,8 +105,8 @@
                 margin-bottom: 0;
                 border-top-right-radius: 10px;
 
-                .vhd__datepicker__travel-dates,
-                .vhd__datepicker__nights {
+                .cico__travel-dates,
+                .cico__nights {
                     display: block;
                     padding-top: 0.5rem;
                 }
@@ -124,7 +124,7 @@
             margin-top: 40px;
             transition: all ease 0.2s;
 
-            .vhd__datepicker__month {
+            .cico__month {
                 width: auto;
                 margin-right: 2rem;
                 margin-left: 2rem;
@@ -133,17 +133,17 @@
                 &:first-of-type {
                     margin-top: -40px;
 
-                    .vhd__datepicker__month-name {
+                    .cico__month-name {
                         padding-top: 55px;
                     }
                 }
             
-                .vhd__datepicker__month-name {
+                .cico__month-name {
                     order: 1;
                     padding-top: 0;
                 }
         
-                .vhd__datepicker__week-row {
+                .cico__week-row {
                     padding-top: 12px;
                     margin-top: 0;
                     z-index: 10;
@@ -159,12 +159,12 @@
                     order: 0;
                 }
         
-                .vhd__square-wrapper {
+                .cico__square-wrapper {
                     order: 2;
                 }
         
                 &:first-of-type {
-                    .vhd__datepicker__week-row {
+                    .cico__week-row {
                         display: block;
                     }
                 }

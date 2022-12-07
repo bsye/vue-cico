@@ -1,24 +1,14 @@
 <template>
   <div>
+    <div class="cico__tooltip" v-html="tooltipMessageDisplay" v-if="showTooltip && options.hoveringTooltip" />
     <div
-      class="vhd__datepicker__tooltip"
-      v-html="tooltipMessageDisplay"
-      v-if="showTooltip && options.hoveringTooltip"
-    />
-    <div
-      class="vhd__datepicker__month-day"
+      class="cico__month-day"
       @click.prevent.stop="dayClicked($event, date)"
-      :class="[
-        dayClass,
-        disabledClass,
-        checkinCheckoutClass,
-        bookingClass,
-        { 'vhd__datepicker__month-day--today': isToday },
-      ]"
+      :class="[dayClass, disabledClass, checkinCheckoutClass, bookingClass, { 'cico__month-day--today': isToday }]"
       :tabindex="tabIndex"
       ref="day"
     >
-      <div class="vhd__datepicker__month-day-wrapper">
+      <div class="cico__month-day-wrapper">
         <span class="day">{{ dayNumber }}</span>
         <Price :show="showPrice" :price="dayPrice" :symbol="priceSymbol" />
       </div>
@@ -36,7 +26,7 @@
 <script>
 import fecha from 'fecha'
 import get from 'lodash.get'
-import Helpers from '../../helpers'
+import Helpers from '../src/helpers'
 import BookingBullet from './BookingBullet.vue'
 import Price from './Price.vue'
 
@@ -210,14 +200,14 @@ export default {
 
         if (this.checkIncheckOutHalfDay[keyDate] && this.checkIncheckOutHalfDay[keyDate].checkIn) {
           if (this.checkIn && !this.checkOut) {
-            return 'vhd__datepicker__month-day--halfCheckIn vhd__datepicker__month-day--valid'
+            return 'cico__month-day--halfCheckIn cico__month-day--valid'
           }
 
-          return 'vhd__datepicker__month-day--halfCheckIn vhd__datepicker__month-day--invalid'
+          return 'cico__month-day--halfCheckIn cico__month-day--invalid'
         }
 
         if (this.checkIncheckOutHalfDay[keyDate] && this.checkIncheckOutHalfDay[keyDate].checkOut) {
-          return 'vhd__datepicker__month-day--halfCheckOut vhd__datepicker__month-day--valid'
+          return 'cico__month-day--halfCheckOut cico__month-day--valid'
         }
       }
 
@@ -235,21 +225,21 @@ export default {
         ) {
           if (this.checkIncheckOutHalfDay[this.formatDate]) {
             if (this.checkIn && !this.checkOut) {
-              return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--hovering'
+              return 'cico__month-day--not-allowed cico__month-day--hovering'
             }
 
             if (this.checkIncheckOutHalfDay[this.formatDate].checkOut) {
-              return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--hovering'
+              return 'cico__month-day--not-allowed cico__month-day--hovering'
             }
 
-            return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--invalid'
+            return 'cico__month-day--not-allowed cico__month-day--invalid'
           }
 
           if (this.checkIn && !this.checkOut) {
-            return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--invalid'
+            return 'cico__month-day--not-allowed cico__month-day--invalid'
           }
 
-          return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--hovering'
+          return 'cico__month-day--not-allowed cico__month-day--hovering'
         }
 
         if (
@@ -258,30 +248,30 @@ export default {
           !this.duplicateBookingDates.includes(this.formatDate)
         ) {
           if (!this.checkIn) {
-            return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--hovering'
+            return 'cico__month-day--not-allowed cico__month-day--hovering'
           }
 
           if ((this.checkIn && this.checkIn === this.date) || (this.checkIn && this.checkOut)) {
-            return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--hovering'
+            return 'cico__month-day--not-allowed cico__month-day--hovering'
           }
         }
 
         if (this.checkIn && !this.checkOut && this.hoveringDate === this.date) {
-          return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--hovering'
+          return 'cico__month-day--not-allowed cico__month-day--hovering'
         }
 
-        return 'vhd__datepicker__month-day--not-allowed vhd__datepicker__month-day--invalid'
+        return 'cico__month-day--not-allowed cico__month-day--invalid'
       }
 
       return ''
     },
     disabledClass() {
-      return this.isDisabled || this.isADisabledDay ? ' vhd__datepicker__month-day--disabled ' : ''
+      return this.isDisabled || this.isADisabledDay ? ' cico__month-day--disabled ' : ''
     },
     dayClass() {
       if (!this.belongsToThisMonth) {
         // Good
-        return 'vhd__datepicker__month-day--hidden'
+        return 'cico__month-day--hidden'
       }
 
       // If the calendar has a minimum number of nights && !checkOut
@@ -297,7 +287,7 @@ export default {
         this.minNightCount > 0 &&
         this.compareDay(this.date, this.addDays(this.checkIn, this.minNightCount)) === -1
       ) {
-        isNotMinimumDuration = ' vhd__datepicker__month-day--disabled minimumDurationUnvalidDay'
+        isNotMinimumDuration = ' cico__month-day--disabled minimumDurationUnvalidDay'
       }
 
       // Current Day
@@ -308,37 +298,37 @@ export default {
         this.checkOut == null &&
         this.dateFormater(this.checkIn) !== this.dateFormater(this.date)
       ) {
-        return `vhd__datepicker__month-day--selected vhd__datepicker__month-day--hovering vhd__currentDay${isNotMinimumDuration}`
+        return `cico__month-day--selected cico__month-day--hovering cico__currentDay${isNotMinimumDuration}`
       }
 
       // Highlight the selected dates and prevent the user from selecting
       // the same date for checkout and checkin
       if (this.checkIn !== null && this.dateFormater(this.checkIn) === this.dateFormater(this.date)) {
         if (this.minNightCount === 0) {
-          return `vhd__datepicker__month-day--first-day-selected checkIn${isNotMinimumDuration}`
+          return `cico__month-day--first-day-selected checkIn${isNotMinimumDuration}`
         }
 
         // Good
-        return 'vhd__datepicker__month-day--disabled vhd__datepicker__month-day--first-day-selected checkIn'
+        return 'cico__month-day--disabled cico__month-day--first-day-selected checkIn'
       }
 
       // Checkout day
       if (this.checkOut !== null) {
         if (this.dateFormater(this.checkOut) === this.dateFormater(this.date)) {
           if (this.halfDayClass) {
-            return `vhd__datepicker__month-day--disabled vhd__datepicker__month-day--last-day-selected ${this.halfDayClass} checkOut`
+            return `cico__month-day--disabled cico__month-day--last-day-selected ${this.halfDayClass} checkOut`
           }
 
-          return 'vhd__datepicker__month-day--disabled vhd__datepicker__month-day--last-day-selected checkOut'
+          return 'cico__month-day--disabled cico__month-day--last-day-selected checkOut'
         }
       }
 
       // Only highlight dates that are not disabled
       if (this.isHighlighted && !this.isDisabled) {
-        const classSelected = 'vhd__datepicker__month-day--selected'
+        const classSelected = 'cico__month-day--selected'
 
         if (this.isADisabledDay) {
-          return `${classSelected} vhd__datepicker__month-day--disabled afterMinimumDurationValidDay`
+          return `${classSelected} cico__month-day--disabled afterMinimumDurationValidDay`
         }
 
         if (
@@ -379,12 +369,12 @@ export default {
           return `${classSelected}`
         }
 
-        return `${classSelected} vhd__datepicker__month-day--valid`
+        return `${classSelected} cico__month-day--valid`
       }
 
       // Good
       if (this.isDisabled || this.isADisabledDay) {
-        return 'vhd__datepicker__month-day--disabled'
+        return 'cico__month-day--disabled'
       }
 
       if (this.halfDayClass) {
@@ -392,7 +382,7 @@ export default {
       }
 
       // Good
-      return 'vhd__datepicker__month-day--valid'
+      return 'cico__month-day--valid'
     },
     checkinCheckoutClass() {
       let currentPeriod = null
@@ -411,7 +401,7 @@ export default {
           ? this.nextPeriodDisableDates.some((i) => this.compareDay(i, this.date) === 0)
           : null
       ) {
-        return 'vhd__datepicker__month-day--disabled vhd__datepicker__month-day--not-allowed nightly'
+        return 'cico__month-day--disabled cico__month-day--not-allowed nightly'
       }
 
       if (currentPeriod) {
@@ -420,7 +410,7 @@ export default {
             ((!this.checkIn && !this.checkOut) || (this.checkIn && this.checkOut)) &&
             this.notAllowedDayDueToNextPeriod(currentPeriod)
           ) {
-            return 'vhd__datepicker__month-day--disabled vhd__datepicker__month-day--not-allowed nightly'
+            return 'cico__month-day--disabled cico__month-day--not-allowed nightly'
           }
 
           return 'nightly'
@@ -433,12 +423,12 @@ export default {
           currentPeriod.endAt !== this.formatDate &&
           this.date.getDay() !== 6
         ) {
-          return 'vhd__datepicker__month-day--disabled vhd__datepicker__month-day--not-allowed weekly_by_saturday'
+          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_saturday'
         }
 
         // Disable date between checkIn and nextDate, if minimumDuration is superior to 1
         if (this.notAllowDaysBetweenCheckInAndNextValidDate(6)) {
-          return 'vhd__datepicker__month-day--disabled vhd__datepicker__month-day--not-allowed weekly_by_saturday'
+          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_saturday'
         }
 
         // date.getDay() === 0 => sunday
@@ -448,12 +438,12 @@ export default {
           currentPeriod.endAt !== this.formatDate &&
           this.date.getDay() !== 0
         ) {
-          return 'vhd__datepicker__month-day--disabled vhd__datepicker__month-day--not-allowed weekly_by_sunday'
+          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_sunday'
         }
 
         // Disable date between checkIn and nextDate, if minimumDuration is superior to 1
         if (this.notAllowDaysBetweenCheckInAndNextValidDate(0)) {
-          return 'vhd__datepicker__month-day--disabled vhd__datepicker__month-day--not-allowed weekly_by_sunday'
+          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_sunday'
         }
 
         return ''
