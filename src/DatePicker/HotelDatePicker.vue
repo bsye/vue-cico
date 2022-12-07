@@ -13,9 +13,9 @@
     <div @click="toggleDatepicker()" class="vhd__datepicker__dummy-wrapper">
       <IconCalendar />
       <div class="vhd__datepicker__dummy-wrapper-input-wrapper">
-        <p v-if="get(i18n, 'activity.filter.checkOut')" class="vhd__datepicker__dummy-wrapper-arrival">
+        <span v-if="get(i18n, 'activity.filter.checkOut')" class="vhd__datepicker__dummy-wrapper-arrival">
           {{ get(i18n, 'activity.filter.checkIn') }}
-        </p>
+        </span>
         <date-input
           :i18n="i18n"
           :input-date="responsiveFormatter(this.checkIn)"
@@ -27,9 +27,9 @@
       </div>
       <IconArrow />
       <div class="vhd__datepicker__dummy-wrapper-input-wrapper">
-        <p v-if="get(i18n, 'activity.filter.checkOut')" class="vhd__datepicker__dummy-wrapper-departure">
+        <span v-if="get(i18n, 'activity.filter.checkOut')" class="vhd__datepicker__dummy-wrapper-departure">
           {{ get(i18n, 'activity.filter.checkOut') }}
-        </p>
+        </span>
         <date-input
           v-if="!singleDaySelection"
           :i18n="i18n"
