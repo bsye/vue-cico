@@ -249,34 +249,6 @@ Function.prototype.toString = makeBuiltIn(function toString() {
 
 /***/ }),
 
-/***/ "13d5":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__("23e7");
-var $reduce = __webpack_require__("d58f").left;
-var arrayMethodIsStrict = __webpack_require__("a640");
-var CHROME_VERSION = __webpack_require__("2d00");
-var IS_NODE = __webpack_require__("605d");
-
-var STRICT_METHOD = arrayMethodIsStrict('reduce');
-// Chrome 80-82 has a critical bug
-// https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
-var CHROME_BUG = !IS_NODE && CHROME_VERSION > 79 && CHROME_VERSION < 83;
-
-// `Array.prototype.reduce` method
-// https://tc39.es/ecma262/#sec-array.prototype.reduce
-$({ target: 'Array', proto: true, forced: !STRICT_METHOD || CHROME_BUG }, {
-  reduce: function reduce(callbackfn /* , initialValue */) {
-    var length = arguments.length;
-    return $reduce(this, callbackfn, length, length > 1 ? arguments[1] : undefined);
-  }
-});
-
-
-/***/ }),
-
 /***/ "14d9":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -801,17 +773,6 @@ module.exports = {
   PROPER: PROPER,
   CONFIGURABLE: CONFIGURABLE
 };
-
-
-/***/ }),
-
-/***/ "605d":
-/***/ (function(module, exports, __webpack_require__) {
-
-var classof = __webpack_require__("c6b6");
-var global = __webpack_require__("da84");
-
-module.exports = classof(global.process) == 'process';
 
 
 /***/ }),
@@ -1630,24 +1591,6 @@ module.exports = function (argument) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "a640":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var fails = __webpack_require__("d039");
-
-module.exports = function (METHOD_NAME, argument) {
-  var method = [][METHOD_NAME];
-  return !!method && fails(function () {
-    // eslint-disable-next-line no-useless-call -- required for testing
-    method.call(null, argument || function () { return 1; }, 1);
-  });
-};
-
 
 /***/ }),
 
@@ -2919,55 +2862,6 @@ exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
 
 /***/ }),
 
-/***/ "d58f":
-/***/ (function(module, exports, __webpack_require__) {
-
-var aCallable = __webpack_require__("59ed");
-var toObject = __webpack_require__("7b0b");
-var IndexedObject = __webpack_require__("44ad");
-var lengthOfArrayLike = __webpack_require__("07fa");
-
-var $TypeError = TypeError;
-
-// `Array.prototype.{ reduce, reduceRight }` methods implementation
-var createMethod = function (IS_RIGHT) {
-  return function (that, callbackfn, argumentsLength, memo) {
-    aCallable(callbackfn);
-    var O = toObject(that);
-    var self = IndexedObject(O);
-    var length = lengthOfArrayLike(O);
-    var index = IS_RIGHT ? length - 1 : 0;
-    var i = IS_RIGHT ? -1 : 1;
-    if (argumentsLength < 2) while (true) {
-      if (index in self) {
-        memo = self[index];
-        index += i;
-        break;
-      }
-      index += i;
-      if (IS_RIGHT ? index < 0 : length <= index) {
-        throw $TypeError('Reduce of empty array with no initial value');
-      }
-    }
-    for (;IS_RIGHT ? index >= 0 : length > index; index += i) if (index in self) {
-      memo = callbackfn(memo, self[index], index, O);
-    }
-    return memo;
-  };
-};
-
-module.exports = {
-  // `Array.prototype.reduce` method
-  // https://tc39.es/ecma262/#sec-array.prototype.reduce
-  left: createMethod(false),
-  // `Array.prototype.reduceRight` method
-  // https://tc39.es/ecma262/#sec-array.prototype.reduceright
-  right: createMethod(true)
-};
-
-
-/***/ }),
-
 /***/ "d9b5":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3123,11 +3017,11 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=eb3d7c1a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=5f1c2a78&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.value ? _c('div', {
+  return _c('div', {
     ref: `DatePicker-${_vm.hash}`,
     staticClass: "cico__wrapper",
     class: {
@@ -3136,7 +3030,9 @@ var render = function render() {
   }, [_vm.isOpen ? _c('div', {
     staticClass: "cico__close-button cico__hide-on-desktop",
     on: {
-      "click": _vm.closeMobileDatepicker
+      "click": function ($event) {
+        return _vm.hideDatepicker();
+      }
     }
   }, [_c('i', [_vm._v("+")])]) : _vm._e(), _c('div', {
     staticClass: "cico__dummy-wrapper",
@@ -3203,8 +3099,7 @@ var render = function render() {
     staticClass: "cico",
     class: {
       'cico--open': _vm.isOpen,
-      'cico--closed': !_vm.isOpen,
-      'cico--right': _vm.positionRight
+      'cico--closed': !_vm.isOpen
     }
   }, [_vm.isOpen ? _c('div', {
     staticClass: "cico__inner"
@@ -3217,10 +3112,7 @@ var render = function render() {
       "i18n": _vm.i18n
     }
   }), _c('div', {
-    staticClass: "cico__months",
-    class: {
-      'cico__months--full': _vm.showSingleMonth
-    }
+    staticClass: "cico__months"
   }, [_vm.isDesktop ? _c('div', {
     class: {
       cico__header: _vm.isDesktop
@@ -3308,7 +3200,6 @@ var render = function render() {
         "checkInPeriod": _vm.checkInPeriod,
         "checkOut": _vm.checkOut,
         "disableCheckoutOnCheckin": _vm.disableCheckoutOnCheckin,
-        "duplicateBookingDates": _vm.duplicateBookingDates,
         "hoveringDate": _vm.hoveringDate,
         "hoveringPeriod": _vm.hoveringPeriod,
         "i18n": _vm.i18n,
@@ -3318,7 +3209,6 @@ var render = function render() {
         "nextPeriodDisableDates": _vm.nextPeriodDisableDates,
         "options": _vm.dayOptions,
         "priceSymbol": _vm.priceSymbol,
-        "screenSize": _vm.screenSize,
         "showPrice": _vm.showPrice,
         "disabledDates": _vm.disabledDates,
         "periodDates": _vm.periodDates,
@@ -3347,14 +3237,11 @@ var render = function render() {
         _vm.isOpen = !_vm.isOpen;
       }
     }
-  }) : _vm._e()], 1) : _vm._e(), _vm._t("content")], 2)]) : _vm._e();
+  }) : _vm._e()], 1) : _vm._e()])]);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=eb3d7c1a&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
-var es_array_reduce = __webpack_require__("13d5");
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=5f1c2a78&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -4031,7 +3918,7 @@ const helpers = {
   dateFormatter(date, format) {
     const f = format || 'YYYY-MM-DD';
     if (date) {
-      return lib_fecha.format(date, f);
+      return lib_fecha.format(new Date(date), f);
     }
     return '';
   },
@@ -5564,7 +5451,6 @@ var CallToAction_component = normalizeComponent(
 
 
 
-
 // eslint-disable-next-line import/no-named-as-default
 
 /* harmony default export */ var Cicovue_type_script_lang_js_ = ({
@@ -5590,7 +5476,7 @@ var CallToAction_component = normalizeComponent(
     },
     disableCheckoutOnCheckin: {
       type: Boolean,
-      default: false
+      default: true
     },
     disabledDates: {
       type: Array,
@@ -5634,10 +5520,6 @@ var CallToAction_component = normalizeComponent(
       type: String,
       default: 'YYYY-MM-DD'
     },
-    hoveringTooltip: {
-      default: true,
-      type: [Boolean, Function]
-    },
     i18n: {
       type: Object,
       default: () => en
@@ -5660,19 +5542,11 @@ var CallToAction_component = normalizeComponent(
         return [];
       }
     },
-    positionRight: {
-      type: Boolean,
-      default: false
-    },
     priceSymbol: {
       type: String,
       default: ''
     },
     showPrice: {
-      type: Boolean,
-      default: false
-    },
-    showSingleMonth: {
       type: Boolean,
       default: false
     },
@@ -5694,10 +5568,6 @@ var CallToAction_component = normalizeComponent(
       type: [Date, null],
       default: null
     },
-    value: {
-      type: Boolean,
-      default: true
-    },
     yearBeforeMonth: {
       type: Boolean,
       default: false
@@ -5710,25 +5580,17 @@ var CallToAction_component = normalizeComponent(
       checkInPeriod: {},
       checkOut: this.endingDateValue,
       hoveringPeriod: {},
-      customTooltip: '',
-      customTooltipHalfday: '',
       datepickerDayKey: 0,
       datepickerMonthKey: 0,
       datepickerWeekKey: 0,
       dynamicNightCounts: null,
       hash: Date.now(),
       hoveringDate: null,
-      isTouchMove: false,
       months: [],
       nextDisabledDate: null,
       nextPeriodDisableDates: [],
       open: false,
-      screenSize: null,
       sortedDisabledDates: null,
-      xDown: null,
-      xUp: null,
-      yDown: null,
-      yUp: null,
       windowWidth: window.innerWidth
     };
   },
@@ -5769,18 +5631,6 @@ var CallToAction_component = normalizeComponent(
       }
       return [];
     },
-    duplicateBookingDates() {
-      return this.baseHalfDayDates.filter((newArr => date => newArr.has(date) || !newArr.add(date))(new Set()));
-    },
-    baseHalfDayDates() {
-      if (this.sortBookings.length > 0) {
-        const bookings = this.sortBookings.map(x => [x.checkInDate, x.checkOutDate]);
-        return bookings.reduce((a, b) => {
-          return a.concat(b);
-        });
-      }
-      return this.disabledDates;
-    },
     paginateMonths() {
       const months = [];
       if (this.isDesktop) {
@@ -5806,13 +5656,6 @@ var CallToAction_component = normalizeComponent(
         periodDates = [...this.periodDates].sort(sortFunction);
       }
       return periodDates;
-    },
-    sliceMonthMobile() {
-      const nbMonthRenderDom = 4;
-      if (this.activeMonthIndex >= nbMonthRenderDom) {
-        return this.months.slice(this.activeMonthIndex - 3, this.activeMonthIndex + 1);
-      }
-      return this.months.slice(0, nbMonthRenderDom);
     },
     isPreventedMaxMonth() {
       const lastIndexMonthAvailable = this.getMonthDiff(this.startDate, this.lastDateAvailable);
@@ -5948,7 +5791,6 @@ var CallToAction_component = normalizeComponent(
   methods: {
     ...src_helpers,
     get: lodash_get_default.a,
-    transformDisabledWeekDays() {},
     configureI18n() {
       lib_fecha.setGlobalDateI18n({
         dayNames: this.weekdays,
@@ -5972,8 +5814,7 @@ var CallToAction_component = normalizeComponent(
       this.months = [];
       if (this.checkIn && (this.getMonthDiff(this.getNextMonth(new Date(this.startDate)), this.checkIn) > 0 || this.getMonthDiff(this.startDate, this.checkIn) > 0)) {
         this.createMonth(new Date(this.startDate));
-        const count = this.getMonthDiff(this.startDate, this.checkIn);
-        const monthCount = this.showSingleMonth ? count - 1 : count;
+        const monthCount = this.getMonthDiff(this.startDate, this.checkIn);
         let nextMonth = new Date(this.startDate);
         for (let i = 0; i <= monthCount; i++) {
           const tempNextMonth = this.getNextMonth(nextMonth);
@@ -5984,7 +5825,7 @@ var CallToAction_component = normalizeComponent(
           this.createMonth(this.getNextMonth(nextMonth));
           this.activeMonthIndex = 1;
         }
-        this.activeMonthIndex += count;
+        this.activeMonthIndex += monthCount;
       } else {
         let date = new Date(this.startDate);
         for (let i = 0; i < this.numberOfMonths; i++) {
@@ -6004,25 +5845,6 @@ var CallToAction_component = normalizeComponent(
     },
     formatDate(date) {
       return this.dateFormatter(date, this.format);
-    },
-    dateIsInCheckInCheckOut(date) {
-      const compareDate = this.dateFormatter(date);
-      let currentPeriod = null;
-      this.sortedPeriodDates.forEach(d => {
-        if (d.endAt !== compareDate && (d.startAt === compareDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, compareDate))) {
-          currentPeriod = d;
-        }
-      });
-      return currentPeriod;
-    },
-    dayIsDisabled(date) {
-      if (this.checkIn && !this.checkOut && !this.isDateLessOrEquals(date, this.nextDisabledDate) && this.nextDisabledDate !== Infinity) {
-        return true;
-      }
-      if (this.checkIn && !this.checkOut && this.isDateLessOrEquals(date, this.checkIn)) {
-        return true;
-      }
-      return false;
     },
     enterMonth(event, month) {
       this.$emit('enter-month', event, month);
@@ -6082,27 +5904,23 @@ var CallToAction_component = normalizeComponent(
         nextDisabledDate = Infinity;
       }
       if (this.checkIn == null && !this.singleDaySelection) {
-        this.checkIn = this.dateFormatter(date, this.format);
-        this.$emit('check-in-selected', this.checkIn);
+        this.checkIn = date;
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format));
         this.setMinimumDuration(date);
       } else if (this.singleDaySelection) {
-        this.checkIn = this.dateFormatter(date, this.format);
-        this.$emit('check-in-selected', this.checkIn);
-        this.checkOut = this.dateFormatter(date, this.format);
+        this.checkIn = date;
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format));
+        this.checkOut = date;
       } else if (this.checkIn !== null && this.checkOut == null && this.isDateLessOrEquals(date, this.checkIn)) {
-        this.checkIn = this.dateFormatter(date, this.format);
-        this.$emit('check-in-selected', this.checkIn);
+        this.checkIn = date;
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format));
       } else if (this.checkIn !== null && this.checkOut == null) {
-        this.checkOut = this.dateFormatter(date, this.format);
-        this.$emit('period-selected', event, this.checkIn, this.checkOut);
-        /**
-         * @deprecated since v4.0.0 beta 11
-         */
-        this.$emit('periodSelected', event, this.checkIn, this.checkOut);
+        this.checkOut = date;
+        this.$emit('period-selected', event, this.dateFormatter(this.checkIn, this.format), this.checkOut);
       } else {
         this.checkOut = null;
-        this.checkIn = this.dateFormatter(date, this.format);
-        this.$emit('check-in-selected', this.checkIn);
+        this.checkIn = date;
+        this.$emit('check-in-selected', this.this.dateFormatter(this.checkIn, this.format));
         this.setMinimumDuration(date);
       }
       if (this.checkIn && !this.checkOut) {
@@ -6152,9 +5970,6 @@ var CallToAction_component = normalizeComponent(
       this.reRender();
       this.$emit('clear-selection');
     },
-    closeMobileDatepicker() {
-      this.hideDatepicker();
-    },
     hideDatepicker() {
       this.isOpen = false;
       this.$nextTick(() => {
@@ -6169,16 +5984,6 @@ var CallToAction_component = normalizeComponent(
     },
     toggleDatepicker() {
       this[this.isOpen ? 'hideDatepicker' : 'showDatepicker']();
-    },
-    clearCheckIn() {
-      if (this.checkIn && !this.checkOut) {
-        this.clearSelection();
-      }
-    },
-    clickOutside() {
-      if (this.closeDatepickerOnClickOutside) {
-        this.hideDatepicker();
-      }
     },
     setMinimumDuration(date) {
       if (this.sortedPeriodDates) {
@@ -6223,7 +6028,7 @@ var CallToAction_component = normalizeComponent(
       }
     },
     renderNextMonth: lodash_throttle_default()(function throttleRenderNextMonth() {
-      if (!this.showSingleMonth && this.activeMonthIndex < this.months.length - 2 || this.showSingleMonth && this.activeMonthIndex < this.months.length - 1) {
+      if (this.activeMonthIndex < this.months.length - 2) {
         this.activeMonthIndex++;
         return;
       }

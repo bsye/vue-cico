@@ -152,7 +152,6 @@
           v-if="!isDesktop"
         />
       </div>
-      <slot name="content" />
     </div>
   </div>
 </template>
