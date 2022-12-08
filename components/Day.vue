@@ -196,7 +196,7 @@ export default {
     },
     halfDayClass() {
       if (Object.keys(this.checkIncheckOutHalfDay).length > 0) {
-        const keyDate = this.dateFormater(this.date)
+        const keyDate = this.dateFormatter(this.date)
 
         if (this.checkIncheckOutHalfDay[keyDate] && this.checkIncheckOutHalfDay[keyDate].checkIn) {
           if (this.checkIn && !this.checkOut) {
@@ -296,14 +296,14 @@ export default {
         this.date === this.hoveringDate &&
         this.checkIn !== null &&
         this.checkOut == null &&
-        this.dateFormater(this.checkIn) !== this.dateFormater(this.date)
+        this.dateFormatter(this.checkIn) !== this.dateFormatter(this.date)
       ) {
         return `cico__month-day--selected cico__month-day--hovering cico__currentDay${isNotMinimumDuration}`
       }
 
       // Highlight the selected dates and prevent the user from selecting
       // the same date for checkout and checkin
-      if (this.checkIn !== null && this.dateFormater(this.checkIn) === this.dateFormater(this.date)) {
+      if (this.checkIn !== null && this.dateFormatter(this.checkIn) === this.dateFormatter(this.date)) {
         if (this.minNightCount === 0) {
           return `cico__month-day--first-day-selected checkIn${isNotMinimumDuration}`
         }
@@ -314,7 +314,7 @@ export default {
 
       // Checkout day
       if (this.checkOut !== null) {
-        if (this.dateFormater(this.checkOut) === this.dateFormater(this.date)) {
+        if (this.dateFormatter(this.checkOut) === this.dateFormatter(this.date)) {
           if (this.halfDayClass) {
             return `cico__month-day--disabled cico__month-day--last-day-selected ${this.halfDayClass} checkOut`
           }
@@ -452,7 +452,7 @@ export default {
       return ''
     },
     formatDate() {
-      return this.dateFormater(this.date)
+      return this.dateFormatter(this.date)
     },
     tabIndex() {
       if (!this.isOpen || !this.belongsToThisMonth || this.isDisabled || !this.isClickable()) {
@@ -565,8 +565,8 @@ export default {
         this.date.getDay() === dayCode &&
         Object.keys(this.hoveringPeriod).length > 0 &&
         this.validateDateBetweenTwoDates(this.checkIn, this.hoveringPeriod.nextValidDate, this.date) &&
-        this.dateFormater(this.checkIn) !== this.formatDate &&
-        this.dateFormater(this.hoveringPeriod.nextValidDate) !== this.formatDate
+        this.dateFormatter(this.checkIn) !== this.formatDate &&
+        this.dateFormatter(this.hoveringPeriod.nextValidDate) !== this.formatDate
       )
     },
     notAllowedDayDueToNextPeriod(currentPeriod) {
@@ -629,7 +629,7 @@ export default {
 
       if (disableCheckoutOnCheckin) {
         if (!this.isDisabled || this.isClickable()) {
-          const formatDate = this.dateFormater(date)
+          const formatDate = this.dateFormatter(date)
 
           this.$emit('day-clicked', event, date, formatDate, resetCheckin)
         } else {

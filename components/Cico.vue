@@ -59,8 +59,8 @@
         <CallToAction
           :included-nights="minNightCount"
           :nights-total="totalNights"
-          :nights-in="dateFormater(checkIn, 'ddd DD MMM.')"
-          :nights-out="dateFormater(checkOut, 'ddd DD MMM.')"
+          :nights-in="dateFormatter(checkIn, 'ddd DD MMM.')"
+          :nights-out="dateFormatter(checkOut, 'ddd DD MMM.')"
           :i18n="i18n"
         />
         <div class="cico__months" :class="{ 'cico__months--full': showSingleMonth }">
@@ -241,7 +241,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'dddd DD MMMM',
+      default: 'YYYY-MM-DD',
     },
     hoveringTooltip: {
       default: true,
@@ -333,7 +333,6 @@ export default {
       nextPeriodDisableDates: [],
       open: false,
       screenSize: null,
-      showCustomTooltip: false,
       sortedDisabledDates: null,
       xDown: null,
       xUp: null,
@@ -524,21 +523,20 @@ export default {
       this.reRender()
     },
     checkIn(newDate) {
-      this.$emit('check-in-changed', newDate)
-      this.$emit('starting-date-changed', newDate)
+      this.$emit('check-in-changed', this.dateFormatter(newDate, this.format))
+      this.$emit('starting-date-changed', this.dateFormatter(newDate, this.format))
       this.reRender()
     },
     checkOut(newDate) {
-      this.$emit('ending-date-changed', newDate)
+      this.$emit('ending-date-changed')
 
       if (this.checkOut !== null) {
         this.hoveringDate = null
         this.nextDisabledDate = null
         this.reRender()
-        this.showCustomTooltip = false
       }
 
-      this.$emit('check-out-changed', newDate)
+      this.$emit('check-out-changed', this.dateFormatter(newDate, this.format))
       this.reRender()
     },
     firstDayOfWeek(newDay) {
@@ -625,10 +623,10 @@ export default {
     },
     responsiveFormatter(date) {
       if (this.isDesktop) {
-        return this.dateFormater(date, 'ddd DD MMM')
+        return this.dateFormatter(date, 'ddd DD MMM')
       }
 
-      return this.dateFormater(date, 'DD MMM')
+      return this.dateFormatter(date, 'DD MMM')
     },
     generateInitialMonths() {
       this.months = []
@@ -666,7 +664,7 @@ export default {
       }
     },
     handleBookingClicked(event, date, currentBooking) {
-      this.$emit('booking-clicked', event, date, currentBooking)
+      this.$emit('booking-clicked', event, this.dateFormatter(date, this.format), currentBooking)
     },
     escFunction(e) {
       const escTouch = 27
@@ -676,10 +674,10 @@ export default {
       }
     },
     formatDate(date) {
-      return this.dateFormater(date, this.format)
+      return this.dateFormatter(date, this.format)
     },
     dateIsInCheckInCheckOut(date) {
-      const compareDate = this.dateFormater(date)
+      const compareDate = this.dateFormatter(date)
       let currentPeriod = null
 
       this.sortedPeriodDates.forEach((d) => {
@@ -723,13 +721,13 @@ export default {
         this.sortedPeriodDates.forEach((d) => {
           if (
             eventType === 'click' &&
-            (d.startAt === this.dateFormater(date) ||
-              (d.endAt !== this.dateFormater(date) && this.validateDateBetweenTwoDates(d.startAt, d.endAt, date)))
+            (d.startAt === this.dateFormatter(date) ||
+              (d.endAt !== this.dateFormatter(date) && this.validateDateBetweenTwoDates(d.startAt, d.endAt, date)))
           ) {
             currentPeriod = d
           } else if (
             eventType === 'hover' &&
-            (d.startAt === this.dateFormater(date) || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))
+            (d.startAt === this.dateFormatter(date) || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))
           ) {
             currentPeriod = d
           }
@@ -787,18 +785,18 @@ export default {
       }
 
       if (this.checkIn == null && !this.singleDaySelection) {
-        this.checkIn = date
-        this.$emit('check-in-selected', date)
+        this.checkIn = this.dateFormatter(date, this.format)
+        this.$emit('check-in-selected', this.checkIn)
         this.setMinimumDuration(date)
       } else if (this.singleDaySelection) {
-        this.checkIn = date
-        this.$emit('check-in-selected', date)
-        this.checkOut = date
+        this.checkIn = this.dateFormatter(date, this.format)
+        this.$emit('check-in-selected', this.checkIn)
+        this.checkOut = this.dateFormatter(date, this.format)
       } else if (this.checkIn !== null && this.checkOut == null && this.isDateLessOrEquals(date, this.checkIn)) {
-        this.checkIn = date
-        this.$emit('check-in-selected', date)
+        this.checkIn = this.dateFormatter(date, this.format)
+        this.$emit('check-in-selected', this.checkIn)
       } else if (this.checkIn !== null && this.checkOut == null) {
-        this.checkOut = date
+        this.checkOut = this.dateFormatter(date, this.format)
         this.$emit('period-selected', event, this.checkIn, this.checkOut)
         /**
          * @deprecated since v4.0.0 beta 11
@@ -806,8 +804,8 @@ export default {
         this.$emit('periodSelected', event, this.checkIn, this.checkOut)
       } else {
         this.checkOut = null
-        this.checkIn = date
-        this.$emit('check-in-selected', date)
+        this.checkIn = this.dateFormatter(date, this.format)
+        this.$emit('check-in-selected', this.checkIn)
         this.setMinimumDuration(date)
       }
 
@@ -819,17 +817,17 @@ export default {
       this.nextDisabledDate = nextDisabledDate
       this.hoveringDate = null
       this.hoveringDate = date
-      this.$emit('day-clicked', date, formatDate, nextDisabledDate)
+      this.$emit('day-clicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate)
       /**
        * @deprecated since v4.0.0 beta 11
        */
-      this.$emit('dayClicked', date, formatDate, nextDisabledDate)
+      this.$emit('dayClicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate)
     },
     nextBookingDate(date) {
       let closest = Infinity
 
       if (this.sortBookings.length > 0) {
-        const nextDateFormated = this.dateFormater(this.addDays(date, 1))
+        const nextDateFormated = this.dateFormatter(this.addDays(date, 1))
         const nextBooking = this.sortBookings.find(
           (booking) =>
             this.validateDateBetweenDate(booking.checkInDate, nextDateFormated) ||
@@ -900,7 +898,7 @@ export default {
       if (this.sortedPeriodDates) {
         let nextPeriod = null
         let currentPeriod = null
-        const compareDate = this.dateFormater(date)
+        const compareDate = this.dateFormatter(date)
 
         this.sortedPeriodDates.forEach((d) => {
           if (

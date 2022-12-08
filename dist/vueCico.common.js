@@ -3203,8 +3203,8 @@ var render = function render() {
     attrs: {
       "included-nights": _vm.minNightCount,
       "nights-total": _vm.totalNights,
-      "nights-in": _vm.dateFormater(_vm.checkIn, 'ddd DD MMM.'),
-      "nights-out": _vm.dateFormater(_vm.checkOut, 'ddd DD MMM.'),
+      "nights-in": _vm.dateFormatter(_vm.checkIn, 'ddd DD MMM.'),
+      "nights-out": _vm.dateFormatter(_vm.checkOut, 'ddd DD MMM.'),
       "i18n": _vm.i18n
     }
   }), _c('div', {
@@ -4019,7 +4019,7 @@ const helpers = {
     // eslint-disable-next-line block-scoped-var
     return arr;
   },
-  dateFormater(date, format) {
+  dateFormatter(date, format) {
     const f = format || 'YYYY-MM-DD';
     if (date) {
       return lib_fecha.format(date, f);
@@ -4440,7 +4440,7 @@ var Price_component = normalizeComponent(
     },
     halfDayClass() {
       if (Object.keys(this.checkIncheckOutHalfDay).length > 0) {
-        const keyDate = this.dateFormater(this.date);
+        const keyDate = this.dateFormatter(this.date);
         if (this.checkIncheckOutHalfDay[keyDate] && this.checkIncheckOutHalfDay[keyDate].checkIn) {
           if (this.checkIn && !this.checkOut) {
             return 'cico__month-day--halfCheckIn cico__month-day--valid';
@@ -4503,13 +4503,13 @@ var Price_component = normalizeComponent(
       }
 
       // Current Day
-      if (!this.isDisabled && this.date === this.hoveringDate && this.checkIn !== null && this.checkOut == null && this.dateFormater(this.checkIn) !== this.dateFormater(this.date)) {
+      if (!this.isDisabled && this.date === this.hoveringDate && this.checkIn !== null && this.checkOut == null && this.dateFormatter(this.checkIn) !== this.dateFormatter(this.date)) {
         return `cico__month-day--selected cico__month-day--hovering cico__currentDay${isNotMinimumDuration}`;
       }
 
       // Highlight the selected dates and prevent the user from selecting
       // the same date for checkout and checkin
-      if (this.checkIn !== null && this.dateFormater(this.checkIn) === this.dateFormater(this.date)) {
+      if (this.checkIn !== null && this.dateFormatter(this.checkIn) === this.dateFormatter(this.date)) {
         if (this.minNightCount === 0) {
           return `cico__month-day--first-day-selected checkIn${isNotMinimumDuration}`;
         }
@@ -4520,7 +4520,7 @@ var Price_component = normalizeComponent(
 
       // Checkout day
       if (this.checkOut !== null) {
-        if (this.dateFormater(this.checkOut) === this.dateFormater(this.date)) {
+        if (this.dateFormatter(this.checkOut) === this.dateFormatter(this.date)) {
           if (this.halfDayClass) {
             return `cico__month-day--disabled cico__month-day--last-day-selected ${this.halfDayClass} checkOut`;
           }
@@ -4609,7 +4609,7 @@ var Price_component = normalizeComponent(
       return '';
     },
     formatDate() {
-      return this.dateFormater(this.date);
+      return this.dateFormatter(this.date);
     },
     tabIndex() {
       if (!this.isOpen || !this.belongsToThisMonth || this.isDisabled || !this.isClickable()) {
@@ -4683,7 +4683,7 @@ var Price_component = normalizeComponent(
     ...src_helpers,
     get: lodash_get_default.a,
     notAllowDaysBetweenCheckInAndNextValidDate(dayCode) {
-      return this.checkIn && !this.checkOut && this.date.getDay() === dayCode && Object.keys(this.hoveringPeriod).length > 0 && this.validateDateBetweenTwoDates(this.checkIn, this.hoveringPeriod.nextValidDate, this.date) && this.dateFormater(this.checkIn) !== this.formatDate && this.dateFormater(this.hoveringPeriod.nextValidDate) !== this.formatDate;
+      return this.checkIn && !this.checkOut && this.date.getDay() === dayCode && Object.keys(this.hoveringPeriod).length > 0 && this.validateDateBetweenTwoDates(this.checkIn, this.hoveringPeriod.nextValidDate, this.date) && this.dateFormatter(this.checkIn) !== this.formatDate && this.dateFormatter(this.hoveringPeriod.nextValidDate) !== this.formatDate;
     },
     notAllowedDayDueToNextPeriod(currentPeriod) {
       // Check if the next period is directly after the current period
@@ -4735,7 +4735,7 @@ var Price_component = normalizeComponent(
       }
       if (disableCheckoutOnCheckin) {
         if (!this.isDisabled || this.isClickable()) {
-          const formatDate = this.dateFormater(date);
+          const formatDate = this.dateFormatter(date);
           this.$emit('day-clicked', event, date, formatDate, resetCheckin);
         } else {
           this.$emit('clear-selection');
@@ -5957,9 +5957,9 @@ var CallToAction_component = normalizeComponent(
     },
     responsiveFormatter(date) {
       if (this.isDesktop) {
-        return this.dateFormater(date, 'ddd DD MMM');
+        return this.dateFormatter(date, 'ddd DD MMM');
       }
-      return this.dateFormater(date, 'DD MMM');
+      return this.dateFormatter(date, 'DD MMM');
     },
     generateInitialMonths() {
       this.months = [];
@@ -5996,10 +5996,10 @@ var CallToAction_component = normalizeComponent(
       }
     },
     formatDate(date) {
-      return this.dateFormater(date, this.format);
+      return this.dateFormatter(date, this.format);
     },
     dateIsInCheckInCheckOut(date) {
-      const compareDate = this.dateFormater(date);
+      const compareDate = this.dateFormatter(date);
       let currentPeriod = null;
       this.sortedPeriodDates.forEach(d => {
         if (d.endAt !== compareDate && (d.startAt === compareDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, compareDate))) {
@@ -6028,9 +6028,9 @@ var CallToAction_component = normalizeComponent(
       let currentPeriod = {};
       if (this.sortedPeriodDates.length > 0) {
         this.sortedPeriodDates.forEach(d => {
-          if (eventType === 'click' && (d.startAt === this.dateFormater(date) || d.endAt !== this.dateFormater(date) && this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
+          if (eventType === 'click' && (d.startAt === this.dateFormatter(date) || d.endAt !== this.dateFormatter(date) && this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
             currentPeriod = d;
-          } else if (eventType === 'hover' && (d.startAt === this.dateFormater(date) || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
+          } else if (eventType === 'hover' && (d.startAt === this.dateFormatter(date) || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
             currentPeriod = d;
           }
         });
@@ -6114,7 +6114,7 @@ var CallToAction_component = normalizeComponent(
     nextBookingDate(date) {
       let closest = Infinity;
       if (this.sortBookings.length > 0) {
-        const nextDateFormated = this.dateFormater(this.addDays(date, 1));
+        const nextDateFormated = this.dateFormatter(this.addDays(date, 1));
         const nextBooking = this.sortBookings.find(booking => this.validateDateBetweenDate(booking.checkInDate, nextDateFormated) || this.validateDateBetweenTwoDates(booking.checkInDate, booking.checkOutDate, nextDateFormated));
         closest = nextBooking ? nextBooking.checkInDate : Infinity;
       }
@@ -6177,7 +6177,7 @@ var CallToAction_component = normalizeComponent(
       if (this.sortedPeriodDates) {
         let nextPeriod = null;
         let currentPeriod = null;
-        const compareDate = this.dateFormater(date);
+        const compareDate = this.dateFormatter(date);
         this.sortedPeriodDates.forEach(d => {
           if (d.endAt !== compareDate && (d.startAt === compareDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
             currentPeriod = d;
