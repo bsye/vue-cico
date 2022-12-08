@@ -214,7 +214,7 @@ const helpers = {
     const f = format || 'YYYY-MM-DD'
 
     if (date) {
-      return fecha.format(date, f)
+      return fecha.format(new Date(date), f)
     }
 
     return ''

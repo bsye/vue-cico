@@ -5,9 +5,8 @@
       'cico__wrapper--booking': bookings.length > 0,
     }"
     :ref="`DatePicker-${hash}`"
-    v-if="value"
   >
-    <div class="cico__close-button cico__hide-on-desktop" v-if="isOpen" @click="closeMobileDatepicker">
+    <div class="cico__close-button cico__hide-on-desktop" v-if="isOpen" @click="hideDatepicker()">
       <i>+</i>
     </div>
     <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
@@ -52,7 +51,6 @@
       :class="{
         'cico--open': isOpen,
         'cico--closed': !isOpen,
-        'cico--right': positionRight,
       }"
     >
       <div v-if="isOpen" class="cico__inner">
@@ -63,7 +61,7 @@
           :nights-out="dateFormatter(checkOut, 'ddd DD MMM.')"
           :i18n="i18n"
         />
-        <div class="cico__months" :class="{ 'cico__months--full': showSingleMonth }">
+        <div class="cico__months">
           <div
             v-if="isDesktop"
             :class="{
@@ -124,7 +122,6 @@
             :checkInPeriod="checkInPeriod"
             :checkOut="checkOut"
             :disableCheckoutOnCheckin="disableCheckoutOnCheckin"
-            :duplicateBookingDates="duplicateBookingDates"
             :hoveringDate="hoveringDate"
             :hoveringPeriod="hoveringPeriod"
             :i18n="i18n"
@@ -134,7 +131,6 @@
             :nextPeriodDisableDates="nextPeriodDisableDates"
             :options="dayOptions"
             :priceSymbol="priceSymbol"
-            :screenSize="screenSize"
             :showPrice="showPrice"
             :disabledDates="disabledDates"
             :periodDates="periodDates"
@@ -164,7 +160,6 @@
 <script>
 import throttle from 'lodash.throttle'
 import fecha from 'fecha'
-
 import get from 'lodash.get'
 import Month from './Month.vue'
 import MobileActions from './MobileActions.vue'
@@ -193,125 +188,133 @@ export default {
         return []
       },
     },
+
     closeDatepickerOnClickOutside: {
       type: Boolean,
       default: true,
     },
+
     disableCheckoutOnCheckin: {
       type: Boolean,
-      default: false,
+      default: true,
     },
+
     disabledDates: {
       type: Array,
       default() {
         return []
       },
     },
+
     disabledDaysOfWeek: {
       type: Array,
       default() {
         return []
       },
     },
+
     disabledWeekDays: {
       type: Object,
       default() {
         return {}
       },
     },
+
     displayClearButton: {
       type: Boolean,
       default: true,
     },
+
     enableCheckout: {
       type: Boolean,
       default: false,
     },
+
     endDate: {
       type: [Date, String, Number],
       default: Infinity,
     },
+
     endingDateValue: {
       type: [Date, null],
       default: null,
     },
+
     firstDayOfWeek: {
       type: Number,
       default: 0,
     },
+
     format: {
       type: String,
       default: 'YYYY-MM-DD',
     },
-    hoveringTooltip: {
-      default: true,
-      type: [Boolean, Function],
-    },
+
     i18n: {
       type: Object,
       default: () => i18nDefaults,
     },
+
     lastDateAvailable: {
       type: [Number, Date],
       default: Infinity,
     },
+
     maxNights: {
       type: [Number, null],
       default: null,
     },
+
     minNights: {
       type: Number,
       default: 1,
     },
+
     periodDates: {
       type: Array,
       default() {
         return []
       },
     },
-    positionRight: {
-      type: Boolean,
-      default: false,
-    },
+
     priceSymbol: {
       type: String,
       default: '',
     },
+
     showPrice: {
       type: Boolean,
       default: false,
     },
-    showSingleMonth: {
-      type: Boolean,
-      default: false,
-    },
+
     showYear: {
       type: Boolean,
       default: true,
     },
+
     singleDaySelection: {
       type: Boolean,
       default: false,
     },
+
     startDate: {
       type: [Date, String],
       default() {
         return new Date()
       },
     },
+
     startingDateValue: {
       type: [Date, null],
       default: null,
     },
-    value: {
-      type: Boolean,
-      default: true,
-    },
+
     yearBeforeMonth: {
       type: Boolean,
       default: false,
     },
   },
+
   data() {
     return {
       activeMonthIndex: 0,
@@ -319,25 +322,17 @@ export default {
       checkInPeriod: {},
       checkOut: this.endingDateValue,
       hoveringPeriod: {},
-      customTooltip: '',
-      customTooltipHalfday: '',
       datepickerDayKey: 0,
       datepickerMonthKey: 0,
       datepickerWeekKey: 0,
       dynamicNightCounts: null,
       hash: Date.now(),
       hoveringDate: null,
-      isTouchMove: false,
       months: [],
       nextDisabledDate: null,
       nextPeriodDisableDates: [],
       open: false,
-      screenSize: null,
       sortedDisabledDates: null,
-      xDown: null,
-      xUp: null,
-      yDown: null,
-      yUp: null,
       windowWidth: window.innerWidth,
     }
   },
@@ -387,6 +382,7 @@ export default {
 
       return this.countDays(this.checkIn, this.checkOut)
     },
+
     sortBookings() {
       if (this.bookings.length > 0) {
         const bookings = [...this.bookings]
@@ -402,25 +398,7 @@ export default {
 
       return []
     },
-    duplicateBookingDates() {
-      return this.baseHalfDayDates.filter(
-        (
-          (newArr) => (date) =>
-            newArr.has(date) || !newArr.add(date)
-        )(new Set()),
-      )
-    },
-    baseHalfDayDates() {
-      if (this.sortBookings.length > 0) {
-        const bookings = this.sortBookings.map((x) => [x.checkInDate, x.checkOutDate])
 
-        return bookings.reduce((a, b) => {
-          return a.concat(b)
-        })
-      }
-
-      return this.disabledDates
-    },
     paginateMonths() {
       const months = []
 
@@ -435,6 +413,7 @@ export default {
 
       return months
     },
+
     sortedPeriodDates() {
       let periodDates = []
 
@@ -452,26 +431,21 @@ export default {
 
       return periodDates
     },
-    sliceMonthMobile() {
-      const nbMonthRenderDom = 4
 
-      if (this.activeMonthIndex >= nbMonthRenderDom) {
-        return this.months.slice(this.activeMonthIndex - 3, this.activeMonthIndex + 1)
-      }
-
-      return this.months.slice(0, nbMonthRenderDom)
-    },
     isPreventedMaxMonth() {
       const lastIndexMonthAvailable = this.getMonthDiff(this.startDate, this.lastDateAvailable)
 
       return this.activeMonthIndex >= lastIndexMonthAvailable - 1
     },
+
     minNightCount() {
       return this.dynamicNightCounts || this.minNights
     },
+
     showClearSelectionButton() {
       return Boolean((this.checkIn || this.checkOut) && this.displayClearButton)
     },
+
     disabledWeekDaysObject() {
       const disabledDays = this.disabledDaysOfWeek.map((d) => d.toLowerCase())
       const names = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
@@ -495,6 +469,7 @@ export default {
 
       return Object.assign(disabledWeekDaysObject, this.disabledWeekDays)
     },
+
     disabledWeekDaysArray() {
       const days = this.disabledWeekDaysObject
 
@@ -506,14 +481,17 @@ export default {
         .map(fn)
         .filter((v) => v)
     },
+
     dayOptions() {
       return { ...this.$props, disabledWeekDaysObject: this.disabledWeekDaysObject }
     },
+
     numberOfMonths() {
       if (this.isDesktop) return 2
 
       return 12
     },
+
     isDesktop() {
       return this.windowWidth > 767
     },
@@ -522,11 +500,13 @@ export default {
     bookings() {
       this.reRender()
     },
+
     checkIn(newDate) {
       this.$emit('check-in-changed', this.dateFormatter(newDate, this.format))
       this.$emit('starting-date-changed', this.dateFormatter(newDate, this.format))
       this.reRender()
     },
+
     checkOut(newDate) {
       this.$emit('ending-date-changed')
 
@@ -539,6 +519,7 @@ export default {
       this.$emit('check-out-changed', this.dateFormatter(newDate, this.format))
       this.reRender()
     },
+
     firstDayOfWeek(newDay) {
       this.$emit('first-day-of-week-changed', newDay)
       const startDate = new Date(this.startDate)
@@ -552,12 +533,15 @@ export default {
 
       this.reRender()
     },
+
     startingDateValue(date) {
       this.setCheckIn(date)
     },
+
     endingDateValue(date) {
       this.setCheckOut(date)
     },
+
     singleDaySelection(single) {
       if (single) {
         this.setCheckOut(this.checkIn)
@@ -568,21 +552,26 @@ export default {
 
       this.reRender()
     },
+
     yearBeforeMonth() {
       this.reRender()
     },
+
     i18n() {
       this.configureI18n()
     },
+
     disabledDates() {
       this.nextDisabledDate = null
       this.reRender()
     },
   },
+
   created() {
     this.configureI18n()
     this.generateInitialMonths()
   },
+
   mounted() {
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
@@ -598,16 +587,18 @@ export default {
       document.addEventListener('keyup', this.escFunction, false)
     }
   },
+
   destroyed() {
     if (this.isDesktop) {
       document.removeEventListener('keyup', this.escFunction, false)
       document.removeEventListener('click', this.handleClickOutside)
     }
   },
+
   methods: {
     ...Helpers,
     get,
-    transformDisabledWeekDays() {},
+
     configureI18n() {
       fecha.setGlobalDateI18n({
         dayNames: this.weekdays,
@@ -621,6 +612,7 @@ export default {
         },
       })
     },
+
     responsiveFormatter(date) {
       if (this.isDesktop) {
         return this.dateFormatter(date, 'ddd DD MMM')
@@ -628,6 +620,7 @@ export default {
 
       return this.dateFormatter(date, 'DD MMM')
     },
+
     generateInitialMonths() {
       this.months = []
 
@@ -637,8 +630,7 @@ export default {
           this.getMonthDiff(this.startDate, this.checkIn) > 0)
       ) {
         this.createMonth(new Date(this.startDate))
-        const count = this.getMonthDiff(this.startDate, this.checkIn)
-        const monthCount = this.showSingleMonth ? count - 1 : count
+        const monthCount = this.getMonthDiff(this.startDate, this.checkIn)
         let nextMonth = new Date(this.startDate)
 
         for (let i = 0; i <= monthCount; i++) {
@@ -653,7 +645,7 @@ export default {
           this.activeMonthIndex = 1
         }
 
-        this.activeMonthIndex += count
+        this.activeMonthIndex += monthCount
       } else {
         let date = new Date(this.startDate)
 
@@ -663,9 +655,11 @@ export default {
         }
       }
     },
+
     handleBookingClicked(event, date, currentBooking) {
       this.$emit('booking-clicked', event, this.dateFormatter(date, this.format), currentBooking)
     },
+
     escFunction(e) {
       const escTouch = 27
 
@@ -673,47 +667,20 @@ export default {
         this.clearSelection()
       }
     },
+
     formatDate(date) {
       return this.dateFormatter(date, this.format)
     },
-    dateIsInCheckInCheckOut(date) {
-      const compareDate = this.dateFormatter(date)
-      let currentPeriod = null
 
-      this.sortedPeriodDates.forEach((d) => {
-        if (
-          d.endAt !== compareDate &&
-          (d.startAt === compareDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, compareDate))
-        ) {
-          currentPeriod = d
-        }
-      })
-
-      return currentPeriod
-    },
-    dayIsDisabled(date) {
-      if (
-        this.checkIn &&
-        !this.checkOut &&
-        !this.isDateLessOrEquals(date, this.nextDisabledDate) &&
-        this.nextDisabledDate !== Infinity
-      ) {
-        return true
-      }
-
-      if (this.checkIn && !this.checkOut && this.isDateLessOrEquals(date, this.checkIn)) {
-        return true
-      }
-
-      return false
-    },
     enterMonth(event, month) {
       this.$emit('enter-month', event, month)
     },
+
     enterDay(event, day) {
       this.hoveringDate = this.singleDaySelection ? null : day.date
       this.$emit('enter-day', event, day)
     },
+
     setCurrentPeriod(date, eventType) {
       let currentPeriod = {}
 
@@ -759,6 +726,7 @@ export default {
         }
       }
     },
+
     handleDayClick(event, date, formatDate, resetCheckin) {
       this.nextPeriodDisableDates = []
 
@@ -785,27 +753,23 @@ export default {
       }
 
       if (this.checkIn == null && !this.singleDaySelection) {
-        this.checkIn = this.dateFormatter(date, this.format)
-        this.$emit('check-in-selected', this.checkIn)
+        this.checkIn = date
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format))
         this.setMinimumDuration(date)
       } else if (this.singleDaySelection) {
-        this.checkIn = this.dateFormatter(date, this.format)
-        this.$emit('check-in-selected', this.checkIn)
-        this.checkOut = this.dateFormatter(date, this.format)
+        this.checkIn = date
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format))
+        this.checkOut = date
       } else if (this.checkIn !== null && this.checkOut == null && this.isDateLessOrEquals(date, this.checkIn)) {
-        this.checkIn = this.dateFormatter(date, this.format)
-        this.$emit('check-in-selected', this.checkIn)
+        this.checkIn = date
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format))
       } else if (this.checkIn !== null && this.checkOut == null) {
-        this.checkOut = this.dateFormatter(date, this.format)
-        this.$emit('period-selected', event, this.checkIn, this.checkOut)
-        /**
-         * @deprecated since v4.0.0 beta 11
-         */
-        this.$emit('periodSelected', event, this.checkIn, this.checkOut)
+        this.checkOut = date
+        this.$emit('period-selected', event, this.dateFormatter(this.checkIn, this.format), this.checkOut)
       } else {
         this.checkOut = null
-        this.checkIn = this.dateFormatter(date, this.format)
-        this.$emit('check-in-selected', this.checkIn)
+        this.checkIn = date
+        this.$emit('check-in-selected', this.this.dateFormatter(this.checkIn, this.format))
         this.setMinimumDuration(date)
       }
 
@@ -823,6 +787,7 @@ export default {
        */
       this.$emit('dayClicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate)
     },
+
     nextBookingDate(date) {
       let closest = Infinity
 
@@ -839,6 +804,7 @@ export default {
 
       return closest
     },
+
     handleClickOutside(event) {
       const ignoreClickOnMeElement = this.$refs[`DatePicker-${this.hash}`]
 
@@ -850,11 +816,13 @@ export default {
         }
       }
     },
+
     reRender() {
       this.datepickerDayKey += 1
       this.datepickerMonthKey += 1
       this.datepickerWeekKey += 1
     },
+
     clearSelection() {
       this.hoveringDate = null
       this.checkIn = null
@@ -866,34 +834,25 @@ export default {
       this.reRender()
       this.$emit('clear-selection')
     },
-    closeMobileDatepicker() {
-      this.hideDatepicker()
-    },
+
     hideDatepicker() {
       this.isOpen = false
       this.$nextTick(() => {
         this.$emit('cico-closed')
       })
     },
+
     showDatepicker() {
       this.isOpen = true
       this.$nextTick(() => {
         this.$emit('cico-opened')
       })
     },
+
     toggleDatepicker() {
       this[this.isOpen ? 'hideDatepicker' : 'showDatepicker']()
     },
-    clearCheckIn() {
-      if (this.checkIn && !this.checkOut) {
-        this.clearSelection()
-      }
-    },
-    clickOutside() {
-      if (this.closeDatepickerOnClickOutside) {
-        this.hideDatepicker()
-      }
-    },
+
     setMinimumDuration(date) {
       if (this.sortedPeriodDates) {
         let nextPeriod = null
@@ -938,6 +897,7 @@ export default {
         }
       }
     },
+
     renderPreviousMonth() {
       if (this.activeMonthIndex >= 1) {
         const firstDayOfLastMonth = this.months[this.activeMonthIndex].days.filter(
@@ -950,11 +910,9 @@ export default {
         this.$emit('previous-month-rendered', previousMonth)
       }
     },
+
     renderNextMonth: throttle(function throttleRenderNextMonth() {
-      if (
-        (!this.showSingleMonth && this.activeMonthIndex < this.months.length - 2) ||
-        (this.showSingleMonth && this.activeMonthIndex < this.months.length - 1)
-      ) {
+      if (this.activeMonthIndex < this.months.length - 2) {
         this.activeMonthIndex++
 
         return
@@ -982,12 +940,15 @@ export default {
       this.activeMonthIndex++
       this.$emit('next-month-rendered', nextMonth)
     }, 350),
+
     setCheckIn(date) {
       this.checkIn = date
     },
+
     setCheckOut(date) {
       this.checkOut = date
     },
+
     createMonth(date) {
       const firstDay = this.getFirstDay(date, this.firstDayOfWeek)
       const month = {
