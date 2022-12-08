@@ -47,7 +47,6 @@
       <div class="picker">
         <Cico
           :startDate="startDate"
-          :startingDateValue="'Invalid date'"
           :endDate="Infinity"
           :minNights="3"
           :maxNights="20"

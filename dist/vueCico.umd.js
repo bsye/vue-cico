@@ -4030,7 +4030,7 @@ const helpers = {
   },
   dateFormater(date, format) {
     const f = format || 'YYYY-MM-DD';
-    if (date && Object.prototype.toString.call(date) === '[object Date]' && typeof date.getMonth === 'function') {
+    if (date && Object.prototype.toString.call(date) === '[object Date]') {
       return lib_fecha.format(date, f);
     }
     return '';
