@@ -210,7 +210,7 @@ const helpers = {
     // eslint-disable-next-line block-scoped-var
     return arr
   },
-  dateFormater(date, format) {
+  dateFormatter(date, format) {
     const f = format || 'YYYY-MM-DD'
 
     if (date) {

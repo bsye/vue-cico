@@ -3114,7 +3114,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=312145b8&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=eb3d7c1a&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -3203,8 +3203,8 @@ var render = function render() {
     attrs: {
       "included-nights": _vm.minNightCount,
       "nights-total": _vm.totalNights,
-      "nights-in": _vm.dateFormater(_vm.checkIn, 'ddd DD MMM.'),
-      "nights-out": _vm.dateFormater(_vm.checkOut, 'ddd DD MMM.'),
+      "nights-in": _vm.dateFormatter(_vm.checkIn, 'ddd DD MMM.'),
+      "nights-out": _vm.dateFormatter(_vm.checkOut, 'ddd DD MMM.'),
       "i18n": _vm.i18n
     }
   }), _c('div', {
@@ -3342,7 +3342,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=312145b8&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=eb3d7c1a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
@@ -3805,8 +3805,8 @@ var Monthvue_type_template_id_7d1d45a4_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=7d1d45a4&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=1dc04a28&
-var Dayvue_type_template_id_1dc04a28_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=33d1593c&
+var Dayvue_type_template_id_33d1593c_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_vm.showTooltip && _vm.options.hoveringTooltip ? _c('div', {
@@ -3849,9 +3849,9 @@ var Dayvue_type_template_id_1dc04a28_render = function render() {
     }
   }) : _vm._e()], 1);
 };
-var Dayvue_type_template_id_1dc04a28_staticRenderFns = [];
+var Dayvue_type_template_id_33d1593c_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=1dc04a28&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=33d1593c&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -4019,7 +4019,7 @@ const helpers = {
     // eslint-disable-next-line block-scoped-var
     return arr;
   },
-  dateFormater(date, format) {
+  dateFormatter(date, format) {
     const f = format || 'YYYY-MM-DD';
     if (date) {
       return lib_fecha.format(date, f);
@@ -4440,7 +4440,7 @@ var Price_component = normalizeComponent(
     },
     halfDayClass() {
       if (Object.keys(this.checkIncheckOutHalfDay).length > 0) {
-        const keyDate = this.dateFormater(this.date);
+        const keyDate = this.dateFormatter(this.date);
         if (this.checkIncheckOutHalfDay[keyDate] && this.checkIncheckOutHalfDay[keyDate].checkIn) {
           if (this.checkIn && !this.checkOut) {
             return 'cico__month-day--halfCheckIn cico__month-day--valid';
@@ -4503,13 +4503,13 @@ var Price_component = normalizeComponent(
       }
 
       // Current Day
-      if (!this.isDisabled && this.date === this.hoveringDate && this.checkIn !== null && this.checkOut == null && this.dateFormater(this.checkIn) !== this.dateFormater(this.date)) {
+      if (!this.isDisabled && this.date === this.hoveringDate && this.checkIn !== null && this.checkOut == null && this.dateFormatter(this.checkIn) !== this.dateFormatter(this.date)) {
         return `cico__month-day--selected cico__month-day--hovering cico__currentDay${isNotMinimumDuration}`;
       }
 
       // Highlight the selected dates and prevent the user from selecting
       // the same date for checkout and checkin
-      if (this.checkIn !== null && this.dateFormater(this.checkIn) === this.dateFormater(this.date)) {
+      if (this.checkIn !== null && this.dateFormatter(this.checkIn) === this.dateFormatter(this.date)) {
         if (this.minNightCount === 0) {
           return `cico__month-day--first-day-selected checkIn${isNotMinimumDuration}`;
         }
@@ -4520,7 +4520,7 @@ var Price_component = normalizeComponent(
 
       // Checkout day
       if (this.checkOut !== null) {
-        if (this.dateFormater(this.checkOut) === this.dateFormater(this.date)) {
+        if (this.dateFormatter(this.checkOut) === this.dateFormatter(this.date)) {
           if (this.halfDayClass) {
             return `cico__month-day--disabled cico__month-day--last-day-selected ${this.halfDayClass} checkOut`;
           }
@@ -4609,7 +4609,7 @@ var Price_component = normalizeComponent(
       return '';
     },
     formatDate() {
-      return this.dateFormater(this.date);
+      return this.dateFormatter(this.date);
     },
     tabIndex() {
       if (!this.isOpen || !this.belongsToThisMonth || this.isDisabled || !this.isClickable()) {
@@ -4683,7 +4683,7 @@ var Price_component = normalizeComponent(
     ...src_helpers,
     get: lodash_get_default.a,
     notAllowDaysBetweenCheckInAndNextValidDate(dayCode) {
-      return this.checkIn && !this.checkOut && this.date.getDay() === dayCode && Object.keys(this.hoveringPeriod).length > 0 && this.validateDateBetweenTwoDates(this.checkIn, this.hoveringPeriod.nextValidDate, this.date) && this.dateFormater(this.checkIn) !== this.formatDate && this.dateFormater(this.hoveringPeriod.nextValidDate) !== this.formatDate;
+      return this.checkIn && !this.checkOut && this.date.getDay() === dayCode && Object.keys(this.hoveringPeriod).length > 0 && this.validateDateBetweenTwoDates(this.checkIn, this.hoveringPeriod.nextValidDate, this.date) && this.dateFormatter(this.checkIn) !== this.formatDate && this.dateFormatter(this.hoveringPeriod.nextValidDate) !== this.formatDate;
     },
     notAllowedDayDueToNextPeriod(currentPeriod) {
       // Check if the next period is directly after the current period
@@ -4735,7 +4735,7 @@ var Price_component = normalizeComponent(
       }
       if (disableCheckoutOnCheckin) {
         if (!this.isDisabled || this.isClickable()) {
-          const formatDate = this.dateFormater(date);
+          const formatDate = this.dateFormatter(date);
           this.$emit('day-clicked', event, date, formatDate, resetCheckin);
         } else {
           this.$emit('clear-selection');
@@ -4816,8 +4816,8 @@ var Price_component = normalizeComponent(
 
 var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_1dc04a28_render,
-  Dayvue_type_template_id_1dc04a28_staticRenderFns,
+  Dayvue_type_template_id_33d1593c_render,
+  Dayvue_type_template_id_33d1593c_staticRenderFns,
   false,
   null,
   null,
@@ -5623,7 +5623,7 @@ var CallToAction_component = normalizeComponent(
     },
     format: {
       type: String,
-      default: 'dddd DD MMMM'
+      default: 'YYYY-MM-DD'
     },
     hoveringTooltip: {
       default: true,
@@ -5715,7 +5715,6 @@ var CallToAction_component = normalizeComponent(
       nextPeriodDisableDates: [],
       open: false,
       screenSize: null,
-      showCustomTooltip: false,
       sortedDisabledDates: null,
       xDown: null,
       xUp: null,
@@ -5864,19 +5863,18 @@ var CallToAction_component = normalizeComponent(
       this.reRender();
     },
     checkIn(newDate) {
-      this.$emit('check-in-changed', newDate);
-      this.$emit('starting-date-changed', newDate);
+      this.$emit('check-in-changed', this.dateFormatter(newDate, this.format));
+      this.$emit('starting-date-changed', this.dateFormatter(newDate, this.format));
       this.reRender();
     },
     checkOut(newDate) {
-      this.$emit('ending-date-changed', newDate);
+      this.$emit('ending-date-changed');
       if (this.checkOut !== null) {
         this.hoveringDate = null;
         this.nextDisabledDate = null;
         this.reRender();
-        this.showCustomTooltip = false;
       }
-      this.$emit('check-out-changed', newDate);
+      this.$emit('check-out-changed', this.dateFormatter(newDate, this.format));
       this.reRender();
     },
     firstDayOfWeek(newDay) {
@@ -5957,9 +5955,9 @@ var CallToAction_component = normalizeComponent(
     },
     responsiveFormatter(date) {
       if (this.isDesktop) {
-        return this.dateFormater(date, 'ddd DD MMM');
+        return this.dateFormatter(date, 'ddd DD MMM');
       }
-      return this.dateFormater(date, 'DD MMM');
+      return this.dateFormatter(date, 'DD MMM');
     },
     generateInitialMonths() {
       this.months = [];
@@ -5987,7 +5985,7 @@ var CallToAction_component = normalizeComponent(
       }
     },
     handleBookingClicked(event, date, currentBooking) {
-      this.$emit('booking-clicked', event, date, currentBooking);
+      this.$emit('booking-clicked', event, this.dateFormatter(date, this.format), currentBooking);
     },
     escFunction(e) {
       const escTouch = 27;
@@ -5996,10 +5994,10 @@ var CallToAction_component = normalizeComponent(
       }
     },
     formatDate(date) {
-      return this.dateFormater(date, this.format);
+      return this.dateFormatter(date, this.format);
     },
     dateIsInCheckInCheckOut(date) {
-      const compareDate = this.dateFormater(date);
+      const compareDate = this.dateFormatter(date);
       let currentPeriod = null;
       this.sortedPeriodDates.forEach(d => {
         if (d.endAt !== compareDate && (d.startAt === compareDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, compareDate))) {
@@ -6028,9 +6026,9 @@ var CallToAction_component = normalizeComponent(
       let currentPeriod = {};
       if (this.sortedPeriodDates.length > 0) {
         this.sortedPeriodDates.forEach(d => {
-          if (eventType === 'click' && (d.startAt === this.dateFormater(date) || d.endAt !== this.dateFormater(date) && this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
+          if (eventType === 'click' && (d.startAt === this.dateFormatter(date) || d.endAt !== this.dateFormatter(date) && this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
             currentPeriod = d;
-          } else if (eventType === 'hover' && (d.startAt === this.dateFormater(date) || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
+          } else if (eventType === 'hover' && (d.startAt === this.dateFormatter(date) || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
             currentPeriod = d;
           }
         });
@@ -6075,18 +6073,18 @@ var CallToAction_component = normalizeComponent(
         nextDisabledDate = Infinity;
       }
       if (this.checkIn == null && !this.singleDaySelection) {
-        this.checkIn = date;
-        this.$emit('check-in-selected', date);
+        this.checkIn = this.dateFormatter(date, this.format);
+        this.$emit('check-in-selected', this.checkIn);
         this.setMinimumDuration(date);
       } else if (this.singleDaySelection) {
-        this.checkIn = date;
-        this.$emit('check-in-selected', date);
-        this.checkOut = date;
+        this.checkIn = this.dateFormatter(date, this.format);
+        this.$emit('check-in-selected', this.checkIn);
+        this.checkOut = this.dateFormatter(date, this.format);
       } else if (this.checkIn !== null && this.checkOut == null && this.isDateLessOrEquals(date, this.checkIn)) {
-        this.checkIn = date;
-        this.$emit('check-in-selected', date);
+        this.checkIn = this.dateFormatter(date, this.format);
+        this.$emit('check-in-selected', this.checkIn);
       } else if (this.checkIn !== null && this.checkOut == null) {
-        this.checkOut = date;
+        this.checkOut = this.dateFormatter(date, this.format);
         this.$emit('period-selected', event, this.checkIn, this.checkOut);
         /**
          * @deprecated since v4.0.0 beta 11
@@ -6094,8 +6092,8 @@ var CallToAction_component = normalizeComponent(
         this.$emit('periodSelected', event, this.checkIn, this.checkOut);
       } else {
         this.checkOut = null;
-        this.checkIn = date;
-        this.$emit('check-in-selected', date);
+        this.checkIn = this.dateFormatter(date, this.format);
+        this.$emit('check-in-selected', this.checkIn);
         this.setMinimumDuration(date);
       }
       if (this.checkIn && !this.checkOut) {
@@ -6105,16 +6103,16 @@ var CallToAction_component = normalizeComponent(
       this.nextDisabledDate = nextDisabledDate;
       this.hoveringDate = null;
       this.hoveringDate = date;
-      this.$emit('day-clicked', date, formatDate, nextDisabledDate);
+      this.$emit('day-clicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate);
       /**
        * @deprecated since v4.0.0 beta 11
        */
-      this.$emit('dayClicked', date, formatDate, nextDisabledDate);
+      this.$emit('dayClicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate);
     },
     nextBookingDate(date) {
       let closest = Infinity;
       if (this.sortBookings.length > 0) {
-        const nextDateFormated = this.dateFormater(this.addDays(date, 1));
+        const nextDateFormated = this.dateFormatter(this.addDays(date, 1));
         const nextBooking = this.sortBookings.find(booking => this.validateDateBetweenDate(booking.checkInDate, nextDateFormated) || this.validateDateBetweenTwoDates(booking.checkInDate, booking.checkOutDate, nextDateFormated));
         closest = nextBooking ? nextBooking.checkInDate : Infinity;
       }
@@ -6177,7 +6175,7 @@ var CallToAction_component = normalizeComponent(
       if (this.sortedPeriodDates) {
         let nextPeriod = null;
         let currentPeriod = null;
-        const compareDate = this.dateFormater(date);
+        const compareDate = this.dateFormatter(date);
         this.sortedPeriodDates.forEach(d => {
           if (d.endAt !== compareDate && (d.startAt === compareDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))) {
             currentPeriod = d;
