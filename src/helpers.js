@@ -213,7 +213,7 @@ const helpers = {
   dateFormater(date, format) {
     const f = format || 'YYYY-MM-DD'
 
-    if (date && Object.prototype.toString.call(date) === '[object Date]') {
+    if (date && Object.prototype.toString.call(date) === '[object Date]' && typeof date.getMonth === 'function') {
       return fecha.format(date, f)
     }
 
