@@ -4031,11 +4031,7 @@ const helpers = {
   dateFormater(date, format) {
     const f = format || 'YYYY-MM-DD';
     if (date && Object.prototype.toString.call(date) === '[object Date]' && typeof date.getMonth === 'function') {
-      try {
-        return lib_fecha.format(date, f);
-      } catch (error) {
-        return '';
-      }
+      return lib_fecha.format(date, f);
     }
     return '';
   },
