@@ -4030,7 +4030,7 @@ const helpers = {
   },
   dateFormater(date, format) {
     const f = format || 'YYYY-MM-DD';
-    if (date) {
+    if (date && Object.prototype.toString.call(date) === '[object Date]') {
       return lib_fecha.format(date, f);
     }
     return '';
