@@ -8,19 +8,28 @@ A responsive date range picker for Vue.js that displays the number of nights sel
 npm install git+ssh://git@gitlab.production.smartbox.com:npm/vue-cico.git
 ```
 
+To make it work with different colors you need to override the default css variables found in the .css__root class
+```css
+import 'vue-cico/dist/vueHotelDatepicker.css'
+
+div.cico__root {
+    --primary-color: #{$primary-color} //my color variable;
+}
+```
+
+
 ```javascript
-import HotelDatePicker from 'vue-hotel-datepicker'
-import 'vue-hotel-datepicker/dist/vueHotelDatepicker.css';
+import Cico from 'vue-cico'
 
 export default {
   components: {
-    HotelDatePicker,
+    Cico,
   },
 }
 ```
 
 ```html
-<HotelDatePicker />
+<Cico />
 ```
 
 
@@ -65,34 +74,124 @@ export default {
 ## i18n Defaults:
 
 ```js
-i18n: {
-  "night": "Night",
-  "nights": "Nights",
-  "week": "week",
-  "weeks": "weeks",
-  "day-names": ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"],
-  "check-in": "Check-in",
-  "check-out": "Check-out",
-  "month-names": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-  ],
-  "tooltip": {
-      "halfDayCheckIn": "Available CheckIn",
-      "halfDayCheckOut": "Available CheckOut",
-      "saturdayToSaturday": "Only Saturday to Saturday",
-      "sundayToSunday": "Only Sunday to Sunday",
-      "minimumRequiredPeriod": "%{minNightInPeriod} %{night} minimum.",
+export default {
+  cta: {
+    select: 'Select',
+  },
+  date: {
+    weekdays: {
+      sun: 'Sunday',
+      mon: 'Monday',
+      tue: 'Tuesday',
+      wed: 'Wednesday',
+      thu: 'Thursday',
+      fri: 'Friday',
+      sat: 'Saturday',
+      short: {
+        sun: 'Sun.',
+        mon: 'Mon.',
+        tue: 'Tue.',
+        wed: 'Wed.',
+        thu: 'Thu.',
+        fri: 'Fri.',
+        sat: 'Sat.',
+      },
+    },
+    months: {
+      1: 'January',
+      2: 'February',
+      3: 'March',
+      4: 'April',
+      5: 'May',
+      6: 'June',
+      7: 'July',
+      8: 'August',
+      9: 'September',
+      10: 'October',
+      11: 'November',
+      12: 'December',
+    },
+  },
+  checkInCheckOut: {
+    addDate: 'Add dates',
+    whereToGo: 'Where to?',
+    anywhere: 'Anywhere',
+    stayLongerOne: 'Want to stay for longer?',
+    addExtraNights: 'Add extra nights in the calendar!',
+    checkIn: 'Select a check-in date',
+    checkOut: 'Select a checkout date',
+    included: 'included',
+    extraNight: 'extra night(s)',
+    yourDates: 'Your travel dates',
+    selectCheckInCheckOut:
+      'Choose a check-in and check-out date to make the most of your getaway and really relax by enjoying an extended stay!',
+    people: 'People',
+    nightsIncluded: 'Night(s) included',
+    nightsResults: '"Showing results for a # night stay ( 1 included, 1 extra)"',
+    upgraded: "You've upgraded your stay by adding more nights",
+    changeDatesOne: 'Change your dates to see results included in your box',
+    changeDatesTwo: 'Change dates',
+    clear: 'Clear',
+    extendedStay: 'Extend your stay',
+    mobileMinNights: 'Your experience is for a minimum of %boxMinNights% nights.',
+  },
+  activity: {
+    calendar: {
+      title: 'Select a date to make a booking',
+      titleQCTerme: 'Select your date',
+      mobileTitle: 'Your arrival date',
+      numberOfNight: '"Your stay is for %number% night(s)"',
+      upSell: 'You can add extra nights or rooms later',
+      error: 'The selected partner has no availability at this time. Please choose another partner.',
+      available: 'Available',
+      provisional: 'On request',
+      checkIn: 'Check-in',
+      checkOut: 'Check-out',
+      instantBookingRibbon:
+        'This Hotel is <span class="availability-ribbon__instant-booking">%symbol%Instantly Bookable</span>',
+      onRequestBookingRibbon: "This hotel is available by request only. They'll get back to you within 24 hours.",
+    },
+    filter: {
+      total: '"Your search: %number% stays"',
+      totalMobile: '"%number% results"',
+      text: 'Where would you like to go?',
+      textPopup: 'Search',
+      textMobileNote: 'Here you can search for an experience or a location',
+      regionAndDepartment: 'Country or county',
+      regionMobileListTitle: 'Choose a destination',
+      departmentMobileListTitle: 'Choose a destination',
+      locatorRegionCountryListTitle: '"Country, county"',
+      locatorNoDepartmentOrRegionSelected: 'No country/county selected',
+      locatorDepartmentListTitle: 'Province',
+      region: 'County',
+      department: 'City or town',
+      date: 'Arrival',
+      noResult: 'We have not found any results matching your search',
+      noResultWithOOB:
+        'Your current gift box does not contain any experiences corresponding to your search. But good news, we found below plenty of matching available experiences for you from our range! You can book any of these for free with your current gift voucher.',
+      anyPlace: 'Search City or Region',
+      anyDate: 'Any date',
+      whereTo: 'Where to?',
+      when: 'When?',
+      checkIn: 'Check-in',
+      checkOut: 'Check-out',
+      ctaInfo: 'Want to stay for longer? Add extra nights in the calendar!',
+      ctaCI: 'Select a check-in date',
+      ctaCO: 'Select a checkout date',
+      ctaDates: 'Your travel dates',
+      action: 'Add dates',
+      included: 'included',
+      nightIncludedCICO: 'night included',
+      nightsIncludedCICO: 'nights included',
+      night: 'night',
+      nights: 'nights',
+      clear: 'Clear',
+      extraNight: 'extra night',
+      extraNights: 'extra nights',
+      boxMinNights: 'Your experience is for a minimum of',
+      currentLocation: 'Use current location',
+      searching: 'Searching...',
+    },
   },
 }
 ```
