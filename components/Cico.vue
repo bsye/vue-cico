@@ -17,7 +17,7 @@
         </span>
         <date-input
           :i18n="i18n"
-          :input-date="responsiveFormatter(this.checkIn)"
+          :input-date="responsiveFormatter(this.checkIn, this.formatInputs)"
           input-date-type="check-in"
           :is-open="isOpen"
           :toggle-datepicker="toggleDatepicker"
@@ -32,7 +32,7 @@
         <date-input
           v-if="!singleDaySelection"
           :i18n="i18n"
-          :input-date="responsiveFormatter(this.checkOut)"
+          :input-date="responsiveFormatter(this.checkOut, this.formatInputs)"
           input-date-type="check-out"
           :is-open="isOpen"
           :toggle-datepicker="toggleDatepicker"
@@ -189,6 +189,11 @@ export default {
       },
     },
 
+    class: {
+      type: String,
+      default: 'cico__style-search',
+    },
+
     closeDatepickerOnClickOutside: {
       type: Boolean,
       default: true,
@@ -248,6 +253,16 @@ export default {
     format: {
       type: String,
       default: 'YYYY-MM-DD',
+    },
+
+    formatInputs: {
+      type: [Object, String],
+      default: () => {
+        return {
+          mobile: 'DD MMM',
+          desktop: 'ddd DD MMM',
+        }
+      },
     },
 
     i18n: {
@@ -617,9 +632,22 @@ export default {
     },
 
     responsiveFormatter(date) {
+      if (typeof this.formatInputs === 'string') return this.dateFormatter(date, this.formatInputs)
+
       if (this.isDesktop) {
-        return this.dateFormatter(date, 'ddd DD MMM')
+        try {
+          if (this.get(this.formatInputs, 'desktop')) return this.dateFormatter(date, this.formatInputs.desktop)
+        } catch (error) {
+          return this.dateFormatter(date, 'ddd DD MMM')
+        }
       }
+
+      if (this.get(this.formatInputs, 'mobile'))
+        try {
+          return this.dateFormatter(date, this.formatInputs.mobile)
+        } catch (error) {
+          return this.dateFormatter(date, 'DD MMM')
+        }
 
       return this.dateFormatter(date, 'DD MMM')
     },
