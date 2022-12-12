@@ -640,6 +640,8 @@ export default {
         } catch (error) {
           return this.dateFormatter(date, 'ddd DD MMM')
         }
+
+        return this.dateFormatter(date, 'ddd DD MMM')
       }
 
       if (this.get(this.formatInputs, 'mobile'))
