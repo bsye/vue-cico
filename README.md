@@ -8,6 +8,8 @@ A responsive date range picker for Vue.js that displays the number of nights sel
 npm install git+ssh://git@gitlab.production.smartbox.com:npm/vue-cico.git
 ```
 
+#### CSS
+
 To make it work with different colors you need to override the default css variables found in the .css__root class
 ```css
 import 'vue-cico/dist/vueHotelDatepicker.css'
@@ -17,6 +19,7 @@ div.cico__root {
 }
 ```
 
+#### Javascript
 
 ```javascript
 import Cico from 'vue-cico'
