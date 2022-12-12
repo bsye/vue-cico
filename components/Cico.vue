@@ -11,33 +11,35 @@
     </div>
     <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
       <IconCalendar />
-      <div class="cico__dummy-wrapper-input-wrapper">
-        <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-arrival">
-          {{ get(i18n, 'activity.filter.checkIn') }}
-        </span>
-        <date-input
-          :i18n="i18n"
-          :input-date="responsiveFormatter(this.checkIn, this.formatInputs)"
-          input-date-type="check-in"
-          :is-open="isOpen"
-          :toggle-datepicker="toggleDatepicker"
-          :single-day-selection="singleDaySelection"
-        />
-      </div>
-      <IconArrow />
-      <div class="cico__dummy-wrapper-input-wrapper departure">
-        <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
-          {{ get(i18n, 'activity.filter.checkOut') }}
-        </span>
-        <date-input
-          v-if="!singleDaySelection"
-          :i18n="i18n"
-          :input-date="responsiveFormatter(this.checkOut, this.formatInputs)"
-          input-date-type="check-out"
-          :is-open="isOpen"
-          :toggle-datepicker="toggleDatepicker"
-          :single-day-selection="singleDaySelection"
-        />
+      <div class="cico__dummy-wrapper-scroll">
+        <div class="cico__dummy-wrapper-input-wrapper">
+          <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-arrival">
+            {{ get(i18n, 'activity.filter.checkIn') }}
+          </span>
+          <date-input
+            :i18n="i18n"
+            :input-date="responsiveFormatter(this.checkIn, this.formatInputs)"
+            input-date-type="check-in"
+            :is-open="isOpen"
+            :toggle-datepicker="toggleDatepicker"
+            :single-day-selection="singleDaySelection"
+          />
+        </div>
+        <IconArrow />
+        <div class="cico__dummy-wrapper-input-wrapper departure">
+          <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
+            {{ get(i18n, 'activity.filter.checkOut') }}
+          </span>
+          <date-input
+            v-if="!singleDaySelection"
+            :i18n="i18n"
+            :input-date="responsiveFormatter(this.checkOut, this.formatInputs)"
+            input-date-type="check-out"
+            :is-open="isOpen"
+            :toggle-datepicker="toggleDatepicker"
+            :single-day-selection="singleDaySelection"
+          />
+        </div>
       </div>
       <div class="cico__clear-button" tabindex="0" @click="clearSelection" v-show="showClearSelectionButton">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">

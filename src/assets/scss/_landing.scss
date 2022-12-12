@@ -8,6 +8,15 @@
             padding-bottom: 3px;
             color: var(--white);
 
+            .cico__dummy-wrapper-scroll {
+                overflow: auto;
+                display: flex;
+                flex-wrap: nowrap;
+                margin-bottom: -1rem;
+                padding-bottom: 1rem;
+                align-items: flex-end;
+            }
+
             .cico__dummy-wrapper-input-wrapper {
                 &.departure {
                     .cico-input {
