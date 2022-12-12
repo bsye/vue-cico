@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cico__wrapper"
+    class="cico__wrapper cico__root"
     :class="{
       'cico__wrapper--booking': bookings.length > 0,
     }"

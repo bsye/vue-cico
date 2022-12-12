@@ -10,11 +10,11 @@
 }
 
 button {
-    background-color: $white;
+    background-color: var(--white);
 
     &.primary {
-        color: $white;
-        background-color: $primary-color;
+        color: var(--white);
+        background-color: var(--primary-color);
     }
 }
 
@@ -30,7 +30,7 @@ button {
 
 .#{$prefix} {
   position: absolute;
-  color: $zambezi-grey;
+  color: var(--zambezi-grey);
   border-radius: 10px;
   top: 140%;
   display: flex;
@@ -38,7 +38,7 @@ button {
   z-index: 999;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   transition: all 0.2s ease-in-out;
-  background-color: $white;
+  background-color: var(--white);
   font-size: 1rem;
   line-height: 0.875em;
   height: 400px;
@@ -47,7 +47,7 @@ button {
     &__cta-panel {
         order: -1;
         text-align: center;
-        border-bottom: 1px solid $silver-mid;
+        border-bottom: 1px solid var(--silver-mid);
     }
     &__cta-info {
         font-size: 15px;
@@ -61,7 +61,7 @@ button {
         margin-right: 1rem;
         margin-bottom: 0.75rem;
         font-weight: 500;
-        color: $eerie-black;
+        color: var(--eerie-black);
 
         &.desktop {
             @media screen and ($up-to-tablet) {
@@ -95,7 +95,7 @@ button {
         font-size: 0.75rem;
     }
     &__extra-nights {
-        color: $primary-color;
+        color: var(--primary-color);
     }
     &__warning-container {
         display: flex;
@@ -136,7 +136,7 @@ button {
   }
 
   button.next--mobile {
-    border: 1px solid $light-gray;
+    border: 1px solid var(--light-gray);
     float: none;
     height: 3.125em;
     width: 100%;
@@ -147,8 +147,8 @@ button {
     bottom: 0;
     left: 0;
     outline: none;
-    box-shadow: 0 5px 30px 10px rgba($black, 0.08);
-    background: $white;
+    box-shadow: 0 5px 30px 10px rgba(var(--black), 0.08);
+    background: var(--white);
 
     &:after {
       background: none;
@@ -177,7 +177,7 @@ button {
         margin-left: 0;
     }
 
-    box-shadow: 0 15px 30px 10px rgba($black, 0.08);
+    box-shadow: 0 15px 30px 10px rgba(var(--black), 0.08);
   }
 
   &__header {
@@ -207,7 +207,6 @@ button {
     width: auto;
     background: none;
     font-family: $font-family;
-    //background: $white url('../images/calendar_icon.regular.svg') no-repeat 1em center / 1em;
 
     & *,
     & *::before,
@@ -241,7 +240,7 @@ button {
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
             padding-right: 0;
-            background-color: $primary-color;
+            background-color: var(--primary-color);
         }
 
         &:last-child {
@@ -324,7 +323,7 @@ button {
     &::-moz-placeholder,
     &:-ms-input-placeholder,
     &:-moz-placeholder {
-      color: $oil;
+      color: var(--oil);
     }
 
     &:first-child {
@@ -334,23 +333,23 @@ button {
     }
 
     &--is-active {
-      color: $oil;
+      color: var(--oil);
     }
 
     &--is-active::placeholder {
-      color: $oil;
+      color: var(--oil);
     }
 
     &--is-active::-moz-placeholder {
-      color: $oil;
+      color: var(--oil);
     }
 
     &--is-active:-ms-input-placeholder {
-      color: $oil;
+      color: var(--oil);
     }
 
     &--is-active:-moz-placeholder {
-      color: $oil;
+      color: var(--oil);
     }
 
     &--single-date:first-child {
@@ -391,7 +390,7 @@ button {
   &__month-day {
     visibility: visible;
     text-align: center;
-    color: $oil;
+    color: var(--oil);
     cursor: pointer;
 
     @include focusStyle();
@@ -406,8 +405,8 @@ button {
     }
 
     &--invalid-range {
-      background-color: rgba($primary-color, 0.3);
-      color: $white-smoke;
+      background-color: rgba(var(--primary-color), 0.3);
+      color: var(--white-smoke);
       cursor: not-allowed;
       position: relative;
     }
@@ -419,10 +418,10 @@ button {
 
     &--valid:hover,
     &--allowed-checkout:hover {
-      color: $white;
+      color: var(--white);
 
       > div {
-        background-color: $primary-color;
+        background-color: var(--primary-color);
         border-radius: 100px;
       }
     }
@@ -430,7 +429,7 @@ button {
     &--disabled {
       background: none;
       opacity: 1;
-      color: $silver-mid;
+      color: var(--silver-mid);
       cursor: not-allowed;
       pointer-events: none;
       text-decoration: none;
@@ -440,14 +439,14 @@ button {
     &.minimumDurationUnvalidDay {
         .cico__month-day-wrapper {
             .day {
-                color: $black;
+                color: var(--black);
             }
 
             &::after {
-                background-color: $white;
+                background-color: var(--white);
                 box-sizing: border-box;
-                color: $black;
-                border: 1px solid $primary-color-light;
+                color: var(--black);
+                border: 1px solid var(--primary-color-light);
             }
         }
 
@@ -455,7 +454,7 @@ button {
             &.cico__currentDay {
                 padding-left: 100%;
                 padding-right: 100%;
-                background-color: $primary-color-light;
+                background-color: var(--primary-color-light);
             }
         }
     }
@@ -464,7 +463,7 @@ button {
     &--not-allowed.cico__currentDay,
     &--valid#{&}--not-allowed:hover {
       overflow: hidden;
-      color: $silver-mid;
+      color: var(--silver-mid);
       font-weight: 400;
       cursor: default;
       span {
@@ -480,7 +479,7 @@ button {
                     &::after {
                         content: "";
                         width: 100%;
-                        background-color: $primary-color;
+                        background-color: var(--primary-color);
                         height: 100%;
                         border-radius: 20px;
                         position: absolute;
@@ -491,7 +490,7 @@ button {
                     &::before {
                         content: "";
                         width: 100%;
-                        background-color: $primary-color-light;
+                        background-color: var(--primary-color-light);
                         height: 100%;
                         position: absolute;
                         display: block;
@@ -512,7 +511,7 @@ button {
             &::after {
                 content: "";
                 width: 100%;
-                background-color: $primary-color;
+                background-color: var(--primary-color);
                 height: 100%;
                 border-radius: 20px;
                 position: absolute;
@@ -523,7 +522,7 @@ button {
             &::before {
                 content: "";
                 width: 100%;
-                background-color: $primary-color-light;
+                background-color: var(--primary-color-light);
                 height: 100%;
                 position: absolute;
                 display: block;
@@ -543,7 +542,7 @@ button {
         &::after {
             content: "";
             width: 100%;
-            background-color: $primary-color;
+            background-color: var(--primary-color);
             height: 100%;
             border-radius: 20px;
             position: absolute;
@@ -554,7 +553,7 @@ button {
         &::before {
             content: "";
             width: 100%;
-            background-color: $primary-color-light;
+            background-color: var(--primary-color-light);
             height: 100%;
             position: absolute;
             display: block;
@@ -576,7 +575,7 @@ button {
         &.checkInMinDates {
             &.cico__month-day--selected {
                 > div {
-                    color: $zambezi-grey;
+                    color: var(--zambezi-grey);
                 }
             }
 
@@ -586,15 +585,15 @@ button {
                 > div {
                     background-color: transparent;
                     position: relative;
-                    color: $zambezi-grey;
+                    color: var(--zambezi-grey);
 
                     &::after {
                         content: "";
                         width: 100%;
-                        background-color: $white;
+                        background-color: var(--white);
                         box-sizing: border-box;
-                        border: 1px solid $primary-color-light;
-                        background-color: $white;
+                        border: 1px solid var(--primary-color-light);
+                        background-color: var(--white);
                         height: 100%;
                         border-radius: 20px;
                         position: absolute;
@@ -605,7 +604,7 @@ button {
                     &::before {
                         content: "";
                         width: 100%;
-                        background-color: $primary-color-light;
+                        background-color: var(--primary-color-light);
                         height: 100%;
                         right: 16px;
                         position: absolute;
@@ -624,7 +623,7 @@ button {
 
     &--selected {
       overflow: hidden;
-      background-color: $primary-color-light;
+      background-color: var(--primary-color-light);
 
       &.cico__month-day--hovering {
         background-color: transparent;
@@ -636,7 +635,7 @@ button {
             &::after {
                 content: "";
                 width: 100%;
-                background-color: $primary-color;
+                background-color: var(--primary-color);
                 height: 100%;
                 border-radius: 20px;
                 position: absolute;
@@ -647,7 +646,7 @@ button {
               &::before {
                 content: "";
                 width: 100%;
-                background-color: $primary-color-light;
+                background-color: var(--primary-color-light);
                 height: 100%;
                 position: absolute;
                 right: 16px;
@@ -668,7 +667,7 @@ button {
     }
 
     &--hovering {
-      color: $white;
+      color: var(--white);
       font-weight: 700;
       cursor: pointer;
       span {
@@ -678,7 +677,7 @@ button {
 
     &--first-day-selected,
     &--last-day-selected {
-      color: $white;
+      color: var(--white);
       cursor: pointer;
       font-weight: 700;
       pointer-events: auto;
@@ -719,7 +718,7 @@ button {
               &::after {
                 content: "";
                 width: 100%;
-                background-color: $primary-color;
+                background-color: var(--primary-color);
                 height: 100%;
                 border-radius: 20px;
                 position: absolute;
@@ -730,7 +729,7 @@ button {
               &::before {
                 content: "";
                 width: 100%;
-                background-color: $primary-color-light;
+                background-color: var(--primary-color-light);
                 height: 100%;
                 position: absolute;
                 display: block;
@@ -746,11 +745,11 @@ button {
     }
 
     &--allowed-checkout {
-      color: $tuatara;
+      color: var(--tuatara);
     }
 
     &--out-of-range {
-      color: $white-smoke;
+      color: var(--white-smoke);
       cursor: not-allowed;
       font-weight: 400;
       position: relative;
@@ -766,7 +765,7 @@ button {
     }
 
     &--valid#{&}--halfCheckIn#{&}--last-day-selected {
-      color: $white;
+      color: var(--white);
     }
 
     &--hidden {
@@ -790,7 +789,7 @@ button {
 
     svg {
         path {
-            stroke: $primary-color;
+            stroke: var(--primary-color);
         }
     }
 
@@ -920,7 +919,7 @@ button {
     font-weight: 500;
     padding-top: 4px;
     padding-bottom: 8px;
-    color: $tuatara;
+    color: var(--tuatara);
     text-align: center;
   }
 
@@ -928,7 +927,7 @@ button {
     appearance: none;
     background: transparent;
     border: 0;
-    color: $oil;
+    color: var(--oil);
     cursor: pointer;
     font-size: 1.3125em;
     font-weight: 700;
@@ -969,14 +968,14 @@ button {
     margin-left: auto;
 
     svg {
-      fill: $zambezi-grey;
+      fill: var(--zambezi-grey);
       stroke-linecap: round;
       stroke-width: 0.32em;
-      stroke: $tuatara;
+      stroke: var(--tuatara);
       width: 0.56em;
 
       path {
-        stroke: $zambezi-grey;
+        stroke: var(--zambezi-grey);
       }
     }
 

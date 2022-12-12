@@ -1,7 +1,7 @@
 .cico__wrapper {
     &.cico__style-search {
         .cico__dummy-wrapper {
-            background-color: $background-gray;
+            background-color: var(--background-gray);
             border-radius: 5px;
             padding: 10px;
             align-items: center;
@@ -21,7 +21,7 @@
                 margin-right: 16px;
 
                 * {
-                    stroke: $silver-mid;
+                    stroke: var(--silver-mid);
                 }
 
                 @media screen and ($up-to-tablet) {
@@ -37,7 +37,7 @@
                 margin-right: 16px;
 
                 * {
-                    fill: $zambezi-grey;
+                    fill: var(--zambezi-grey);
                 }
 
                 @media screen and ($up-to-tablet) {
