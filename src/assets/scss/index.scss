@@ -172,7 +172,7 @@
     bottom: 0;
     left: 0;
     outline: none;
-    box-shadow: 0 5px 30px 10px rgba(var(--black), 0.08);
+    box-shadow: 0 15px 30px 10px rgb(0 0 0 / 12%);
     background: var(--white);
 
     &:after {
@@ -202,7 +202,7 @@
         margin-left: 0;
     }
 
-    box-shadow: 0 15px 30px 10px rgba(var(--black), 0.08);
+    box-shadow: 0 15px 30px 10px rgb(0 0 0 / 12%);
   }
 
   &__header {
