@@ -51,6 +51,7 @@
     <div
       class="cico"
       :class="{
+        [position]: true,
         'cico--open': isOpen,
         'cico--closed': !isOpen,
       }"
@@ -285,6 +286,11 @@ export default {
     minNights: {
       type: Number,
       default: 1,
+    },
+
+    position: {
+      type: String,
+      default: 'bottom',
     },
 
     periodDates: {

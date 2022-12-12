@@ -35,6 +35,31 @@
   height: 400px;
   overflow: hidden;
 
+  @media screen and (min-width: 768px) {
+      &.bottom {
+        top: 140%;
+      }
+    
+      &.top {
+        bottom: 140%;
+        top: unset;
+      }
+    
+      &.left {
+        left: 100%;
+        margin-left: 2rem;
+        bottom: unset;
+        top: -160px;
+      }
+    
+      &.right {
+        right: 100%;
+        margin-right: 2rem;
+        bottom: unset;
+        top: -160px;
+      }
+  }
+
   button {
     background-color: var(--white);
 

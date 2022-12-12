@@ -55,6 +55,7 @@
         />
         <Cico
           style="margin-top: 2rem"
+          position="left"
           :startDate="startDate"
           :endDate="Infinity"
           :minNights="3"
