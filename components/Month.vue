@@ -74,6 +74,9 @@ export default {
     checkIn: {
       type: Date,
     },
+    checkInMinNights: {
+      type: Array,
+    },
     checkIncheckOutHalfDay: {
       type: Object,
       default: () => ({}),

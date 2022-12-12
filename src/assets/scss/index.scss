@@ -447,7 +447,7 @@ button {
                 background-color: $white;
                 box-sizing: border-box;
                 color: $black;
-                border: 1px solid rgb(255, 207, 179);
+                border: 1px solid $primary-color-light;
             }
         }
 
@@ -455,7 +455,7 @@ button {
             &.cico__currentDay {
                 padding-left: 100%;
                 padding-right: 100%;
-                background-color: rgb(255, 207, 179);
+                background-color: $primary-color-light;
             }
         }
     }
@@ -491,7 +491,7 @@ button {
                     &::before {
                         content: "";
                         width: 100%;
-                        background-color: rgb(255, 207, 179);
+                        background-color: $primary-color-light;
                         height: 100%;
                         position: absolute;
                         display: block;
@@ -523,7 +523,7 @@ button {
             &::before {
                 content: "";
                 width: 100%;
-                background-color: rgb(255, 207, 179);
+                background-color: $primary-color-light;
                 height: 100%;
                 position: absolute;
                 display: block;
@@ -554,7 +554,7 @@ button {
         &::before {
             content: "";
             width: 100%;
-            background-color: rgb(255, 207, 179);
+            background-color: $primary-color-light;
             height: 100%;
             position: absolute;
             display: block;
@@ -572,9 +572,59 @@ button {
       cursor: pointer;
     }
 
+    &.cico__month-day--disabled {
+        &.checkInMinDates {
+            &.cico__month-day--selected {
+                > div {
+                    color: $zambezi-grey;
+                }
+            }
+
+            &.cico__month-day--hovering {
+                background-color: transparent;
+
+                > div {
+                    background-color: transparent;
+                    position: relative;
+                    color: $zambezi-grey;
+
+                    &::after {
+                        content: "";
+                        width: 100%;
+                        background-color: $white;
+                        box-sizing: border-box;
+                        border: 1px solid $primary-color-light;
+                        background-color: $white;
+                        height: 100%;
+                        border-radius: 20px;
+                        position: absolute;
+                        display: block;
+                        top: 0;
+                        }
+    
+                    &::before {
+                        content: "";
+                        width: 100%;
+                        background-color: $primary-color-light;
+                        height: 100%;
+                        right: 16px;
+                        position: absolute;
+                        display: block;
+                        top: 0;
+                        width: 7vw;
+    
+                        @media screen and ($desktop) {
+                            width: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     &--selected {
       overflow: hidden;
-      background-color: rgb(255, 207, 179);
+      background-color: $primary-color-light;
 
       &.cico__month-day--hovering {
         background-color: transparent;
@@ -597,7 +647,7 @@ button {
               &::before {
                 content: "";
                 width: 100%;
-                background-color: rgb(255, 207, 179);
+                background-color: $primary-color-light;
                 height: 100%;
                 position: absolute;
                 right: 16px;
@@ -680,7 +730,7 @@ button {
               &::before {
                 content: "";
                 width: 100%;
-                background-color: rgb(255, 207, 179);
+                background-color: $primary-color-light;
                 height: 100%;
                 position: absolute;
                 display: block;

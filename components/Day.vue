@@ -51,6 +51,9 @@ export default {
     checkIn: {
       type: Date,
     },
+    checkInMinNights: {
+      type: Array,
+    },
     checkIncheckOutHalfDay: {
       type: Object,
       default: () => ({}),
@@ -194,29 +197,9 @@ export default {
 
       return String(result)
     },
-    halfDayClass() {
-      if (Object.keys(this.checkIncheckOutHalfDay).length > 0) {
-        const keyDate = this.dateFormatter(this.date)
-
-        if (this.checkIncheckOutHalfDay[keyDate] && this.checkIncheckOutHalfDay[keyDate].checkIn) {
-          if (this.checkIn && !this.checkOut) {
-            return 'cico__month-day--halfCheckIn cico__month-day--valid'
-          }
-
-          return 'cico__month-day--halfCheckIn cico__month-day--invalid'
-        }
-
-        if (this.checkIncheckOutHalfDay[keyDate] && this.checkIncheckOutHalfDay[keyDate].checkOut) {
-          return 'cico__month-day--halfCheckOut cico__month-day--valid'
-        }
-      }
-
-      return false
-    },
     bookingClass() {
       if (this.bookings.length > 0 && this.currentBooking) {
         if (
-          !this.isDisabled &&
           this.validateDateBetweenTwoDates(
             this.currentBooking.checkInDate,
             this.currentBooking.checkOutDate,
@@ -292,13 +275,16 @@ export default {
 
       // Current Day
       if (
-        !this.isDisabled &&
         this.date === this.hoveringDate &&
         this.checkIn !== null &&
         this.checkOut == null &&
         this.dateFormatter(this.checkIn) !== this.dateFormatter(this.date)
       ) {
-        return `cico__month-day--selected cico__month-day--hovering cico__currentDay${isNotMinimumDuration}`
+        if (!this.isDisabled) {
+          return `cico__month-day--selected cico__month-day--hovering cico__currentDay${isNotMinimumDuration}`
+        }
+
+        return `cico__month-day--disabled cico__month-day--hovering cico__currentDay checkInMinDates`
       }
 
       // Highlight the selected dates and prevent the user from selecting
@@ -315,20 +301,20 @@ export default {
       // Checkout day
       if (this.checkOut !== null) {
         if (this.dateFormatter(this.checkOut) === this.dateFormatter(this.date)) {
-          if (this.halfDayClass) {
-            return `cico__month-day--disabled cico__month-day--last-day-selected ${this.halfDayClass} checkOut`
-          }
-
           return 'cico__month-day--disabled cico__month-day--last-day-selected checkOut'
         }
       }
 
       // Only highlight dates that are not disabled
-      if (this.isHighlighted && !this.isDisabled) {
+      if (this.isHighlighted) {
         const classSelected = 'cico__month-day--selected'
 
         if (this.isADisabledDay) {
           return `${classSelected} cico__month-day--disabled afterMinimumDurationValidDay`
+        }
+
+        if (this.isDisabled) {
+          return `${classSelected} cico__month-day--disabled checkInMinDates`
         }
 
         if (
@@ -374,11 +360,7 @@ export default {
 
       // Good
       if (this.isDisabled || this.isADisabledDay) {
-        return 'cico__month-day--disabled'
-      }
-
-      if (this.halfDayClass) {
-        return `${this.halfDayClass}`
+        return `cico__month-day--disabled`
       }
 
       // Good
@@ -649,6 +631,7 @@ export default {
       this.isDisabled =
         // If this day is equal any of the disabled dates
         (this.sortedDisabledDates ? this.sortedDisabledDates.some((i) => this.compareDay(i, this.date) === 0) : null) ||
+        (this.checkInMinNights ? this.checkInMinNights.some((i) => this.compareDay(i, this.date) === 0) : null) ||
         // Or is before the start date
         this.compareDay(this.date, this.options.startDate) === -1 ||
         // Or is after the end date
@@ -666,7 +649,7 @@ export default {
       }
     },
     checkIfHighlighted() {
-      if (this.checkIn !== null && this.checkOut !== null && this.isDisabled === false) {
+      if (this.checkIn !== null && this.checkOut !== null) {
         if (this.isDateLessOrEquals(this.checkIn, this.date) && this.isDateLessOrEquals(this.date, this.checkOut)) {
           this.isHighlighted = true
         } else {
@@ -694,7 +677,7 @@ export default {
       }
     },
     fetchHighlight() {
-      if (this.checkIn !== null && this.checkOut === null && this.isDisabled === false) {
+      if (this.checkIn !== null && this.checkOut === null) {
         if (!this.isDateLessOrEquals(this.checkIn, this.date)) {
           this.isHighlighted = false
         } else if (this.isDateLessOrEquals(this.date, this.hoveringDate)) {

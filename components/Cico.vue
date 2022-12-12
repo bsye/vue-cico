@@ -119,6 +119,7 @@
             :activeMonthIndex="activeMonthIndex"
             :bookings="sortBookings"
             :checkIn="checkIn"
+            :checkInMinNights="checkInMinNights"
             :checkInPeriod="checkInPeriod"
             :checkOut="checkOut"
             :disableCheckoutOnCheckin="disableCheckoutOnCheckin"
@@ -318,6 +319,7 @@ export default {
     return {
       activeMonthIndex: 0,
       checkIn: this.startingDateValue,
+      checkInMinNights: [],
       checkInPeriod: {},
       checkOut: this.endingDateValue,
       hoveringPeriod: {},
@@ -503,6 +505,8 @@ export default {
     checkIn(newDate) {
       this.$emit('check-in-changed', this.dateFormatter(newDate, this.format))
       this.$emit('starting-date-changed', this.dateFormatter(newDate, this.format))
+
+      this.setAdjacentDisabledDates()
       this.reRender()
     },
 
@@ -655,6 +659,16 @@ export default {
       }
     },
 
+    setAdjacentDisabledDates() {
+      if (this.minNightCount && this.checkIn) {
+        this.checkInMinNights = []
+
+        for (let i = 0; i < this.minNightCount; i++) {
+          this.checkInMinNights = [...this.checkInMinNights, new Date(this.addDays(this.checkIn, i))]
+        }
+      }
+    },
+
     handleBookingClicked(event, date, currentBooking) {
       this.$emit('booking-clicked', event, this.dateFormatter(date, this.format), currentBooking)
     },
@@ -768,7 +782,7 @@ export default {
       } else {
         this.checkOut = null
         this.checkIn = date
-        this.$emit('check-in-selected', this.this.dateFormatter(this.checkIn, this.format))
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format))
         this.setMinimumDuration(date)
       }
 
@@ -781,10 +795,6 @@ export default {
       this.hoveringDate = null
       this.hoveringDate = date
       this.$emit('day-clicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate)
-      /**
-       * @deprecated since v4.0.0 beta 11
-       */
-      this.$emit('dayClicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate)
     },
 
     nextBookingDate(date) {
