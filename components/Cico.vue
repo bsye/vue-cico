@@ -25,7 +25,7 @@
         />
       </div>
       <IconArrow />
-      <div class="cico__dummy-wrapper-input-wrapper">
+      <div class="cico__dummy-wrapper-input-wrapper departure">
         <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
           {{ get(i18n, 'activity.filter.checkOut') }}
         </span>

@@ -3008,7 +3008,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=35db55cd&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=c73f0b8e&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -3046,7 +3046,7 @@ var render = function render() {
       "single-day-selection": _vm.singleDaySelection
     }
   })], 1), _c('IconArrow'), _c('div', {
-    staticClass: "cico__dummy-wrapper-input-wrapper"
+    staticClass: "cico__dummy-wrapper-input-wrapper departure"
   }, [_vm.get(_vm.i18n, 'activity.filter.checkOut') ? _c('span', {
     staticClass: "cico__dummy-wrapper-departure"
   }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.checkOut')) + " ")]) : _vm._e(), !_vm.singleDaySelection ? _c('date-input', {
@@ -3233,7 +3233,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=35db55cd&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=c73f0b8e&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");

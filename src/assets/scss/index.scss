@@ -9,15 +9,6 @@
   }
 }
 
-button {
-    background-color: var(--white);
-
-    &.primary {
-        color: var(--white);
-        background-color: var(--primary-color);
-    }
-}
-
 @mixin device($device-widths) {
   @media screen and #{$device-widths} {
     @content;
@@ -43,6 +34,15 @@ button {
   line-height: 0.875em;
   height: 400px;
   overflow: hidden;
+
+  button {
+    background-color: var(--white);
+
+    &.primary {
+        color: var(--white);
+        background-color: var(--primary-color);
+    }
+  }
 
     &__cta-panel {
         order: -1;

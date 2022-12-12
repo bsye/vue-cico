@@ -9,6 +9,12 @@
             color: var(--white);
 
             .cico__dummy-wrapper-input-wrapper {
+                &.departure {
+                    .cico-input {
+                        padding-right: 20px;
+                    }
+                }
+
                 .cico__dummy-wrapper-arrival,
                 .cico__dummy-wrapper-departure {
                     display: block;
