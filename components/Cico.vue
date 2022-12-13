@@ -149,7 +149,7 @@
         </div>
         <MobileActions
           @reset="clearSelection()"
-          @selected="isOpen = !isOpen"
+          @selected="mobileActionSelected()"
           :isClearDisabled="!(checkIn || checkOut)"
           :isSelectDisabled="!checkIn || !checkOut"
           :i18n="i18n"
@@ -637,6 +637,11 @@ export default {
           return D + ['th', 'st', 'nd', 'rd'][D % 10 > 3 ? 0 : ((D - (D % 10) !== 10) * D) % 10]
         },
       })
+    },
+
+    mobileActionSelected() {
+      this.isOpen = !this.isOpen
+      this.$emit('search-mobile-triggered')
     },
 
     responsiveFormatter(date) {
