@@ -599,26 +599,13 @@ export default {
   },
 
   mounted() {
-    window.addEventListener('resize', () => {
-      this.windowWidth = window.innerWidth
-
-      if (this.isDesktop) {
-        document.addEventListener('click', this.handleClickOutside, false)
-        document.addEventListener('keyup', this.escFunction, false)
-      }
-    })
-
-    if (this.isDesktop) {
-      document.addEventListener('click', this.handleClickOutside, false)
-      document.addEventListener('keyup', this.escFunction, false)
-    }
+    document.addEventListener('click', this.handleClickOutside, false)
+    document.addEventListener('keyup', this.escFunction, false)
   },
 
   destroyed() {
-    if (this.isDesktop) {
-      document.removeEventListener('keyup', this.escFunction, false)
-      document.removeEventListener('click', this.handleClickOutside)
-    }
+    document.removeEventListener('keyup', this.escFunction, false)
+    document.removeEventListener('click', this.handleClickOutside)
   },
 
   methods: {
@@ -864,8 +851,15 @@ export default {
         const isClickInsideElement = ignoreClickOnMeElement.contains(event.target)
 
         if (!isClickInsideElement) {
+          this.autofillWithCheckOut()
           this.hideDatepicker()
         }
+      }
+    },
+
+    autofillWithCheckOut() {
+      if (this.checkIn && !this.checkOut) {
+        this.checkOut = this.addDays(this.checkIn, this.minNights)
       }
     },
 
@@ -883,6 +877,7 @@ export default {
       this.nextPeriodDisableDates = []
       this.hoveringPeriod = {}
       this.checkInPeriod = {}
+      this.checkInMinNights = []
       this.reRender()
       this.$emit('clear-selection')
     },
