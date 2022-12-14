@@ -192,11 +192,6 @@ export default {
       },
     },
 
-    class: {
-      type: String,
-      default: 'cico__style-search',
-    },
-
     closeDatepickerOnClickOutside: {
       type: Boolean,
       default: true,
@@ -599,11 +594,17 @@ export default {
   },
 
   mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.handleResize)
+    })
+
     document.addEventListener('click', this.handleClickOutside, false)
     document.addEventListener('keyup', this.escFunction, false)
   },
 
   destroyed() {
+    window.removeEventListener('resize', this.handleResize)
+
     document.removeEventListener('keyup', this.escFunction, false)
     document.removeEventListener('click', this.handleClickOutside)
   },
@@ -611,6 +612,10 @@ export default {
   methods: {
     ...Helpers,
     get,
+
+    handleResize() {
+      this.windowWidth = window.innerWidth
+    },
 
     configureI18n() {
       fecha.setGlobalDateI18n({

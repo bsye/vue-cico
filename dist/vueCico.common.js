@@ -3008,7 +3008,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=9408969c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=686798b8&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -3236,7 +3236,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=9408969c&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=686798b8&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -5456,10 +5456,6 @@ var CallToAction_component = normalizeComponent(
         return [];
       }
     },
-    class: {
-      type: String,
-      default: 'cico__style-search'
-    },
     closeDatepickerOnClickOutside: {
       type: Boolean,
       default: true
@@ -5775,27 +5771,23 @@ var CallToAction_component = normalizeComponent(
     this.generateInitialMonths();
   },
   mounted() {
-    window.addEventListener('resize', () => {
-      this.windowWidth = window.innerWidth;
-      if (this.isDesktop) {
-        document.addEventListener('click', this.handleClickOutside, false);
-        document.addEventListener('keyup', this.escFunction, false);
-      }
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.handleResize);
     });
-    if (this.isDesktop) {
-      document.addEventListener('click', this.handleClickOutside, false);
-      document.addEventListener('keyup', this.escFunction, false);
-    }
+    document.addEventListener('click', this.handleClickOutside, false);
+    document.addEventListener('keyup', this.escFunction, false);
   },
   destroyed() {
-    if (this.isDesktop) {
-      document.removeEventListener('keyup', this.escFunction, false);
-      document.removeEventListener('click', this.handleClickOutside);
-    }
+    window.removeEventListener('resize', this.handleResize);
+    document.removeEventListener('keyup', this.escFunction, false);
+    document.removeEventListener('click', this.handleClickOutside);
   },
   methods: {
     ...src_helpers,
     get: lodash_get_default.a,
+    handleResize() {
+      this.windowWidth = window.innerWidth;
+    },
     configureI18n() {
       lib_fecha.setGlobalDateI18n({
         dayNames: this.weekdays,
@@ -5974,8 +5966,14 @@ var CallToAction_component = normalizeComponent(
       if (ignoreClickOnMeElement) {
         const isClickInsideElement = ignoreClickOnMeElement.contains(event.target);
         if (!isClickInsideElement) {
+          this.autofillWithCheckOut();
           this.hideDatepicker();
         }
+      }
+    },
+    autofillWithCheckOut() {
+      if (this.checkIn && !this.checkOut) {
+        this.checkOut = this.addDays(this.checkIn, this.minNights);
       }
     },
     reRender() {
@@ -5991,6 +5989,7 @@ var CallToAction_component = normalizeComponent(
       this.nextPeriodDisableDates = [];
       this.hoveringPeriod = {};
       this.checkInPeriod = {};
+      this.checkInMinNights = [];
       this.reRender();
       this.$emit('clear-selection');
     },
