@@ -13,6 +13,7 @@
       >
         <Day
           v-bind="$props"
+          :disabledDates="disabledDates"
           :belongsToThisMonth="day.belongsToThisMonth"
           :date="day.date"
           @clear-selection="clearSelection"

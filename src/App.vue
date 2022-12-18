@@ -47,6 +47,7 @@
       <div class="picker">
         <Cico
           :startDate="startDate"
+          :disabledDates="disableDateTestComputed"
           :endDate="Infinity"
           :minNights="3"
           :maxNights="20"
@@ -63,6 +64,7 @@
           :i18n="i18n"
           class="cico__style-search"
         />
+        <button @click="disabledDateTest()">disableNewDates</button>
       </div>
     </div>
   </div>
@@ -79,6 +81,12 @@ export default {
     Cico,
   },
 
+  data() {
+    return {
+      disableDateTestComputed: null,
+    }
+  },
+
   computed: {
     startDate() {
       const currentDate = new Date()
@@ -90,6 +98,12 @@ export default {
 
     i18n() {
       return en
+    },
+  },
+
+  methods: {
+    disabledDateTest() {
+      this.disableDateTestComputed = ['2022-12-25', '2022-12-26']
     },
   },
 }

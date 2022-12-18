@@ -429,118 +429,27 @@
 
     @include focusStyle();
 
-    &--today {
-      border: 0;
-
-      .#{$prefix}__month-day-wrapper {
-        border: none;
-        padding-top: calc(100% - 5px);
-      }
+    &.disabled__from-another-month {
+        opacity: 0;
+        pointer-events: none;
     }
 
-    &--invalid-range {
-      background-color: rgba(var(--primary-color), 0.3);
-      color: var(--white-smoke);
-      cursor: not-allowed;
-      position: relative;
+    &.disabled__before-first-valid-date,
+    &.disabled__after-option-end-date,
+    &.disabled__day-of-the-week {
+        color: var(--silver-mid);
+        pointer-events: none;
     }
 
-    &--invalid {
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    &--valid:hover,
-    &--allowed-checkout:hover {
-      color: var(--white);
-
-      > div {
-        background-color: var(--primary-color);
-        border-radius: 100px;
-      }
-    }
-
-    &--disabled {
-      background: none;
-      opacity: 1;
-      color: var(--silver-mid);
-      cursor: not-allowed;
-      pointer-events: none;
-      text-decoration: none;
-      font-weight: 400;
-    }
-
-    &.minimumDurationUnvalidDay {
-        .cico__month-day-wrapper {
-            .day {
-                color: var(--black);
-            }
-
-            &::after {
-                background-color: var(--white);
-                box-sizing: border-box;
-                color: var(--black);
-                border: 1px solid var(--primary-color-light);
-            }
-        }
-
-        &.cico__month-day-wrapper {
-            &.cico__currentDay {
-                padding-left: 100%;
-                padding-right: 100%;
-                background-color: var(--primary-color-light);
-            }
-        }
-    }
-
-    &--valid#{&}--not-allowed,
-    &--not-allowed.cico__currentDay,
-    &--valid#{&}--not-allowed:hover {
-      overflow: hidden;
-      color: var(--silver-mid);
-      font-weight: 400;
-      cursor: default;
-      span {
-        text-decoration: none;
-      }
-
-      &.cico__month-day--hovering {
-        &.cico__currentDay {
-            &.checkIn {
-                > div {
-                    padding-left: 0;
-
-                    &::after {
-                        content: "";
-                        width: 100%;
-                        background-color: var(--primary-color);
-                        height: 100%;
-                        border-radius: 20px;
-                        position: absolute;
-                        display: block;
-                        top: 0;
-                      }
-
-                    &::before {
-                        content: "";
-                        width: 100%;
-                        background-color: var(--primary-color-light);
-                        height: 100%;
-                        position: absolute;
-                        display: block;
-                        top: 0;
-                        width: 7vw;
-
-                        @media screen and ($desktop) {
-                            width: 20px;
-                        }
-                    }
-                }
-            }
-        }
-
+    &.check-in-date,
+    &.check-out-date,
+    &.hover__check-in-date:hover,
+    &.hover__check-out-date:hover,
+    &.hover__check-out-date.disabled__before-first-valid-date {
         > div {
             position: relative;
+            padding-left: 0;
+            color: white;
 
             &::after {
                 content: "";
@@ -556,6 +465,7 @@
             &::before {
                 content: "";
                 width: 100%;
+                right: 0;
                 background-color: var(--primary-color-light);
                 height: 100%;
                 position: absolute;
@@ -568,243 +478,77 @@
                 }
             }
         }
-      }
-
-      > div {
-        position: relative;
-
-        &::after {
-            content: "";
-            width: 100%;
-            background-color: var(--primary-color);
-            height: 100%;
-            border-radius: 20px;
-            position: absolute;
-            display: block;
-            top: 0;
-          }
-
-        &::before {
-            content: "";
-            width: 100%;
-            background-color: var(--primary-color-light);
-            height: 100%;
-            position: absolute;
-            display: block;
-            top: 0;
-            width: 7vw;
-
-            @media screen and ($desktop) {
-                width: 20px;
-            }
-        }
-      }
     }
 
-    &--hovering#{&}--not-allowed:hover {
-      cursor: pointer;
-    }
-
-    &.cico__month-day--disabled {
-        &.checkInMinDates {
-            &.cico__month-day--selected {
-                > div {
-                    color: var(--zambezi-grey);
-                }
-            }
-
-            &.cico__month-day--hovering {
-                background-color: transparent;
-
-                > div {
-                    background-color: transparent;
-                    position: relative;
-                    color: var(--zambezi-grey);
-
-                    &::after {
-                        content: "";
-                        width: 100%;
-                        background-color: var(--white);
-                        box-sizing: border-box;
-                        border: 1px solid var(--primary-color-light);
-                        background-color: var(--white);
-                        height: 100%;
-                        border-radius: 20px;
-                        position: absolute;
-                        display: block;
-                        top: 0;
-                        }
-    
-                    &::before {
-                        content: "";
-                        width: 100%;
-                        background-color: var(--primary-color-light);
-                        height: 100%;
-                        right: 16px;
-                        position: absolute;
-                        display: block;
-                        top: 0;
-                        width: 7vw;
-    
-                        @media screen and ($desktop) {
-                            width: 20px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    &--selected {
-      overflow: hidden;
-      background-color: var(--primary-color-light);
-
-      &.cico__month-day--hovering {
-        background-color: transparent;
-
+    &.hover__check-out-date.disabled__before-first-valid-date {
         > div {
-            position: relative;
-            padding-left: 0;
+            color: var(--zambezi-grey);
 
             &::after {
-                content: "";
-                width: 100%;
-                background-color: var(--primary-color);
-                height: 100%;
-                border-radius: 20px;
-                position: absolute;
-                display: block;
-                top: 0;
-              }
+                border: 1px solid var(--primary-color-light);
+                background-color: var(--white);
+            }
 
-              &::before {
-                content: "";
-                width: 100%;
-                background-color: var(--primary-color-light);
-                height: 100%;
-                position: absolute;
+            &::before {
                 right: 16px;
-                display: block;
-                top: 0;
-                width: 7vw;
-
-                @media screen and ($desktop) {
-                    width: 20px;
-                }
-              }
+            }
         }
-      }
-
-      span {
-        text-decoration: none;
-      }
     }
 
-    &--hovering {
-      color: var(--white);
-      font-weight: 700;
-      cursor: pointer;
-      span {
-        text-decoration: none;
-      }
-    }
+    &.check-out-date,
+    &.hover__check-out-date:hover {
+        > div {
+            &::before {
+                right: 16px;
+            }
+        }
 
-    &--first-day-selected,
-    &--last-day-selected {
-      color: var(--white);
-      cursor: pointer;
-      font-weight: 700;
-      pointer-events: auto;
-      span {
-        text-decoration: none;
-      }
-    }
-
-    &--first-day-selected {
-        &.checkIn {
-            & > div {
+        &.check-in-date {
+            > div {
                 &::before {
                     left: 16px;
+                    right: unset;
                 }
             }
         }
     }
 
-    &--last-day-selected {
-        &.checkOut {
+    &.check-in-date,
+    &.hover__check-in-date:hover {
+        > div {
+            &::before {
+                left: 16px;
+            }
+        }
+
+        &.check-out-date {
             > div {
                 &::before {
                     right: 16px;
+                    left: unset;
                 }
             }
         }
     }
 
-    &--first-day-selected,
-    &--last-day-selected {
-        &.checkOut,
-        &.checkIn {
-            > div {
-                position: relative;
-                background-color: transparent;
-                z-index: 20;
+    &.is-in-range {
+        background-color: var(--primary-color-light);
+    }
 
-              &::after {
-                content: "";
-                width: 100%;
-                background-color: var(--primary-color);
-                height: 100%;
-                border-radius: 20px;
-                position: absolute;
-                display: block;
-                top: 0;
-              }
+    &.minimumDurationUnvalidDay {
+        .cico__month-day-wrapper {
+            .day {
+                color: var(--black);
+            }
+        }
 
-              &::before {
-                content: "";
-                width: 100%;
+        &.cico__month-day-wrapper {
+            &.cico__currentDay {
+                padding-left: 100%;
+                padding-right: 100%;
                 background-color: var(--primary-color-light);
-                height: 100%;
-                position: absolute;
-                display: block;
-                top: 0;
-                width: 7vw;
-
-                @media screen and ($desktop) {
-                    width: 20px;
-                }
-              }
             }
         }
-    }
-
-    &--allowed-checkout {
-      color: var(--tuatara);
-    }
-
-    &--out-of-range {
-      color: var(--white-smoke);
-      cursor: not-allowed;
-      font-weight: 400;
-      position: relative;
-      pointer-events: none;
-      span {
-        text-decoration: none;
-      }
-    }
-
-    &--valid {
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    &--valid#{&}--halfCheckIn#{&}--last-day-selected {
-      color: var(--white);
-    }
-
-    &--hidden {
-      opacity: 0;
-      pointer-events: none;
     }
   }
 

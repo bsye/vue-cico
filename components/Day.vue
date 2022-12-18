@@ -1,25 +1,29 @@
 <template>
-  <div>
-    <div class="cico__tooltip" v-html="tooltipMessageDisplay" v-if="showTooltip && options.hoveringTooltip" />
+  <div :class="{ availability__disabled: isDayUnavailable }">
     <div
       class="cico__month-day"
       @click.prevent.stop="dayClicked($event, date)"
-      :class="[dayClass, disabledClass, checkinCheckoutClass, bookingClass, { 'cico__month-day--today': isToday }]"
-      :tabindex="tabIndex"
+      :class="[
+        beforeFirstValidDate,
+        dayBelongToThisMonth,
+        isCheckInDay,
+        isBeforeToday,
+        hoverIsCheckInDay,
+        isAfterEndDate,
+        hoverIsInTheRange,
+        isInTheRange,
+        isCheckOutDay,
+        hoverIsCheckOutDay,
+        isADisabledDayOfTheWeek,
+        hoverIsCurrentDay,
+        isValidDay,
+      ]"
       ref="day"
     >
       <div class="cico__month-day-wrapper">
         <span class="day">{{ dayNumber }}</span>
-        <Price :show="showPrice" :price="dayPrice" :symbol="priceSymbol" />
       </div>
     </div>
-    <BookingBullet
-      v-if="currentBooking && belongsToThisMonth && !isDisabled"
-      :currentBooking="currentBooking"
-      :duplicateBookingDates="duplicateBookingDates"
-      :formatDate="formatDate"
-      :previousBooking="previousBooking"
-    />
   </div>
 </template>
 
@@ -27,15 +31,9 @@
 import fecha from 'fecha'
 import get from 'lodash.get'
 import Helpers from '../src/helpers'
-import BookingBullet from './BookingBullet.vue'
-import Price from './Price.vue'
 
 export default {
   name: 'Day',
-  components: {
-    BookingBullet,
-    Price,
-  },
   props: {
     bookings: {
       type: Array,
@@ -64,6 +62,10 @@ export default {
     },
     checkOut: {
       type: Date,
+    },
+    disabledDates: {
+      type: Array,
+      default: () => [],
     },
     date: {
       type: Date,
@@ -98,6 +100,10 @@ export default {
     minNightCount: {
       type: Number,
       default: 0,
+    },
+    month: {
+      type: Object,
+      required: true,
     },
     nextDisabledDate: {
       type: [Date, Number, String],
@@ -145,362 +151,133 @@ export default {
   data() {
     return {
       currentDate: new Date(),
-      isDisabled: false,
-      isHighlighted: false,
     }
   },
   computed: {
-    previousBooking() {
-      let previousBooking = null
+    isDayUnavailable() {
+      if (!this.disabledDates) return false
 
-      if (this.currentBooking && this.duplicateBookingDates.includes(this.currentBooking.checkInDate)) {
-        previousBooking = this.bookings.find(
-          (booking) =>
-            booking.checkOutDate === this.formatDate && this.duplicateBookingDates.includes(booking.checkOutDate),
-        )
-      }
+      return this.disabledDates.find((disabled) => this.compareDay(disabled, this.date) === 0)
+    },
 
-      return previousBooking
-    },
-    currentBooking() {
-      return this.bookings.find(
-        (booking) =>
-          (this.duplicateBookingDates.includes(this.formatDate) && booking.checkInDate === this.formatDate) ||
-          (!this.duplicateBookingDates.includes(this.formatDate) &&
-            this.validateDateBetweenTwoDates(booking.checkInDate, booking.checkOutDate, this.formatDate)),
-      )
-    },
     dayNumber() {
       return fecha.format(this.date, 'D')
     },
-    dayPrice() {
-      let result = ''
-      const currentDate = [...this.sortedPeriodDates]
-        .reverse()
-        .find((d) => this.validateDateBetweenTwoDates(d.startAt, d.endAt, this.formatDate))
 
-      if (currentDate && currentDate.price) {
-        const priceIsNumeric = typeof currentDate.price === 'number' || !Number.isNaN(parseFloat(currentDate.price))
-        const weeklyPeriod = currentDate.periodType !== 'nightly'
+    isBeforeToday() {
+      if (this.compareDay(this.date, new Date()) < 0) return 'disabled__before-first-valid-date'
 
-        if (priceIsNumeric && weeklyPeriod) {
-          // Convert the price when weekly and is not a float/int type
-          const price = parseFloat(currentDate.price)
-          const divisor = 7
-          const decimals = Number.isNaN(parseFloat(this.priceDecimals)) ? 0 : parseFloat(this.priceDecimals)
+      return null
+    },
 
-          result = (price / divisor).toFixed(decimals)
-        } else {
-          result = currentDate.price
-        }
+    beforeFirstValidDate() {
+      const firstValidDate = this.addDays(this.checkIn, this.minNightCount)
+
+      if (this.compareDay(this.date, firstValidDate) < 0 && this.checkIn && !this.checkOut) {
+        return 'disabled__before-first-valid-date'
       }
 
-      return String(result)
+      return null
     },
-    bookingClass() {
-      if (this.bookings.length > 0 && this.currentBooking) {
-        if (
-          this.validateDateBetweenTwoDates(
-            this.currentBooking.checkInDate,
-            this.currentBooking.checkOutDate,
-            this.hoveringDate,
-          )
-        ) {
-          if (this.checkIncheckOutHalfDay[this.formatDate]) {
-            if (this.checkIn && !this.checkOut) {
-              return 'cico__month-day--not-allowed cico__month-day--hovering'
-            }
 
-            if (this.checkIncheckOutHalfDay[this.formatDate].checkOut) {
-              return 'cico__month-day--not-allowed cico__month-day--hovering'
-            }
-
-            return 'cico__month-day--not-allowed cico__month-day--invalid'
-          }
-
-          if (this.checkIn && !this.checkOut) {
-            return 'cico__month-day--not-allowed cico__month-day--invalid'
-          }
-
-          return 'cico__month-day--not-allowed cico__month-day--hovering'
-        }
-
-        if (
-          this.checkIncheckOutHalfDay[this.formatDate] &&
-          this.checkIncheckOutHalfDay[this.formatDate].checkOut &&
-          !this.duplicateBookingDates.includes(this.formatDate)
-        ) {
-          if (!this.checkIn) {
-            return 'cico__month-day--not-allowed cico__month-day--hovering'
-          }
-
-          if ((this.checkIn && this.checkIn === this.date) || (this.checkIn && this.checkOut)) {
-            return 'cico__month-day--not-allowed cico__month-day--hovering'
-          }
-        }
-
-        if (this.checkIn && !this.checkOut && this.hoveringDate === this.date) {
-          return 'cico__month-day--not-allowed cico__month-day--hovering'
-        }
-
-        return 'cico__month-day--not-allowed cico__month-day--invalid'
-      }
-
-      return ''
-    },
-    disabledClass() {
-      return this.isDisabled || this.isADisabledDay ? ' cico__month-day--disabled ' : ''
-    },
-    dayClass() {
+    dayBelongToThisMonth() {
       if (!this.belongsToThisMonth) {
-        // Good
-        return 'cico__month-day--hidden'
+        return 'disabled__from-another-month'
       }
 
-      // If the calendar has a minimum number of nights && !checkOut
-      const nextValidDate = this.addDays(this.checkIn, this.minNightCount)
-      const isDateAfterMinimumDuration = this.getDayDiff(this.hoveringDate, nextValidDate) <= 0
-      let isNotMinimumDuration = ''
+      return null
+    },
 
+    hoverIsCurrentDay() {
+      if (this.date !== this.hoveringDate) return null
+
+      if (this.checkIn && !this.checkOut && this.compareDay(this.date, this.checkIn) === 0) {
+        return 'hovering-current-day'
+      }
+
+      return null
+    },
+
+    isCheckInDay() {
+      if (!this.checkIn) return null
+      if (this.compareDay(this.date, this.checkIn) === 0) return 'check-in-date'
+
+      return null
+    },
+
+    hoverIsCheckInDay() {
+      if (!this.checkIn || (this.checkIn && this.checkOut))
+        if (this.compareDay(this.date, this.hoveringDate) === 0) return 'hover__check-in-date'
+
+      return null
+    },
+
+    isCheckOutDay() {
+      if (!this.checkOut) return null
+      if (this.compareDay(this.date, this.checkOut) === 0) return 'check-out-date'
+
+      return null
+    },
+
+    hoverIsCheckOutDay() {
+      if (this.checkIn && !this.checkOut) {
+        if (this.compareDay(this.date, this.hoveringDate) === 0) return 'hover__check-out-date'
+      }
+
+      return null
+    },
+
+    hoverIsInTheRange() {
+      if (!this.hoveringDate || !this.checkIn || this.checkOut) return null
+
+      if (this.compareDay(this.checkIn, this.date) < 0) {
+        if (this.compareDay(this.date, this.hoveringDate) < 0) return 'is-in-range'
+      }
+
+      return null
+    },
+
+    isInTheRange() {
+      if (!this.checkIn || !this.checkOut) return null
+
+      if (this.compareDay(this.checkIn, this.date) < 0) {
+        if (this.compareDay(this.date, this.checkOut) < 0) return 'is-in-range'
+      }
+
+      return null
+    },
+
+    isAfterEndDate() {
+      if (!this.options.endDate || this.options.endDate === Infinity) return null
+      if (this.compareDay(this.date, this.options.endDate) === 1) return 'disabled__after-option-end-date'
+
+      return null
+    },
+
+    isADisabledDayOfTheWeek() {
+      if (this.isADisabledDay) return 'disabled__day-of-the-week'
+
+      return null
+    },
+
+    isValidDay() {
       if (
-        !isDateAfterMinimumDuration &&
-        !this.checkOut &&
-        !this.isDisabled &&
-        this.compareDay(this.date, this.checkIn) >= 0 &&
-        this.minNightCount > 0 &&
-        this.compareDay(this.date, this.addDays(this.checkIn, this.minNightCount)) === -1
-      ) {
-        isNotMinimumDuration = ' cico__month-day--disabled minimumDurationUnvalidDay'
-      }
+        (!this.isADisabledDayOfTheWeek,
+        !this.isCheckOutDay,
+        !this.isCheckInDay,
+        !this.isAfterEndDate,
+        !this.dayBelongToThisMonth,
+        !this.beforeFirstValidDate)
+      )
+        return 'is-valid-day'
 
-      // Current Day
-      if (
-        this.date === this.hoveringDate &&
-        this.checkIn !== null &&
-        this.checkOut == null &&
-        this.dateFormatter(this.checkIn) !== this.dateFormatter(this.date)
-      ) {
-        if (!this.isDisabled) {
-          return `cico__month-day--selected cico__month-day--hovering cico__currentDay${isNotMinimumDuration}`
-        }
-
-        return `cico__month-day--disabled cico__month-day--hovering cico__currentDay checkInMinDates`
-      }
-
-      // Highlight the selected dates and prevent the user from selecting
-      // the same date for checkout and checkin
-      if (this.checkIn !== null && this.dateFormatter(this.checkIn) === this.dateFormatter(this.date)) {
-        if (this.minNightCount === 0) {
-          return `cico__month-day--first-day-selected checkIn${isNotMinimumDuration}`
-        }
-
-        // Good
-        return 'cico__month-day--disabled cico__month-day--first-day-selected checkIn'
-      }
-
-      // Checkout day
-      if (this.checkOut !== null) {
-        if (this.dateFormatter(this.checkOut) === this.dateFormatter(this.date)) {
-          return 'cico__month-day--disabled cico__month-day--last-day-selected checkOut'
-        }
-      }
-
-      // Only highlight dates that are not disabled
-      if (this.isHighlighted) {
-        const classSelected = 'cico__month-day--selected'
-
-        if (this.isADisabledDay) {
-          return `${classSelected} cico__month-day--disabled afterMinimumDurationValidDay`
-        }
-
-        if (this.isDisabled) {
-          return `${classSelected} cico__month-day--disabled checkInMinDates`
-        }
-
-        if (
-          Object.keys(this.checkInPeriod).length > 0 &&
-          this.checkInPeriod.periodType.includes('weekly') &&
-          this.hoveringDate &&
-          ((this.checkInPeriod.periodType === 'weekly_by_saturday' && this.hoveringDate.getDay() === 6) ||
-            (this.checkInPeriod.periodType === 'weekly_by_sunday' && this.hoveringDate.getDay() === 0)) &&
-          this.isDateLessOrEquals(this.date, this.hoveringDate)
-        ) {
-          // If currentPeriod has a minimumDuration 1
-          if (this.checkInPeriod.minimumDuration === 1) {
-            return `${classSelected} afterMinimumDurationValidDay`
-          }
-
-          // If currentPeriod has a minimumDuration superior to 1
-          if (this.getDayDiff(this.hoveringDate, this.checkInPeriod.nextValidDate) <= 0) {
-            return `${classSelected} afterMinimumDurationValidDay`
-          }
-        } else if (
-          Object.keys(this.checkInPeriod).length > 0 &&
-          this.checkInPeriod.periodType === 'nightly' &&
-          this.hoveringDate &&
-          this.hoveringPeriod.periodType.includes('weekly') &&
-          ((this.hoveringPeriod.periodType === 'weekly_by_saturday' && this.hoveringDate.getDay() === 6) ||
-            (this.hoveringPeriod.periodType === 'weekly_by_sunday' &&
-              this.hoveringDate.getDay() === 0 &&
-              this.isDateLessOrEquals(this.date, this.hoveringDate)))
-        ) {
-          return `${classSelected} afterMinimumDurationValidDay`
-        }
-
-        if (this.hoveringPeriod.periodType === 'nightly' && this.isDateLessOrEquals(this.date, this.hoveringDate)) {
-          return `${classSelected}  afterMinimumDurationValidDay`
-        }
-
-        if (this.checkIn && this.checkOut) {
-          return `${classSelected}`
-        }
-
-        return `${classSelected} cico__month-day--valid`
-      }
-
-      // Good
-      if (this.isDisabled || this.isADisabledDay) {
-        return `cico__month-day--disabled`
-      }
-
-      // Good
-      return 'cico__month-day--valid'
+      return null
     },
-    checkinCheckoutClass() {
-      let currentPeriod = null
 
-      this.sortedPeriodDates.forEach((d) => {
-        if (
-          d.endAt !== this.formatDate &&
-          (d.startAt === this.formatDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, this.formatDate))
-        ) {
-          currentPeriod = d
-        }
-      })
-
-      if (
-        this.nextPeriodDisableDates
-          ? this.nextPeriodDisableDates.some((i) => this.compareDay(i, this.date) === 0)
-          : null
-      ) {
-        return 'cico__month-day--disabled cico__month-day--not-allowed nightly'
-      }
-
-      if (currentPeriod) {
-        if (currentPeriod.periodType === 'nightly' && this.belongsToThisMonth && !this.isDisabled) {
-          if (
-            ((!this.checkIn && !this.checkOut) || (this.checkIn && this.checkOut)) &&
-            this.notAllowedDayDueToNextPeriod(currentPeriod)
-          ) {
-            return 'cico__month-day--disabled cico__month-day--not-allowed nightly'
-          }
-
-          return 'nightly'
-        }
-
-        // date.getDay() === 6 => saturday
-        if (
-          currentPeriod.periodType === 'weekly_by_saturday' &&
-          currentPeriod.startAt !== this.formatDate &&
-          currentPeriod.endAt !== this.formatDate &&
-          this.date.getDay() !== 6
-        ) {
-          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_saturday'
-        }
-
-        // Disable date between checkIn and nextDate, if minimumDuration is superior to 1
-        if (this.notAllowDaysBetweenCheckInAndNextValidDate(6)) {
-          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_saturday'
-        }
-
-        // date.getDay() === 0 => sunday
-        if (
-          currentPeriod.periodType === 'weekly_by_sunday' &&
-          currentPeriod.startAt !== this.formatDate &&
-          currentPeriod.endAt !== this.formatDate &&
-          this.date.getDay() !== 0
-        ) {
-          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_sunday'
-        }
-
-        // Disable date between checkIn and nextDate, if minimumDuration is superior to 1
-        if (this.notAllowDaysBetweenCheckInAndNextValidDate(0)) {
-          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_sunday'
-        }
-
-        return ''
-      }
-
-      return ''
-    },
-    formatDate() {
-      return this.dateFormatter(this.date)
-    },
-    tabIndex() {
-      if (!this.isOpen || !this.belongsToThisMonth || this.isDisabled || !this.isClickable()) {
-        return -1
-      }
-
-      return 0
-    },
     nightsCount() {
       return this.countDays(this.checkIn, this.hoveringDate)
     },
-    tooltipMessageDisplay() {
-      const dateIsInPeriod = this.validateDateBetweenTwoDates(
-        this.hoveringPeriod.startAt,
-        this.hoveringPeriod.endAt,
-        this.date,
-      )
-      const checkInIsInPeriod = this.validateDateBetweenTwoDates(
-        this.hoveringPeriod.startAt,
-        this.hoveringPeriod.endAt,
-        this.checkIn,
-      )
 
-      if (this.tooltipMessage) {
-        return this.tooltipMessage
-      }
-
-      if (
-        this.hoveringPeriod &&
-        this.hoveringPeriod.type !== 'nightly' &&
-        dateIsInPeriod &&
-        checkInIsInPeriod &&
-        this.nightsCount >= 7
-      ) {
-        return `${this.nightsCount / 7} ${this.pluralize(this.nightsCount, 'week')}`
-      }
-
-      if (this.nightsCount >= 1) {
-        return `${this.nightsCount} ${
-          this.nightsCount !== 1
-            ? this.get(this.i18n, 'activity.filter.nights')
-            : this.get(this.i18n, 'activity.filter.night')
-        }`
-      }
-
-      return ''
-    },
-    showTooltip() {
-      if (this.screenSize === 'desktop' || this.screenSize === 'tablet') {
-        const showCustomTooltip = this.showCustomTooltip && this.date === this.hoveringDate
-        const showDefaultTooltip =
-          !this.isDisabled &&
-          this.belongsToThisMonth &&
-          this.date === this.hoveringDate &&
-          this.tooltipMessageDisplay.length > 0 &&
-          this.checkIn !== null &&
-          this.checkOut === null
-
-        return showCustomTooltip || showDefaultTooltip
-      }
-
-      return false
-    },
-    isToday() {
-      return this.compareDay(this.currentDate, this.date) === 0
-    },
     isADisabledDay() {
       const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
       const day = days[this.date.getUTCDay()]
@@ -508,76 +285,10 @@ export default {
       return this.options.disabledWeekDaysObject[day]
     },
   },
-  watch: {
-    hoveringDate() {
-      this.fetchHighlight()
-    },
-    checkIn() {
-      this.fetchHighlight()
-    },
-    activeMonthIndex() {
-      this.checkIfDisabled()
-      this.checkIfHighlighted()
 
-      if (this.checkIn !== null && this.checkOut !== null) {
-        if (this.isDateLessOrEquals(this.checkIn, this.date) && this.isDateLessOrEquals(this.date, this.checkOut)) {
-          this.isHighlighted = true
-        } else {
-          this.isHighlighted = false
-        }
-      } else if (this.checkIn !== null && this.checkOut === null) {
-        this.disableNextDays()
-      }
-    },
-    nextDisabledDate() {
-      this.disableNextDays()
-    },
-  },
-  beforeMount() {
-    this.checkIfDisabled()
-    this.checkIfHighlighted()
-  },
   methods: {
     ...Helpers,
     get,
-    notAllowDaysBetweenCheckInAndNextValidDate(dayCode) {
-      return (
-        this.checkIn &&
-        !this.checkOut &&
-        this.date.getDay() === dayCode &&
-        Object.keys(this.hoveringPeriod).length > 0 &&
-        this.validateDateBetweenTwoDates(this.checkIn, this.hoveringPeriod.nextValidDate, this.date) &&
-        this.dateFormatter(this.checkIn) !== this.formatDate &&
-        this.dateFormatter(this.hoveringPeriod.nextValidDate) !== this.formatDate
-      )
-    },
-    notAllowedDayDueToNextPeriod(currentPeriod) {
-      // Check if the next period is directly after the current period
-      const date = new Date(currentPeriod.endAt)
-      let nextPeriod = null
-
-      this.sortedPeriodDates.forEach((period) => {
-        const dateA = new Date(period.startAt).setHours(0, 0, 0, 0)
-        const dateB = new Date(date).setHours(0, 0, 0, 0)
-
-        if (dateA === dateB) {
-          nextPeriod = period
-        }
-      })
-
-      if (nextPeriod) {
-        // Subtract the startAt nextPeriod to the currentPeriod minimumDuration
-        const subtractTimestamp = new Date(nextPeriod.startAt).setHours(0, 0, 0, 0)
-        const subtractDate = new Date(subtractTimestamp)
-        const resultDate = new Date(subtractDate.setDate(subtractDate.getDate() - currentPeriod.minimumDuration))
-
-        if (!this.validateDateBetweenTwoDates(currentPeriod.startAt, resultDate, this.date)) {
-          return true
-        }
-      }
-
-      return false
-    },
     isClickable() {
       if (this.$refs && this.$refs.day) {
         return getComputedStyle(this.$refs.day).pointerEvents !== 'none'
@@ -588,12 +299,6 @@ export default {
     dayClicked(event, date) {
       let resetCheckin = false
       let disableCheckoutOnCheckin = !this.disableCheckoutOnCheckin
-
-      if (!this.checkIncheckOutHalfDay[this.formatDate] && this.currentBooking) {
-        this.$emit('booking-clicked', event, date, this.currentBooking)
-
-        return
-      }
 
       if (this.disableCheckoutOnCheckin) {
         if (this.checkIn && this.checkIn === date) {
@@ -617,73 +322,6 @@ export default {
         } else {
           this.$emit('clear-selection')
           this.dayClicked(event, date)
-        }
-      }
-    },
-    compareEndDay() {
-      if (this.options.endDate !== Infinity) {
-        return this.compareDay(this.date, this.options.endDate) === 1
-      }
-
-      return false
-    },
-    checkIfDisabled() {
-      this.isDisabled =
-        // If this day is equal any of the disabled dates
-        (this.sortedDisabledDates ? this.sortedDisabledDates.some((i) => this.compareDay(i, this.date) === 0) : null) ||
-        (this.checkInMinNights ? this.checkInMinNights.some((i) => this.compareDay(i, this.date) === 0) : null) ||
-        // Or is before the start date
-        this.compareDay(this.date, this.options.startDate) === -1 ||
-        // Or is after the end date
-        this.compareEndDay() ||
-        // Or is in one of the disabled days of the week
-        this.isADisabledDay ||
-        // Or is after max Nights
-        (this.date >= this.nextDisabledDate && this.nextDisabledDate !== null)
-
-      // Handle checkout enabled
-      if (this.options.enableCheckout) {
-        if (this.compareDay(this.date, this.checkIn) === 1 && this.compareDay(this.date, this.checkOut) === -1) {
-          this.isDisabled = false
-        }
-      }
-    },
-    checkIfHighlighted() {
-      if (this.checkIn !== null && this.checkOut !== null) {
-        if (this.isDateLessOrEquals(this.checkIn, this.date) && this.isDateLessOrEquals(this.date, this.checkOut)) {
-          this.isHighlighted = true
-        } else {
-          this.isHighlighted = false
-        }
-      }
-    },
-    disableNextDays() {
-      if (
-        this.nextDisabledDate !== null &&
-        !this.isDateLessOrEquals(this.date, this.nextDisabledDate) &&
-        this.nextDisabledDate !== Infinity
-      ) {
-        this.isDisabled = true
-      } else if (this.isDateLessOrEquals(this.date, new Date().setDate(this.options.startDate.getDate() - 1))) {
-        this.isDisabled = true
-      }
-
-      if (this.compareDay(this.date, this.checkIn) === 0 && this.minNightCount === 0) {
-        this.isDisabled = false
-      }
-
-      if (this.isDateLessOrEquals(this.checkIn, this.date) && this.options.enableCheckout) {
-        this.isDisabled = false
-      }
-    },
-    fetchHighlight() {
-      if (this.checkIn !== null && this.checkOut === null) {
-        if (!this.isDateLessOrEquals(this.checkIn, this.date)) {
-          this.isHighlighted = false
-        } else if (this.isDateLessOrEquals(this.date, this.hoveringDate)) {
-          this.isHighlighted = true
-        } else if (!this.isDateLessOrEquals(this.date, this.hoveringDate)) {
-          this.isHighlighted = false
         }
       }
     },
