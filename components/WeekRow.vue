@@ -1,5 +1,5 @@
 <template>
-  <div class="cico__week-row cico__hide-up-to-tablet">
+  <div class="cico__week-row">
     <div v-for="(name, ix) in dayNames" :key="`${weekKey}-${ix}`" class="cico__week-name">
       {{ name }}
     </div>

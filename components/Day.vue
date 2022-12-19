@@ -4,6 +4,7 @@
       class="cico__month-day"
       @click.prevent.stop="dayClicked($event, date)"
       :class="[
+        isAfterMaxNights,
         isDayNotAvailable,
         beforeFirstValidDate,
         dayBelongToThisMonth,
@@ -53,16 +54,16 @@ export default {
     date: {
       type: Date,
     },
-    disableCheckoutOnCheckin: {
-      type: Boolean,
-      default: false,
-    },
     hoveringDate: {
       type: Date,
     },
     minNightCount: {
       type: Number,
       default: 0,
+    },
+    maxNights: {
+      type: [Number, null],
+      default: null,
     },
     month: {
       type: Object,
@@ -83,12 +84,21 @@ export default {
       return null
     },
 
+    isAfterMaxNights() {
+      if (!this.checkIn || typeof this.maxNights !== 'number') return null
+      const maxNightDate = this.addDays(this.checkIn, this.maxNights)
+
+      if (this.compareDay(this.date, maxNightDate) > 0) return 'disabled__is-after-max-nights'
+
+      return null
+    },
+
     dayNumber() {
       return fecha.format(this.date, 'D')
     },
 
     isBeforeToday() {
-      if (this.compareDay(this.date, new Date()) < 0) return 'disabled__before-first-valid-date'
+      if (this.compareDay(this.date, new Date()) < 0) return 'disabled__before-today'
 
       return null
     },
@@ -185,13 +195,14 @@ export default {
 
     isValidDay() {
       if (
-        (!this.isADisabledDayOfTheWeek,
-        !this.isCheckOutDay,
-        !this.isDayNotAvailable,
-        !this.isCheckInDay,
-        !this.isAfterEndDate,
-        !this.dayBelongToThisMonth,
-        !this.beforeFirstValidDate)
+        !this.isADisabledDayOfTheWeek &&
+        !this.isCheckOutDay &&
+        !this.isDayNotAvailable &&
+        !this.isCheckInDay &&
+        !this.isAfterEndDate &&
+        !this.dayBelongToThisMonth &&
+        !this.isAfterMaxNights &&
+        !this.beforeFirstValidDate
       )
         return 'is-valid-day'
 
@@ -213,6 +224,7 @@ export default {
   methods: {
     ...Helpers,
     get,
+
     isClickable() {
       if (this.$refs && this.$refs.day) {
         return getComputedStyle(this.$refs.day).pointerEvents !== 'none'
@@ -220,33 +232,17 @@ export default {
 
       return true
     },
+
     dayClicked(event, date) {
-      let resetCheckin = false
-      let disableCheckoutOnCheckin = !this.disableCheckoutOnCheckin
+      const resetCheckin = false
 
-      if (this.disableCheckoutOnCheckin) {
-        if (this.checkIn && this.checkIn === date) {
-          if (this.checkOut) {
-            disableCheckoutOnCheckin = true
-            resetCheckin = true
-          } else {
-            disableCheckoutOnCheckin = false
-            this.$emit('clear-selection')
-          }
-        } else {
-          disableCheckoutOnCheckin = true
-        }
-      }
+      if (this.isClickable()) {
+        const formatDate = this.dateFormatter(date)
 
-      if (disableCheckoutOnCheckin) {
-        if (!this.isDisabled || this.isClickable()) {
-          const formatDate = this.dateFormatter(date)
-
-          this.$emit('day-clicked', event, date, formatDate, resetCheckin)
-        } else {
-          this.$emit('clear-selection')
-          this.dayClicked(event, date)
-        }
+        this.$emit('day-clicked', event, date, formatDate, resetCheckin)
+      } else {
+        this.$emit('clear-selection')
+        this.dayClicked(event, date)
       }
     },
   },

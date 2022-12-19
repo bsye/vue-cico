@@ -3,7 +3,7 @@
     <p class="cico__month-name">
       {{ monthName }}
     </p>
-    <week-row v-bind="$props" />
+    <week-row :i18n="i18n" :weekKey="weekKey" :firstDayOfWeek="firstDayOfWeek" />
     <div class="cico__square-wrapper">
       <div
         class="cico__square"
@@ -12,10 +12,16 @@
         @mouseenter="enterDay($event, day)"
       >
         <Day
-          v-bind="$props"
+          :checkIn="checkIn"
+          :checkOut="checkOut"
           :disabledDates="disabledDates"
-          :belongsToThisMonth="day.belongsToThisMonth"
           :date="day.date"
+          :belongsToThisMonth="day.belongsToThisMonth"
+          :hoveringDate="hoveringDate"
+          :minNightCount="minNightCount"
+          :maxNights="maxNights"
+          :month="month"
+          :options="options"
           @clear-selection="clearSelection"
           @booking-clicked="handleBookingClicked"
           @day-clicked="handleDayClick"
@@ -49,84 +55,35 @@ export default {
       type: Number,
       required: true,
     },
-    isDesktop: {
-      type: Boolean,
-      required: true,
-    },
     firstDayOfWeek: {
       type: Number,
       required: true,
     },
-    activeMonthIndex: {
-      type: Number,
-    },
     checkIn: {
       type: Date,
-    },
-    checkInMinNights: {
-      type: Array,
-    },
-    checkIncheckOutHalfDay: {
-      type: Object,
-      default: () => ({}),
-    },
-    checkInPeriod: {
-      type: Object,
-      default: () => ({}),
     },
     checkOut: {
       type: Date,
     },
-    duplicateBookingDates: {
-      type: Array,
-      default: () => [],
-    },
     hoveringDate: {
       type: Date,
-    },
-    hoveringPeriod: {
-      type: Object,
-      default: () => ({}),
-    },
-    hoveringTooltip: {
-      default: true,
-      type: Boolean,
     },
     i18n: {
       type: Object,
       default: () => ({}),
     },
-    isOpen: {
-      type: Boolean,
-      required: true,
-    },
     minNightCount: {
       type: Number,
       default: 0,
     },
-    nextDisabledDate: {
-      type: [Date, Number, String],
-    },
-    nextPeriodDisableDates: {
-      type: Array,
-      default: () => [],
+    maxNights: {
+      type: [Number, null],
+      default: null,
     },
     options: {
       type: Object,
     },
-    screenSize: {
-      type: String,
-      default: '',
-    },
     disabledDates: {
-      type: Array,
-      default: () => [],
-    },
-    sortedDisabledDates: {
-      type: Array,
-      default: () => [],
-    },
-    sortedPeriodDates: {
       type: Array,
       default: () => [],
     },
@@ -144,18 +101,23 @@ export default {
 
       return fecha.format(date, format).trim()
     },
+
     enterDay(event, day) {
       this.$emit('enter-day', event, day)
     },
+
     enterMonth(event) {
       this.$emit('enter-month', event, this.month)
     },
+
     clearSelection() {
       this.$emit('clear-selection')
     },
+
     handleBookingClicked(event, date, currentBooking) {
       this.$emit('booking-clicked', event, date, currentBooking)
     },
+
     handleDayClick(event, date, formatDate, resetCheckin) {
       this.$emit('day-clicked', event, date, formatDate, resetCheckin)
     },

@@ -437,7 +437,9 @@
     &.disabled__before-first-valid-date,
     &.disabled__after-option-end-date,
     &.disabled__day-of-the-week,
-    &.disabled__not-available {
+    &.disabled__not-available,
+    &.disabled__is-after-max-nights,
+    &.disabled__before-today {
         color: var(--neutrals-300);
         pointer-events: none;
     }
@@ -453,7 +455,9 @@
     &.hover__check-in-date:hover,
     &.hover__check-out-date:hover,
     &.hover__check-out-date.disabled__before-first-valid-date,
-    &.hover__check-out-date.disabled__not-available {
+    &.hover__check-out-date.disabled__before-today,
+    &.hover__check-out-date.disabled__not-available,
+    &.hover__check-out-date.disabled__is-after-max-nights {
         > div {
             position: relative;
             padding-left: 0;
@@ -489,7 +493,9 @@
     }
 
     &.hover__check-out-date.disabled__before-first-valid-date,
-    &.hover__check-out-date.disabled__not-available {
+    &.hover__check-out-date.disabled__before-today,
+    &.hover__check-out-date.disabled__not-available,
+    &.hover__check-out-date.disabled__is-after-max-nights {
         > div {
             color: var(--neutrals-300);
 

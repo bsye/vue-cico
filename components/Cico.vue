@@ -121,6 +121,7 @@
             :i18n="i18n"
             :isOpen="isOpen"
             :minNightCount="minNightCount"
+            :maxNights="maxNights"
             :nextDisabledDate="nextDisabledDate"
             :nextPeriodDisableDates="nextPeriodDisableDates"
             :options="dayOptions"
@@ -917,12 +918,6 @@ export default {
         firstDayOfLastMonth = this.months[this.activeMonthIndex + 1].days.filter(
           (day) => day.belongsToThisMonth === true,
         )
-      }
-
-      if (this.endDate !== Infinity) {
-        if (fecha.format(firstDayOfLastMonth[0].date, 'YYYYMM') === fecha.format(new Date(this.endDate), 'YYYYMM')) {
-          return
-        }
       }
 
       const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date)
