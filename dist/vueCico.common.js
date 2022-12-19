@@ -3008,16 +3008,13 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=686798b8&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=08829592&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     ref: `DatePicker-${_vm.hash}`,
-    staticClass: "cico__wrapper cico__root",
-    class: {
-      'cico__wrapper--booking': _vm.bookings.length > 0
-    }
+    staticClass: "cico__wrapper cico__root"
   }, [_vm.isOpen ? _c('div', {
     staticClass: "cico__close-button cico__hide-on-desktop",
     on: {
@@ -3186,15 +3183,11 @@ var render = function render() {
         "weekKey": _vm.datepickerWeekKey,
         "isDesktop": _vm.isDesktop,
         "firstDayOfWeek": _vm.firstDayOfWeek,
-        "showYear": _vm.showYear,
-        "yearBeforeMonth": _vm.yearBeforeMonth,
         "activeMonthIndex": _vm.activeMonthIndex,
-        "bookings": _vm.sortBookings,
         "checkIn": _vm.checkIn,
         "checkInMinNights": _vm.checkInMinNights,
         "checkInPeriod": _vm.checkInPeriod,
         "checkOut": _vm.checkOut,
-        "disableCheckoutOnCheckin": _vm.disableCheckoutOnCheckin,
         "hoveringDate": _vm.hoveringDate,
         "hoveringPeriod": _vm.hoveringPeriod,
         "i18n": _vm.i18n,
@@ -3203,8 +3196,6 @@ var render = function render() {
         "nextDisabledDate": _vm.nextDisabledDate,
         "nextPeriodDisableDates": _vm.nextPeriodDisableDates,
         "options": _vm.dayOptions,
-        "priceSymbol": _vm.priceSymbol,
-        "showPrice": _vm.showPrice,
         "disabledDates": _vm.disabledDates,
         "periodDates": _vm.periodDates,
         "sortedDisabledDates": _vm.sortedDisabledDates,
@@ -3236,7 +3227,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=686798b8&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=08829592&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -3654,8 +3645,8 @@ var fecha = {
 var lodash_get = __webpack_require__("c832");
 var lodash_get_default = /*#__PURE__*/__webpack_require__.n(lodash_get);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=a40f8286&
-var Monthvue_type_template_id_a40f8286_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=e6f7ceea&
+var Monthvue_type_template_id_e6f7ceea_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -3681,6 +3672,7 @@ var Monthvue_type_template_id_a40f8286_render = function render() {
       }
     }, [_c('Day', _vm._b({
       attrs: {
+        "disabledDates": _vm.disabledDates,
         "belongsToThisMonth": day.belongsToThisMonth,
         "date": day.date
       },
@@ -3692,28 +3684,18 @@ var Monthvue_type_template_id_a40f8286_render = function render() {
     }, 'Day', _vm.$props, false))], 1);
   }), 0)], 1);
 };
-var Monthvue_type_template_id_a40f8286_staticRenderFns = [];
+var Monthvue_type_template_id_e6f7ceea_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=a40f8286&
+// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=e6f7ceea&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=81fbdff4&
-var Dayvue_type_template_id_81fbdff4_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=3567fcbc&
+var Dayvue_type_template_id_3567fcbc_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_vm.showTooltip && _vm.options.hoveringTooltip ? _c('div', {
-    staticClass: "cico__tooltip",
-    domProps: {
-      "innerHTML": _vm._s(_vm.tooltipMessageDisplay)
-    }
-  }) : _vm._e(), _c('div', {
+  return _c('div', [_c('div', {
     ref: "day",
     staticClass: "cico__month-day",
-    class: [_vm.dayClass, _vm.disabledClass, _vm.checkinCheckoutClass, _vm.bookingClass, {
-      'cico__month-day--today': _vm.isToday
-    }],
-    attrs: {
-      "tabindex": _vm.tabIndex
-    },
+    class: [_vm.isDayNotAvailable, _vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isCheckInDay, _vm.isBeforeToday, _vm.hoverIsCheckInDay, _vm.isAfterEndDate, _vm.hoverIsInTheRange, _vm.isInTheRange, _vm.isCheckOutDay, _vm.hoverIsCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.hoverIsCurrentDay, _vm.isValidDay],
     on: {
       "click": function ($event) {
         $event.preventDefault();
@@ -3725,24 +3707,11 @@ var Dayvue_type_template_id_81fbdff4_render = function render() {
     staticClass: "cico__month-day-wrapper"
   }, [_c('span', {
     staticClass: "day"
-  }, [_vm._v(_vm._s(_vm.dayNumber))]), _c('Price', {
-    attrs: {
-      "show": _vm.showPrice,
-      "price": _vm.dayPrice,
-      "symbol": _vm.priceSymbol
-    }
-  })], 1)]), _vm.currentBooking && _vm.belongsToThisMonth && !_vm.isDisabled ? _c('BookingBullet', {
-    attrs: {
-      "currentBooking": _vm.currentBooking,
-      "duplicateBookingDates": _vm.duplicateBookingDates,
-      "formatDate": _vm.formatDate,
-      "previousBooking": _vm.previousBooking
-    }
-  }) : _vm._e()], 1);
+  }, [_vm._v(_vm._s(_vm.dayNumber))])])])]);
 };
-var Dayvue_type_template_id_81fbdff4_staticRenderFns = [];
+var Dayvue_type_template_id_3567fcbc_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=81fbdff4&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=3567fcbc&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3942,65 +3911,179 @@ const helpers = {
   }
 };
 /* harmony default export */ var src_helpers = (helpers);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/BookingBullet.vue?vue&type=template&id=492cabe1&
-var BookingBulletvue_type_template_id_492cabe1_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('i', {
-    staticClass: "cico__parent-bullet"
-  }, [_vm.previousBooking && _vm.duplicateBookingDates.includes(_vm.formatDate) ? _c('i', {
-    staticClass: "cico__bullet",
-    class: [{
-      cico__checkInCheckOut: _vm.duplicateBookingDates.includes(_vm.formatDate)
-    }],
-    style: _vm.previousBooking.style
-  }) : _vm._e(), _vm.previousBooking && _vm.duplicateBookingDates.includes(_vm.formatDate) ? _c('i', {
-    staticClass: "cico__pipe cico__checkInCheckOut",
-    style: _vm.previousBooking.style
-  }) : _vm._e(), _vm.currentBooking && (_vm.currentBooking.checkInDate === _vm.formatDate || _vm.currentBooking.checkOutDate === _vm.formatDate) ? _c('i', {
-    staticClass: "cico__bullet",
-    class: [{
-      cico__checkIn: _vm.currentBooking.checkInDate === _vm.formatDate,
-      cico__checkOut: _vm.currentBooking.checkOutDate === _vm.formatDate
-    }],
-    style: _vm.currentBooking.style
-  }) : _vm._e(), _vm.currentBooking ? _c('i', {
-    staticClass: "cico__pipe",
-    class: [{
-      cico__checkIn: _vm.currentBooking.checkInDate === _vm.formatDate,
-      cico__checkOut: _vm.currentBooking.checkOutDate === _vm.formatDate
-    }],
-    style: _vm.currentBooking.style
-  }) : _vm._e()]);
-};
-var BookingBulletvue_type_template_id_492cabe1_staticRenderFns = [];
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=script&lang=js&
 
-// CONCATENATED MODULE: ./components/BookingBullet.vue?vue&type=template&id=492cabe1&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/BookingBullet.vue?vue&type=script&lang=js&
-/* harmony default export */ var BookingBulletvue_type_script_lang_js_ = ({
-  name: 'BookingBullet',
+
+/* harmony default export */ var Dayvue_type_script_lang_js_ = ({
+  name: 'Day',
   props: {
-    currentBooking: {
-      type: Object,
-      default: () => ({})
+    belongsToThisMonth: {
+      type: Boolean,
+      default: false
     },
-    duplicateBookingDates: {
+    checkIn: {
+      type: Date
+    },
+    checkOut: {
+      type: Date
+    },
+    disabledDates: {
       type: Array,
       default: () => []
     },
-    formatDate: {
-      type: String,
-      default: ''
+    date: {
+      type: Date
     },
-    previousBooking: {
+    disableCheckoutOnCheckin: {
+      type: Boolean,
+      default: false
+    },
+    hoveringDate: {
+      type: Date
+    },
+    minNightCount: {
+      type: Number,
+      default: 0
+    },
+    month: {
       type: Object,
-      default: () => ({})
+      required: true
+    },
+    options: {
+      type: Object
+    }
+  },
+  computed: {
+    isDayNotAvailable() {
+      if (!this.disabledDates) return false;
+      if (this.disabledDates.find(disabled => this.compareDay(disabled, this.date) === 0)) {
+        return 'disabled__not-available';
+      }
+      return null;
+    },
+    dayNumber() {
+      return lib_fecha.format(this.date, 'D');
+    },
+    isBeforeToday() {
+      if (this.compareDay(this.date, new Date()) < 0) return 'disabled__before-first-valid-date';
+      return null;
+    },
+    beforeFirstValidDate() {
+      const firstValidDate = this.addDays(this.checkIn, this.minNightCount);
+      if (this.compareDay(this.date, firstValidDate) < 0 && this.checkIn && !this.checkOut) {
+        return 'disabled__before-first-valid-date';
+      }
+      return null;
+    },
+    dayBelongToThisMonth() {
+      if (!this.belongsToThisMonth) {
+        return 'disabled__from-another-month';
+      }
+      return null;
+    },
+    hoverIsCurrentDay() {
+      if (this.date !== this.hoveringDate) return null;
+      if (this.checkIn && !this.checkOut && this.compareDay(this.date, this.checkIn) === 0) {
+        return 'hovering-current-day';
+      }
+      return null;
+    },
+    isCheckInDay() {
+      if (!this.checkIn) return null;
+      if (this.compareDay(this.date, this.checkIn) === 0) return 'check-in-date';
+      return null;
+    },
+    hoverIsCheckInDay() {
+      if (!this.checkIn || this.checkIn && this.checkOut) if (this.compareDay(this.date, this.hoveringDate) === 0) return 'hover__check-in-date';
+      return null;
+    },
+    isCheckOutDay() {
+      if (!this.checkOut) return null;
+      if (this.compareDay(this.date, this.checkOut) === 0) return 'check-out-date';
+      return null;
+    },
+    hoverIsCheckOutDay() {
+      if (this.checkIn && !this.checkOut) {
+        if (this.compareDay(this.date, this.hoveringDate) === 0) return 'hover__check-out-date';
+      }
+      return null;
+    },
+    hoverIsInTheRange() {
+      if (!this.hoveringDate || !this.checkIn || this.checkOut) return null;
+      if (this.compareDay(this.checkIn, this.date) < 0) {
+        if (this.compareDay(this.date, this.hoveringDate) < 0) return 'is-in-range';
+      }
+      return null;
+    },
+    isInTheRange() {
+      if (!this.checkIn || !this.checkOut) return null;
+      if (this.compareDay(this.checkIn, this.date) < 0) {
+        if (this.compareDay(this.date, this.checkOut) < 0) return 'is-in-range';
+      }
+      return null;
+    },
+    isAfterEndDate() {
+      if (!this.options.endDate || this.options.endDate === Infinity) return null;
+      if (this.compareDay(this.date, this.options.endDate) === 1) return 'disabled__after-option-end-date';
+      return null;
+    },
+    isADisabledDayOfTheWeek() {
+      if (this.isADisabledDay) return 'disabled__day-of-the-week';
+      return null;
+    },
+    isValidDay() {
+      if (!this.isADisabledDayOfTheWeek, !this.isCheckOutDay, !this.isDayNotAvailable, !this.isCheckInDay, !this.isAfterEndDate, !this.dayBelongToThisMonth, !this.beforeFirstValidDate) return 'is-valid-day';
+      return null;
+    },
+    nightsCount() {
+      return this.countDays(this.checkIn, this.hoveringDate);
+    },
+    isADisabledDay() {
+      const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      const day = days[this.date.getUTCDay()];
+      return this.options.disabledWeekDaysObject[day];
+    }
+  },
+  methods: {
+    ...src_helpers,
+    get: lodash_get_default.a,
+    isClickable() {
+      if (this.$refs && this.$refs.day) {
+        return getComputedStyle(this.$refs.day).pointerEvents !== 'none';
+      }
+      return true;
+    },
+    dayClicked(event, date) {
+      let resetCheckin = false;
+      let disableCheckoutOnCheckin = !this.disableCheckoutOnCheckin;
+      if (this.disableCheckoutOnCheckin) {
+        if (this.checkIn && this.checkIn === date) {
+          if (this.checkOut) {
+            disableCheckoutOnCheckin = true;
+            resetCheckin = true;
+          } else {
+            disableCheckoutOnCheckin = false;
+            this.$emit('clear-selection');
+          }
+        } else {
+          disableCheckoutOnCheckin = true;
+        }
+      }
+      if (disableCheckoutOnCheckin) {
+        if (!this.isDisabled || this.isClickable()) {
+          const formatDate = this.dateFormatter(date);
+          this.$emit('day-clicked', event, date, formatDate, resetCheckin);
+        } else {
+          this.$emit('clear-selection');
+          this.dayClicked(event, date);
+        }
+      }
     }
   }
 });
-// CONCATENATED MODULE: ./components/BookingBullet.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_BookingBulletvue_type_script_lang_js_ = (BookingBulletvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Dayvue_type_script_lang_js_ = (Dayvue_type_script_lang_js_); 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -4099,592 +4182,6 @@ function normalizeComponent(
   }
 }
 
-// CONCATENATED MODULE: ./components/BookingBullet.vue
-
-
-
-
-
-/* normalize component */
-
-var component = normalizeComponent(
-  components_BookingBulletvue_type_script_lang_js_,
-  BookingBulletvue_type_template_id_492cabe1_render,
-  BookingBulletvue_type_template_id_492cabe1_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var BookingBullet = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Price.vue?vue&type=template&id=0e09b53a&
-var Pricevue_type_template_id_0e09b53a_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _vm.show && _vm.price ? _c('div', {
-    staticClass: "price"
-  }, [_c('span', {
-    staticClass: "price-symbol"
-  }, [_vm._v(_vm._s(_vm.symbol))]), _c('span', {
-    staticClass: "price-number"
-  }, [_vm._v(_vm._s(_vm.price))])]) : _vm._e();
-};
-var Pricevue_type_template_id_0e09b53a_staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/Price.vue?vue&type=template&id=0e09b53a&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Price.vue?vue&type=script&lang=js&
-/* harmony default export */ var Pricevue_type_script_lang_js_ = ({
-  name: 'Price',
-  props: {
-    show: {
-      type: Boolean,
-      required: true
-    },
-    price: {
-      type: String,
-      required: true
-    },
-    symbol: {
-      type: [String, null, undefined],
-      default: ''
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/Price.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_Pricevue_type_script_lang_js_ = (Pricevue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./components/Price.vue
-
-
-
-
-
-/* normalize component */
-
-var Price_component = normalizeComponent(
-  components_Pricevue_type_script_lang_js_,
-  Pricevue_type_template_id_0e09b53a_render,
-  Pricevue_type_template_id_0e09b53a_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var Price = (Price_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=script&lang=js&
-
-
-
-
-
-/* harmony default export */ var Dayvue_type_script_lang_js_ = ({
-  name: 'Day',
-  components: {
-    BookingBullet: BookingBullet,
-    Price: Price
-  },
-  props: {
-    bookings: {
-      type: Array,
-      default: () => []
-    },
-    activeMonthIndex: {
-      type: Number
-    },
-    belongsToThisMonth: {
-      type: Boolean,
-      default: false
-    },
-    checkIn: {
-      type: Date
-    },
-    checkInMinNights: {
-      type: Array
-    },
-    checkIncheckOutHalfDay: {
-      type: Object,
-      default: () => ({})
-    },
-    checkInPeriod: {
-      type: Object,
-      default: () => ({})
-    },
-    checkOut: {
-      type: Date
-    },
-    date: {
-      type: Date
-    },
-    disableCheckoutOnCheckin: {
-      type: Boolean,
-      default: false
-    },
-    duplicateBookingDates: {
-      type: Array,
-      default: () => []
-    },
-    hoveringDate: {
-      type: Date
-    },
-    hoveringPeriod: {
-      type: Object,
-      default: () => ({})
-    },
-    hoveringTooltip: {
-      default: true,
-      type: Boolean
-    },
-    i18n: {
-      type: Object,
-      default: () => ({})
-    },
-    isOpen: {
-      type: Boolean,
-      required: true
-    },
-    minNightCount: {
-      type: Number,
-      default: 0
-    },
-    nextDisabledDate: {
-      type: [Date, Number, String]
-    },
-    nextPeriodDisableDates: {
-      type: Array,
-      default: () => []
-    },
-    options: {
-      type: Object
-    },
-    priceSymbol: {
-      type: String,
-      required: true
-    },
-    priceDecimals: {
-      type: [Number, null],
-      default: 0
-    },
-    screenSize: {
-      type: String,
-      default: ''
-    },
-    showCustomTooltip: {
-      default: false,
-      type: Boolean
-    },
-    showPrice: {
-      type: Boolean,
-      default: false
-    },
-    sortedDisabledDates: {
-      type: Array,
-      default: () => []
-    },
-    sortedPeriodDates: {
-      type: Array,
-      default: () => []
-    },
-    tooltipMessage: {
-      default: null,
-      type: String
-    }
-  },
-  data() {
-    return {
-      currentDate: new Date(),
-      isDisabled: false,
-      isHighlighted: false
-    };
-  },
-  computed: {
-    previousBooking() {
-      let previousBooking = null;
-      if (this.currentBooking && this.duplicateBookingDates.includes(this.currentBooking.checkInDate)) {
-        previousBooking = this.bookings.find(booking => booking.checkOutDate === this.formatDate && this.duplicateBookingDates.includes(booking.checkOutDate));
-      }
-      return previousBooking;
-    },
-    currentBooking() {
-      return this.bookings.find(booking => this.duplicateBookingDates.includes(this.formatDate) && booking.checkInDate === this.formatDate || !this.duplicateBookingDates.includes(this.formatDate) && this.validateDateBetweenTwoDates(booking.checkInDate, booking.checkOutDate, this.formatDate));
-    },
-    dayNumber() {
-      return lib_fecha.format(this.date, 'D');
-    },
-    dayPrice() {
-      let result = '';
-      const currentDate = [...this.sortedPeriodDates].reverse().find(d => this.validateDateBetweenTwoDates(d.startAt, d.endAt, this.formatDate));
-      if (currentDate && currentDate.price) {
-        const priceIsNumeric = typeof currentDate.price === 'number' || !Number.isNaN(parseFloat(currentDate.price));
-        const weeklyPeriod = currentDate.periodType !== 'nightly';
-        if (priceIsNumeric && weeklyPeriod) {
-          // Convert the price when weekly and is not a float/int type
-          const price = parseFloat(currentDate.price);
-          const divisor = 7;
-          const decimals = Number.isNaN(parseFloat(this.priceDecimals)) ? 0 : parseFloat(this.priceDecimals);
-          result = (price / divisor).toFixed(decimals);
-        } else {
-          result = currentDate.price;
-        }
-      }
-      return String(result);
-    },
-    bookingClass() {
-      if (this.bookings.length > 0 && this.currentBooking) {
-        if (this.validateDateBetweenTwoDates(this.currentBooking.checkInDate, this.currentBooking.checkOutDate, this.hoveringDate)) {
-          if (this.checkIncheckOutHalfDay[this.formatDate]) {
-            if (this.checkIn && !this.checkOut) {
-              return 'cico__month-day--not-allowed cico__month-day--hovering';
-            }
-            if (this.checkIncheckOutHalfDay[this.formatDate].checkOut) {
-              return 'cico__month-day--not-allowed cico__month-day--hovering';
-            }
-            return 'cico__month-day--not-allowed cico__month-day--invalid';
-          }
-          if (this.checkIn && !this.checkOut) {
-            return 'cico__month-day--not-allowed cico__month-day--invalid';
-          }
-          return 'cico__month-day--not-allowed cico__month-day--hovering';
-        }
-        if (this.checkIncheckOutHalfDay[this.formatDate] && this.checkIncheckOutHalfDay[this.formatDate].checkOut && !this.duplicateBookingDates.includes(this.formatDate)) {
-          if (!this.checkIn) {
-            return 'cico__month-day--not-allowed cico__month-day--hovering';
-          }
-          if (this.checkIn && this.checkIn === this.date || this.checkIn && this.checkOut) {
-            return 'cico__month-day--not-allowed cico__month-day--hovering';
-          }
-        }
-        if (this.checkIn && !this.checkOut && this.hoveringDate === this.date) {
-          return 'cico__month-day--not-allowed cico__month-day--hovering';
-        }
-        return 'cico__month-day--not-allowed cico__month-day--invalid';
-      }
-      return '';
-    },
-    disabledClass() {
-      return this.isDisabled || this.isADisabledDay ? ' cico__month-day--disabled ' : '';
-    },
-    dayClass() {
-      if (!this.belongsToThisMonth) {
-        // Good
-        return 'cico__month-day--hidden';
-      }
-
-      // If the calendar has a minimum number of nights && !checkOut
-      const nextValidDate = this.addDays(this.checkIn, this.minNightCount);
-      const isDateAfterMinimumDuration = this.getDayDiff(this.hoveringDate, nextValidDate) <= 0;
-      let isNotMinimumDuration = '';
-      if (!isDateAfterMinimumDuration && !this.checkOut && !this.isDisabled && this.compareDay(this.date, this.checkIn) >= 0 && this.minNightCount > 0 && this.compareDay(this.date, this.addDays(this.checkIn, this.minNightCount)) === -1) {
-        isNotMinimumDuration = ' cico__month-day--disabled minimumDurationUnvalidDay';
-      }
-
-      // Current Day
-      if (this.date === this.hoveringDate && this.checkIn !== null && this.checkOut == null && this.dateFormatter(this.checkIn) !== this.dateFormatter(this.date)) {
-        if (!this.isDisabled) {
-          return `cico__month-day--selected cico__month-day--hovering cico__currentDay${isNotMinimumDuration}`;
-        }
-        return `cico__month-day--disabled cico__month-day--hovering cico__currentDay checkInMinDates`;
-      }
-
-      // Highlight the selected dates and prevent the user from selecting
-      // the same date for checkout and checkin
-      if (this.checkIn !== null && this.dateFormatter(this.checkIn) === this.dateFormatter(this.date)) {
-        if (this.minNightCount === 0) {
-          return `cico__month-day--first-day-selected checkIn${isNotMinimumDuration}`;
-        }
-
-        // Good
-        return 'cico__month-day--disabled cico__month-day--first-day-selected checkIn';
-      }
-
-      // Checkout day
-      if (this.checkOut !== null) {
-        if (this.dateFormatter(this.checkOut) === this.dateFormatter(this.date)) {
-          return 'cico__month-day--disabled cico__month-day--last-day-selected checkOut';
-        }
-      }
-
-      // Only highlight dates that are not disabled
-      if (this.isHighlighted) {
-        const classSelected = 'cico__month-day--selected';
-        if (this.isADisabledDay) {
-          return `${classSelected} cico__month-day--disabled afterMinimumDurationValidDay`;
-        }
-        if (this.isDisabled) {
-          return `${classSelected} cico__month-day--disabled checkInMinDates`;
-        }
-        if (Object.keys(this.checkInPeriod).length > 0 && this.checkInPeriod.periodType.includes('weekly') && this.hoveringDate && (this.checkInPeriod.periodType === 'weekly_by_saturday' && this.hoveringDate.getDay() === 6 || this.checkInPeriod.periodType === 'weekly_by_sunday' && this.hoveringDate.getDay() === 0) && this.isDateLessOrEquals(this.date, this.hoveringDate)) {
-          // If currentPeriod has a minimumDuration 1
-          if (this.checkInPeriod.minimumDuration === 1) {
-            return `${classSelected} afterMinimumDurationValidDay`;
-          }
-
-          // If currentPeriod has a minimumDuration superior to 1
-          if (this.getDayDiff(this.hoveringDate, this.checkInPeriod.nextValidDate) <= 0) {
-            return `${classSelected} afterMinimumDurationValidDay`;
-          }
-        } else if (Object.keys(this.checkInPeriod).length > 0 && this.checkInPeriod.periodType === 'nightly' && this.hoveringDate && this.hoveringPeriod.periodType.includes('weekly') && (this.hoveringPeriod.periodType === 'weekly_by_saturday' && this.hoveringDate.getDay() === 6 || this.hoveringPeriod.periodType === 'weekly_by_sunday' && this.hoveringDate.getDay() === 0 && this.isDateLessOrEquals(this.date, this.hoveringDate))) {
-          return `${classSelected} afterMinimumDurationValidDay`;
-        }
-        if (this.hoveringPeriod.periodType === 'nightly' && this.isDateLessOrEquals(this.date, this.hoveringDate)) {
-          return `${classSelected}  afterMinimumDurationValidDay`;
-        }
-        if (this.checkIn && this.checkOut) {
-          return `${classSelected}`;
-        }
-        return `${classSelected} cico__month-day--valid`;
-      }
-
-      // Good
-      if (this.isDisabled || this.isADisabledDay) {
-        return `cico__month-day--disabled`;
-      }
-
-      // Good
-      return 'cico__month-day--valid';
-    },
-    checkinCheckoutClass() {
-      let currentPeriod = null;
-      this.sortedPeriodDates.forEach(d => {
-        if (d.endAt !== this.formatDate && (d.startAt === this.formatDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, this.formatDate))) {
-          currentPeriod = d;
-        }
-      });
-      if (this.nextPeriodDisableDates ? this.nextPeriodDisableDates.some(i => this.compareDay(i, this.date) === 0) : null) {
-        return 'cico__month-day--disabled cico__month-day--not-allowed nightly';
-      }
-      if (currentPeriod) {
-        if (currentPeriod.periodType === 'nightly' && this.belongsToThisMonth && !this.isDisabled) {
-          if ((!this.checkIn && !this.checkOut || this.checkIn && this.checkOut) && this.notAllowedDayDueToNextPeriod(currentPeriod)) {
-            return 'cico__month-day--disabled cico__month-day--not-allowed nightly';
-          }
-          return 'nightly';
-        }
-
-        // date.getDay() === 6 => saturday
-        if (currentPeriod.periodType === 'weekly_by_saturday' && currentPeriod.startAt !== this.formatDate && currentPeriod.endAt !== this.formatDate && this.date.getDay() !== 6) {
-          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_saturday';
-        }
-
-        // Disable date between checkIn and nextDate, if minimumDuration is superior to 1
-        if (this.notAllowDaysBetweenCheckInAndNextValidDate(6)) {
-          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_saturday';
-        }
-
-        // date.getDay() === 0 => sunday
-        if (currentPeriod.periodType === 'weekly_by_sunday' && currentPeriod.startAt !== this.formatDate && currentPeriod.endAt !== this.formatDate && this.date.getDay() !== 0) {
-          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_sunday';
-        }
-
-        // Disable date between checkIn and nextDate, if minimumDuration is superior to 1
-        if (this.notAllowDaysBetweenCheckInAndNextValidDate(0)) {
-          return 'cico__month-day--disabled cico__month-day--not-allowed weekly_by_sunday';
-        }
-        return '';
-      }
-      return '';
-    },
-    formatDate() {
-      return this.dateFormatter(this.date);
-    },
-    tabIndex() {
-      if (!this.isOpen || !this.belongsToThisMonth || this.isDisabled || !this.isClickable()) {
-        return -1;
-      }
-      return 0;
-    },
-    nightsCount() {
-      return this.countDays(this.checkIn, this.hoveringDate);
-    },
-    tooltipMessageDisplay() {
-      const dateIsInPeriod = this.validateDateBetweenTwoDates(this.hoveringPeriod.startAt, this.hoveringPeriod.endAt, this.date);
-      const checkInIsInPeriod = this.validateDateBetweenTwoDates(this.hoveringPeriod.startAt, this.hoveringPeriod.endAt, this.checkIn);
-      if (this.tooltipMessage) {
-        return this.tooltipMessage;
-      }
-      if (this.hoveringPeriod && this.hoveringPeriod.type !== 'nightly' && dateIsInPeriod && checkInIsInPeriod && this.nightsCount >= 7) {
-        return `${this.nightsCount / 7} ${this.pluralize(this.nightsCount, 'week')}`;
-      }
-      if (this.nightsCount >= 1) {
-        return `${this.nightsCount} ${this.nightsCount !== 1 ? this.get(this.i18n, 'activity.filter.nights') : this.get(this.i18n, 'activity.filter.night')}`;
-      }
-      return '';
-    },
-    showTooltip() {
-      if (this.screenSize === 'desktop' || this.screenSize === 'tablet') {
-        const showCustomTooltip = this.showCustomTooltip && this.date === this.hoveringDate;
-        const showDefaultTooltip = !this.isDisabled && this.belongsToThisMonth && this.date === this.hoveringDate && this.tooltipMessageDisplay.length > 0 && this.checkIn !== null && this.checkOut === null;
-        return showCustomTooltip || showDefaultTooltip;
-      }
-      return false;
-    },
-    isToday() {
-      return this.compareDay(this.currentDate, this.date) === 0;
-    },
-    isADisabledDay() {
-      const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-      const day = days[this.date.getUTCDay()];
-      return this.options.disabledWeekDaysObject[day];
-    }
-  },
-  watch: {
-    hoveringDate() {
-      this.fetchHighlight();
-    },
-    checkIn() {
-      this.fetchHighlight();
-    },
-    activeMonthIndex() {
-      this.checkIfDisabled();
-      this.checkIfHighlighted();
-      if (this.checkIn !== null && this.checkOut !== null) {
-        if (this.isDateLessOrEquals(this.checkIn, this.date) && this.isDateLessOrEquals(this.date, this.checkOut)) {
-          this.isHighlighted = true;
-        } else {
-          this.isHighlighted = false;
-        }
-      } else if (this.checkIn !== null && this.checkOut === null) {
-        this.disableNextDays();
-      }
-    },
-    nextDisabledDate() {
-      this.disableNextDays();
-    }
-  },
-  beforeMount() {
-    this.checkIfDisabled();
-    this.checkIfHighlighted();
-  },
-  methods: {
-    ...src_helpers,
-    get: lodash_get_default.a,
-    notAllowDaysBetweenCheckInAndNextValidDate(dayCode) {
-      return this.checkIn && !this.checkOut && this.date.getDay() === dayCode && Object.keys(this.hoveringPeriod).length > 0 && this.validateDateBetweenTwoDates(this.checkIn, this.hoveringPeriod.nextValidDate, this.date) && this.dateFormatter(this.checkIn) !== this.formatDate && this.dateFormatter(this.hoveringPeriod.nextValidDate) !== this.formatDate;
-    },
-    notAllowedDayDueToNextPeriod(currentPeriod) {
-      // Check if the next period is directly after the current period
-      const date = new Date(currentPeriod.endAt);
-      let nextPeriod = null;
-      this.sortedPeriodDates.forEach(period => {
-        const dateA = new Date(period.startAt).setHours(0, 0, 0, 0);
-        const dateB = new Date(date).setHours(0, 0, 0, 0);
-        if (dateA === dateB) {
-          nextPeriod = period;
-        }
-      });
-      if (nextPeriod) {
-        // Subtract the startAt nextPeriod to the currentPeriod minimumDuration
-        const subtractTimestamp = new Date(nextPeriod.startAt).setHours(0, 0, 0, 0);
-        const subtractDate = new Date(subtractTimestamp);
-        const resultDate = new Date(subtractDate.setDate(subtractDate.getDate() - currentPeriod.minimumDuration));
-        if (!this.validateDateBetweenTwoDates(currentPeriod.startAt, resultDate, this.date)) {
-          return true;
-        }
-      }
-      return false;
-    },
-    isClickable() {
-      if (this.$refs && this.$refs.day) {
-        return getComputedStyle(this.$refs.day).pointerEvents !== 'none';
-      }
-      return true;
-    },
-    dayClicked(event, date) {
-      let resetCheckin = false;
-      let disableCheckoutOnCheckin = !this.disableCheckoutOnCheckin;
-      if (!this.checkIncheckOutHalfDay[this.formatDate] && this.currentBooking) {
-        this.$emit('booking-clicked', event, date, this.currentBooking);
-        return;
-      }
-      if (this.disableCheckoutOnCheckin) {
-        if (this.checkIn && this.checkIn === date) {
-          if (this.checkOut) {
-            disableCheckoutOnCheckin = true;
-            resetCheckin = true;
-          } else {
-            disableCheckoutOnCheckin = false;
-            this.$emit('clear-selection');
-          }
-        } else {
-          disableCheckoutOnCheckin = true;
-        }
-      }
-      if (disableCheckoutOnCheckin) {
-        if (!this.isDisabled || this.isClickable()) {
-          const formatDate = this.dateFormatter(date);
-          this.$emit('day-clicked', event, date, formatDate, resetCheckin);
-        } else {
-          this.$emit('clear-selection');
-          this.dayClicked(event, date);
-        }
-      }
-    },
-    compareEndDay() {
-      if (this.options.endDate !== Infinity) {
-        return this.compareDay(this.date, this.options.endDate) === 1;
-      }
-      return false;
-    },
-    checkIfDisabled() {
-      this.isDisabled =
-      // If this day is equal any of the disabled dates
-      (this.sortedDisabledDates ? this.sortedDisabledDates.some(i => this.compareDay(i, this.date) === 0) : null) || (this.checkInMinNights ? this.checkInMinNights.some(i => this.compareDay(i, this.date) === 0) : null) ||
-      // Or is before the start date
-      this.compareDay(this.date, this.options.startDate) === -1 ||
-      // Or is after the end date
-      this.compareEndDay() ||
-      // Or is in one of the disabled days of the week
-      this.isADisabledDay ||
-      // Or is after max Nights
-      this.date >= this.nextDisabledDate && this.nextDisabledDate !== null;
-
-      // Handle checkout enabled
-      if (this.options.enableCheckout) {
-        if (this.compareDay(this.date, this.checkIn) === 1 && this.compareDay(this.date, this.checkOut) === -1) {
-          this.isDisabled = false;
-        }
-      }
-    },
-    checkIfHighlighted() {
-      if (this.checkIn !== null && this.checkOut !== null) {
-        if (this.isDateLessOrEquals(this.checkIn, this.date) && this.isDateLessOrEquals(this.date, this.checkOut)) {
-          this.isHighlighted = true;
-        } else {
-          this.isHighlighted = false;
-        }
-      }
-    },
-    disableNextDays() {
-      if (this.nextDisabledDate !== null && !this.isDateLessOrEquals(this.date, this.nextDisabledDate) && this.nextDisabledDate !== Infinity) {
-        this.isDisabled = true;
-      } else if (this.isDateLessOrEquals(this.date, new Date().setDate(this.options.startDate.getDate() - 1))) {
-        this.isDisabled = true;
-      }
-      if (this.compareDay(this.date, this.checkIn) === 0 && this.minNightCount === 0) {
-        this.isDisabled = false;
-      }
-      if (this.isDateLessOrEquals(this.checkIn, this.date) && this.options.enableCheckout) {
-        this.isDisabled = false;
-      }
-    },
-    fetchHighlight() {
-      if (this.checkIn !== null && this.checkOut === null) {
-        if (!this.isDateLessOrEquals(this.checkIn, this.date)) {
-          this.isHighlighted = false;
-        } else if (this.isDateLessOrEquals(this.date, this.hoveringDate)) {
-          this.isHighlighted = true;
-        } else if (!this.isDateLessOrEquals(this.date, this.hoveringDate)) {
-          this.isHighlighted = false;
-        }
-      }
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_Dayvue_type_script_lang_js_ = (Dayvue_type_script_lang_js_); 
 // CONCATENATED MODULE: ./components/Day.vue
 
 
@@ -4693,10 +4190,10 @@ var Price_component = normalizeComponent(
 
 /* normalize component */
 
-var Day_component = normalizeComponent(
+var component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_81fbdff4_render,
-  Dayvue_type_template_id_81fbdff4_staticRenderFns,
+  Dayvue_type_template_id_3567fcbc_render,
+  Dayvue_type_template_id_3567fcbc_staticRenderFns,
   false,
   null,
   null,
@@ -4704,7 +4201,7 @@ var Day_component = normalizeComponent(
   
 )
 
-/* harmony default export */ var Day = (Day_component.exports);
+/* harmony default export */ var Day = (component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3c556f10-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/WeekRow.vue?vue&type=template&id=53d1a813&
 var WeekRowvue_type_template_id_53d1a813_render = function render() {
   var _vm = this,
@@ -4803,21 +4300,9 @@ var WeekRow_component = normalizeComponent(
       type: Boolean,
       required: true
     },
-    showYear: {
-      type: Boolean,
-      required: true
-    },
-    yearBeforeMonth: {
-      type: Boolean,
-      required: true
-    },
     firstDayOfWeek: {
       type: Number,
       required: true
-    },
-    bookings: {
-      type: Array,
-      default: () => []
     },
     activeMonthIndex: {
       type: Number
@@ -4838,10 +4323,6 @@ var WeekRow_component = normalizeComponent(
     },
     checkOut: {
       type: Date
-    },
-    disableCheckoutOnCheckin: {
-      type: Boolean,
-      default: false
     },
     duplicateBookingDates: {
       type: Array,
@@ -4880,21 +4361,9 @@ var WeekRow_component = normalizeComponent(
     options: {
       type: Object
     },
-    priceSymbol: {
-      type: String,
-      default: ''
-    },
-    priceDecimals: {
-      type: [Number, null],
-      default: 0
-    },
     screenSize: {
       type: String,
       default: ''
-    },
-    showPrice: {
-      type: Boolean,
-      default: false
     },
     disabledDates: {
       type: Array,
@@ -4918,10 +4387,7 @@ var WeekRow_component = normalizeComponent(
     getMonth(date) {
       const month = 'MMMM';
       const year = 'YYYY';
-      let format = month;
-      if (this.showYear) {
-        format = this.yearBeforeMonth ? `${year} ${month}` : `${month} ${year}`;
-      }
+      const format = `${month} ${year}`;
       return lib_fecha.format(date, format).trim();
     },
     enterDay(event, day) {
@@ -4953,8 +4419,8 @@ var WeekRow_component = normalizeComponent(
 
 var Month_component = normalizeComponent(
   components_Monthvue_type_script_lang_js_,
-  Monthvue_type_template_id_a40f8286_render,
-  Monthvue_type_template_id_a40f8286_staticRenderFns,
+  Monthvue_type_template_id_e6f7ceea_render,
+  Monthvue_type_template_id_e6f7ceea_staticRenderFns,
   false,
   null,
   null,
@@ -5450,17 +4916,7 @@ var CallToAction_component = normalizeComponent(
     DateInput: DateInput
   },
   props: {
-    bookings: {
-      type: Array,
-      default() {
-        return [];
-      }
-    },
     closeDatepickerOnClickOutside: {
-      type: Boolean,
-      default: true
-    },
-    disableCheckoutOnCheckin: {
       type: Boolean,
       default: true
     },
@@ -5474,12 +4930,6 @@ var CallToAction_component = normalizeComponent(
       type: Array,
       default() {
         return [];
-      }
-    },
-    disabledWeekDays: {
-      type: Object,
-      default() {
-        return {};
       }
     },
     displayClearButton: {
@@ -5541,18 +4991,6 @@ var CallToAction_component = normalizeComponent(
         return [];
       }
     },
-    priceSymbol: {
-      type: String,
-      default: ''
-    },
-    showPrice: {
-      type: Boolean,
-      default: false
-    },
-    showYear: {
-      type: Boolean,
-      default: true
-    },
     singleDaySelection: {
       type: Boolean,
       default: false
@@ -5566,10 +5004,6 @@ var CallToAction_component = normalizeComponent(
     startingDateValue: {
       type: [Date, null],
       default: null
-    },
-    yearBeforeMonth: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
@@ -5617,19 +5051,6 @@ var CallToAction_component = normalizeComponent(
       if (!this.checkIn) return 0;
       if (!this.checkOut) return 0;
       return this.countDays(this.checkIn, this.checkOut);
-    },
-    sortBookings() {
-      if (this.bookings.length > 0) {
-        const bookings = [...this.bookings];
-        return bookings.sort((a, b) => {
-          const aa = a.checkInDate.split('/').reverse().join();
-          const bb = b.checkOutDate.split('/').reverse().join();
-
-          // eslint-disable-next-line no-nested-ternary
-          return aa < bb ? -1 : aa > bb ? 1 : 0;
-        });
-      }
-      return [];
     },
     paginateMonths() {
       const months = [];
@@ -5687,7 +5108,7 @@ var CallToAction_component = normalizeComponent(
         friday: disabledDays.includes(FRIDAY),
         saturday: disabledDays.includes(SATURDAY)
       };
-      return Object.assign(disabledWeekDaysObject, this.disabledWeekDays);
+      return disabledWeekDaysObject;
     },
     disabledWeekDaysArray() {
       const days = this.disabledWeekDaysObject;
@@ -5711,9 +5132,6 @@ var CallToAction_component = normalizeComponent(
     }
   },
   watch: {
-    bookings() {
-      this.reRender();
-    },
     checkIn(newDate) {
       this.$emit('check-in-changed', this.dateFormatter(newDate, this.format));
       this.$emit('starting-date-changed', this.dateFormatter(newDate, this.format));
@@ -5755,14 +5173,13 @@ var CallToAction_component = normalizeComponent(
       }
       this.reRender();
     },
-    yearBeforeMonth() {
-      this.reRender();
-    },
     i18n() {
       this.configureI18n();
     },
     disabledDates() {
       this.nextDisabledDate = null;
+      this.disabledDateIsCheckIn();
+      this.disabledDateIsCheckOut();
       this.reRender();
     }
   },
@@ -5804,6 +5221,24 @@ var CallToAction_component = normalizeComponent(
     mobileActionSelected() {
       this.isOpen = !this.isOpen;
       this.$emit('search-mobile-triggered');
+    },
+    disabledDateIsCheckIn() {
+      if (!this.checkIn) return null;
+      if (this.disabledDates.find(disabled => this.compareDay(disabled, this.checkIn) === 0)) {
+        this.clearSelection();
+      }
+      return null;
+    },
+    disabledDateIsCheckOut() {
+      if (!this.checkOut) return null;
+      if (this.disabledDates.find(disabled => this.compareDay(disabled, this.checkOut) === 0)) {
+        const {
+          checkIn
+        } = this;
+        this.clearSelection();
+        this.checkIn = checkIn;
+      }
+      return null;
     },
     responsiveFormatter(date) {
       if (typeof this.formatInputs === 'string') return this.dateFormatter(date, this.formatInputs);
@@ -5918,11 +5353,7 @@ var CallToAction_component = normalizeComponent(
         });
         return;
       }
-      let nextDisabledDate = (this.maxNights ? this.addDays(date, this.maxNights + 1) : null) || this.getNextDate(this.sortedDisabledDates, date) || this.nextDateByDayOfWeekArray(this.disabledWeekDaysArray, date, this.i18n) || this.nextBookingDate(date) || Infinity;
       this.dynamicNightCounts = null;
-      if (this.enableCheckout) {
-        nextDisabledDate = Infinity;
-      }
       if (this.checkIn == null && !this.singleDaySelection) {
         this.checkIn = date;
         this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format));
@@ -5947,10 +5378,9 @@ var CallToAction_component = normalizeComponent(
         this.setCurrentPeriod(date, 'click');
         this.checkInPeriod = this.hoveringPeriod;
       }
-      this.nextDisabledDate = nextDisabledDate;
       this.hoveringDate = null;
       this.hoveringDate = date;
-      this.$emit('day-clicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate);
+      this.$emit('day-clicked', this.dateFormatter(date, this.format), formatDate);
     },
     nextBookingDate(date) {
       let closest = Infinity;
@@ -5972,7 +5402,7 @@ var CallToAction_component = normalizeComponent(
       }
     },
     autofillWithCheckOut() {
-      if (this.checkIn && !this.checkOut) {
+      if (!this.disabledDates) if (this.checkIn && !this.checkOut) {
         this.checkOut = this.addDays(this.checkIn, this.minNights);
       }
     },
