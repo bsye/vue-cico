@@ -53,21 +53,9 @@ export default {
       type: Boolean,
       required: true,
     },
-    showYear: {
-      type: Boolean,
-      required: true,
-    },
-    yearBeforeMonth: {
-      type: Boolean,
-      required: true,
-    },
     firstDayOfWeek: {
       type: Number,
       required: true,
-    },
-    bookings: {
-      type: Array,
-      default: () => [],
     },
     activeMonthIndex: {
       type: Number,
@@ -88,10 +76,6 @@ export default {
     },
     checkOut: {
       type: Date,
-    },
-    disableCheckoutOnCheckin: {
-      type: Boolean,
-      default: false,
     },
     duplicateBookingDates: {
       type: Array,
@@ -130,21 +114,9 @@ export default {
     options: {
       type: Object,
     },
-    priceSymbol: {
-      type: String,
-      default: '',
-    },
-    priceDecimals: {
-      type: [Number, null],
-      default: 0,
-    },
     screenSize: {
       type: String,
       default: '',
-    },
-    showPrice: {
-      type: Boolean,
-      default: false,
     },
     disabledDates: {
       type: Array,
@@ -168,11 +140,7 @@ export default {
     getMonth(date) {
       const month = 'MMMM'
       const year = 'YYYY'
-      let format = month
-
-      if (this.showYear) {
-        format = this.yearBeforeMonth ? `${year} ${month}` : `${month} ${year}`
-      }
+      const format = `${month} ${year}`
 
       return fecha.format(date, format).trim()
     },

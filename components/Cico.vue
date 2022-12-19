@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="cico__wrapper cico__root"
-    :class="{
-      'cico__wrapper--booking': bookings.length > 0,
-    }"
-    :ref="`DatePicker-${hash}`"
-  >
+  <div class="cico__wrapper cico__root" :ref="`DatePicker-${hash}`">
     <div class="cico__close-button cico__hide-on-desktop" v-if="isOpen" @click="hideDatepicker()">
       <i>+</i>
     </div>
@@ -117,15 +111,11 @@
             :weekKey="datepickerWeekKey"
             :isDesktop="isDesktop"
             :firstDayOfWeek="firstDayOfWeek"
-            :showYear="showYear"
-            :yearBeforeMonth="yearBeforeMonth"
             :activeMonthIndex="activeMonthIndex"
-            :bookings="sortBookings"
             :checkIn="checkIn"
             :checkInMinNights="checkInMinNights"
             :checkInPeriod="checkInPeriod"
             :checkOut="checkOut"
-            :disableCheckoutOnCheckin="disableCheckoutOnCheckin"
             :hoveringDate="hoveringDate"
             :hoveringPeriod="hoveringPeriod"
             :i18n="i18n"
@@ -134,8 +124,6 @@
             :nextDisabledDate="nextDisabledDate"
             :nextPeriodDisableDates="nextPeriodDisableDates"
             :options="dayOptions"
-            :priceSymbol="priceSymbol"
-            :showPrice="showPrice"
             :disabledDates="disabledDates"
             :periodDates="periodDates"
             :sortedDisabledDates="sortedDisabledDates"
@@ -185,19 +173,7 @@ export default {
     DateInput,
   },
   props: {
-    bookings: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-
     closeDatepickerOnClickOutside: {
-      type: Boolean,
-      default: true,
-    },
-
-    disableCheckoutOnCheckin: {
       type: Boolean,
       default: true,
     },
@@ -213,13 +189,6 @@ export default {
       type: Array,
       default() {
         return []
-      },
-    },
-
-    disabledWeekDays: {
-      type: Object,
-      default() {
-        return {}
       },
     },
 
@@ -295,21 +264,6 @@ export default {
       },
     },
 
-    priceSymbol: {
-      type: String,
-      default: '',
-    },
-
-    showPrice: {
-      type: Boolean,
-      default: false,
-    },
-
-    showYear: {
-      type: Boolean,
-      default: true,
-    },
-
     singleDaySelection: {
       type: Boolean,
       default: false,
@@ -325,11 +279,6 @@ export default {
     startingDateValue: {
       type: [Date, null],
       default: null,
-    },
-
-    yearBeforeMonth: {
-      type: Boolean,
-      default: false,
     },
   },
 
@@ -402,22 +351,6 @@ export default {
       return this.countDays(this.checkIn, this.checkOut)
     },
 
-    sortBookings() {
-      if (this.bookings.length > 0) {
-        const bookings = [...this.bookings]
-
-        return bookings.sort((a, b) => {
-          const aa = a.checkInDate.split('/').reverse().join()
-          const bb = b.checkOutDate.split('/').reverse().join()
-
-          // eslint-disable-next-line no-nested-ternary
-          return aa < bb ? -1 : aa > bb ? 1 : 0
-        })
-      }
-
-      return []
-    },
-
     paginateMonths() {
       const months = []
 
@@ -486,7 +419,7 @@ export default {
         saturday: disabledDays.includes(SATURDAY),
       }
 
-      return Object.assign(disabledWeekDaysObject, this.disabledWeekDays)
+      return disabledWeekDaysObject
     },
 
     disabledWeekDaysArray() {
@@ -516,10 +449,6 @@ export default {
     },
   },
   watch: {
-    bookings() {
-      this.reRender()
-    },
-
     checkIn(newDate) {
       this.$emit('check-in-changed', this.dateFormatter(newDate, this.format))
       this.$emit('starting-date-changed', this.dateFormatter(newDate, this.format))
@@ -571,10 +500,6 @@ export default {
         this.setCheckOut(null)
       }
 
-      this.reRender()
-    },
-
-    yearBeforeMonth() {
       this.reRender()
     },
 
@@ -812,18 +737,7 @@ export default {
         return
       }
 
-      let nextDisabledDate =
-        (this.maxNights ? this.addDays(date, this.maxNights + 1) : null) ||
-        this.getNextDate(this.sortedDisabledDates, date) ||
-        this.nextDateByDayOfWeekArray(this.disabledWeekDaysArray, date, this.i18n) ||
-        this.nextBookingDate(date) ||
-        Infinity
-
       this.dynamicNightCounts = null
-
-      if (this.enableCheckout) {
-        nextDisabledDate = Infinity
-      }
 
       if (this.checkIn == null && !this.singleDaySelection) {
         this.checkIn = date
@@ -851,10 +765,9 @@ export default {
         this.checkInPeriod = this.hoveringPeriod
       }
 
-      this.nextDisabledDate = nextDisabledDate
       this.hoveringDate = null
       this.hoveringDate = date
-      this.$emit('day-clicked', this.dateFormatter(date, this.format), formatDate, nextDisabledDate)
+      this.$emit('day-clicked', this.dateFormatter(date, this.format), formatDate)
     },
 
     nextBookingDate(date) {
