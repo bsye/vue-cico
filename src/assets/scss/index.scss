@@ -424,7 +424,7 @@
   &__month-day {
     visibility: visible;
     text-align: center;
-    color: var(--oil);
+    color: var(--black);
     cursor: pointer;
 
     @include focusStyle();
@@ -436,16 +436,24 @@
 
     &.disabled__before-first-valid-date,
     &.disabled__after-option-end-date,
-    &.disabled__day-of-the-week {
-        color: var(--silver-mid);
+    &.disabled__day-of-the-week,
+    &.disabled__not-available {
+        color: var(--neutrals-300);
         pointer-events: none;
+    }
+
+    &.disabled__not-available {
+        span {
+            text-decoration: line-through;
+        }
     }
 
     &.check-in-date,
     &.check-out-date,
     &.hover__check-in-date:hover,
     &.hover__check-out-date:hover,
-    &.hover__check-out-date.disabled__before-first-valid-date {
+    &.hover__check-out-date.disabled__before-first-valid-date,
+    &.hover__check-out-date.disabled__not-available {
         > div {
             position: relative;
             padding-left: 0;
@@ -480,9 +488,10 @@
         }
     }
 
-    &.hover__check-out-date.disabled__before-first-valid-date {
+    &.hover__check-out-date.disabled__before-first-valid-date,
+    &.hover__check-out-date.disabled__not-available {
         > div {
-            color: var(--zambezi-grey);
+            color: var(--neutrals-300);
 
             &::after {
                 border: 1px solid var(--primary-color-light);
@@ -496,7 +505,8 @@
     }
 
     &.check-out-date,
-    &.hover__check-out-date:hover {
+    &.hover__check-out-date:hover,
+    &.hover__check-out-date.disabled__not-available {
         > div {
             &::before {
                 right: 16px;
@@ -533,22 +543,6 @@
 
     &.is-in-range {
         background-color: var(--primary-color-light);
-    }
-
-    &.minimumDurationUnvalidDay {
-        .cico__month-day-wrapper {
-            .day {
-                color: var(--black);
-            }
-        }
-
-        &.cico__month-day-wrapper {
-            &.cico__currentDay {
-                padding-left: 100%;
-                padding-right: 100%;
-                background-color: var(--primary-color-light);
-            }
-        }
     }
   }
 

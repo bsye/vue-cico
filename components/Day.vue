@@ -1,9 +1,10 @@
 <template>
-  <div :class="{ availability__disabled: isDayUnavailable }">
+  <div>
     <div
       class="cico__month-day"
       @click.prevent.stop="dayClicked($event, date)"
       :class="[
+        isDayNotAvailable,
         beforeFirstValidDate,
         dayBelongToThisMonth,
         isCheckInDay,
@@ -35,30 +36,12 @@ import Helpers from '../src/helpers'
 export default {
   name: 'Day',
   props: {
-    bookings: {
-      type: Array,
-      default: () => [],
-    },
-    activeMonthIndex: {
-      type: Number,
-    },
     belongsToThisMonth: {
       type: Boolean,
       default: false,
     },
     checkIn: {
       type: Date,
-    },
-    checkInMinNights: {
-      type: Array,
-    },
-    checkIncheckOutHalfDay: {
-      type: Object,
-      default: () => ({}),
-    },
-    checkInPeriod: {
-      type: Object,
-      default: () => ({}),
     },
     checkOut: {
       type: Date,
@@ -74,28 +57,8 @@ export default {
       type: Boolean,
       default: false,
     },
-    duplicateBookingDates: {
-      type: Array,
-      default: () => [],
-    },
     hoveringDate: {
       type: Date,
-    },
-    hoveringPeriod: {
-      type: Object,
-      default: () => ({}),
-    },
-    hoveringTooltip: {
-      default: true,
-      type: Boolean,
-    },
-    i18n: {
-      type: Object,
-      default: () => ({}),
-    },
-    isOpen: {
-      type: Boolean,
-      required: true,
     },
     minNightCount: {
       type: Number,
@@ -105,59 +68,19 @@ export default {
       type: Object,
       required: true,
     },
-    nextDisabledDate: {
-      type: [Date, Number, String],
-    },
-    nextPeriodDisableDates: {
-      type: Array,
-      default: () => [],
-    },
     options: {
       type: Object,
     },
-    priceSymbol: {
-      type: String,
-      required: true,
-    },
-    priceDecimals: {
-      type: [Number, null],
-      default: 0,
-    },
-    screenSize: {
-      type: String,
-      default: '',
-    },
-    showCustomTooltip: {
-      default: false,
-      type: Boolean,
-    },
-    showPrice: {
-      type: Boolean,
-      default: false,
-    },
-    sortedDisabledDates: {
-      type: Array,
-      default: () => [],
-    },
-    sortedPeriodDates: {
-      type: Array,
-      default: () => [],
-    },
-    tooltipMessage: {
-      default: null,
-      type: String,
-    },
-  },
-  data() {
-    return {
-      currentDate: new Date(),
-    }
   },
   computed: {
-    isDayUnavailable() {
+    isDayNotAvailable() {
       if (!this.disabledDates) return false
 
-      return this.disabledDates.find((disabled) => this.compareDay(disabled, this.date) === 0)
+      if (this.disabledDates.find((disabled) => this.compareDay(disabled, this.date) === 0)) {
+        return 'disabled__not-available'
+      }
+
+      return null
     },
 
     dayNumber() {
@@ -264,6 +187,7 @@ export default {
       if (
         (!this.isADisabledDayOfTheWeek,
         !this.isCheckOutDay,
+        !this.isDayNotAvailable,
         !this.isCheckInDay,
         !this.isAfterEndDate,
         !this.dayBelongToThisMonth,

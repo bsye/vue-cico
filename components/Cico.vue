@@ -584,6 +584,8 @@ export default {
 
     disabledDates() {
       this.nextDisabledDate = null
+      this.disabledDateIsCheckIn()
+      this.disabledDateIsCheckOut()
       this.reRender()
     },
   },
@@ -634,6 +636,29 @@ export default {
     mobileActionSelected() {
       this.isOpen = !this.isOpen
       this.$emit('search-mobile-triggered')
+    },
+
+    disabledDateIsCheckIn() {
+      if (!this.checkIn) return null
+
+      if (this.disabledDates.find((disabled) => this.compareDay(disabled, this.checkIn) === 0)) {
+        this.clearSelection()
+      }
+
+      return null
+    },
+
+    disabledDateIsCheckOut() {
+      if (!this.checkOut) return null
+
+      if (this.disabledDates.find((disabled) => this.compareDay(disabled, this.checkOut) === 0)) {
+        const { checkIn } = this
+
+        this.clearSelection()
+        this.checkIn = checkIn
+      }
+
+      return null
     },
 
     responsiveFormatter(date) {
@@ -863,9 +888,10 @@ export default {
     },
 
     autofillWithCheckOut() {
-      if (this.checkIn && !this.checkOut) {
-        this.checkOut = this.addDays(this.checkIn, this.minNights)
-      }
+      if (!this.disabledDates)
+        if (this.checkIn && !this.checkOut) {
+          this.checkOut = this.addDays(this.checkIn, this.minNights)
+        }
     },
 
     reRender() {
