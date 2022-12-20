@@ -12,18 +12,20 @@
         @mouseenter="enterDay($event, day)"
       >
         <Day
+          :minDate="minDate"
+          :maxDate="maxDate"
           :checkIn="checkIn"
           :checkOut="checkOut"
           :disabledDates="disabledDates"
           :date="day.date"
           :belongsToThisMonth="day.belongsToThisMonth"
           :hoveringDate="hoveringDate"
+          :disabledWeekDays="disabledWeekDays"
           :minNightCount="minNightCount"
           :maxNights="maxNights"
           :month="month"
           :options="options"
           @clear-selection="clearSelection"
-          @booking-clicked="handleBookingClicked"
           @day-clicked="handleDayClick"
         />
       </div>
@@ -46,6 +48,9 @@ export default {
     month: {
       type: Object,
       required: true,
+    },
+    disabledWeekDays: {
+      type: Object,
     },
     dayKey: {
       type: Number,
@@ -71,6 +76,16 @@ export default {
     i18n: {
       type: Object,
       default: () => ({}),
+    },
+    minDate: {
+      type: [Date, String],
+      default() {
+        return new Date()
+      },
+    },
+    maxDate: {
+      type: [Date, String, Number],
+      default: Infinity,
     },
     minNightCount: {
       type: Number,
@@ -114,12 +129,8 @@ export default {
       this.$emit('clear-selection')
     },
 
-    handleBookingClicked(event, date, currentBooking) {
-      this.$emit('booking-clicked', event, date, currentBooking)
-    },
-
-    handleDayClick(event, date, formatDate, resetCheckin) {
-      this.$emit('day-clicked', event, date, formatDate, resetCheckin)
+    handleDayClick(event, date) {
+      this.$emit('day-clicked', event, date)
     },
   },
 }

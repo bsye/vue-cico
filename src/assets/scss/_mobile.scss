@@ -28,6 +28,7 @@
 
         .cico-mobile-action-select {
             width: 70%;
+            flex-grow: 1;
 
             &.disabled {
                 pointer-events: none;

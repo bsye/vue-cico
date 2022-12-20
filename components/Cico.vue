@@ -12,11 +12,10 @@
           </span>
           <date-input
             :i18n="i18n"
-            :input-date="responsiveFormatter(this.checkIn, this.formatInputs)"
+            :input-date="responsiveFormatter(this.checkIn, this.fieldsFormat)"
             input-date-type="check-in"
             :is-open="isOpen"
             :toggle-datepicker="toggleDatepicker"
-            :single-day-selection="singleDaySelection"
           />
         </div>
         <IconArrow />
@@ -25,13 +24,11 @@
             {{ get(i18n, 'activity.filter.checkOut') }}
           </span>
           <date-input
-            v-if="!singleDaySelection"
             :i18n="i18n"
-            :input-date="responsiveFormatter(this.checkOut, this.formatInputs)"
+            :input-date="responsiveFormatter(this.checkOut, this.fieldsFormat)"
             input-date-type="check-out"
             :is-open="isOpen"
             :toggle-datepicker="toggleDatepicker"
-            :single-day-selection="singleDaySelection"
           />
         </div>
       </div>
@@ -109,28 +106,18 @@
             :month="month"
             :dayKey="datepickerDayKey"
             :weekKey="datepickerWeekKey"
-            :isDesktop="isDesktop"
             :firstDayOfWeek="firstDayOfWeek"
-            :activeMonthIndex="activeMonthIndex"
             :checkIn="checkIn"
-            :checkInMinNights="checkInMinNights"
-            :checkInPeriod="checkInPeriod"
             :checkOut="checkOut"
             :hoveringDate="hoveringDate"
-            :hoveringPeriod="hoveringPeriod"
             :i18n="i18n"
-            :isOpen="isOpen"
+            :minDate="minDate"
+            :maxDate="maxDate"
             :minNightCount="minNightCount"
             :maxNights="maxNights"
-            :nextDisabledDate="nextDisabledDate"
-            :nextPeriodDisableDates="nextPeriodDisableDates"
-            :options="dayOptions"
+            :disabledWeekDays="disabledWeekDays"
             :disabledDates="disabledDates"
-            :periodDates="periodDates"
-            :sortedDisabledDates="sortedDisabledDates"
-            :sortedPeriodDates="sortedPeriodDates"
             @clear-selection="clearSelection"
-            @booking-clicked="handleBookingClicked"
             @day-clicked="handleDayClick"
             @enter-day="enterDay"
             @enter-month="enterMonth"
@@ -139,6 +126,7 @@
         <MobileActions
           @reset="clearSelection()"
           @selected="mobileActionSelected()"
+          :displayClearButton="displayClearButton"
           :isClearDisabled="!(checkIn || checkOut)"
           :isSelectDisabled="!checkIn || !checkOut"
           :i18n="i18n"
@@ -174,7 +162,17 @@ export default {
     DateInput,
   },
   props: {
-    closeDatepickerOnClickOutside: {
+    checkInDate: {
+      type: [Date, null],
+      default: null,
+    },
+
+    checkOutDate: {
+      type: [Date, null],
+      default: null,
+    },
+
+    closeOnClickOutside: {
       type: Boolean,
       default: true,
     },
@@ -198,32 +196,12 @@ export default {
       default: true,
     },
 
-    enableCheckout: {
-      type: Boolean,
-      default: false,
-    },
-
-    endDate: {
-      type: [Date, String, Number],
-      default: Infinity,
-    },
-
-    endingDateValue: {
-      type: [Date, null],
-      default: null,
-    },
-
-    firstDayOfWeek: {
-      type: Number,
-      default: 0,
-    },
-
-    format: {
+    outputFormat: {
       type: String,
       default: 'YYYY-MM-DD',
     },
 
-    formatInputs: {
+    fieldsFormat: {
       type: [Object, String],
       default: () => {
         return {
@@ -238,8 +216,15 @@ export default {
       default: () => i18nDefaults,
     },
 
-    lastDateAvailable: {
-      type: [Number, Date],
+    minDate: {
+      type: [Date, String],
+      default() {
+        return new Date()
+      },
+    },
+
+    maxDate: {
+      type: [Date, String],
       default: Infinity,
     },
 
@@ -257,51 +242,23 @@ export default {
       type: String,
       default: 'bottom',
     },
-
-    periodDates: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-
-    singleDaySelection: {
-      type: Boolean,
-      default: false,
-    },
-
-    startDate: {
-      type: [Date, String],
-      default() {
-        return new Date()
-      },
-    },
-
-    startingDateValue: {
-      type: [Date, null],
-      default: null,
-    },
   },
 
   data() {
     return {
       activeMonthIndex: 0,
-      checkIn: this.startingDateValue,
+      checkIn: this.checkInDate,
       checkInMinNights: [],
-      checkInPeriod: {},
-      checkOut: this.endingDateValue,
-      hoveringPeriod: {},
+      checkOut: this.checkOutDate,
       datepickerDayKey: 0,
+      firstDayOfWeek: 0,
       datepickerMonthKey: 0,
       datepickerWeekKey: 0,
       dynamicNightCounts: null,
       hash: Date.now(),
       hoveringDate: null,
       months: [],
-      nextDisabledDate: null,
-      nextPeriodDisableDates: [],
       open: false,
-      sortedDisabledDates: null,
       windowWidth: window.innerWidth,
     }
   },
@@ -312,8 +269,6 @@ export default {
       },
       set(open) {
         this.open = open
-
-        this.$emit('input', this.open)
       },
     },
 
@@ -367,26 +322,8 @@ export default {
       return months
     },
 
-    sortedPeriodDates() {
-      let periodDates = []
-
-      if (this.periodDates) {
-        const sortFunction = (fecha1, fecha2) => {
-          const v1 = fecha1.startAt.split('/').reverse().join() + fecha1.endAt.split('/').reverse().join()
-          const v2 = fecha2.startAt.split('/').reverse().join() + fecha2.endAt.split('/').reverse().join()
-
-          // eslint-disable-next-line no-nested-ternary
-          return v1 < v2 ? -1 : v1 > v2 ? 1 : 0
-        }
-
-        periodDates = [...this.periodDates].sort(sortFunction)
-      }
-
-      return periodDates
-    },
-
     isPreventedMaxMonth() {
-      const lastIndexMonthAvailable = this.getMonthDiff(this.startDate, this.lastDateAvailable)
+      const lastIndexMonthAvailable = this.getMonthDiff(this.minDate, this.maxDate)
 
       return this.activeMonthIndex >= lastIndexMonthAvailable - 1
     },
@@ -399,7 +336,7 @@ export default {
       return Boolean((this.checkIn || this.checkOut) && this.displayClearButton)
     },
 
-    disabledWeekDaysObject() {
+    disabledWeekDays() {
       const disabledDays = this.disabledDaysOfWeek.map((d) => d.toLowerCase())
       const names = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
       const SUNDAY = names[0]
@@ -410,7 +347,7 @@ export default {
       const FRIDAY = names[5]
       const SATURDAY = names[6]
       // The order of _default is important!
-      const disabledWeekDaysObject = {
+      const disabledWeekDays = {
         sunday: disabledDays.includes(SUNDAY),
         monday: disabledDays.includes(MONDAY),
         tuesday: disabledDays.includes(TUESDAY),
@@ -420,7 +357,7 @@ export default {
         saturday: disabledDays.includes(SATURDAY),
       }
 
-      return disabledWeekDaysObject
+      return disabledWeekDays
     },
 
     disabledWeekDaysArray() {
@@ -435,10 +372,6 @@ export default {
         .filter((v) => v)
     },
 
-    dayOptions() {
-      return { ...this.$props, disabledWeekDaysObject: this.disabledWeekDaysObject }
-    },
-
     numberOfMonths() {
       if (this.isDesktop) return 2
 
@@ -451,29 +384,23 @@ export default {
   },
   watch: {
     checkIn(newDate) {
-      this.$emit('check-in-changed', this.dateFormatter(newDate, this.format))
-      this.$emit('starting-date-changed', this.dateFormatter(newDate, this.format))
+      this.$emit('check-in-selected', this.dateFormatter(newDate, this.outputFormat))
 
-      this.setAdjacentDisabledDates()
       this.reRender()
     },
 
     checkOut(newDate) {
-      this.$emit('ending-date-changed')
-
       if (this.checkOut !== null) {
         this.hoveringDate = null
-        this.nextDisabledDate = null
         this.reRender()
       }
 
-      this.$emit('check-out-changed', this.dateFormatter(newDate, this.format))
+      this.$emit('check-out-selected', this.dateFormatter(newDate, this.outputFormat))
       this.reRender()
     },
 
-    firstDayOfWeek(newDay) {
-      this.$emit('first-day-of-week-changed', newDay)
-      const startDate = new Date(this.startDate)
+    firstDayOfWeek() {
+      const startDate = new Date(this.minDate)
       const offset = this.numberOfMonths + this.activeMonthIndex
 
       this.generateInitialMonths()
@@ -485,23 +412,12 @@ export default {
       this.reRender()
     },
 
-    startingDateValue(date) {
+    checkInDate(date) {
       this.setCheckIn(date)
     },
 
-    endingDateValue(date) {
+    checkOutDate(date) {
       this.setCheckOut(date)
-    },
-
-    singleDaySelection(single) {
-      if (single) {
-        this.setCheckOut(this.checkIn)
-      } else {
-        this.setCheckIn(this.checkIn)
-        this.setCheckOut(null)
-      }
-
-      this.reRender()
     },
 
     i18n() {
@@ -509,7 +425,6 @@ export default {
     },
 
     disabledDates() {
-      this.nextDisabledDate = null
       this.disabledDateIsCheckIn()
       this.disabledDateIsCheckOut()
       this.reRender()
@@ -588,11 +503,11 @@ export default {
     },
 
     responsiveFormatter(date) {
-      if (typeof this.formatInputs === 'string') return this.dateFormatter(date, this.formatInputs)
+      if (typeof this.fieldsFormat === 'string') return this.dateFormatter(date, this.fieldsFormat)
 
       if (this.isDesktop) {
         try {
-          if (this.get(this.formatInputs, 'desktop')) return this.dateFormatter(date, this.formatInputs.desktop)
+          if (this.get(this.fieldsFormat, 'desktop')) return this.dateFormatter(date, this.fieldsFormat.desktop)
         } catch (error) {
           return this.dateFormatter(date, 'ddd DD MMM')
         }
@@ -600,9 +515,9 @@ export default {
         return this.dateFormatter(date, 'ddd DD MMM')
       }
 
-      if (this.get(this.formatInputs, 'mobile'))
+      if (this.get(this.fieldsFormat, 'mobile'))
         try {
-          return this.dateFormatter(date, this.formatInputs.mobile)
+          return this.dateFormatter(date, this.fieldsFormat.mobile)
         } catch (error) {
           return this.dateFormatter(date, 'DD MMM')
         }
@@ -615,12 +530,12 @@ export default {
 
       if (
         this.checkIn &&
-        (this.getMonthDiff(this.getNextMonth(new Date(this.startDate)), this.checkIn) > 0 ||
-          this.getMonthDiff(this.startDate, this.checkIn) > 0)
+        (this.getMonthDiff(this.getNextMonth(new Date(this.minDate)), this.checkIn) > 0 ||
+          this.getMonthDiff(this.minDate, this.checkIn) > 0)
       ) {
-        this.createMonth(new Date(this.startDate))
-        const monthCount = this.getMonthDiff(this.startDate, this.checkIn)
-        let nextMonth = new Date(this.startDate)
+        this.createMonth(new Date(this.minDate))
+        const monthCount = this.getMonthDiff(this.minDate, this.checkIn)
+        let nextMonth = new Date(this.minDate)
 
         for (let i = 0; i <= monthCount; i++) {
           const tempNextMonth = this.getNextMonth(nextMonth)
@@ -636,27 +551,13 @@ export default {
 
         this.activeMonthIndex += monthCount
       } else {
-        let date = new Date(this.startDate)
+        let date = new Date(this.minDate)
 
         for (let i = 0; i < this.numberOfMonths; i++) {
           this.createMonth(date)
           date = this.getNextMonth(new Date(date))
         }
       }
-    },
-
-    setAdjacentDisabledDates() {
-      if (this.minNightCount && this.checkIn) {
-        this.checkInMinNights = []
-
-        for (let i = 0; i < this.minNightCount; i++) {
-          this.checkInMinNights = [...this.checkInMinNights, new Date(this.addDays(this.checkIn, i))]
-        }
-      }
-    },
-
-    handleBookingClicked(event, date, currentBooking) {
-      this.$emit('booking-clicked', event, this.dateFormatter(date, this.format), currentBooking)
     },
 
     escFunction(e) {
@@ -668,67 +569,19 @@ export default {
     },
 
     formatDate(date) {
-      return this.dateFormatter(date, this.format)
+      return this.dateFormatter(date, this.outputFormat)
     },
 
     enterMonth(event, month) {
-      this.$emit('enter-month', event, month)
+      this.$emit('enter-month', month)
     },
 
     enterDay(event, day) {
-      this.hoveringDate = this.singleDaySelection ? null : day.date
-      this.$emit('enter-day', event, day)
-    },
-
-    setCurrentPeriod(date, eventType) {
-      let currentPeriod = {}
-
-      if (this.sortedPeriodDates.length > 0) {
-        this.sortedPeriodDates.forEach((d) => {
-          if (
-            eventType === 'click' &&
-            (d.startAt === this.dateFormatter(date) ||
-              (d.endAt !== this.dateFormatter(date) && this.validateDateBetweenTwoDates(d.startAt, d.endAt, date)))
-          ) {
-            currentPeriod = d
-          } else if (
-            eventType === 'hover' &&
-            (d.startAt === this.dateFormatter(date) || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))
-          ) {
-            currentPeriod = d
-          }
-        })
-
-        if (Object.keys(currentPeriod).length > 0) {
-          this.hoveringPeriod = currentPeriod
-        } else if (this.minNightCount > 0 && this.checkIn) {
-          this.hoveringPeriod = {
-            periodType: 'nightly',
-            minimumDuration: this.minNightCount,
-            startAt: this.checkIn,
-            endAt: this.addDays(this.checkIn, this.minNightCount),
-          }
-        } else {
-          this.hoveringPeriod = {
-            periodType: 'nightly',
-            minimumDuration: this.minNightCount,
-            startAt: this.checkIn,
-            endAt: this.addDays(this.checkIn, this.minNightCount),
-          }
-        }
-      } else if (this.minNightCount > 0) {
-        this.hoveringPeriod = {
-          periodType: 'nightly',
-          minimumDuration: this.minNightCount,
-          startAt: this.checkIn,
-          endAt: this.addDays(this.checkIn, this.minNightCount),
-        }
-      }
+      this.hoveringDate = day.date
+      this.$emit('enter-day', day)
     },
 
     handleDayClick(event, date, formatDate, resetCheckin) {
-      this.nextPeriodDisableDates = []
-
       if (resetCheckin) {
         this.clearSelection()
         this.$nextTick(() => {
@@ -740,35 +593,28 @@ export default {
 
       this.dynamicNightCounts = null
 
-      if (this.checkIn == null && !this.singleDaySelection) {
+      if (this.checkIn == null) {
         this.checkIn = date
-        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format))
-        this.setMinimumDuration(date)
-      } else if (this.singleDaySelection) {
-        this.checkIn = date
-        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format))
-        this.checkOut = date
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
       } else if (this.checkIn !== null && this.checkOut == null && this.isDateLessOrEquals(date, this.checkIn)) {
         this.checkIn = date
-        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format))
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
       } else if (this.checkIn !== null && this.checkOut == null) {
         this.checkOut = date
-        this.$emit('period-selected', event, this.dateFormatter(this.checkIn, this.format), this.checkOut)
+        this.$emit(
+          'period-selected',
+          this.dateFormatter(this.checkIn, this.outputFormat),
+          this.dateFormatter(this.checkOut, this.outputFormat),
+        )
       } else {
         this.checkOut = null
         this.checkIn = date
-        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.format))
-        this.setMinimumDuration(date)
-      }
-
-      if (this.checkIn && !this.checkOut) {
-        this.setCurrentPeriod(date, 'click')
-        this.checkInPeriod = this.hoveringPeriod
+        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
       }
 
       this.hoveringDate = null
       this.hoveringDate = date
-      this.$emit('day-clicked', this.dateFormatter(date, this.format), formatDate)
+      this.$emit('day-clicked', this.dateFormatter(date, this.outputFormat), formatDate)
     },
 
     nextBookingDate(date) {
@@ -789,6 +635,7 @@ export default {
     },
 
     handleClickOutside(event) {
+      if (this.closeOnClickOutside === false) return
       const ignoreClickOnMeElement = this.$refs[`DatePicker-${this.hash}`]
 
       if (ignoreClickOnMeElement) {
@@ -818,11 +665,7 @@ export default {
       this.hoveringDate = null
       this.checkIn = null
       this.checkOut = null
-      this.nextDisabledDate = null
-      this.nextPeriodDisableDates = []
       this.hoveringPeriod = {}
-      this.checkInPeriod = {}
-      this.checkInMinNights = []
       this.reRender()
       this.$emit('clear-selection')
     },
@@ -843,51 +686,6 @@ export default {
 
     toggleDatepicker() {
       this[this.isOpen ? 'hideDatepicker' : 'showDatepicker']()
-    },
-
-    setMinimumDuration(date) {
-      if (this.sortedPeriodDates) {
-        let nextPeriod = null
-        let currentPeriod = null
-        const compareDate = this.dateFormatter(date)
-
-        this.sortedPeriodDates.forEach((d) => {
-          if (
-            d.endAt !== compareDate &&
-            (d.startAt === compareDate || this.validateDateBetweenTwoDates(d.startAt, d.endAt, date))
-          ) {
-            currentPeriod = d
-          }
-        })
-
-        if (currentPeriod) {
-          this.sortedPeriodDates.forEach((period) => {
-            if (period.startAt === currentPeriod.endAt) {
-              nextPeriod = period
-            }
-          })
-
-          if (this.checkIn && !this.checkOut && nextPeriod) {
-            const endNextPeriod = this.addDays(nextPeriod.startAt, nextPeriod.minimumDuration - 1)
-            const startNextPeriodPlusOne = this.addDays(nextPeriod.startAt, 1)
-            const newDisablesDates = this.getDaysArray(startNextPeriodPlusOne, endNextPeriod)
-
-            this.nextPeriodDisableDates = newDisablesDates
-          }
-
-          if (currentPeriod.periodType === 'nightly' && currentPeriod.endAt !== date) {
-            this.dynamicNightCounts = currentPeriod.minimumDuration
-          }
-
-          if (currentPeriod.periodType === 'weekly_by_saturday' || currentPeriod.periodType === 'weekly_by_sunday') {
-            const minimumDuration = currentPeriod.minimumDuration * 7
-
-            this.dynamicNightCounts = minimumDuration
-          }
-        } else {
-          this.dynamicNightCounts = 0
-        }
-      }
     },
 
     renderPreviousMonth() {

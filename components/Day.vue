@@ -9,7 +9,7 @@
         beforeFirstValidDate,
         dayBelongToThisMonth,
         isCheckInDay,
-        isBeforeToday,
+        isBeforeMinDate,
         hoverIsCheckInDay,
         isAfterEndDate,
         hoverIsInTheRange,
@@ -51,6 +51,9 @@ export default {
       type: Array,
       default: () => [],
     },
+    disabledWeekDays: {
+      type: Object,
+    },
     date: {
       type: Date,
     },
@@ -60,6 +63,16 @@ export default {
     minNightCount: {
       type: Number,
       default: 0,
+    },
+    minDate: {
+      type: [Date, String],
+      default() {
+        return new Date()
+      },
+    },
+    maxDate: {
+      type: [Date, String, Number],
+      default: Infinity,
     },
     maxNights: {
       type: [Number, null],
@@ -85,7 +98,7 @@ export default {
     },
 
     isAfterMaxNights() {
-      if (!this.checkIn || typeof this.maxNights !== 'number') return null
+      if (!this.checkIn || typeof this.maxNights !== 'number' || this.checkOut) return null
       const maxNightDate = this.addDays(this.checkIn, this.maxNights)
 
       if (this.compareDay(this.date, maxNightDate) > 0) return 'disabled__is-after-max-nights'
@@ -97,8 +110,8 @@ export default {
       return fecha.format(this.date, 'D')
     },
 
-    isBeforeToday() {
-      if (this.compareDay(this.date, new Date()) < 0) return 'disabled__before-today'
+    isBeforeMinDate() {
+      if (this.compareDay(this.date, this.minDate) < 0) return 'disabled__before-min-date'
 
       return null
     },
@@ -181,8 +194,8 @@ export default {
     },
 
     isAfterEndDate() {
-      if (!this.options.endDate || this.options.endDate === Infinity) return null
-      if (this.compareDay(this.date, this.options.endDate) === 1) return 'disabled__after-option-end-date'
+      if (!this.maxDate || this.maxDate === Infinity) return null
+      if (this.compareDay(this.date, this.maxDate) === 1) return 'disabled__after-option-end-date'
 
       return null
     },
@@ -214,10 +227,12 @@ export default {
     },
 
     isADisabledDay() {
+      if (!this.disabledWeekDays) return null
+
       const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
       const day = days[this.date.getUTCDay()]
 
-      return this.options.disabledWeekDaysObject[day]
+      return this.disabledWeekDays[day]
     },
   },
 

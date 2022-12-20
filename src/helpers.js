@@ -177,14 +177,18 @@ const helpers = {
     return getvalidDate(givenDate) <= getvalidDate(fromDate)
   },
   getMonthDiff(d1, d2) {
-    const newD1 = new Date(d1)
-    const newD2 = new Date(d2)
-    const d1Y = newD1.getFullYear()
-    const d2Y = newD2.getFullYear()
-    const d1M = newD1.getMonth()
-    const d2M = newD2.getMonth()
+    try {
+      const newD1 = new Date(d1)
+      const newD2 = new Date(d2)
+      const d1Y = newD1.getFullYear()
+      const d2Y = newD2.getFullYear()
+      const d1M = newD1.getMonth()
+      const d2M = newD2.getMonth()
 
-    return d2M + 12 * d2Y - (d1M + 12 * d1Y)
+      return d2M + 12 * d2Y - (d1M + 12 * d1Y)
+    } catch {
+      return null
+    }
   },
   shortenString(arr, sLen) {
     const newArr = []

@@ -2,6 +2,7 @@
   <div class="cico-mobile-actions">
     <button
       @click="$emit('reset')"
+      v-if="displayClearButton"
       :class="{ disabled: isClearDisabled }"
       class="button no-margin expanded has-text-weight-semibold cico-mobile-action-reset"
     >
@@ -24,6 +25,11 @@ export default {
     i18n: {
       type: Object,
       required: true,
+    },
+
+    displayClearButton: {
+      type: Boolean,
+      default: true,
     },
 
     isSelectDisabled: {
