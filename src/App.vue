@@ -63,8 +63,8 @@
           :i18n="i18n"
           class="cico__style-search"
         />
-        <button @click="disabledDateTest()">disableNewDates</button>
-        <button @click="disabledDateTest2()">disableNewDates2</button>
+        <!-- <button @click="disabledDateTest()">disableNewDates</button>
+        <button @click="disabledDateTest2()">disableNewDates2</button> -->
       </div>
     </div>
   </div>
