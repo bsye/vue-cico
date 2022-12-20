@@ -1,6 +1,6 @@
 A responsive date range picker for Vue.js that displays the number of nights selected and allow several useful options like custom check-in/check-out rules, localisation support and more.
 
-![demo gif](https://gitlab.production.smartbox.com/npm/vue-cico/blob/main/demo.gif?raw=true)
+![demo gif](https://gitlab.production.smartbox.com/npm/vue-cico/-/raw/main/demo.gif?inline=false)
 
 ## Installation
 
