@@ -88,7 +88,7 @@ export default {
   },
   computed: {
     isDayNotAvailable() {
-      if (!this.disabledDates) return false
+      if (!this.disabledDates) return null
 
       if (this.disabledDates.find((disabled) => this.compareDay(disabled, this.date) === 0)) {
         return 'disabled__not-available'
@@ -210,7 +210,9 @@ export default {
       if (
         !this.isADisabledDayOfTheWeek &&
         !this.isCheckOutDay &&
+        !this.isBeforeMinDate &&
         !this.isDayNotAvailable &&
+        !this.isADisabledDayOfTheWeek &&
         !this.isCheckInDay &&
         !this.isAfterEndDate &&
         !this.dayBelongToThisMonth &&
