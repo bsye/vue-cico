@@ -47,7 +47,6 @@
       <div class="picker">
         <Cico
           :startDate="startDate"
-          :disabledDaysOfWeek="['monday']"
           :disabledDates="disableDateTestComputed"
           :singleDaySelection="true"
           :minNights="3"
