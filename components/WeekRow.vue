@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     weekdaysShort() {
-      return this.shortenString(
+      return this.shortenArrayOfStrings(
         [
           this.get(this.i18n, 'date.weekdays.short.sun'),
           this.get(this.i18n, 'date.weekdays.short.mon'),

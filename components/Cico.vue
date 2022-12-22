@@ -49,7 +49,7 @@
     >
       <div v-if="isOpen" class="cico__inner">
         <CallToAction
-          :included-nights="minNightCount"
+          :included-nights="minNights"
           :nights-total="totalNights"
           :nights-in="dateFormatter(checkIn, 'ddd DD MMM.')"
           :nights-out="dateFormatter(checkOut, 'ddd DD MMM.')"
@@ -113,7 +113,7 @@
             :i18n="i18n"
             :minDate="minDate"
             :maxDate="maxDate"
-            :minNightCount="minNightCount"
+            :minNightCount="minNights"
             :maxNights="maxNights"
             :disabledWeekDays="disabledWeekDays"
             :disabledDates="disabledDates"
@@ -328,10 +328,6 @@ export default {
       return this.activeMonthIndex >= lastIndexMonthAvailable - 1
     },
 
-    minNightCount() {
-      return this.dynamicNightCounts || this.minNights
-    },
-
     showClearSelectionButton() {
       return Boolean((this.checkIn || this.checkOut) && this.displayClearButton)
     },
@@ -463,9 +459,9 @@ export default {
     configureI18n() {
       fecha.setGlobalDateI18n({
         dayNames: this.weekdays,
-        dayNamesShort: this.shortenString(this.weekdaysShort, 3),
+        dayNamesShort: this.shortenArrayOfStrings(this.weekdaysShort, 3),
         monthNames: this.monthNames,
-        monthNamesShort: this.shortenString(this.monthNames, 3),
+        monthNamesShort: this.shortenArrayOfStrings(this.monthNames, 3),
         amPm: ['am', 'pm'],
         // D is the day of the month, function returns something like...  3rd or 11th
         DoFn(D) {
@@ -591,47 +587,31 @@ export default {
         return
       }
 
-      this.dynamicNightCounts = null
+      this.hoveringDate = null
+      this.hoveringDate = date
+      this.$emit('day-clicked', this.dateFormatter(date, this.outputFormat), formatDate)
 
       if (this.checkIn == null) {
         this.checkIn = date
         this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
-      } else if (this.checkIn !== null && this.checkOut == null && this.isDateLessOrEquals(date, this.checkIn)) {
-        this.checkIn = date
-        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
-      } else if (this.checkIn !== null && this.checkOut == null) {
+
+        return
+      }
+
+      if (this.checkIn && !this.checkOut) {
         this.checkOut = date
         this.$emit(
           'period-selected',
           this.dateFormatter(this.checkIn, this.outputFormat),
           this.dateFormatter(this.checkOut, this.outputFormat),
         )
-      } else {
-        this.checkOut = null
-        this.checkIn = date
-        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
+
+        return
       }
 
-      this.hoveringDate = null
-      this.hoveringDate = date
-      this.$emit('day-clicked', this.dateFormatter(date, this.outputFormat), formatDate)
-    },
-
-    nextBookingDate(date) {
-      let closest = Infinity
-
-      if (this.sortBookings.length > 0) {
-        const nextDateFormated = this.dateFormatter(this.addDays(date, 1))
-        const nextBooking = this.sortBookings.find(
-          (booking) =>
-            this.validateDateBetweenDate(booking.checkInDate, nextDateFormated) ||
-            this.validateDateBetweenTwoDates(booking.checkInDate, booking.checkOutDate, nextDateFormated),
-        )
-
-        closest = nextBooking ? nextBooking.checkInDate : Infinity
-      }
-
-      return closest
+      this.checkOut = null
+      this.checkIn = date
+      this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
     },
 
     handleClickOutside(event) {

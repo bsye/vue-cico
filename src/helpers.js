@@ -21,6 +21,7 @@ const helpers = {
 
     return closest
   },
+
   nextDateByDayOfWeek(weekDay, referenceDate, i18n) {
     const newReferenceDate = new Date(referenceDate)
     let newWeekDay = weekDay.toLowerCase()
@@ -48,6 +49,7 @@ const helpers = {
 
     return newReferenceDate.setDate(newReferenceDate.getDate() + daysUntilNext)
   },
+
   nextDateByDayOfWeekArray(daysArray, referenceDate, i18n) {
     const tempArray = []
 
@@ -57,13 +59,7 @@ const helpers = {
 
     return this.getNextDate(tempArray, referenceDate)
   },
-  nextDateByDayOfWeekObject(days, referenceDate, i18n) {
-    const daysArray = Object.entries(days)
-      .map((e) => (e[1] ? e[0] : false))
-      .filter((v) => v)
 
-    return this.nextDateByDayOfWeekArray(daysArray, referenceDate, i18n)
-  },
   countDays(start, end) {
     const oneDay = 24 * 60 * 60 * 1000
     const firstDate = new Date(start)
@@ -71,6 +67,7 @@ const helpers = {
 
     return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay))
   },
+
   addDays(date, quantity) {
     const result = new Date(date)
 
@@ -120,62 +117,6 @@ const helpers = {
 
     return prevMonth
   },
-  handleTouchStart(evt) {
-    this.isTouchMove = false
-
-    if (this.isOpen) {
-      this.xDown = evt.touches[0].clientX
-      this.yDown = evt.touches[0].clientY
-    }
-  },
-  handleTouchMove(evt) {
-    if (!this.xDown || !this.yDown) {
-      this.isTouchMove = false
-
-      return
-    }
-
-    this.isTouchMove = true
-    this.xUp = evt.touches[0].clientX
-    this.yUp = evt.touches[0].clientY
-  },
-  handleTouchEnd() {
-    if (!this.isTouchMove) {
-      return
-    }
-
-    if (!this.xDown || !this.yDown) {
-      return
-    }
-
-    const xDiff = this.xDown - this.xUp
-    const yDiff = this.yDown - this.yUp
-
-    if (Math.abs(xDiff) < Math.abs(yDiff) && yDiff > 0 && !this.isPreventedMaxMonth) {
-      this.renderNextMonth()
-    } else {
-      this.renderPreviousMonth()
-    }
-
-    this.xDown = null
-    this.yDown = null
-  },
-  validateDateBetweenTwoDates(fromDate, toDate, givenDate) {
-    const getvalidDate = (d) => {
-      const formatDateAt00 = new Date(d).setHours(0, 0, 0, 0)
-
-      return new Date(formatDateAt00)
-    }
-
-    return getvalidDate(givenDate) <= getvalidDate(toDate) && getvalidDate(givenDate) >= getvalidDate(fromDate)
-  },
-  validateDateBetweenDate(fromDate, givenDate) {
-    const getvalidDate = (d) => {
-      return new Date(d)
-    }
-
-    return getvalidDate(givenDate) <= getvalidDate(fromDate)
-  },
   getMonthDiff(d1, d2) {
     try {
       const newD1 = new Date(d1)
@@ -190,7 +131,7 @@ const helpers = {
       return null
     }
   },
-  shortenString(arr, sLen) {
+  shortenArrayOfStrings(arr, sLen) {
     const newArr = []
 
     if (!arr) return null
@@ -201,37 +142,18 @@ const helpers = {
 
     return newArr
   },
-  getDaysArray(start, end) {
-    for (
-      // eslint-disable-next-line no-var
-      var arr = [], dt = new Date(start);
-      dt <= end;
-      dt.setDate(dt.getDate() + 1)
-    ) {
-      arr.push(new Date(dt))
-    }
-
-    // eslint-disable-next-line block-scoped-var
-    return arr
-  },
   dateFormatter(date, format) {
     const f = format || 'YYYY-MM-DD'
 
-    if (date) {
-      return fecha.format(new Date(date), f)
+    try {
+      if (date) {
+        return fecha.format(new Date(date), f)
+      }
+    } catch (error) {
+      return null
     }
 
-    return ''
-  },
-  pluralize(countOfDays, periodType = 'night') {
-    if (periodType === 'week') {
-      return countOfDays > 7 ? 'weeks' : 'week'
-    }
-
-    return countOfDays !== 1 ? this.i18n.nights : this.i18n.night
-  },
-  isDateLessOrEquals(time1, time2) {
-    return new Date(time1) < new Date(time2)
+    return null
   },
   compareDay(day1, day2) {
     const date1 = fecha.format(new Date(day1), 'YYYYMMDD')

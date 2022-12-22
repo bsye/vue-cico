@@ -1,36 +1,14 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { expect } from 'chai'
 
-import Day from '@/DatePicker/components/Day.vue'
+import Day from '../../components/Day.vue'
 
 describe('Datepicker Day', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = shallowMount(Day, {
-      propsData: {
-        activeMonthIndex: 0,
-        belongsToThisMonth: true,
-        checkIn: null,
-        checkOut: null,
-        date: new Date(),
-        dayNumber: '1',
-        hoveringDate: null,
-        hoveringTooltip: true,
-        isOpen: true,
-        nextDisabledDate: null,
-        options: {
-          disabledDates: [],
-          disabledDaysOfWeek: [],
-          endDate: '2017-12-30T23:00:00.000Z',
-          format: 'YYYY-MM-DD',
-          hoveringTooltip: true,
-          maxNights: null,
-          minNights: 3,
-          startDate: '2017-10-05T15:16:50.281Z',
-          value: undefined,
-        },
-      },
+    wrapper = mount(Day, {
+      propsData: {},
     })
   })
 
