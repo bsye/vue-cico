@@ -78,10 +78,6 @@ export default {
       type: [Number, null],
       default: null,
     },
-    month: {
-      type: Object,
-      required: true,
-    },
     options: {
       type: Object,
     },
@@ -107,6 +103,8 @@ export default {
     },
 
     dayNumber() {
+      if (!this.date) return null
+
       return fecha.format(this.date, 'D')
     },
 
@@ -117,9 +115,11 @@ export default {
     },
 
     beforeFirstValidDate() {
+      if (!this.checkIn || this.checkOut) return null
+
       const firstValidDate = this.addDays(this.checkIn, this.minNightCount)
 
-      if (this.compareDay(this.date, firstValidDate) < 0 && this.checkIn && !this.checkOut) {
+      if (this.compareDay(this.date, firstValidDate) < 0) {
         return 'disabled__before-first-valid-date'
       }
 
@@ -152,6 +152,8 @@ export default {
     },
 
     hoverIsCheckInDay() {
+      if (!this.hoveringDate) return null
+
       if (!this.checkIn || (this.checkIn && this.checkOut))
         if (this.compareDay(this.date, this.hoveringDate) === 0) return 'hover__check-in-date'
 
@@ -166,6 +168,8 @@ export default {
     },
 
     hoverIsCheckOutDay() {
+      if (!this.hoveringDate) return null
+
       if (this.checkIn && !this.checkOut) {
         if (this.compareDay(this.date, this.hoveringDate) === 0) return 'hover__check-out-date'
       }
