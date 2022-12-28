@@ -156,6 +156,7 @@ const helpers = {
     return null
   },
   compareDay(day1, day2) {
+    if (!day1 || !day2) return null
     const date1 = fecha.format(new Date(day1), 'YYYYMMDD')
     const date2 = fecha.format(new Date(day2), 'YYYYMMDD')
 

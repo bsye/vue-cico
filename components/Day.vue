@@ -135,7 +135,7 @@ export default {
     },
 
     hoverIsCurrentDay() {
-      if (this.date !== this.hoveringDate) return null
+      if (this.compareDay(this.date, this.hoveringDate) !== 0) return null
 
       if (this.checkIn && !this.checkOut && this.compareDay(this.date, this.checkIn) === 0) {
         return 'hovering-current-day'
@@ -226,10 +226,6 @@ export default {
         return 'is-valid-day'
 
       return null
-    },
-
-    nightsCount() {
-      return this.countDays(this.checkIn, this.hoveringDate)
     },
 
     isADisabledDay() {
