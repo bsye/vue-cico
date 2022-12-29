@@ -152,7 +152,7 @@ import Helpers from '../src/helpers'
 import i18nDefaults from '../public/i18n/en'
 
 export default {
-  name: 'HotelDatePicker',
+  name: 'Cico',
   components: {
     Month,
     CallToAction,
@@ -224,7 +224,7 @@ export default {
     },
 
     maxDate: {
-      type: [Date, String],
+      type: [Date, String, Number],
       default: Infinity,
     },
 

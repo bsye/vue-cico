@@ -48,7 +48,6 @@
         <Cico
           :startDate="startDate"
           :disabledDates="disableDateTestComputed"
-          :singleDaySelection="true"
           :minNights="3"
           :maxNights="20"
           :i18n="i18n"
