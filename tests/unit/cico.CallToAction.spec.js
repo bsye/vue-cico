@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { expect } from 'chai'
 import get from 'lodash.get'
 import i18n from '../../public/i18n/en'
+import helpers from '../../src/helpers'
 
 import Cico from '../../components/Cico.vue'
 
@@ -30,7 +31,9 @@ describe('Call To Action Component', () => {
   })
 
   it('should tell me the selected checkIn Date but not the checkOut date', () => {
-    expect(wrapper.find('.cico__nights-info .cico__checkin').text()).to.be.eql('Sat 31 Dec.')
+    const testCheckIn = helpers.dateFormatter('2022-12-31', 'ddd DD MMM.')
+
+    expect(wrapper.find('.cico__nights-info .cico__checkin').text()).to.be.eql(testCheckIn)
     expect(wrapper.find('.cico__nights-info .cico__checkout').text()).to.be.eql(
       `- ${get(i18n, 'activity.calendar.checkOut')}`,
     )
@@ -40,9 +43,13 @@ describe('Call To Action Component', () => {
     await wrapper.setProps({
       checkOutDate: new Date('2023-01-04'),
     })
+
+    const testCheckIn = helpers.dateFormatter('2022-12-31', 'ddd DD MMM.')
+    const testCheckOut = helpers.dateFormatter('2023-01-04', 'ddd DD MMM.')
+
     expect(wrapper.find('.cico__cta-panel-title').text()).to.be.eql(get(i18n, 'checkInCheckOut.yourDates'))
-    expect(wrapper.find('.cico__nights-info .cico__checkin').text()).to.be.eql('Sat 31 Dec.')
-    expect(wrapper.find('.cico__nights-info .cico__checkout').text()).to.be.eql(`- Wed 04 Jan.`)
+    expect(wrapper.find('.cico__nights-info .cico__checkin').text()).to.be.eql(testCheckIn)
+    expect(wrapper.find('.cico__nights-info .cico__checkout').text()).to.be.eql(`- ${testCheckOut}`)
   })
 
   it("should tell me that there's an extra night selected", async () => {

@@ -589,11 +589,10 @@ export default {
 
       this.hoveringDate = null
       this.hoveringDate = date
-      this.$emit('day-clicked', this.dateFormatter(date, this.outputFormat), formatDate)
+      this.$emit('day-clicked', this.dateFormatter(date, this.outputFormat))
 
       if (this.checkIn == null) {
         this.checkIn = date
-        this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
 
         return
       }
@@ -611,7 +610,6 @@ export default {
 
       this.checkOut = null
       this.checkIn = date
-      this.$emit('check-in-selected', this.dateFormatter(this.checkIn, this.outputFormat))
     },
 
     handleClickOutside(event) {

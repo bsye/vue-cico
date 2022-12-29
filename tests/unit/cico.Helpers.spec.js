@@ -117,10 +117,6 @@ describe('Datepicker Helpers', () => {
       expect(DatepickerHelpers.dateFormatter('', 'MMMM YY DD')).to.eql(null)
     })
 
-    it('it should return the default format YYYY-MM-DD if no format is provided', () => {
-      expect(DatepickerHelpers.dateFormatter('2022-10-12', 'YYYY-MM-DD')).to.eql('2022-10-12')
-    })
-
     it('it should not support italian date formats', () => {
       expect(DatepickerHelpers.dateFormatter('12-10-22', 'YYYY-MM-DD')).to.not.eql('2022-10-12')
     })
@@ -128,7 +124,7 @@ describe('Datepicker Helpers', () => {
 
   describe('compareDay', () => {
     it('it should return 0 because the dates are equal', () => {
-      expect(DatepickerHelpers.compareDay(new Date('10-12-2028'), new Date('2028-10-12'))).to.eql(0)
+      expect(DatepickerHelpers.compareDay(new Date('2028-10-12'), new Date('2028-10-12'))).to.eql(0)
     })
 
     it('it should return 1 because the first date is after the second date', () => {

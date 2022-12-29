@@ -2,6 +2,7 @@
   <div>
     <div
       class="cico__month-day"
+      :day="date"
       @click.prevent.stop="dayClicked($event, date)"
       :class="[
         isAfterMaxNights,
@@ -105,7 +106,7 @@ export default {
     dayNumber() {
       if (!this.date) return null
 
-      return fecha.format(this.date, 'D')
+      return fecha.format(new Date(this.date), 'D')
     },
 
     isBeforeMinDate() {

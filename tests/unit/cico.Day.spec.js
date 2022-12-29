@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { expect } from 'chai'
+import helpers from '../../src/helpers'
 
 import Day from '../../components/Day.vue'
 
@@ -99,7 +100,7 @@ describe('Day Component', () => {
     })
 
     it('should return the day number', () => {
-      expect(wrapper.vm.dayNumber).to.equal('12')
+      expect(wrapper.vm.dayNumber).to.equal(helpers.dateFormatter(new Date('2022-12-12'), 'D'))
     })
   })
 
