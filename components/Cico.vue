@@ -1,6 +1,6 @@
 <template>
   <div class="cico__wrapper cico__root" :ref="`DatePicker-${hash}`">
-    <div class="cico__close-button" v-if="isOpen" @click="hideDatepicker()">
+    <div class="cico__close-button" v-if="isOpen && !isDesktop" @click="hideDatepicker()">
       <i>+</i>
     </div>
     <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
@@ -453,7 +453,14 @@ export default {
     get,
 
     handleResize() {
+      const { isDesktop } = this
+
       this.windowWidth = window.innerWidth
+
+      if (isDesktop !== this.isDesktop) {
+        this.activeMonthIndex = 0
+        this.generateInitialMonths()
+      }
     },
 
     configureI18n() {
