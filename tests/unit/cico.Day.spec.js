@@ -288,6 +288,47 @@ describe('Day Component', () => {
     })
   })
 
+  describe('isSelectionCheckInDay', () => {
+    let wrapper
+    let wrapper2
+    let wrapper3
+
+    beforeEach(() => {
+      wrapper = shallowMount(Day, {
+        propsData: {
+          hoveringDate: new Date('2022-12-13'),
+          date: new Date('2022-12-12'),
+        },
+      })
+
+      wrapper2 = shallowMount(Day, {
+        propsData: {
+          checkIn: new Date('2022-12-30'),
+          date: new Date('2022-12-30'),
+        },
+      })
+
+      wrapper3 = shallowMount(Day, {
+        propsData: {
+          checkIn: new Date('2022-12-30'),
+          date: new Date('2022-12-31'),
+        },
+      })
+    })
+
+    it('should return NULL if no checkIn date', () => {
+      expect(wrapper.vm.isSelectionCheckInDay).to.eql(null)
+    })
+
+    it('should return "selection__check-in-date" if the check in is selected but the checkout is not', () => {
+      expect(wrapper2.vm.isSelectionCheckInDay).to.eql('selection__check-in-date')
+    })
+
+    it('should return NULL if the current date is the not the checkIn date', () => {
+      expect(wrapper3.vm.isSelectionCheckInDay).to.eql(null)
+    })
+  })
+
   describe('hoverIsCheckInDay', () => {
     let wrapper
     let wrapper2
