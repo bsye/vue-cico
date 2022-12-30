@@ -421,6 +421,33 @@
         }
     }
 
+    &.check-in-date:not(.selection__check-in-date),
+    &.check-out-date,
+    &.hover__check-in-date.is-in-range:hover,
+    &.hover__check-out-date.is-in-range:hover {
+        &.hover__check-in-date:hover > div,
+        &.hover__check-out-date:hover > div,
+        > div {
+            &::before {
+                background-color: var(--primary-color);
+            }
+        }
+    }
+
+    &.check-in-date.selection__check-in-date,
+    &.hover__check-in-date:hover,
+    &.hover__check-out-date:hover,
+    &.hover__check-out-date.disabled__before-first-valid-date,
+    &.hover__check-out-date.disabled__before-min-date,
+    &.hover__check-out-date.disabled__not-available,
+    &.hover__check-out-date.disabled__is-after-max-nights {
+        > div {
+            &::before {
+                background-color: var(--primary-color-light);
+            }
+        }
+    }
+
     &.check-in-date,
     &.check-out-date,
     &.hover__check-in-date:hover,
@@ -449,7 +476,6 @@
                 content: "";
                 width: 100%;
                 right: 0;
-                background-color: var(--primary-color-light);
                 height: 100%;
                 position: absolute;
                 display: block;
@@ -519,6 +545,11 @@
     }
 
     &.is-in-range {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    &.hover__is-in-range {
         background-color: var(--primary-color-light);
     }
   }

@@ -5,21 +5,22 @@
       :day="date"
       @click.prevent.stop="dayClicked($event, date)"
       :class="[
-        isAfterMaxNights,
-        isDayNotAvailable,
         beforeFirstValidDate,
         dayBelongToThisMonth,
+        isAfterMaxNights,
+        isDayNotAvailable,
         isCheckInDay,
+        isSelectionCheckInDay,
         isBeforeMinDate,
-        hoverIsCheckInDay,
         isAfterEndDate,
-        hoverIsInTheRange,
         isInTheRange,
         isCheckOutDay,
-        hoverIsCheckOutDay,
         isADisabledDayOfTheWeek,
-        hoverIsCurrentDay,
         isValidDay,
+        hoverIsCheckInDay,
+        hoverIsInTheRange,
+        hoverIsCheckOutDay,
+        hoverIsCurrentDay,
       ]"
       ref="day"
     >
@@ -152,6 +153,13 @@ export default {
       return null
     },
 
+    isSelectionCheckInDay() {
+      if (!this.checkIn || this.checkOut) return null
+      if (this.compareDay(this.date, this.checkIn) === 0) return 'selection__check-in-date'
+
+      return null
+    },
+
     hoverIsCheckInDay() {
       if (!this.hoveringDate) return null
 
@@ -182,7 +190,7 @@ export default {
       if (!this.hoveringDate || !this.checkIn || this.checkOut) return null
 
       if (this.compareDay(this.checkIn, this.date) < 0) {
-        if (this.compareDay(this.date, this.hoveringDate) < 0) return 'is-in-range'
+        if (this.compareDay(this.date, this.hoveringDate) < 0) return 'hover__is-in-range'
       }
 
       return null
