@@ -251,7 +251,7 @@ export default {
       checkInMinNights: [],
       checkOut: this.checkOutDate,
       datepickerDayKey: 0,
-      firstDayOfWeek: 0,
+      firstDayOfWeek: 1,
       datepickerMonthKey: 0,
       datepickerWeekKey: 0,
       dynamicNightCounts: null,
@@ -724,7 +724,7 @@ export default {
         days: [],
       }
 
-      for (let i = 0; i < 35; i++) {
+      for (let i = 0; i < 38; i++) {
         month.days.push({
           date: this.addDays(firstDay, i),
           belongsToThisMonth: this.addDays(firstDay, i).getMonth() === date.getMonth(),
