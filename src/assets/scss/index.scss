@@ -362,28 +362,7 @@
 
     &:first-child {
       background: none;
-      //background: transparent url('../images/ic-arrow-right-datepicker.regular.svg') no-repeat right center / 8px;
       width: 50%;
-    }
-
-    &--is-active {
-      color: var(--oil);
-    }
-
-    &--is-active::placeholder {
-      color: var(--oil);
-    }
-
-    &--is-active::-moz-placeholder {
-      color: var(--oil);
-    }
-
-    &--is-active:-ms-input-placeholder {
-      color: var(--oil);
-    }
-
-    &--is-active:-moz-placeholder {
-      color: var(--oil);
     }
 
     &--single-date:first-child {
