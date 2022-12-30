@@ -12,6 +12,13 @@ npm install git+ssh://git@gitlab.production.smartbox.com:npm/vue-cico.git
 
 #### CSS
 
+There are two styles already set up, which you can select by adding the class to the component:
+
+Search Page: `.cico__style-search`
+Landing Page: `.cico__style-landing`
+
+The style is only related to the appearance of the inputs.
+
 To make it work with different colors you need to override the default css variables found in the .css__root class
 ```css
 import 'vue-cico/dist/vueHotelDatepicker.css'
