@@ -2570,7 +2570,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=715878d4&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=1dabf5af&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2776,7 +2776,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=715878d4&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=1dabf5af&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -3248,14 +3248,14 @@ var Monthvue_type_template_id_b51f7d16_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=b51f7d16&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=64813ef8&
-var Dayvue_type_template_id_64813ef8_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=dfb1fbec&
+var Dayvue_type_template_id_dfb1fbec_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c('div', {
     ref: "day",
     staticClass: "cico__month-day",
-    class: [_vm.isAfterMaxNights, _vm.isDayNotAvailable, _vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isCheckInDay, _vm.isBeforeMinDate, _vm.hoverIsCheckInDay, _vm.isAfterEndDate, _vm.hoverIsInTheRange, _vm.isInTheRange, _vm.isCheckOutDay, _vm.hoverIsCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.hoverIsCurrentDay, _vm.isValidDay],
+    class: [_vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isAfterMaxNights, _vm.isDayNotAvailable, _vm.isCheckInDay, _vm.isSelectionCheckInDay, _vm.isBeforeMinDate, _vm.isAfterEndDate, _vm.isInTheRange, _vm.isCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.isValidDay, _vm.hoverIsCheckInDay, _vm.hoverIsInTheRange, _vm.hoverIsCheckOutDay, _vm.hoverIsCurrentDay],
     attrs: {
       "day": _vm.date
     },
@@ -3272,9 +3272,9 @@ var Dayvue_type_template_id_64813ef8_render = function render() {
     staticClass: "day"
   }, [_vm._v(_vm._s(_vm.dayNumber))])])])]);
 };
-var Dayvue_type_template_id_64813ef8_staticRenderFns = [];
+var Dayvue_type_template_id_dfb1fbec_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=64813ef8&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=dfb1fbec&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3514,6 +3514,11 @@ const helpers = {
       if (this.compareDay(this.date, this.checkIn) === 0) return 'check-in-date';
       return null;
     },
+    isSelectionCheckInDay() {
+      if (!this.checkIn || this.checkOut) return null;
+      if (this.compareDay(this.date, this.checkIn) === 0) return 'selection__check-in-date';
+      return null;
+    },
     hoverIsCheckInDay() {
       if (!this.hoveringDate) return null;
       if (!this.checkIn || this.checkIn && this.checkOut) if (this.compareDay(this.date, this.hoveringDate) === 0) return 'hover__check-in-date';
@@ -3534,7 +3539,7 @@ const helpers = {
     hoverIsInTheRange() {
       if (!this.hoveringDate || !this.checkIn || this.checkOut) return null;
       if (this.compareDay(this.checkIn, this.date) < 0) {
-        if (this.compareDay(this.date, this.hoveringDate) < 0) return 'is-in-range';
+        if (this.compareDay(this.date, this.hoveringDate) < 0) return 'hover__is-in-range';
       }
       return null;
     },
@@ -3696,8 +3701,8 @@ function normalizeComponent(
 
 var component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_64813ef8_render,
-  Dayvue_type_template_id_64813ef8_staticRenderFns,
+  Dayvue_type_template_id_dfb1fbec_render,
+  Dayvue_type_template_id_dfb1fbec_staticRenderFns,
   false,
   null,
   null,
@@ -4809,7 +4814,7 @@ var CallToAction_component = normalizeComponent(
       const month = {
         days: []
       };
-      for (let i = 0; i < 38; i++) {
+      for (let i = 0; i < 42; i++) {
         month.days.push({
           date: this.addDays(firstDay, i),
           belongsToThisMonth: this.addDays(firstDay, i).getMonth() === date.getMonth()

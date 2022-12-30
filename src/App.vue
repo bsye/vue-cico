@@ -62,8 +62,6 @@
           :i18n="i18n"
           class="cico__style-search"
         />
-        <button @click="disabledDateTest()">disableNewDates</button>
-        <button @click="disabledDateTest2()">disableNewDates2</button>
       </div>
     </div>
   </div>
@@ -97,23 +95,6 @@ export default {
 
     i18n() {
       return en
-    },
-  },
-
-  methods: {
-    disabledDateTest() {
-      this.disableDateTestComputed = ['2022-12-25', '2022-12-26', '2022-12-27', '2022-12-28', '2022-12-31']
-    },
-    disabledDateTest2() {
-      this.disableDateTestComputed = [
-        '2022-12-25',
-        '2022-12-26',
-        '2022-12-27',
-        '2022-12-28',
-        '2022-12-29',
-        '2022-12-30',
-        '2022-12-31',
-      ]
     },
   },
 }
