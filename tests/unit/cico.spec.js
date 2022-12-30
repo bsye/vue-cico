@@ -23,6 +23,7 @@ describe('Cico Component', () => {
     await wrapper.find('.cico__dummy-wrapper').trigger('click')
     expect(wrapper.vm.isOpen).to.eql(true)
     expect(wrapper.find('.cico--open').exists()).to.eql(true)
+    expect(wrapper.emitted('cico-opened').length).to.not.eql(0)
     expect(wrapper.find('.cico__month-day').exists()).to.eql(true)
   })
 
@@ -31,6 +32,7 @@ describe('Cico Component', () => {
 
   it('should be able to select a check-in day', async () => {
     await wrapper.find('.is-valid-day').trigger('click')
+    expect(wrapper.emitted('day-clicked').length).to.not.eql(0)
 
     expect(helpers.compareDay(wrapper.vm.checkIn, testCheckIn)).to.eql(0)
   })
@@ -65,5 +67,108 @@ describe('Cico Component', () => {
         .emitted('check-in-selected')
         .find((date) => helpers.compareDay(date, helpers.dateFormatter(testCheckIn, 'YYYY-MM')) === 0),
     ).to.not.eql(null || undefined)
+  })
+
+  it('should render a new month when clicking on the next month button', async () => {
+    await wrapper.find('.cico__month-button--next').trigger('click')
+    expect(wrapper.emitted('next-month-rendered').length).to.not.eql(0)
+
+    let monthName = wrapper.find('.cico__month-name').text()
+    let nextMonth = helpers.getNextMonth(new Date('2022-12-28'))
+    let testMonth = helpers.dateFormatter(nextMonth, 'MMMM YYYY')
+
+    expect(monthName === testMonth).to.eql(true)
+
+    await wrapper.find('.cico__month-button--next').trigger('click')
+
+    monthName = wrapper.find('.cico__month-name').text()
+    nextMonth = helpers.getNextMonth(nextMonth)
+    testMonth = helpers.dateFormatter(nextMonth, 'MMMM YYYY')
+
+    expect(monthName === testMonth).to.eql(true)
+  })
+
+  it('should render the previous month if it is available', async () => {
+    await wrapper.find('.cico__month-button--prev').trigger('click')
+    expect(wrapper.emitted('previous-month-rendered').length).to.not.eql(0)
+
+    await wrapper.find('.cico__month-button--prev').trigger('click')
+    await expect(wrapper.find('.cico__month-button--prev.disabled').exists()).to.eql(true)
+    await wrapper.find('.cico__month-button--next').trigger('click')
+
+    expect(wrapper.find('.cico__month-button--prev.disabled').exists()).to.eql(false)
+
+    const nextMonth = helpers.getNextMonth(new Date('2022-12-28'))
+    const testMonth = helpers.dateFormatter(nextMonth, 'MMMM YYYY')
+    const monthName = wrapper.find('.cico__month-name').text()
+
+    expect(monthName === testMonth).to.eql(true)
+
+    await wrapper.find('.cico__month-button--prev').trigger('click')
+    expect(wrapper.find('.cico__month-button--prev.disabled').exists()).to.eql(true)
+  })
+
+  it('should not display the clear button if the props is set to false', async () => {
+    await wrapper.setProps({
+      displayClearButton: false,
+    })
+
+    expect(wrapper.find('.cico__clear-button').exists()).to.eql(false)
+
+    await wrapper.setProps({
+      displayClearButton: true,
+    })
+  })
+
+  it('should clear the dates', async () => {
+    await wrapper.find('.cico__clear-button').trigger('click')
+    expect(wrapper.vm.checkIn).to.eql(null)
+  })
+
+  it('should set the checkIn and checkOut dates via props', async () => {
+    await wrapper.setProps({
+      checkInDate: new Date('2022-12-31'),
+      checkOutDate: new Date('2023-01-05'),
+    })
+
+    expect(wrapper.vm.checkIn).to.not.eql(null)
+    expect(wrapper.vm.checkOut).to.not.eql(null)
+  })
+
+  it('should position the cico at the right side of the screen', async () => {
+    await wrapper.setProps({
+      position: 'right',
+    })
+
+    expect(wrapper.find('.cico.right').exists()).to.eql(true)
+  })
+
+  it('should clear the checkIn and checkOut date if it is a disabled date', async () => {
+    await wrapper.setProps({
+      disabledDates: [new Date('2022-12-31'), new Date('2023-01-01')],
+    })
+
+    expect(wrapper.vm.checkIn).to.eql(null)
+  })
+
+  it('should clear only the checkOut if it is a disabled date', async () => {
+    await wrapper.setProps({
+      checkInDate: new Date('2022-12-31'),
+      checkOutDate: new Date('2023-01-05'),
+    })
+
+    await wrapper.setProps({
+      disabledDates: [new Date('2023-01-05')],
+    })
+
+    expect(wrapper.vm.checkIn).to.not.eql(null)
+    expect(wrapper.vm.checkOut).to.eql(null)
+  })
+
+  it('should close the cico on click outside', async () => {
+    await wrapper.find('.cico__wrapper').trigger('click')
+
+    expect(wrapper.vm.isOpen).to.eql(false)
+    expect(wrapper.emitted('cico-closed').length).to.not.eql(0)
   })
 })

@@ -1,6 +1,6 @@
 <template>
   <div class="cico__wrapper cico__root" :ref="`DatePicker-${hash}`">
-    <div class="cico__close-button cico__hide-on-desktop" v-if="isOpen" @click="hideDatepicker()">
+    <div class="cico__close-button" v-if="isOpen" @click="hideDatepicker()">
       <i>+</i>
     </div>
     <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
@@ -32,7 +32,7 @@
           />
         </div>
       </div>
-      <div class="cico__clear-button" tabindex="0" @click="clearSelection" v-show="showClearSelectionButton">
+      <div class="cico__clear-button" tabindex="0" @click="clearSelection" v-if="showClearSelectionButton">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
           <title>x</title>
           <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
@@ -65,6 +65,7 @@
             <button
               type="button"
               class="cico__month-button cico__month-button--prev"
+              :class="{ disabled: activeMonthIndex === 0 }"
               @click="renderPreviousMonth"
               @keyup.enter.stop.prevent="renderPreviousMonth"
               :tabindex="isOpen ? 0 : -1"
@@ -138,7 +139,6 @@
 </template>
 
 <script>
-import throttle from 'lodash.throttle'
 import fecha from 'fecha'
 import get from 'lodash.get'
 import Month from './Month.vue'
@@ -679,7 +679,7 @@ export default {
       }
     },
 
-    renderNextMonth: throttle(function throttleRenderNextMonth() {
+    renderNextMonth() {
       if (this.activeMonthIndex < this.months.length - 2) {
         this.activeMonthIndex++
 
@@ -701,7 +701,7 @@ export default {
       this.createMonth(nextMonth)
       this.activeMonthIndex++
       this.$emit('next-month-rendered', nextMonth)
-    }, 350),
+    },
 
     setCheckIn(date) {
       this.checkIn = date
