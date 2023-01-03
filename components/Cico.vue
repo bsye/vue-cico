@@ -47,12 +47,12 @@
         'cico--closed': !isOpen,
       }"
     >
-      <div v-if="isOpen" class="cico__inner">
+      <div class="cico__inner">
         <CallToAction
-          :included-nights="minNights"
-          :nights-total="totalNights"
-          :nights-in="dateFormatter(checkIn, 'ddd DD MMM.')"
-          :nights-out="dateFormatter(checkOut, 'ddd DD MMM.')"
+          :minNights="minNights"
+          :checkIn="checkIn"
+          :checkOut="checkOut"
+          :validHoveredDate="validHoveredDate"
           :i18n="i18n"
         />
         <div class="cico__months">
@@ -121,6 +121,7 @@
             :disabledDates="disabledDates"
             @clear-selection="clearSelection"
             @day-clicked="handleDayClick"
+            @valid-day-hovered="validDayHovered"
             @enter-day="enterDay"
             @enter-month="enterMonth"
           />
@@ -262,6 +263,7 @@ export default {
       dynamicNightCounts: null,
       hash: Date.now(),
       hoveringDate: null,
+      validHoveredDate: null,
       months: [],
       open: false,
       windowWidth: window.innerWidth,
@@ -303,13 +305,6 @@ export default {
         this.get(this.i18n, 'date.weekdays.short.fri'),
         this.get(this.i18n, 'date.weekdays.short.sat'),
       ]
-    },
-
-    totalNights() {
-      if (!this.checkIn) return 0
-      if (!this.checkOut) return 0
-
-      return this.countDays(this.checkIn, this.checkOut)
     },
 
     paginateMonths() {
@@ -531,6 +526,10 @@ export default {
         }
 
       return this.dateFormatter(date, 'DD MMM')
+    },
+
+    validDayHovered(date) {
+      this.validHoveredDate = date
     },
 
     generateInitialMonths() {
