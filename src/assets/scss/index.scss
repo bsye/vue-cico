@@ -372,6 +372,7 @@
   &__input {
     text-align: left;
     height: auto;
+    transition: all 0.2s cubic-bezier(0.4, 0.2, 0, 1);
     font-size: 0.875rem;
     line-height: 2;
     text-transform: uppercase;
@@ -801,18 +802,16 @@
 
   &__clear-button {
     appearance: none;
+
     background: transparent;
     border: 0;
     cursor: pointer;
     font-size: 1.5625em;
     font-weight: 700;
     height: 100%;
-    margin: 0;
-    padding: 0;
     width: 1em;
     text-align: right;
     display: flex;
-    margin-left: 8px;
     align-items: center;
     position: relative;
     top: 1px;

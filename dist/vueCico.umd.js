@@ -2588,7 +2588,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=81d597ac&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=b16fb2de&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2616,6 +2616,9 @@ var render = function render() {
   }, [_vm.get(_vm.i18n, 'activity.filter.checkOut') ? _c('span', {
     staticClass: "cico__dummy-wrapper-arrival"
   }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.checkIn')) + " ")]) : _vm._e(), _c('date-input', {
+    class: {
+      focused: !_vm.checkIn
+    },
     attrs: {
       "i18n": _vm.i18n,
       "input-date": _vm.responsiveFormatter(this.checkIn, this.fieldsFormat),
@@ -2628,6 +2631,9 @@ var render = function render() {
   }, [_vm.get(_vm.i18n, 'activity.filter.checkOut') ? _c('span', {
     staticClass: "cico__dummy-wrapper-departure"
   }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.checkOut')) + " ")]) : _vm._e(), _c('date-input', {
+    class: {
+      focused: _vm.checkIn && !_vm.checkOut
+    },
     attrs: {
       "i18n": _vm.i18n,
       "input-date": _vm.responsiveFormatter(this.checkOut, this.fieldsFormat),
@@ -2643,6 +2649,8 @@ var render = function render() {
     on: {
       "click": _vm.clearSelection
     }
+  }, [_c('div', {
+    staticClass: "cico__clear-button-inner"
   }, [_c('svg', {
     attrs: {
       "xmlns": "http://www.w3.org/2000/svg",
@@ -2657,7 +2665,7 @@ var render = function render() {
       "fill": "none",
       "stroke-linecap": "square"
     }
-  })])]) : _vm._e()], 1), _c('div', {
+  })])])]) : _vm._e()], 1), _c('div', {
     staticClass: "cico",
     class: {
       [_vm.position]: true,
@@ -2796,7 +2804,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=81d597ac&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=b16fb2de&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");

@@ -14,6 +14,19 @@
             }
         }
 
+        .cico__clear-button {
+            margin-right: -20px;
+            margin-top: -20px;
+            margin-bottom: -20px;
+
+            > div {
+                padding-right: 20px;
+                padding-left: 10px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+        }
+
         svg {
             margin-bottom: 2px;
             &.arrow-icon {
