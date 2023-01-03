@@ -24,6 +24,7 @@
           :minNightCount="minNightCount"
           :maxNights="maxNights"
           :month="month"
+          :prices="prices"
           :options="options"
           @clear-selection="clearSelection"
           @day-clicked="handleDayClick"
@@ -86,6 +87,9 @@ export default {
     maxDate: {
       type: [Date, String, Number],
       default: Infinity,
+    },
+    prices: {
+      type: Array,
     },
     minNightCount: {
       type: Number,

@@ -55,11 +55,11 @@
         />
         <Cico
           style="margin-top: 2rem"
-          position="left"
           :startDate="startDate"
           :minNights="3"
           :maxNights="20"
           :i18n="i18n"
+          :prices="[{ date: '2023-01-04', price: '120' }]"
           class="cico__style-search"
         />
       </div>

@@ -112,6 +112,7 @@
             :checkOut="checkOut"
             :hoveringDate="hoveringDate"
             :i18n="i18n"
+            :prices="prices"
             :minDate="minDate"
             :maxDate="maxDate"
             :minNightCount="minNights"
@@ -189,6 +190,10 @@ export default {
       default() {
         return []
       },
+    },
+
+    prices: {
+      type: Array,
     },
 
     displayClearButton: {

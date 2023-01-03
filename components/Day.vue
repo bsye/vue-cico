@@ -26,6 +26,7 @@
     >
       <div class="cico__month-day-wrapper">
         <span class="day">{{ dayNumber }}</span>
+        <Price :isValidDay="isValidDay" :prices="prices" :date="date" />
       </div>
     </div>
   </div>
@@ -35,9 +36,14 @@
 import fecha from 'fecha'
 import get from 'lodash.get'
 import Helpers from '../src/helpers'
+import Price from './Price.vue'
 
 export default {
   name: 'Day',
+  components: {
+    Price,
+  },
+
   props: {
     belongsToThisMonth: {
       type: Boolean,
@@ -79,6 +85,9 @@ export default {
     maxNights: {
       type: [Number, null],
       default: null,
+    },
+    prices: {
+      type: Array,
     },
     options: {
       type: Object,

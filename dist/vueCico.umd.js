@@ -873,6 +873,13 @@ module.exports = {
 
 /***/ }),
 
+/***/ "70ec":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "7234":
 /***/ (function(module, exports) {
 
@@ -1120,6 +1127,17 @@ exports.f = DESCRIPTORS ? V8_PROTOTYPE_DEFINE_BUG ? function defineProperty(O, P
   if ('value' in Attributes) O[P] = Attributes.value;
   return O;
 };
+
+
+/***/ }),
+
+/***/ "9fa8":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Price_vue_vue_type_style_index_0_id_45571450_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("70ec");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Price_vue_vue_type_style_index_0_id_45571450_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Price_vue_vue_type_style_index_0_id_45571450_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -2570,7 +2588,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=1dabf5af&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=05824dd1&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2743,6 +2761,7 @@ var render = function render() {
         "checkOut": _vm.checkOut,
         "hoveringDate": _vm.hoveringDate,
         "i18n": _vm.i18n,
+        "prices": _vm.prices,
         "minDate": _vm.minDate,
         "maxDate": _vm.maxDate,
         "minNightCount": _vm.minNights,
@@ -2776,7 +2795,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=1dabf5af&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=05824dd1&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -3190,8 +3209,8 @@ var fecha = {
 var lodash_get = __webpack_require__("c832");
 var lodash_get_default = /*#__PURE__*/__webpack_require__.n(lodash_get);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=b51f7d16&
-var Monthvue_type_template_id_b51f7d16_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=62faa452&
+var Monthvue_type_template_id_62faa452_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -3235,6 +3254,7 @@ var Monthvue_type_template_id_b51f7d16_render = function render() {
         "minNightCount": _vm.minNightCount,
         "maxNights": _vm.maxNights,
         "month": _vm.month,
+        "prices": _vm.prices,
         "options": _vm.options
       },
       on: {
@@ -3244,12 +3264,12 @@ var Monthvue_type_template_id_b51f7d16_render = function render() {
     })], 1);
   }), 0)], 1);
 };
-var Monthvue_type_template_id_b51f7d16_staticRenderFns = [];
+var Monthvue_type_template_id_62faa452_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=b51f7d16&
+// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=62faa452&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=dfb1fbec&
-var Dayvue_type_template_id_dfb1fbec_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=52843d92&
+var Dayvue_type_template_id_52843d92_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c('div', {
@@ -3270,11 +3290,17 @@ var Dayvue_type_template_id_dfb1fbec_render = function render() {
     staticClass: "cico__month-day-wrapper"
   }, [_c('span', {
     staticClass: "day"
-  }, [_vm._v(_vm._s(_vm.dayNumber))])])])]);
+  }, [_vm._v(_vm._s(_vm.dayNumber))]), _c('Price', {
+    attrs: {
+      "isValidDay": _vm.isValidDay,
+      "prices": _vm.prices,
+      "date": _vm.date
+    }
+  })], 1)])]);
 };
-var Dayvue_type_template_id_dfb1fbec_staticRenderFns = [];
+var Dayvue_type_template_id_52843d92_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=dfb1fbec&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=52843d92&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3414,12 +3440,184 @@ const helpers = {
   }
 };
 /* harmony default export */ var src_helpers = (helpers);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Price.vue?vue&type=template&id=45571450&scoped=true&
+var Pricevue_type_template_id_45571450_scoped_true_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _vm.price ? _c('span', {
+    staticClass: "cico__day-price"
+  }, [_vm._v(" " + _vm._s(_vm.price) + " ")]) : _vm._e();
+};
+var Pricevue_type_template_id_45571450_scoped_true_staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/Price.vue?vue&type=template&id=45571450&scoped=true&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Price.vue?vue&type=script&lang=js&
+
+
+/* harmony default export */ var Pricevue_type_script_lang_js_ = ({
+  props: {
+    isValidDay: {
+      type: [String, null]
+    },
+    date: {
+      type: Date
+    },
+    prices: {
+      type: Array
+    }
+  },
+  computed: {
+    price() {
+      if (!this.isValidDay || !this.prices || typeof this.prices !== 'object') return null;
+      let price = null;
+      try {
+        price = this.prices.find(el => this.compareDay(el.date, this.date) === 0);
+      } catch {
+        return null;
+      }
+      return this.get(price, 'price', null);
+    }
+  },
+  methods: {
+    ...src_helpers,
+    get: lodash_get_default.a
+  }
+});
+// CONCATENATED MODULE: ./components/Price.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Pricevue_type_script_lang_js_ = (Pricevue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./components/Price.vue?vue&type=style&index=0&id=45571450&prod&scoped=true&lang=css&
+var Pricevue_type_style_index_0_id_45571450_prod_scoped_true_lang_css_ = __webpack_require__("9fa8");
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent(
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */,
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options =
+    typeof scriptExports === 'function' ? scriptExports.options : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) {
+    // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () {
+          injectStyles.call(
+            this,
+            (options.functional ? this.parent : this).$root.$options.shadowRoot
+          )
+        }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functional component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection(h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+// CONCATENATED MODULE: ./components/Price.vue
+
+
+
+
+
+
+/* normalize component */
+
+var component = normalizeComponent(
+  components_Pricevue_type_script_lang_js_,
+  Pricevue_type_template_id_45571450_scoped_true_render,
+  Pricevue_type_template_id_45571450_scoped_true_staticRenderFns,
+  false,
+  null,
+  "45571450",
+  null
+  
+)
+
+/* harmony default export */ var Price = (component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=script&lang=js&
+
 
 
 
 /* harmony default export */ var Dayvue_type_script_lang_js_ = ({
   name: 'Day',
+  components: {
+    Price: Price
+  },
   props: {
     belongsToThisMonth: {
       type: Boolean,
@@ -3461,6 +3659,9 @@ const helpers = {
     maxNights: {
       type: [Number, null],
       default: null
+    },
+    prices: {
+      type: Array
     },
     options: {
       type: Object
@@ -3593,104 +3794,6 @@ const helpers = {
 });
 // CONCATENATED MODULE: ./components/Day.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Dayvue_type_script_lang_js_ = (Dayvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent(
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */,
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options =
-    typeof scriptExports === 'function' ? scriptExports.options : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) {
-    // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () {
-          injectStyles.call(
-            this,
-            (options.functional ? this.parent : this).$root.$options.shadowRoot
-          )
-        }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functional component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
 // CONCATENATED MODULE: ./components/Day.vue
 
 
@@ -3699,10 +3802,10 @@ function normalizeComponent(
 
 /* normalize component */
 
-var component = normalizeComponent(
+var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_dfb1fbec_render,
-  Dayvue_type_template_id_dfb1fbec_staticRenderFns,
+  Dayvue_type_template_id_52843d92_render,
+  Dayvue_type_template_id_52843d92_staticRenderFns,
   false,
   null,
   null,
@@ -3710,7 +3813,7 @@ var component = normalizeComponent(
   
 )
 
-/* harmony default export */ var Day = (component.exports);
+/* harmony default export */ var Day = (Day_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/WeekRow.vue?vue&type=template&id=e6241eda&
 var WeekRowvue_type_template_id_e6241eda_render = function render() {
   var _vm = this,
@@ -3835,6 +3938,9 @@ var WeekRow_component = normalizeComponent(
       type: [Date, String, Number],
       default: Infinity
     },
+    prices: {
+      type: Array
+    },
     minNightCount: {
       type: Number,
       default: 0
@@ -3889,8 +3995,8 @@ var WeekRow_component = normalizeComponent(
 
 var Month_component = normalizeComponent(
   components_Monthvue_type_script_lang_js_,
-  Monthvue_type_template_id_b51f7d16_render,
-  Monthvue_type_template_id_b51f7d16_staticRenderFns,
+  Monthvue_type_template_id_62faa452_render,
+  Monthvue_type_template_id_62faa452_staticRenderFns,
   false,
   null,
   null,
@@ -4412,6 +4518,9 @@ var CallToAction_component = normalizeComponent(
       default() {
         return [];
       }
+    },
+    prices: {
+      type: Array
     },
     displayClearButton: {
       type: Boolean,
