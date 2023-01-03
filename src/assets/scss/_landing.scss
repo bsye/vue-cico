@@ -38,7 +38,13 @@
                 .cico__input {
                     line-height: 1;
                     margin-bottom: 2px;
+                    padding-left: 1px;
+                    padding-right: 1px;
                     margin-top: 10px;
+
+                    &.focused {
+                        background-color: rgba(125, 208, 255, 0.53);
+                    }
                 }
             }
 
@@ -95,6 +101,10 @@
                     * {
                         stroke: white;
                     }
+                }
+    
+                > div {
+                    padding-left: 1rem;
                 }
             }
         }

@@ -14,6 +14,7 @@
             :i18n="i18n"
             :input-date="responsiveFormatter(this.checkIn, this.fieldsFormat)"
             input-date-type="check-in"
+            :class="{ focused: !checkIn }"
             :is-open="isOpen"
             :toggle-datepicker="toggleDatepicker"
           />
@@ -25,6 +26,7 @@
           </span>
           <date-input
             :i18n="i18n"
+            :class="{ focused: checkIn && !checkOut }"
             :input-date="responsiveFormatter(this.checkOut, this.fieldsFormat)"
             input-date-type="check-out"
             :is-open="isOpen"
@@ -33,10 +35,12 @@
         </div>
       </div>
       <div class="cico__clear-button" tabindex="0" @click="clearSelection" v-if="showClearSelectionButton">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
-          <title>x</title>
-          <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
-        </svg>
+        <div class="cico__clear-button-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
+            <title>x</title>
+            <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
+          </svg>
+        </div>
       </div>
     </div>
     <div
