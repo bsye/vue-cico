@@ -59,6 +59,10 @@
           :minNights="3"
           :maxNights="20"
           :i18n="i18n"
+          :prices="[
+            { date: '2023-01-04', price: '120' },
+            { date: '2023-01-05', price: '1000' },
+          ]"
           class="cico__style-search"
         />
       </div>
