@@ -49,6 +49,7 @@
           :startDate="startDate"
           :disabledDates="disableDateTestComputed"
           :minNights="3"
+          position="right"
           :maxNights="20"
           :i18n="i18n"
           class="cico__style-landing"

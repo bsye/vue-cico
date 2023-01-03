@@ -4,6 +4,8 @@
       class="cico__month-day"
       :day="date"
       @click.prevent.stop="dayClicked($event, date)"
+      @mouseenter="validDayHovered(date)"
+      @mouseleave="validDayHovered(null)"
       :class="[
         beforeFirstValidDate,
         dayBelongToThisMonth,
@@ -279,6 +281,22 @@ export default {
         this.$emit('clear-selection')
         this.dayClicked(event, date)
       }
+    },
+
+    validDayHovered(date) {
+      if (!this.isValidDay || !this.checkIn) {
+        this.$emit('valid-day-hovered', null)
+
+        return
+      }
+
+      if (this.checkIn && this.checkOut) {
+        this.$emit('valid-day-hovered', null)
+
+        return
+      }
+
+      this.$emit('valid-day-hovered', date)
     },
   },
 }

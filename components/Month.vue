@@ -28,6 +28,7 @@
           :options="options"
           @clear-selection="clearSelection"
           @day-clicked="handleDayClick"
+          @valid-day-hovered="validDayHovered"
         />
       </div>
     </div>
@@ -135,6 +136,10 @@ export default {
 
     handleDayClick(event, date) {
       this.$emit('day-clicked', event, date)
+    },
+
+    validDayHovered(date) {
+      this.$emit('valid-day-hovered', date)
     },
   },
 }
