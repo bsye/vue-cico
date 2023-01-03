@@ -41,6 +41,8 @@
       "json",
       "vue"
     ],
+    "collectCoverage": true,
+    "collectCoverageFrom": ["**/*.vue"],
     "transform": {
         ".*\\.(vue)$": "vue-jest",
         "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
