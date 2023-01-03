@@ -63,6 +63,7 @@ export default {
 |**maxNights**|`[Number, null],`|`null)`|It sets the maximum of nights that can be selected
 |**minNights**|`Number`|`1`|It sets the minimum of nights that can be selected
 |**position**|`String`|`bottom`|Set the position of the datepicker, accepted values are: bottom, top, left, right
+|**prices**|`Array`|`[]`|It lets you set prices for the dates. Es. `[{ date: '2022-01-01', price: '120' }, { date: '2022-01-02', price: '140'}]`. Prices are applied only to valid dates.
 
 
 ## i18n Defaults:
