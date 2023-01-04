@@ -14,7 +14,7 @@
             :i18n="i18n"
             :input-date="responsiveFormatter(this.checkIn, this.fieldsFormat)"
             input-date-type="check-in"
-            :class="{ focused: !checkIn }"
+            :class="{ focused: !checkIn && isOpen }"
             :is-open="isOpen"
             :toggle-datepicker="toggleDatepicker"
           />
@@ -26,7 +26,7 @@
           </span>
           <date-input
             :i18n="i18n"
-            :class="{ focused: checkIn && !checkOut }"
+            :class="{ focused: checkIn && !checkOut && isOpen }"
             :input-date="responsiveFormatter(this.checkOut, this.fieldsFormat)"
             input-date-type="check-out"
             :is-open="isOpen"
@@ -593,6 +593,12 @@ export default {
     },
 
     handleDayClick(event, date, formatDate, resetCheckin) {
+      if (this.checkIn && !this.checkOut) {
+        if (this.compareDay(this.checkIn, date) >= 0) {
+          this.checkIn = null
+        }
+      }
+
       if (resetCheckin) {
         this.clearSelection()
         this.$nextTick(() => {
