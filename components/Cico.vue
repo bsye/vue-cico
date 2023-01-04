@@ -229,7 +229,7 @@ export default {
     minDate: {
       type: [Date, String],
       default() {
-        return new Date()
+        return Helpers.addDays(new Date(), 1)
       },
     },
 

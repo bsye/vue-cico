@@ -15,15 +15,17 @@
         }
 
         .cico__clear-button {
-            margin-right: -20px;
-            margin-top: -20px;
-            margin-bottom: -20px;
+            margin-top: -14px;
+            margin-bottom: -14px;
 
             > div {
-                padding-right: 20px;
-                padding-left: 10px;
-                padding-top: 20px;
-                padding-bottom: 20px;
+                padding-top: 14px;
+                margin-right: -18px;
+                padding-bottom: 14px;
+
+                svg {
+                    margin-right: 16px;
+                }
             }
         }
 
