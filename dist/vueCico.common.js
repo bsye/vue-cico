@@ -2579,7 +2579,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=2f1291d4&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=b8d69302&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2608,7 +2608,7 @@ var render = function render() {
     staticClass: "cico__dummy-wrapper-arrival"
   }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.checkIn')) + " ")]) : _vm._e(), _c('date-input', {
     class: {
-      focused: !_vm.checkIn
+      focused: !_vm.checkIn && _vm.isOpen
     },
     attrs: {
       "i18n": _vm.i18n,
@@ -2623,7 +2623,7 @@ var render = function render() {
     staticClass: "cico__dummy-wrapper-departure"
   }, [_vm._v(" " + _vm._s(_vm.get(_vm.i18n, 'activity.filter.checkOut')) + " ")]) : _vm._e(), _c('date-input', {
     class: {
-      focused: _vm.checkIn && !_vm.checkOut
+      focused: _vm.checkIn && !_vm.checkOut && _vm.isOpen
     },
     attrs: {
       "i18n": _vm.i18n,
@@ -2795,7 +2795,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=2f1291d4&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=b8d69302&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -3269,8 +3269,8 @@ var Monthvue_type_template_id_5f305be3_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=5f305be3&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=5e8ff234&
-var Dayvue_type_template_id_5e8ff234_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=b6d2ae62&
+var Dayvue_type_template_id_b6d2ae62_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c('div', {
@@ -3305,9 +3305,9 @@ var Dayvue_type_template_id_5e8ff234_render = function render() {
     }
   })], 1)])]);
 };
-var Dayvue_type_template_id_5e8ff234_staticRenderFns = [];
+var Dayvue_type_template_id_b6d2ae62_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=5e8ff234&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=b6d2ae62&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3700,7 +3700,7 @@ var component = normalizeComponent(
       if (!this.checkIn || this.checkOut) return null;
       const firstValidDate = this.addDays(this.checkIn, this.minNightCount);
       if (this.compareDay(this.date, firstValidDate) < 0) {
-        return 'disabled__before-first-valid-date';
+        if (this.compareDay(this.checkIn, this.date) < 0) return 'disabled__before-first-valid-date';
       }
       return null;
     },
@@ -3822,8 +3822,8 @@ var component = normalizeComponent(
 
 var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_5e8ff234_render,
-  Dayvue_type_template_id_5e8ff234_staticRenderFns,
+  Dayvue_type_template_id_b6d2ae62_render,
+  Dayvue_type_template_id_b6d2ae62_staticRenderFns,
   false,
   null,
   null,
@@ -4854,6 +4854,11 @@ var CallToAction_component = normalizeComponent(
       this.$emit('enter-day', day);
     },
     handleDayClick(event, date, formatDate, resetCheckin) {
+      if (this.checkIn && !this.checkOut) {
+        if (this.compareDay(this.checkIn, date) >= 0) {
+          this.checkIn = null;
+        }
+      }
       if (resetCheckin) {
         this.clearSelection();
         this.$nextTick(() => {

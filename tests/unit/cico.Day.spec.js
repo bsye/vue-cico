@@ -138,6 +138,7 @@ describe('Day Component', () => {
     let wrapper
     let wrapper2
     let wrapper3
+    let wrapper4
 
     beforeEach(() => {
       wrapper = shallowMount(Day, {
@@ -160,6 +161,14 @@ describe('Day Component', () => {
           date: new Date('2023-01-12'),
         },
       })
+
+      wrapper4 = shallowMount(Day, {
+        propsData: {
+          minNightCount: 2,
+          checkIn: new Date('2022-12-29'),
+          date: new Date('2022-12-26'),
+        },
+      })
     })
 
     it('should return NULL if checkin is not set or checkout is set', () => {
@@ -172,6 +181,10 @@ describe('Day Component', () => {
 
     it('should return NULL because the date is after the minimum night count', () => {
       expect(wrapper3.vm.beforeFirstValidDate).to.eql(null)
+    })
+
+    it('should return NULL because the date is before the checkIn', () => {
+      expect(wrapper4.vm.beforeFirstValidDate).to.eql(null)
     })
   })
 

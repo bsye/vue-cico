@@ -133,7 +133,7 @@ export default {
       const firstValidDate = this.addDays(this.checkIn, this.minNightCount)
 
       if (this.compareDay(this.date, firstValidDate) < 0) {
-        return 'disabled__before-first-valid-date'
+        if (this.compareDay(this.checkIn, this.date) < 0) return 'disabled__before-first-valid-date'
       }
 
       return null
