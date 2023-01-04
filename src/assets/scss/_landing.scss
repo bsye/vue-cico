@@ -48,7 +48,8 @@
                 }
             }
 
-            > * {
+            > span,
+            .cico__input {
                 font-size: 24px;
                 line-height: 1;
 
@@ -77,8 +78,9 @@
                 }
 
                 &.calendar-icon {
-                    margin-bottom: 2px;
                     height: 20px;
+                    bottom: 3px;
+                    position: relative;
                     margin-right: 16px;
 
                     * {
@@ -87,8 +89,7 @@
 
                     @media screen and ($up-to-tablet) {
                         width: 17px;
-                        position: relative;
-                        top: 1px;
+                        bottom: 1px;
                         margin-right: 10px;
                         margin-bottom: 0px;
                     }
@@ -97,7 +98,13 @@
 
             .cico__clear-button {
                 width: 25px;
+                align-items: flex-end;
                 svg {
+                    width: 1rem;
+                    @media screen and ($up-to-tablet) {
+                        width: 0.75rem;
+                    }
+
                     * {
                         stroke: white;
                     }
