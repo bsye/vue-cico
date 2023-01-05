@@ -37,7 +37,7 @@
 
                 .cico__input {
                     line-height: 1;
-                    margin-bottom: 2px;
+                    margin-bottom: 1px;
                     padding-left: 1px;
                     padding-right: 1px;
                     margin-top: 10px;
@@ -50,7 +50,7 @@
 
             > span,
             .cico__input {
-                font-size: 24px;
+                font-size: 1rem;
                 line-height: 1;
 
                 @media screen and ($up-to-tablet) {
@@ -60,9 +60,10 @@
 
             svg {
                 &.arrow-icon {
-                    margin-bottom: 5px;
-                    margin-left: 16px;
-                    margin-right: 16px;
+                    width: 16px;
+                    margin-bottom: 2px;
+                    margin-left: 12px;
+                    margin-right: 12px;
 
                     * {
                         stroke: white;
@@ -70,18 +71,18 @@
 
                     @media screen and ($up-to-tablet) {
                         width: 16px;
-                        margin-bottom: 2px;
+                        margin-left: 4px;
+                        margin-right: 4px;
+                        margin-bottom: 3px;
                         height: 13px;
-                        margin-left: 10px;
-                        margin-right: 10px;
                     }
                 }
 
                 &.calendar-icon {
-                    height: 20px;
-                    bottom: 3px;
+                    height: 18px;
+                    bottom: 2px;
                     position: relative;
-                    margin-right: 16px;
+                    margin-right: 12px;
 
                     * {
                         fill: white;
@@ -90,7 +91,7 @@
                     @media screen and ($up-to-tablet) {
                         width: 17px;
                         bottom: 1px;
-                        margin-right: 10px;
+                        margin-right: 4px;
                         margin-bottom: 0px;
                     }
                 }
@@ -100,7 +101,7 @@
                 width: 25px;
                 align-items: flex-end;
                 svg {
-                    width: 1rem;
+                    width: 14px;
                     @media screen and ($up-to-tablet) {
                         width: 0.75rem;
                     }

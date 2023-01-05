@@ -6,15 +6,11 @@ $font-family: 'Montserrat', 'din-medium', Helvetica;
 /* =============================================================
 * RESPONSIVE LAYOUT HELPERS
 * ============================================================*/
-$tablet: '(min-width: 480px) and (max-width: 767px)';
-$phone: '(max-width: 479px)';
-$desktop: '(min-width: 768px)';
-$up-to-tablet: '(max-width: 767px)';
-$extra-small-screen: '(max-width: 23em)';
+$desktop: 'min-width: 768px';
+$up-to-tablet: 'max-width: 767px';
 
 $primary-color: #eb5f40;
 $primary-color-light: lighten($primary-color, 30);
-
 
 .cico__root {
     --white: #fff;

@@ -104,31 +104,34 @@
               </svg>
             </button>
           </div>
-          <Month
-            v-for="(month, monthIndex) in paginateMonths"
-            :key="`${datepickerMonthKey}-${monthIndex}-desktop`"
-            ref="datepickerMonth"
-            :month="month"
-            :dayKey="datepickerDayKey"
-            :weekKey="datepickerWeekKey"
-            :firstDayOfWeek="firstDayOfWeek"
-            :checkIn="checkIn"
-            :checkOut="checkOut"
-            :hoveringDate="hoveringDate"
-            :i18n="i18n"
-            :prices="prices"
-            :minDate="minDate"
-            :maxDate="maxDate"
-            :minNightCount="minNights"
-            :maxNights="maxNights"
-            :disabledWeekDays="disabledWeekDays"
-            :disabledDates="disabledDates"
-            @clear-selection="clearSelection"
-            @day-clicked="handleDayClick"
-            @valid-day-hovered="validDayHovered"
-            @enter-day="enterDay"
-            @enter-month="enterMonth"
-          />
+          <div class="cico__months-wrapper">
+            <Month
+              v-for="(month, monthIndex) in paginateMonths"
+              :key="`${datepickerMonthKey}-${monthIndex}-desktop`"
+              ref="datepickerMonth"
+              :month="month"
+              :class="animateClass"
+              :dayKey="datepickerDayKey"
+              :weekKey="datepickerWeekKey"
+              :firstDayOfWeek="firstDayOfWeek"
+              :checkIn="checkIn"
+              :checkOut="checkOut"
+              :hoveringDate="hoveringDate"
+              :i18n="i18n"
+              :prices="prices"
+              :minDate="minDate"
+              :maxDate="maxDate"
+              :minNightCount="minNights"
+              :maxNights="maxNights"
+              :disabledWeekDays="disabledWeekDays"
+              :disabledDates="disabledDates"
+              @clear-selection="clearSelection"
+              @day-clicked="handleDayClick"
+              @valid-day-hovered="validDayHovered"
+              @enter-day="enterDay"
+              @enter-month="enterMonth"
+            />
+          </div>
         </div>
         <MobileActions
           @reset="clearSelection()"
@@ -257,6 +260,7 @@ export default {
   data() {
     return {
       activeMonthIndex: 0,
+      animateClass: null,
       checkIn: this.checkInDate,
       checkInMinNights: [],
       checkOut: this.checkOutDate,
@@ -315,8 +319,9 @@ export default {
       const months = []
 
       if (this.isDesktop) {
-        months.push(this.months[this.activeMonthIndex])
-        months.push(this.months[this.activeMonthIndex + 1])
+        for (let i = 0; i < this.numberOfMonths; i++) {
+          months.push(this.months[this.activeMonthIndex + i])
+        }
       } else {
         this.months.forEach((el) => {
           months.push(el)
@@ -373,7 +378,7 @@ export default {
     },
 
     numberOfMonths() {
-      if (this.isDesktop) return 2
+      if (this.isDesktop) return 4
 
       return 12
     },
@@ -544,7 +549,9 @@ export default {
         (this.getMonthDiff(this.getNextMonth(new Date(this.minDate)), this.checkIn) > 0 ||
           this.getMonthDiff(this.minDate, this.checkIn) > 0)
       ) {
-        this.createMonth(new Date(this.minDate))
+        const date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate)
+
+        this.createMonth(date)
         const monthCount = this.getMonthDiff(this.minDate, this.checkIn)
         let nextMonth = new Date(this.minDate)
 
@@ -562,7 +569,7 @@ export default {
 
         this.activeMonthIndex += monthCount
       } else {
-        let date = new Date(this.minDate)
+        let date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate)
 
         for (let i = 0; i < this.numberOfMonths; i++) {
           this.createMonth(date)
@@ -648,10 +655,11 @@ export default {
     },
 
     autofillWithCheckOut() {
-      if (!this.disabledDates)
-        if (this.checkIn && !this.checkOut) {
-          this.checkOut = this.addDays(this.checkIn, this.minNights)
-        }
+      if (this.get(this.disabledDates, 'length') !== 0) return
+
+      if (this.checkIn && !this.checkOut) {
+        this.checkOut = this.addDays(this.checkIn, this.minNights)
+      }
     },
 
     reRender() {
@@ -687,7 +695,9 @@ export default {
       this[this.isOpen ? 'hideDatepicker' : 'showDatepicker']()
     },
 
-    renderPreviousMonth() {
+    async renderPreviousMonth() {
+      await this.handleAnimation('enter-previous-animation')
+
       if (this.activeMonthIndex >= 1) {
         const firstDayOfLastMonth = this.months[this.activeMonthIndex].days.filter(
           (day) => day.belongsToThisMonth === true,
@@ -700,28 +710,31 @@ export default {
       }
     },
 
-    renderNextMonth() {
-      if (this.activeMonthIndex < this.months.length - 2) {
+    async renderNextMonth() {
+      await this.handleAnimation('enter-next-animation')
+
+      if (this.activeMonthIndex < this.months.length - this.numberOfMonths) {
         this.activeMonthIndex++
 
         return
       }
 
-      let firstDayOfLastMonth
-
-      if (!this.isDesktop) {
-        firstDayOfLastMonth = this.months[this.months.length - 1].days.filter((day) => day.belongsToThisMonth === true)
-      } else {
-        firstDayOfLastMonth = this.months[this.activeMonthIndex + 1].days.filter(
-          (day) => day.belongsToThisMonth === true,
-        )
-      }
-
+      const firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(
+        (day) => day.belongsToThisMonth === true,
+      )
       const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date)
 
       this.createMonth(nextMonth)
       this.activeMonthIndex++
       this.$emit('next-month-rendered', nextMonth)
+    },
+
+    async handleAnimation(elementClass) {
+      this.animateClass = elementClass
+
+      await new Promise((resolve) => setTimeout(resolve, 400))
+
+      this.animateClass = null
     },
 
     setCheckIn(date) {
