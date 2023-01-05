@@ -242,6 +242,7 @@
   &__header {
     padding-top: 6px;
     text-align: left;
+    z-index: 10;
     position: absolute;
     top: 0;
     left: 0;
@@ -749,19 +750,14 @@
   &__months {
     position: relative;
     flex-grow: 1;
-    grid-auto-flow: column;
-    flex-wrap: nowrap;
-    gap: 3rem;
-    display: grid;
+    flex-direction: column;
+    display: flex;
     &::before {
         display: none;
     }
 
-    @include device($desktop) {
-      display: flex;
-      flex-wrap: wrap;
+    @media screen and ($desktop) {
       width: calc(630px - 2rem);
-      justify-content: space-between;
     }
 
     &--full {
@@ -776,11 +772,38 @@
     }
   }
 
+  &__months-wrapper {
+    flex-grow: 1;
+    grid-auto-flow: row;
+    flex-wrap: nowrap;
+    gap: 3rem;
+    display: grid;
+    &::before {
+        display: none;
+    }
+
+    @media screen and ($desktop) {
+        transform: translateX(calc((-100% - 3rem) / 2));
+        grid-auto-flow: column;
+    }
+  }
+
   &__month {
     font-size: 0.75em;
+    width: calc((630px - 5rem) / 2);
     display: flex;
     flex-grow: 1;
     flex-direction: column;
+    
+    &.enter-next-animation {
+        transition: all 0.4s cubic-bezier(0.4, 0.2, 0, 1);
+        transform: translateX(calc(-100% - 3rem));
+    }
+
+    &.enter-previous-animation {
+        transition: all 0.4s cubic-bezier(0.4, 0.2, 0, 1);
+        transform: translateX(calc(100% + 3rem));
+    }
   }
 
   &__month-caption {
@@ -884,18 +907,6 @@
   display: none;
 }
 
-.cico__hide-up-to-tablet {
-  @include device($up-to-tablet) {
-    display: none;
-  }
-}
-
-.cico__hide-on-desktop {
-  @include device($desktop) {
-    display: none;
-  }
-}
-
 .cico__parent-bullet {
   position: absolute;
   top: 50%;
@@ -914,7 +925,7 @@
     width: 100%;
     height: 4px;
     transition: opacity ease 0.3s;
-    @include device($desktop) {
+    @media screen and ($desktop) {
       top: 50%;
     }
 
@@ -944,7 +955,7 @@
     top: 60%;
     transform: translateY(-50%);
     transition: opacity ease 0.3s;
-    @include device($desktop) {
+    @media screen and ($desktop) {
       top: 50%;
     }
 

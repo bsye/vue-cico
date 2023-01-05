@@ -2579,7 +2579,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=b8d69302&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=4420710d&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2746,11 +2746,14 @@ var render = function render() {
       "stroke-linecap": "round",
       "stroke-linejoin": "round"
     }
-  })])])]) : _vm._e(), _vm._l(_vm.paginateMonths, function (month, monthIndex) {
+  })])])]) : _vm._e(), _c('div', {
+    staticClass: "cico__months-wrapper"
+  }, _vm._l(_vm.paginateMonths, function (month, monthIndex) {
     return _c('Month', {
       key: `${_vm.datepickerMonthKey}-${monthIndex}-desktop`,
       ref: "datepickerMonth",
       refInFor: true,
+      class: _vm.animateClass,
       attrs: {
         "month": month,
         "dayKey": _vm.datepickerDayKey,
@@ -2776,7 +2779,7 @@ var render = function render() {
         "enter-month": _vm.enterMonth
       }
     });
-  })], 2), !_vm.isDesktop ? _c('MobileActions', {
+  }), 1)]), !_vm.isDesktop ? _c('MobileActions', {
     attrs: {
       "displayClearButton": _vm.displayClearButton,
       "isClearDisabled": !(_vm.checkIn || _vm.checkOut),
@@ -2795,7 +2798,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=b8d69302&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=4420710d&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -3209,8 +3212,8 @@ var fecha = {
 var lodash_get = __webpack_require__("c832");
 var lodash_get_default = /*#__PURE__*/__webpack_require__.n(lodash_get);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=5f305be3&
-var Monthvue_type_template_id_5f305be3_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=2ea984af&
+var Monthvue_type_template_id_2ea984af_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -3265,9 +3268,9 @@ var Monthvue_type_template_id_5f305be3_render = function render() {
     })], 1);
   }), 0)], 1);
 };
-var Monthvue_type_template_id_5f305be3_staticRenderFns = [];
+var Monthvue_type_template_id_2ea984af_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=5f305be3&
+// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=2ea984af&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=b6d2ae62&
 var Dayvue_type_template_id_b6d2ae62_render = function render() {
@@ -4016,8 +4019,8 @@ var WeekRow_component = normalizeComponent(
 
 var Month_component = normalizeComponent(
   components_Monthvue_type_script_lang_js_,
-  Monthvue_type_template_id_5f305be3_render,
-  Monthvue_type_template_id_5f305be3_staticRenderFns,
+  Monthvue_type_template_id_2ea984af_render,
+  Monthvue_type_template_id_2ea984af_staticRenderFns,
   false,
   null,
   null,
@@ -4602,6 +4605,7 @@ var CallToAction_component = normalizeComponent(
   data() {
     return {
       activeMonthIndex: 0,
+      animateClass: null,
       checkIn: this.checkInDate,
       checkInMinNights: [],
       checkOut: this.checkOutDate,
@@ -4639,8 +4643,9 @@ var CallToAction_component = normalizeComponent(
     paginateMonths() {
       const months = [];
       if (this.isDesktop) {
-        months.push(this.months[this.activeMonthIndex]);
-        months.push(this.months[this.activeMonthIndex + 1]);
+        for (let i = 0; i < this.numberOfMonths; i++) {
+          months.push(this.months[this.activeMonthIndex + i]);
+        }
       } else {
         this.months.forEach(el => {
           months.push(el);
@@ -4685,7 +4690,7 @@ var CallToAction_component = normalizeComponent(
       return Object.entries(days).map(fn).filter(v => v);
     },
     numberOfMonths() {
-      if (this.isDesktop) return 2;
+      if (this.isDesktop) return 4;
       return 12;
     },
     isDesktop() {
@@ -4816,7 +4821,8 @@ var CallToAction_component = normalizeComponent(
     generateInitialMonths() {
       this.months = [];
       if (this.checkIn && (this.getMonthDiff(this.getNextMonth(new Date(this.minDate)), this.checkIn) > 0 || this.getMonthDiff(this.minDate, this.checkIn) > 0)) {
-        this.createMonth(new Date(this.minDate));
+        const date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate);
+        this.createMonth(date);
         const monthCount = this.getMonthDiff(this.minDate, this.checkIn);
         let nextMonth = new Date(this.minDate);
         for (let i = 0; i <= monthCount; i++) {
@@ -4830,7 +4836,7 @@ var CallToAction_component = normalizeComponent(
         }
         this.activeMonthIndex += monthCount;
       } else {
-        let date = new Date(this.minDate);
+        let date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate);
         for (let i = 0; i < this.numberOfMonths; i++) {
           this.createMonth(date);
           date = this.getNextMonth(new Date(date));
@@ -4893,7 +4899,8 @@ var CallToAction_component = normalizeComponent(
       }
     },
     autofillWithCheckOut() {
-      if (!this.disabledDates) if (this.checkIn && !this.checkOut) {
+      if (this.get(this.disabledDates, 'length') !== 0) return;
+      if (this.checkIn && !this.checkOut) {
         this.checkOut = this.addDays(this.checkIn, this.minNights);
       }
     },
@@ -4925,7 +4932,8 @@ var CallToAction_component = normalizeComponent(
     toggleDatepicker() {
       this[this.isOpen ? 'hideDatepicker' : 'showDatepicker']();
     },
-    renderPreviousMonth() {
+    async renderPreviousMonth() {
+      await this.handleAnimation('enter-previous-animation');
       if (this.activeMonthIndex >= 1) {
         const firstDayOfLastMonth = this.months[this.activeMonthIndex].days.filter(day => day.belongsToThisMonth === true);
         const previousMonth = this.getPreviousMonth(firstDayOfLastMonth[0].date);
@@ -4933,21 +4941,22 @@ var CallToAction_component = normalizeComponent(
         this.$emit('previous-month-rendered', previousMonth);
       }
     },
-    renderNextMonth() {
-      if (this.activeMonthIndex < this.months.length - 2) {
+    async renderNextMonth() {
+      await this.handleAnimation('enter-next-animation');
+      if (this.activeMonthIndex < this.months.length - this.numberOfMonths) {
         this.activeMonthIndex++;
         return;
       }
-      let firstDayOfLastMonth;
-      if (!this.isDesktop) {
-        firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(day => day.belongsToThisMonth === true);
-      } else {
-        firstDayOfLastMonth = this.months[this.activeMonthIndex + 1].days.filter(day => day.belongsToThisMonth === true);
-      }
+      const firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(day => day.belongsToThisMonth === true);
       const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date);
       this.createMonth(nextMonth);
       this.activeMonthIndex++;
       this.$emit('next-month-rendered', nextMonth);
+    },
+    async handleAnimation(elementClass) {
+      this.animateClass = elementClass;
+      await new Promise(resolve => setTimeout(resolve, 400));
+      this.animateClass = null;
     },
     setCheckIn(date) {
       this.checkIn = date;

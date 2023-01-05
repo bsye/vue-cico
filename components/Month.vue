@@ -3,6 +3,7 @@
     <p class="cico__month-name">
       {{ monthName }}
     </p>
+
     <week-row :i18n="i18n" :weekKey="weekKey" :firstDayOfWeek="firstDayOfWeek" />
     <div class="cico__square-wrapper">
       <div

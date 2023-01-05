@@ -71,15 +71,17 @@ describe('Cico Component', () => {
 
   it('should render a new month when clicking on the next month button', async () => {
     await wrapper.find('.cico__month-button--next').trigger('click')
+    await new Promise((resolve) => setTimeout(resolve, 410))
     expect(wrapper.emitted('next-month-rendered').length).to.not.eql(0)
 
     let monthName = wrapper.find('.cico__month-name').text()
-    let nextMonth = helpers.getNextMonth(new Date('2022-12-28'))
+    let nextMonth = new Date('2022-12-28')
     let testMonth = helpers.dateFormatter(nextMonth, 'MMMM YYYY')
 
     expect(monthName === testMonth).to.eql(true)
 
     await wrapper.find('.cico__month-button--next').trigger('click')
+    await new Promise((resolve) => setTimeout(resolve, 410))
 
     monthName = wrapper.find('.cico__month-name').text()
     nextMonth = helpers.getNextMonth(nextMonth)
@@ -90,21 +92,28 @@ describe('Cico Component', () => {
 
   it('should render the previous month if it is available', async () => {
     await wrapper.find('.cico__month-button--prev').trigger('click')
+    await new Promise((resolve) => setTimeout(resolve, 410))
+
     expect(wrapper.emitted('previous-month-rendered').length).to.not.eql(0)
 
     await wrapper.find('.cico__month-button--prev').trigger('click')
+    await new Promise((resolve) => setTimeout(resolve, 410))
+
     await expect(wrapper.find('.cico__month-button--prev.disabled').exists()).to.eql(true)
     await wrapper.find('.cico__month-button--next').trigger('click')
+    await new Promise((resolve) => setTimeout(resolve, 410))
 
     expect(wrapper.find('.cico__month-button--prev.disabled').exists()).to.eql(false)
 
-    const nextMonth = helpers.getNextMonth(new Date('2022-12-28'))
+    const nextMonth = new Date('2022-12-28')
     const testMonth = helpers.dateFormatter(nextMonth, 'MMMM YYYY')
     const monthName = wrapper.find('.cico__month-name').text()
 
     expect(monthName === testMonth).to.eql(true)
 
     await wrapper.find('.cico__month-button--prev').trigger('click')
+    await new Promise((resolve) => setTimeout(resolve, 410))
+
     expect(wrapper.find('.cico__month-button--prev.disabled').exists()).to.eql(true)
   })
 

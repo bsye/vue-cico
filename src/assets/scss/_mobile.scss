@@ -136,7 +136,7 @@
             padding-bottom: 80px;
             overflow-y: scroll;
 
-            margin-top: 40px;
+            padding-top: 40px;
             transition: all ease 0.2s;
 
             .cico__month {
@@ -168,6 +168,7 @@
                     position: fixed;
                     left: 0;
                     right: 0;
+                    top: auto;
                     background-color: white;
                     border-top: 1px solid var(--silver-mid);
                     display: none;
@@ -178,7 +179,7 @@
                     order: 2;
                 }
         
-                &:first-of-type {
+                &:first-child {
                     .cico__week-row {
                         display: block;
                     }

@@ -32,8 +32,8 @@
         svg {
             margin-bottom: 2px;
             &.arrow-icon {
-                margin-left: 16px;
-                margin-right: 16px;
+                margin-left: 12px;
+                margin-right: 12px;
 
                 * {
                     stroke: var(--silver-mid);
@@ -42,23 +42,24 @@
                 @media screen and ($up-to-tablet) {
                     width: 16px;
                     height: 13px;
-                    margin-left: 10px;
-                    margin-right: 10px;
+                    margin-left: 4px;
+                    margin-right: 4px;
                 }
             }
 
             &.calendar-icon {
                 height: 20px;
-                margin-right: 16px;
+                margin-right: 12px;
 
                 * {
                     fill: var(--zambezi-grey);
                 }
 
                 @media screen and ($up-to-tablet) {
+                    height: 18px;
                     position: relative;
                     bottom: 1px;
-                    margin-right: 10px;
+                    margin-right: 6px;
                     margin-bottom: 0px;
                 }
             }
