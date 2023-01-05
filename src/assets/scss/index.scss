@@ -687,6 +687,10 @@
     opacity: 1;
     transition: opacity ease 0.5s;
 
+    &.disabled {
+        pointer-events: none;
+    }
+
     svg {
         path {
             stroke: var(--primary-color);
@@ -875,10 +879,7 @@
     background: transparent;
     border: 0;
     cursor: pointer;
-    font-size: 1.5625em;
-    font-weight: 700;
     height: 100%;
-    width: 1em;
     text-align: right;
     display: flex;
     align-items: center;
@@ -889,10 +890,10 @@
 
     svg {
       fill: var(--zambezi-grey);
+      width: 13px;
       stroke-linecap: round;
-      stroke-width: 0.32em;
+      stroke-width: 6px;
       stroke: var(--tuatara);
-      width: 0.56em;
 
       path {
         stroke: var(--zambezi-grey);

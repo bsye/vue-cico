@@ -69,7 +69,7 @@
             <button
               type="button"
               class="cico__month-button cico__month-button--prev"
-              :class="{ disabled: activeMonthIndex === 0 }"
+              :class="{ disabled: activeMonthIndex === 0, disabled: animateClass !== null }"
               @click="renderPreviousMonth"
               @keyup.enter.stop.prevent="renderPreviousMonth"
               :tabindex="isOpen ? 0 : -1"
@@ -88,6 +88,7 @@
             <button
               type="button"
               class="cico__month-button cico__month-button--next"
+              :class="{ disabled: animateClass !== null }"
               @click="renderNextMonth"
               @keyup.enter.stop.prevent="renderNextMonth"
               :disabled="isPreventedMaxMonth"
