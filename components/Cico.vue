@@ -69,7 +69,7 @@
             <button
               type="button"
               class="cico__month-button cico__month-button--prev"
-              :class="{ disabled: activeMonthIndex === 0, disabled: animateClass !== null }"
+              :class="{ disabled: activeMonthIndex === 0 || animateClass !== null }"
               @click="renderPreviousMonth"
               @keyup.enter.stop.prevent="renderPreviousMonth"
               :tabindex="isOpen ? 0 : -1"

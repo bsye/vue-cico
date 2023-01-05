@@ -32,32 +32,30 @@
 
         svg {
             &.arrow-icon {
-                margin-bottom: 2px;
-                margin-left: 12px;
-                margin-right: 12px;
+                margin-bottom: 1px;
+                margin-left: 6px;
+                margin-right: 6px;
 
                 * {
                     stroke: var(--silver-mid);
                 }
 
                 @media screen and ($up-to-tablet) {
-                    width: 14px;
-                    height: 13px;
+                    width: 16px;
                     margin-left: 4px;
                     margin-right: 4px;
                 }
             }
 
             &.calendar-icon {
-                height: 20px;
-                margin-right: 12px;
+                height: 18px;
+                margin-right: 6px;
 
                 * {
                     fill: var(--zambezi-grey);
                 }
 
                 @media screen and ($up-to-tablet) {
-                    height: 18px;
                     position: relative;
                     bottom: 1px;
                     margin-right: 6px;
