@@ -19,6 +19,7 @@
         isCheckOutDay,
         isADisabledDayOfTheWeek,
         isValidDay,
+        hoverIsBeforeCheckIn,
         hoverIsCheckInDay,
         hoverIsInTheRange,
         hoverIsCheckOutDay,
@@ -153,6 +154,14 @@ export default {
       if (this.checkIn && !this.checkOut && this.compareDay(this.date, this.checkIn) === 0) {
         return 'hovering-current-day'
       }
+
+      return null
+    },
+
+    hoverIsBeforeCheckIn() {
+      if (!this.checkIn || !this.hoveringDate) return null
+
+      if (this.compareDay(this.hoveringDate, this.checkIn) < 0) return 'hover__is-before-check-in'
 
       return null
     },

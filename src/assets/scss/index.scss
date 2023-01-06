@@ -630,6 +630,14 @@
         }
     }
 
+    &.hover__check-out-date.hover__is-before-check-in {
+        > div {
+            &::before {
+                display: none;
+            }
+        }
+    }
+
     &.check-out-date,
     &.hover__check-out-date:hover,
     &.hover__check-out-date.disabled__not-available {

@@ -469,6 +469,49 @@ describe('Day Component', () => {
     })
   })
 
+  describe('hoverIsBeforeCheckIn', () => {
+    let wrapper
+    let wrapper2
+    let wrapper3
+
+    beforeEach(() => {
+      wrapper = shallowMount(Day, {
+        propsData: {
+          date: new Date('2022-12-12'),
+          hoveringDate: new Date('2022-12-12'),
+        },
+      })
+
+      wrapper2 = shallowMount(Day, {
+        propsData: {
+          minDate: new Date('2022-01-01'),
+          checkIn: new Date('2023-01-12'),
+          hoveringDate: new Date('2023-01-11'),
+        },
+      })
+
+      wrapper3 = shallowMount(Day, {
+        propsData: {
+          minDate: new Date('2022-01-01'),
+          checkIn: new Date('2023-01-12'),
+          hoveringDate: new Date('2023-01-13'),
+        },
+      })
+    })
+
+    it('should return NULL if no checkIn', () => {
+      expect(wrapper.vm.hoverIsBeforeCheckIn).to.eql(null)
+    })
+
+    it('should return "hover__is-before-check-in" if the hovering date is before the check-in date', () => {
+      expect(wrapper2.vm.hoverIsBeforeCheckIn).to.eql('hover__is-before-check-in')
+    })
+
+    it('should return NULL if the hovering date is after the check-in date', () => {
+      expect(wrapper3.vm.hoverIsBeforeCheckIn).to.eql(null)
+    })
+  })
+
   describe('hoverIsInTheRange', () => {
     let wrapper
     let wrapper2
