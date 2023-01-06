@@ -1,4 +1,3 @@
-/* eslint-disable vars-on-top */
 import fecha from 'fecha'
 import get from 'lodash.get'
 

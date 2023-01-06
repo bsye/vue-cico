@@ -3317,7 +3317,6 @@ var Dayvue_type_template_id_87411ad2_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./src/helpers.js
 
-/* eslint-disable vars-on-top */
 
 
 const helpers = {
