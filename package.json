@@ -43,7 +43,7 @@
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/*.vue"
+      "components/*.vue"
     ],
     "transform": {
       ".*\\.(vue)$": "vue-jest",

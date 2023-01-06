@@ -3284,14 +3284,14 @@ var Monthvue_type_template_id_2ea984af_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=2ea984af&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=b6d2ae62&
-var Dayvue_type_template_id_b6d2ae62_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=87411ad2&
+var Dayvue_type_template_id_87411ad2_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c('div', {
     ref: "day",
     staticClass: "cico__month-day",
-    class: [_vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isAfterMaxNights, _vm.isDayNotAvailable, _vm.isCheckInDay, _vm.isSelectionCheckInDay, _vm.isBeforeMinDate, _vm.isAfterEndDate, _vm.isInTheRange, _vm.isCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.isValidDay, _vm.hoverIsCheckInDay, _vm.hoverIsInTheRange, _vm.hoverIsCheckOutDay, _vm.hoverIsCurrentDay],
+    class: [_vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isAfterMaxNights, _vm.isDayNotAvailable, _vm.isCheckInDay, _vm.isSelectionCheckInDay, _vm.isBeforeMinDate, _vm.isAfterEndDate, _vm.isInTheRange, _vm.isCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.isValidDay, _vm.hoverIsBeforeCheckIn, _vm.hoverIsCheckInDay, _vm.hoverIsInTheRange, _vm.hoverIsCheckOutDay, _vm.hoverIsCurrentDay],
     attrs: {
       "day": _vm.date
     },
@@ -3320,9 +3320,9 @@ var Dayvue_type_template_id_b6d2ae62_render = function render() {
     }
   })], 1)])]);
 };
-var Dayvue_type_template_id_b6d2ae62_staticRenderFns = [];
+var Dayvue_type_template_id_87411ad2_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=b6d2ae62&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=87411ad2&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3732,6 +3732,11 @@ var component = normalizeComponent(
       }
       return null;
     },
+    hoverIsBeforeCheckIn() {
+      if (!this.checkIn || !this.hoveringDate) return null;
+      if (this.compareDay(this.hoveringDate, this.checkIn) < 0) return 'hover__is-before-check-in';
+      return null;
+    },
     isCheckInDay() {
       if (!this.checkIn) return null;
       if (this.compareDay(this.date, this.checkIn) === 0) return 'check-in-date';
@@ -3837,8 +3842,8 @@ var component = normalizeComponent(
 
 var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_b6d2ae62_render,
-  Dayvue_type_template_id_b6d2ae62_staticRenderFns,
+  Dayvue_type_template_id_87411ad2_render,
+  Dayvue_type_template_id_87411ad2_staticRenderFns,
   false,
   null,
   null,
