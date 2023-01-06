@@ -21,7 +21,7 @@ The style is only related to the appearance of the inputs.
 
 To make it work with different colors you need to override the default css variables found in the .css__root class
 ```css
-import 'vue-cico/dist/vueHotelDatepicker.css'
+import 'vue-cico/dist/vueCico.css'
 
 div.cico__root {
     --primary-color: #{$primary-color} //my color variable;
