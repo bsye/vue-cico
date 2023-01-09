@@ -664,12 +664,15 @@ export default {
 
     clearSelection() {
       this.hoveringDate = null
-      this.activeMonthIndex = 0
       this.checkIn = null
       this.checkOut = null
-      this.hoveringPeriod = {}
       this.reRender()
       this.$emit('clear-selection')
+
+      // Binded to the close animation length
+      setTimeout(() => {
+        this.activeMonthIndex = 0
+      }, 200)
     },
 
     hideDatepicker() {
