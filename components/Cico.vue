@@ -62,7 +62,7 @@
           :validHoveredDate="validHoveredDate"
           :i18n="i18n"
         />
-        <div class="cico__months">
+        <div ref="scroller" class="cico__months">
           <div
             v-if="isDesktop"
             :class="{
@@ -112,7 +112,7 @@
             <Month
               v-for="(month, monthIndex) in paginateMonths"
               :key="`${datepickerMonthKey}-${monthIndex}-desktop`"
-              ref="datepickerMonth"
+              ref="months"
               :month="month"
               :class="animateClass"
               :dayKey="datepickerDayKey"
@@ -664,6 +664,7 @@ export default {
 
     clearSelection() {
       this.hoveringDate = null
+      this.activeMonthIndex = 0
       this.checkIn = null
       this.checkOut = null
       this.hoveringPeriod = {}
@@ -683,6 +684,25 @@ export default {
       this.$nextTick(() => {
         this.$emit('cico-opened')
       })
+
+      this.adjustScrollOnMobile()
+    },
+
+    adjustScrollOnMobile() {
+      if (this.isDesktop) return
+      if (!this.get(this, '$refs.months.length') || !this.get(this, '$refs.scroller')) return
+
+      let scrolled = false
+
+      this.$refs.months.forEach((el) => {
+        if (el.monthHasCheckIn === true) {
+          // The scrollTop Value is binded to the padding-top value of .cico__month-name
+          this.$refs.scroller.scrollTop = el.$el.offsetTop - 86
+          scrolled = true
+        }
+      })
+
+      if (scrolled === false) this.$refs.scroller.scrollTop = 0
     },
 
     toggleDatepicker() {

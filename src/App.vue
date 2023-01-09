@@ -57,7 +57,7 @@
           style="margin-top: 2rem"
           :startDate="startDate"
           :minNights="3"
-          :checkInDate="new Date('2023-02-09')"
+          :checkInDate="new Date('2023-10-09')"
           :maxNights="20"
           :i18n="i18n"
           :prices="[

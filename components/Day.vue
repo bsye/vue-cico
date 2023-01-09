@@ -3,6 +3,7 @@
     <div
       class="cico__month-day"
       :day="date"
+      :ref="date"
       @mouseenter="validDayHovered(date)"
       @mouseleave="validDayHovered(null)"
       :class="[
@@ -24,7 +25,6 @@
         hoverIsCheckOutDay,
         hoverIsCurrentDay,
       ]"
-      ref="day"
     >
       <div class="cico__month-day-wrapper">
         <span class="day">{{ dayNumber }}</span>

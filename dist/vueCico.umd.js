@@ -2588,7 +2588,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=5765a35c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=55f9fe92&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2697,6 +2697,7 @@ var render = function render() {
       "i18n": _vm.i18n
     }
   }), _c('div', {
+    ref: "scroller",
     staticClass: "cico__months"
   }, [_vm.isDesktop ? _c('div', {
     class: {
@@ -2777,7 +2778,7 @@ var render = function render() {
   }, _vm._l(_vm.paginateMonths, function (month, monthIndex) {
     return _c('Month', {
       key: `${_vm.datepickerMonthKey}-${monthIndex}-desktop`,
-      ref: "datepickerMonth",
+      ref: "months",
       refInFor: true,
       class: _vm.animateClass,
       attrs: {
@@ -2824,7 +2825,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=5765a35c&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=55f9fe92&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -3238,8 +3239,8 @@ var fecha = {
 var lodash_get = __webpack_require__("c832");
 var lodash_get_default = /*#__PURE__*/__webpack_require__.n(lodash_get);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=0f7f9457&
-var Monthvue_type_template_id_0f7f9457_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=c15da084&
+var Monthvue_type_template_id_c15da084_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -3297,12 +3298,12 @@ var Monthvue_type_template_id_0f7f9457_render = function render() {
     })], 1);
   }), 0)], 1);
 };
-var Monthvue_type_template_id_0f7f9457_staticRenderFns = [];
+var Monthvue_type_template_id_c15da084_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=0f7f9457&
+// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=c15da084&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=b6eee9b2&
-var Dayvue_type_template_id_b6eee9b2_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=da63d3f2&
+var Dayvue_type_template_id_da63d3f2_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('button', {
@@ -3314,7 +3315,7 @@ var Dayvue_type_template_id_b6eee9b2_render = function render() {
       }
     }
   }, [_c('div', {
-    ref: "day",
+    ref: _vm.date,
     staticClass: "cico__month-day",
     class: [_vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isAfterMaxNights, _vm.isDayNotAvailable, _vm.isCheckInDay, _vm.isSelectionCheckInDay, _vm.isBeforeMinDate, _vm.isAfterEndDate, _vm.isInTheRange, _vm.isCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.isValidDay, _vm.hoverIsBeforeCheckIn, _vm.hoverIsCheckInDay, _vm.hoverIsInTheRange, _vm.hoverIsCheckOutDay, _vm.hoverIsCurrentDay],
     attrs: {
@@ -3340,9 +3341,9 @@ var Dayvue_type_template_id_b6eee9b2_render = function render() {
     }
   })], 1)])]);
 };
-var Dayvue_type_template_id_b6eee9b2_staticRenderFns = [];
+var Dayvue_type_template_id_da63d3f2_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=b6eee9b2&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=da63d3f2&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3865,8 +3866,8 @@ var component = normalizeComponent(
 
 var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_b6eee9b2_render,
-  Dayvue_type_template_id_b6eee9b2_staticRenderFns,
+  Dayvue_type_template_id_da63d3f2_render,
+  Dayvue_type_template_id_da63d3f2_staticRenderFns,
   false,
   null,
   null,
@@ -3950,6 +3951,7 @@ var WeekRow_component = normalizeComponent(
 
 
 
+
 /* harmony default export */ var Monthvue_type_script_lang_js_ = ({
   name: 'Month',
   components: {
@@ -4021,9 +4023,17 @@ var WeekRow_component = normalizeComponent(
   computed: {
     monthName() {
       return this.getMonth(this.month.days[15].date);
+    },
+    monthHasCheckIn() {
+      const day = this.month.days.find(el => {
+        if (this.compareDay(this.checkIn, el.date) === 0 && el.belongsToThisMonth === true) return true;
+        return false;
+      });
+      return !!day;
     }
   },
   methods: {
+    ...src_helpers,
     getMonth(date) {
       const month = 'MMMM';
       const year = 'YYYY';
@@ -4059,8 +4069,8 @@ var WeekRow_component = normalizeComponent(
 
 var Month_component = normalizeComponent(
   components_Monthvue_type_script_lang_js_,
-  Monthvue_type_template_id_0f7f9457_render,
-  Monthvue_type_template_id_0f7f9457_staticRenderFns,
+  Monthvue_type_template_id_c15da084_render,
+  Monthvue_type_template_id_c15da084_staticRenderFns,
   false,
   null,
   null,
@@ -4945,6 +4955,7 @@ var CallToAction_component = normalizeComponent(
     },
     clearSelection() {
       this.hoveringDate = null;
+      this.activeMonthIndex = 0;
       this.checkIn = null;
       this.checkOut = null;
       this.hoveringPeriod = {};
@@ -4962,6 +4973,20 @@ var CallToAction_component = normalizeComponent(
       this.$nextTick(() => {
         this.$emit('cico-opened');
       });
+      this.adjustScrollOnMobile();
+    },
+    adjustScrollOnMobile() {
+      if (this.isDesktop) return;
+      if (!this.get(this, '$refs.months.length') || !this.get(this, '$refs.scroller')) return;
+      let scrolled = false;
+      this.$refs.months.forEach(el => {
+        if (el.monthHasCheckIn === true) {
+          // The scrollTop Value is binded to the padding-top value of .cico__month-name
+          this.$refs.scroller.scrollTop = el.$el.offsetTop - 86;
+          scrolled = true;
+        }
+      });
+      if (scrolled === false) this.$refs.scroller.scrollTop = 0;
     },
     toggleDatepicker() {
       this[this.isOpen ? 'hideDatepicker' : 'showDatepicker']();

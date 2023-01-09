@@ -41,6 +41,7 @@
 import fecha from 'fecha'
 import Day from './Day.vue'
 import WeekRow from './WeekRow.vue'
+import helpers from '../src/helpers'
 
 export default {
   name: 'Month',
@@ -114,8 +115,19 @@ export default {
     monthName() {
       return this.getMonth(this.month.days[15].date)
     },
+
+    monthHasCheckIn() {
+      const day = this.month.days.find((el) => {
+        if (this.compareDay(this.checkIn, el.date) === 0 && el.belongsToThisMonth === true) return true
+
+        return false
+      })
+
+      return !!day
+    },
   },
   methods: {
+    ...helpers,
     getMonth(date) {
       const month = 'MMMM'
       const year = 'YYYY'
