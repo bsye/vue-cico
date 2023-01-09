@@ -443,6 +443,7 @@ export default {
   created() {
     this.configureI18n()
     this.generateInitialMonths()
+    this.selectCorrectMonth()
   },
 
   mounted() {
@@ -473,6 +474,7 @@ export default {
       if (isDesktop !== this.isDesktop) {
         this.activeMonthIndex = 0
         this.generateInitialMonths()
+        this.selectCorrectMonth()
       }
     },
 
@@ -488,6 +490,20 @@ export default {
           return D + ['th', 'st', 'nd', 'rd'][D % 10 > 3 ? 0 : ((D - (D % 10) !== 10) * D) % 10]
         },
       })
+    },
+
+    selectCorrectMonth() {
+      if (!this.checkIn) return
+
+      for (let i = 0; i < this.getMonthDiff(this.minDate, this.checkIn); i++) {
+        const firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(
+          (day) => day.belongsToThisMonth === true,
+        )
+        const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date)
+
+        this.createMonth(nextMonth)
+        this.activeMonthIndex++
+      }
     },
 
     mobileActionSelected() {
@@ -548,37 +564,11 @@ export default {
     generateInitialMonths() {
       this.months = []
 
-      if (
-        this.checkIn &&
-        (this.getMonthDiff(this.getNextMonth(new Date(this.minDate)), this.checkIn) > 0 ||
-          this.getMonthDiff(this.minDate, this.checkIn) > 0)
-      ) {
-        const date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate)
+      let date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate)
 
+      for (let i = 0; i < this.numberOfMonths; i++) {
         this.createMonth(date)
-        const monthCount = this.getMonthDiff(this.minDate, this.checkIn)
-        let nextMonth = new Date(this.minDate)
-
-        for (let i = 0; i <= monthCount; i++) {
-          const tempNextMonth = this.getNextMonth(nextMonth)
-
-          this.createMonth(tempNextMonth)
-          nextMonth = tempNextMonth
-        }
-
-        if (this.checkOut && this.getMonthDiff(this.checkIn, this.checkOut) > 0) {
-          this.createMonth(this.getNextMonth(nextMonth))
-          this.activeMonthIndex = 1
-        }
-
-        this.activeMonthIndex += monthCount
-      } else {
-        let date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate)
-
-        for (let i = 0; i < this.numberOfMonths; i++) {
-          this.createMonth(date)
-          date = this.getNextMonth(new Date(date))
-        }
+        date = this.getNextMonth(new Date(date))
       }
     },
 

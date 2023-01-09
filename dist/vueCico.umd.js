@@ -2588,7 +2588,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=0fd3618e&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=5765a35c&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2824,7 +2824,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=0fd3618e&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=5765a35c&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -4777,6 +4777,7 @@ var CallToAction_component = normalizeComponent(
   created() {
     this.configureI18n();
     this.generateInitialMonths();
+    this.selectCorrectMonth();
   },
   mounted() {
     this.$nextTick(() => {
@@ -4801,6 +4802,7 @@ var CallToAction_component = normalizeComponent(
       if (isDesktop !== this.isDesktop) {
         this.activeMonthIndex = 0;
         this.generateInitialMonths();
+        this.selectCorrectMonth();
       }
     },
     configureI18n() {
@@ -4815,6 +4817,15 @@ var CallToAction_component = normalizeComponent(
           return D + ['th', 'st', 'nd', 'rd'][D % 10 > 3 ? 0 : (D - D % 10 !== 10) * D % 10];
         }
       });
+    },
+    selectCorrectMonth() {
+      if (!this.checkIn) return;
+      for (let i = 0; i < this.getMonthDiff(this.minDate, this.checkIn); i++) {
+        const firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(day => day.belongsToThisMonth === true);
+        const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date);
+        this.createMonth(nextMonth);
+        this.activeMonthIndex++;
+      }
     },
     mobileActionSelected() {
       this.isOpen = !this.isOpen;
@@ -4860,27 +4871,10 @@ var CallToAction_component = normalizeComponent(
     },
     generateInitialMonths() {
       this.months = [];
-      if (this.checkIn && (this.getMonthDiff(this.getNextMonth(new Date(this.minDate)), this.checkIn) > 0 || this.getMonthDiff(this.minDate, this.checkIn) > 0)) {
-        const date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate);
+      let date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate);
+      for (let i = 0; i < this.numberOfMonths; i++) {
         this.createMonth(date);
-        const monthCount = this.getMonthDiff(this.minDate, this.checkIn);
-        let nextMonth = new Date(this.minDate);
-        for (let i = 0; i <= monthCount; i++) {
-          const tempNextMonth = this.getNextMonth(nextMonth);
-          this.createMonth(tempNextMonth);
-          nextMonth = tempNextMonth;
-        }
-        if (this.checkOut && this.getMonthDiff(this.checkIn, this.checkOut) > 0) {
-          this.createMonth(this.getNextMonth(nextMonth));
-          this.activeMonthIndex = 1;
-        }
-        this.activeMonthIndex += monthCount;
-      } else {
-        let date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate);
-        for (let i = 0; i < this.numberOfMonths; i++) {
-          this.createMonth(date);
-          date = this.getNextMonth(new Date(date));
-        }
+        date = this.getNextMonth(new Date(date));
       }
     },
     escFunction(e) {

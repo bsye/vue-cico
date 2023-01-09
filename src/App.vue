@@ -47,7 +47,6 @@
       <div class="picker">
         <Cico
           :startDate="startDate"
-          :disabledDates="disableDateTestComputed"
           :minNights="3"
           position="right"
           :maxNights="20"
@@ -58,6 +57,7 @@
           style="margin-top: 2rem"
           :startDate="startDate"
           :minNights="3"
+          :checkInDate="new Date('2023-02-09')"
           :maxNights="20"
           :i18n="i18n"
           :prices="[
@@ -80,12 +80,6 @@ export default {
   name: 'Examples',
   components: {
     Cico,
-  },
-
-  data() {
-    return {
-      disableDateTestComputed: null,
-    }
   },
 
   computed: {
