@@ -1,8 +1,11 @@
 <template>
   <div class="cico__wrapper cico__root" :ref="`DatePicker-${hash}`">
-    <div class="cico__close-button" v-if="isOpen && !isDesktop" @click="hideDatepicker()">
-      <i>+</i>
-    </div>
+    <button class="cico__close-button" v-if="isOpen && !isDesktop" @click="hideDatepicker()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
+        <title>x</title>
+        <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
+      </svg>
+    </button>
     <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
       <IconCalendar />
       <div class="cico__dummy-wrapper-scroll">
@@ -34,14 +37,14 @@
           />
         </div>
       </div>
-      <div class="cico__clear-button" tabindex="0" @click="clearSelection" v-if="showClearSelectionButton">
+      <button class="cico__clear-button" tabindex="0" @click="clearSelection" v-if="showClearSelectionButton">
         <div class="cico__clear-button-inner">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
             <title>x</title>
             <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
           </svg>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="cico"

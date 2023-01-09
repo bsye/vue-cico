@@ -1,9 +1,8 @@
 <template>
-  <div>
+  <button @click.prevent.stop="dayClicked($event, date)">
     <div
       class="cico__month-day"
       :day="date"
-      @click.prevent.stop="dayClicked($event, date)"
       @mouseenter="validDayHovered(date)"
       @mouseleave="validDayHovered(null)"
       :class="[
@@ -32,7 +31,7 @@
         <Price :isValidDay="isValidDay" :prices="prices" :date="date" />
       </div>
     </div>
-  </div>
+  </button>
 </template>
 
 <script>

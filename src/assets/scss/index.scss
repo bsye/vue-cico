@@ -18,6 +18,235 @@
 /* =============================================================
 * BASE STYLES
 * ============================================================*/
+.cico__wrapper {
+  min-width: 100%;
+  position: relative;
+  display: inline-block;
+  height: auto;
+  width: auto;
+  background: none;
+  font-family: $font-family;
+
+  button {
+    all: unset;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+  }
+
+  button.cico__close-button {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    cursor: pointer;
+    outline: 0;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 0.5rem;
+      z-index: 9;
+
+      path {
+        stroke: white;
+      }
+    }
+  }
+
+  button.cico__input {
+    text-align: left;
+    height: auto;
+    transition: all 0.2s cubic-bezier(0.4, 0.2, 0, 1);
+    font-size: 0.875rem;
+    line-height: 2;
+    text-transform: uppercase;
+    word-spacing: 0;
+    white-space: nowrap;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media screen and (min-width: 720px) {
+      font-size: 1.25rem;
+    }
+
+    @include focusStyle();
+
+    &:first-child {
+      background: none;
+      width: 50%;
+    }
+
+    &--single-date:first-child {
+      width: 100%;
+      background: none;
+      text-align: center;
+    }
+  }
+
+  button.cico__clear-button {
+    appearance: none;
+
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    height: 100%;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 1px;
+    justify-content: flex-end;
+    margin-left: auto;
+
+    svg {
+      fill: var(--zambezi-grey);
+      width: 13px;
+      stroke-linecap: round;
+      stroke-width: 6px;
+      stroke: var(--tuatara);
+
+      path {
+        stroke: var(--zambezi-grey);
+      }
+    }
+
+    @include focusStyle();
+  }
+
+  .cico__inner {
+    .cico__month-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      text-transform: capitalize;
+      pointer-events: none;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .cico__header {
+      padding-top: 3px;
+      text-align: left;
+      z-index: 10;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .cico__month-button {
+        background: none;
+        width: 2.5em;
+        height: 2.5em;
+        outline: none;
+        text-align: center;
+        appearance: none;
+        cursor: pointer;
+        border: none;
+        opacity: 1;
+        transition: opacity ease 0.5s;
+
+        &.disabled {
+          pointer-events: none;
+        }
+
+        svg {
+          path {
+            stroke: var(--primary-color);
+          }
+        }
+
+        &:hover {
+          opacity: 0.65;
+        }
+
+        @include focusStyle();
+
+        &.cico__month-button--prev {
+          transform: rotate(180deg);
+        }
+
+        &[disabled] {
+          opacity: 0.2;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  & *,
+  & *::before,
+  & *::after {
+    box-sizing: border-box;
+  }
+
+  .cico__square .#{$prefix}__month-day {
+    margin: -1px 0 0 -1px;
+    border-bottom: 5px solid white;
+    border-top: 5px solid white;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    padding-right: 0;
+    padding-left: 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    &--hovering {
+      &.cico__currentDay {
+        &::after {
+          content: '';
+          width: 45px;
+          height: calc(100% + 1px);
+          //find a variable for this
+          position: absolute;
+          z-index: -1;
+          display: block;
+          top: -1px;
+          left: -1px;
+        }
+      }
+      > div {
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        padding-right: 0;
+        background-color: var(--primary-color);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &--booking {
+    .#{$prefix}__month-day-wrapper {
+      border: none;
+
+      & .day {
+        display: inline;
+        text-align: right;
+        padding-top: 0.75em;
+        padding-right: 0.75em;
+        right: 0;
+        top: 0;
+        transform: none;
+      }
+    }
+    .#{$prefix}__month-day:before {
+      display: none;
+    }
+  }
+}
 
 .#{$prefix} {
   position: absolute;
@@ -41,146 +270,146 @@
     height: 400px;
 
     &--closed {
-        &.bottom {
-            transform: translateY(-2%);
-        }
-    
-        &.top {
-            bottom: 100%;
-            transform: translateY(2%);
-            top: unset;
-        }
-    
-        &.right {
-            left: 100%;
-            margin-left: 2rem;
-            transform: translateX(-3%);
-            bottom: unset;
-            top: -160px;
-        }
-    
-        &.left {
-            right: 100%;
-            transform: translateX(3%);
-            margin-right: 2rem;
-            bottom: unset;
-            top: -160px;
-        }
+      &.bottom {
+        transform: translateY(-2%);
+      }
+
+      &.top {
+        bottom: 100%;
+        transform: translateY(2%);
+        top: unset;
+      }
+
+      &.right {
+        left: 100%;
+        margin-left: 2rem;
+        transform: translateX(-3%);
+        bottom: unset;
+        top: -160px;
+      }
+
+      &.left {
+        right: 100%;
+        transform: translateX(3%);
+        margin-right: 2rem;
+        bottom: unset;
+        top: -160px;
+      }
     }
 
     &--open {
-        &.bottom {
-          transform: 0;
-          top: 140%;
-        }
-      
-        &.top {
-          transform: 0;
-          bottom: 140%;
-          top: unset;
-        }
-      
-        &.right {
-          left: 100%;
-          transform: 0;
-          margin-left: 2rem;
-          bottom: unset;
-          top: -160px;
-        }
-      
-        &.left {
-          right: 100%;
-          transform: 0;
-          margin-right: 2rem;
-          bottom: unset;
-          top: -160px;
-        }
-    }
+      &.bottom {
+        transform: 0;
+        top: 140%;
+      }
 
+      &.top {
+        transform: 0;
+        bottom: 140%;
+        top: unset;
+      }
+
+      &.right {
+        left: 100%;
+        transform: 0;
+        margin-left: 2rem;
+        bottom: unset;
+        top: -160px;
+      }
+
+      &.left {
+        right: 100%;
+        transform: 0;
+        margin-right: 2rem;
+        bottom: unset;
+        top: -160px;
+      }
+    }
   }
 
   button {
     background-color: var(--white);
 
     &.primary {
-        color: var(--white);
-        background-color: var(--primary-color);
+      color: var(--white);
+      background-color: var(--primary-color);
     }
   }
 
-    &__cta-panel {
-        order: -1;
-        text-align: center;
-        border-bottom: 1px solid var(--silver-mid);
-    }
-    &__cta-info {
-        font-size: 15px;
-        line-height: 1;
-        font-weight: 400;
-        margin-bottom: 1rem;
+  &__cta-panel {
+    order: -1;
+    text-align: center;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  &__cta-info {
+    font-size: 15px;
+    line-height: 1;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  &__cta-panel-title {
+    font-size: 18px;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    color: var(--eerie-black);
+
+    &.desktop {
+      @media screen and ($up-to-tablet) {
+        display: none;
+      }
+
+      display: block;
     }
 
-    &__cta-panel-title {
-        font-size: 18px;
-        margin-bottom: 0.75rem;
-        font-weight: 500;
-        color: var(--eerie-black);
+    &.mobile {
+      @media screen and ($desktop) {
+        display: none;
+      }
 
-        &.desktop {
-            @media screen and ($up-to-tablet) {
-                display: none;
-            }
+      display: block;
+    }
+  }
+  &__checkin,
+  &__checkout {
+    text-transform: capitalize;
+  }
+  &__nights-info {
+    margin-bottom: 1rem;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  &__nights {
+    font-size: 0.875rem;
+  }
+  &__travel-dates {
+    white-space: nowrap;
+    font-size: 0.75rem;
+  }
+  &__extra-nights {
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+  &__warning-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-            display: block;
-        }
+    > * {
+      font-size: 0.75rem;
+      text-align: left;
+      line-height: 1;
+      margin-top: 0.5rem;
+    }
+  }
 
-        &.mobile {
-            @media screen and ($desktop) {
-                display: none;
-            }
-
-            display: block;
-        }
-    }
-    &__checkin, &__checkout {
-        text-transform: capitalize;
-    }
-    &__nights-info {
-        margin-bottom: 1rem;
-        font-size: 15px;
-        font-weight: 400;
-    }
-    &__nights {
-        font-size: 0.875rem;
-    }
-    &__travel-dates {
-        white-space: nowrap;
-        font-size: 0.75rem;
-    }
-    &__extra-nights {
-        font-weight: 600;
-        color: var(--primary-color);
-    }
-    &__warning-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        > * {
-            font-size: 0.75rem;
-            text-align: left;
-            line-height: 1;
-            margin-top: 0.5rem;
-        }
-    }
-
-    &__nights-warning {
-        color: #E5605F;
-        transform: rotate(180deg);
-        margin-right: 0.5rem;
-        font-size: 1.2rem;
-        line-height: 1.25rem;
-    }
+  &__nights-warning {
+    color: #e5605f;
+    transform: rotate(180deg);
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    line-height: 1.25rem;
+  }
 
   &--right {
     right: 0;
@@ -239,16 +468,6 @@
     box-shadow: 0 15px 30px 10px rgb(0 0 0 / 10%);
   }
 
-  &__header {
-    padding-top: 6px;
-    text-align: left;
-    z-index: 10;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
   &__header-mobile {
     text-align: left;
     position: absolute;
@@ -257,79 +476,6 @@
     padding: 0 1.75rem;
     width: 100%;
     z-index: 1;
-  }
-
-  &__wrapper {
-    min-width: 100%;
-    position: relative;
-    display: inline-block;
-    height: auto;
-    width: auto;
-    background: none;
-    font-family: $font-family;
-
-    & *,
-    & *::before,
-    & *::after {
-      box-sizing: border-box;
-    }
-
-    .cico__square .#{$prefix}__month-day {
-      margin: -1px 0 0 -1px;
-      border-bottom: 5px solid white;
-      border-top: 5px solid white;
-      margin-top: -5px;
-      margin-bottom: -5px;
-      padding-right: 0;
-      padding-left: 0;
-      font-size: 0.75rem;
-      font-weight: 500;
-
-      &--hovering {
-        &.cico__currentDay {
-            &::after {
-                content: '';
-                width: 45px;
-                height: calc(100% + 1px);
-                //find a variable for this
-                position: absolute;
-                z-index: -1;
-                display: block;
-                top: -1px;
-                left: -1px;
-            }
-        }
-        > div {
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-            padding-right: 0;
-            background-color: var(--primary-color);
-        }
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-      }
-    }
-
-    &--booking {
-      .#{$prefix}__month-day-wrapper {
-        border: none;
-
-        & .day {
-          display: inline;
-          text-align: right;
-          padding-top: 0.75em;
-          padding-right: 0.75em;
-          right: 0;
-          top: 0;
-          transform: none;
-        }
-      }
-      .#{$prefix}__month-day:before {
-        display: none;
-      }
-    }
   }
 
   &__dummy-wrapper {
@@ -343,12 +489,12 @@
     height: 100%;
 
     .cico__dummy-wrapper-scroll {
-        overflow: auto;
-        display: flex;
-        flex-wrap: nowrap;
-        margin-bottom: -1rem;
-        padding-bottom: 1rem;
-        align-items: center;
+      overflow: auto;
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: -1rem;
+      padding-bottom: 1rem;
+      align-items: center;
     }
 
     .arrow-icon,
@@ -357,11 +503,11 @@
     }
 
     .cico__dummy-wrapper-input-wrapper {
-        .cico__dummy-wrapper-arrival,
-        .cico__dummy-wrapper-departure {
-            font-size: 1rem;
-            display: none;
-        }
+      .cico__dummy-wrapper-arrival,
+      .cico__dummy-wrapper-departure {
+        font-size: 1rem;
+        display: none;
+      }
     }
 
     &--no-border.#{$prefix}__dummy-wrapper {
@@ -369,45 +515,7 @@
     }
 
     &--is-active {
-      border: none
-    }
-  }
-
-  &__input {
-    text-align: left;
-    height: auto;
-    transition: all 0.2s cubic-bezier(0.4, 0.2, 0, 1);
-    font-size: 0.875rem;
-    line-height: 2;
-    text-transform: uppercase;
-    word-spacing: 0;
-    white-space: nowrap;
-    width: auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    @media screen and (min-width: 720px) {
-        font-size: 1.25rem;
-    }
-
-    @include focusStyle();
-
-    &::-webkit-input-placeholder,
-    &::-moz-placeholder,
-    &:-ms-input-placeholder,
-    &:-moz-placeholder {
-      color: var(--oil);
-    }
-
-    &:first-child {
-      background: none;
-      width: 50%;
-    }
-
-    &--single-date:first-child {
-      width: 100%;
-      background: none;
-      text-align: center;
+      border: none;
     }
   }
 
@@ -417,16 +525,16 @@
     margin: 0 auto;
     padding-top: 32px; //fix for safari
     span.day {
-        z-index: 1;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        display: flex;
-        justify-content: center;
-        height: auto;
-        align-items: center;
-        bottom: 0;
+      z-index: 1;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      height: auto;
+      align-items: center;
+      bottom: 0;
     }
 
     .price {
@@ -448,38 +556,39 @@
     @include focusStyle();
 
     > div {
-        position: relative;
-        &::after {
-            content: "";
-            width: 100%;
-            background-color: transparent;
-            height: 100%;
-            border-radius: 20px;
-            position: absolute;
-            display: block;
-            top: 0;
-          }
+      position: relative;
+      &::after {
+        content: '';
+        width: 100%;
+        background-color: transparent;
+        height: 100%;
+        border-radius: 20px;
+        position: absolute;
+        display: block;
+        top: 0;
+      }
 
-        &::before {
-            content: "";
-            width: 100%;
-            right: 0;
-            height: 100%;
-            position: absolute;
-            display: block;
-            background-color: transparent;
-            top: 0;
-            width: 7vw;
+      &::before {
+        content: '';
+        width: 100%;
+        right: 0;
+        height: 100%;
+        position: absolute;
+        display: block;
+        background-color: transparent;
+        top: 0;
+        width: 7vw;
 
-            @media screen and ($desktop) {
-                width: 20px;
-            }
+        @media screen and ($desktop) {
+          width: 20px;
         }
+      }
     }
 
     &.disabled__from-another-month {
-        opacity: 0;
-        pointer-events: none;
+      opacity: 0;
+      height: 0;
+      pointer-events: none;
     }
 
     &.disabled__before-first-valid-date,
@@ -488,246 +597,285 @@
     &.disabled__not-available,
     &.disabled__is-after-max-nights,
     &.disabled__before-min-date {
-        color: var(--neutrals-300);
-        pointer-events: none;
+      color: var(--neutrals-300);
+      pointer-events: none;
     }
 
     &.disabled__not-available {
-        span {
-            text-decoration: line-through;
-        }
+      span {
+        text-decoration: line-through;
+      }
     }
 
     &.check-in-date:not(.selection__check-in-date),
-    &.check-out-date,
-    &.hover__check-in-date.is-in-range:hover,
-    &.hover__check-out-date.is-in-range:hover {
-        &.hover__check-in-date:hover > div,
-        &.hover__check-out-date:hover > div,
-        > div {
-            &::before {
-                background-color: var(--primary-color);
-            }
+    &.check-out-date {
+      &.hover__check-in-date:hover > div,
+      &.hover__check-out-date:hover > div,
+      > div {
+        &::before {
+          background-color: var(--primary-color);
         }
+      }
     }
 
-    &.check-in-date.selection__check-in-date,
-    &.hover__check-out-date:hover,
-    &.hover__check-out-date.disabled__before-first-valid-date,
-    &.hover__check-out-date.disabled__before-min-date,
-    &.hover__check-out-date.disabled__not-available,
-    &.hover__check-out-date.disabled__is-after-max-nights {
-        > div {
-            &::before {
-                background-color: var(--primary-color-light);
-            }
+    &.check-in-date.selection__check-in-date {
+      > div {
+        &::before {
+          background-color: var(--primary-color-light);
         }
+      }
     }
 
     &.hover__check-in-date:hover,
     &.hover__check-out-date:hover {
-        > div {
-            position: relative;
-            padding-left: 0;
+      > div {
+        position: relative;
+        padding-left: 0;
 
-            &::after {
-                content: "";
-                width: 100%;
-                background-color: white;
-                height: 100%;
-                border-radius: 20px;
-                position: absolute;
-                display: block;
-                top: 0;
-              }
-
-            &::before {
-                content: "";
-                width: 100%;
-                right: 0;
-                height: 100%;
-                position: absolute;
-                display: block;
-                top: 0;
-                width: 7vw;
-
-                @media screen and ($desktop) {
-                    width: 20px;
-                }
-            }
+        &::after {
+          content: '';
+          width: 100%;
+          background-color: white;
+          height: 100%;
+          border-radius: 20px;
+          position: absolute;
+          display: block;
+          top: 0;
         }
+
+        &::before {
+          content: '';
+          width: 100%;
+          right: 0;
+          height: 100%;
+          position: absolute;
+          display: block;
+          top: 0;
+          width: 7vw;
+
+          @media screen and ($desktop) {
+            width: 20px;
+          }
+        }
+      }
     }
 
     &.hover__check-in-date:hover,
-    &.hover__check-out-date:hover, 
-    &.hover__check-out-date.check-out-date:hover
-    &.hover__check-in-date.check-in-date:hover {
-        span {
-            color: var(--oil);
-        }
-
-        > div {
-            &::after {
-                border: 1px solid var(--primary-color);
-            }
-        }
-    }
-
-    &.check-in-date,
-    &.check-out-date,
-    &.hover__check-out-date.disabled__before-first-valid-date,
-    &.hover__check-out-date.disabled__before-min-date,
-    &.hover__check-out-date.disabled__not-available,
-    &.hover__check-out-date.disabled__is-after-max-nights {
-        > div {
-            position: relative;
-            padding-left: 0;
-            color: white;
-
-            &::after {
-                content: "";
-                width: 100%;
-                background-color: var(--primary-color);
-                height: 100%;
-                border-radius: 20px;
-                position: absolute;
-                display: block;
-                top: 0;
-              }
-
-            &::before {
-                content: "";
-                width: 100%;
-                right: 0;
-                height: 100%;
-                position: absolute;
-                display: block;
-                top: 0;
-                width: 7vw;
-
-                @media screen and ($desktop) {
-                    width: 20px;
-                }
-            }
-        }
-    }
-
-    &.hover__check-out-date.disabled__before-first-valid-date,
-    &.hover__check-out-date.disabled__before-min-date,
-    &.hover__check-out-date.disabled__not-available,
-    &.hover__check-out-date.disabled__is-after-max-nights {
-        > div {
-            color: var(--neutrals-300);
-
-            &::after {
-                border: 1px solid var(--primary-color-light);
-                background-color: var(--white);
-            }
-
-            &::before {
-                right: 16px;
-            }
-        }
-    }
-
-    &.hover__check-out-date.hover__is-before-check-in {
-        > div {
-            &::before {
-                display: none;
-            }
-        }
-    }
-
-    &.check-out-date,
     &.hover__check-out-date:hover,
-    &.hover__check-out-date.disabled__not-available {
+    &.hover__check-out-date.check-out-date:hover &.hover__check-in-date.check-in-date:hover {
+      span {
+        color: var(--oil);
+      }
+
+      > div {
+        &::after {
+          border: 1px solid var(--primary-color);
+        }
+      }
+    }
+
+    &.hover__check-in-date:hover {
+      > div {
+        &::before {
+          left: 16px;
+        }
+      }
+
+      &.check-out-date {
         > div {
-            &::before {
-                right: 16px;
+          &::before {
+            right: 16px;
+            left: unset;
+          }
+        }
+      }
+    }
+
+    @media screen and ($desktop) {
+      &.hover__check-out-date.disabled__before-first-valid-date,
+      &.hover__check-out-date.disabled__before-min-date,
+      &.hover__check-out-date.disabled__not-available,
+      &.hover__check-out-date.disabled__is-after-max-nights {
+        > div {
+          position: relative;
+          padding-left: 0;
+          color: white;
+
+          &::after {
+            content: '';
+            width: 100%;
+            background-color: var(--primary-color);
+            height: 100%;
+            border-radius: 20px;
+            position: absolute;
+            display: block;
+            top: 0;
+          }
+
+          &::before {
+            content: '';
+            width: 100%;
+            right: 0;
+            height: 100%;
+            position: absolute;
+            display: block;
+            top: 0;
+            width: 7vw;
+
+            @media screen and ($desktop) {
+              width: 20px;
             }
+          }
+        }
+      }
+
+      &.hover__check-in-date.is-in-range:hover,
+      &.hover__check-out-date.is-in-range:hover {
+        &.hover__check-in-date:hover > div,
+        &.hover__check-out-date:hover > div,
+        > div {
+          &::before {
+            background-color: var(--primary-color);
+          }
+        }
+      }
+
+      &.hover__check-out-date.disabled__before-first-valid-date,
+      &.hover__check-out-date.disabled__before-min-date,
+      &.hover__check-out-date.disabled__not-available,
+      &.hover__check-out-date.disabled__is-after-max-nights {
+        > div {
+          color: var(--neutrals-300);
+
+          &::after {
+            border: 1px solid var(--primary-color-light);
+            background-color: var(--white);
+          }
+
+          &::before {
+            right: 16px;
+          }
+        }
+      }
+
+      &.hover__check-out-date.hover__is-before-check-in {
+        > div {
+          &::before {
+            display: none;
+          }
+        }
+      }
+
+      &.hover__check-out-date:hover,
+      &.hover__check-out-date.disabled__not-available {
+        > div {
+          &::before {
+            right: 16px;
+          }
         }
 
         &.check-in-date {
-            > div {
-                &::before {
-                    left: 16px;
-                    right: unset;
-                }
+          > div {
+            &::before {
+              left: 16px;
+              right: unset;
             }
+          }
         }
+      }
+
+      &.hover__check-out-date:hover,
+      &.hover__check-out-date.disabled__before-first-valid-date,
+      &.hover__check-out-date.disabled__before-min-date,
+      &.hover__check-out-date.disabled__not-available,
+      &.hover__check-out-date.disabled__is-after-max-nights {
+        > div {
+          &::before {
+            background-color: var(--primary-color-light);
+          }
+        }
+      }
+
+      &.hover__is-in-range {
+        background-color: var(--primary-color-light);
+      }
     }
 
     &.check-in-date,
-    &.hover__check-in-date:hover {
-        > div {
-            &::before {
-                left: 16px;
-            }
+    &.check-out-date {
+      > div {
+        position: relative;
+        padding-left: 0;
+        color: white;
+
+        &::after {
+          content: '';
+          width: 100%;
+          background-color: var(--primary-color);
+          height: 100%;
+          border-radius: 20px;
+          position: absolute;
+          display: block;
+          top: 0;
         }
 
-        &.check-out-date {
-            > div {
-                &::before {
-                    right: 16px;
-                    left: unset;
-                }
-            }
+        &::before {
+          content: '';
+          width: 100%;
+          right: 0;
+          height: 100%;
+          position: absolute;
+          display: block;
+          top: 0;
+          width: 7vw;
+
+          @media screen and ($desktop) {
+            width: 20px;
+          }
         }
+      }
+    }
+
+    &.check-out-date {
+      > div {
+        &::before {
+          right: 16px;
+        }
+      }
+
+      &.check-in-date {
+        > div {
+          &::before {
+            left: 16px;
+            right: unset;
+          }
+        }
+      }
+    }
+
+    &.check-in-date {
+      > div {
+        &::before {
+          left: 16px;
+        }
+      }
+
+      &.check-out-date {
+        > div {
+          &::before {
+            right: 16px;
+            left: unset;
+          }
+        }
+      }
     }
 
     &.is-in-range {
-        background-color: var(--primary-color);
-        color: white;
-    }
-
-    &.hover__is-in-range {
-        background-color: var(--primary-color-light);
+      background-color: var(--primary-color);
+      color: white;
     }
   }
 
-
-  &__month-button {
-    background: none;
-    width: 2.5em;
-    height: 2.5em;
-    outline: none;
-    text-align: center;
-    appearance: none;
-    cursor: pointer;
-    border: none;
-    opacity: 1;
-    transition: opacity ease 0.5s;
-
-    &.disabled {
-        pointer-events: none;
-    }
-
-    svg {
-        path {
-            stroke: var(--primary-color);
-        }
-    }
-
-    &:hover {
-      opacity: 0.65;
-    }
-
-    @include focusStyle();
-
-    &--prev {
-      transform: rotate(180deg)
-    }
-
-    &--next {
-      float: right;
-    }
-
-    &[disabled] {
-      opacity: 0.2;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-  }
   &__inner {
     padding: 1rem;
     padding-top: 1.25rem;
@@ -768,7 +916,7 @@
     flex-direction: column;
     display: flex;
     &::before {
-        display: none;
+      display: none;
     }
 
     @media screen and ($desktop) {
@@ -794,12 +942,12 @@
     gap: 3rem;
     display: grid;
     &::before {
-        display: none;
+      display: none;
     }
 
     @media screen and ($desktop) {
-        transform: translateX(calc((-100% - 3rem) / 2));
-        grid-auto-flow: column;
+      transform: translateX(calc((-100% - 3rem) / 2));
+      grid-auto-flow: column;
     }
   }
 
@@ -809,33 +957,21 @@
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    
+
     &.enter-next-animation {
-        transition: all 0.4s cubic-bezier(0.4, 0.2, 0, 1);
-        transform: translateX(calc(-100% - 3rem));
+      transition: all 0.4s cubic-bezier(0.4, 0.2, 0, 1);
+      transform: translateX(calc(-100% - 3rem));
     }
 
     &.enter-previous-animation {
-        transition: all 0.4s cubic-bezier(0.4, 0.2, 0, 1);
-        transform: translateX(calc(100% + 3rem));
+      transition: all 0.4s cubic-bezier(0.4, 0.2, 0, 1);
+      transform: translateX(calc(100% + 3rem));
     }
   }
 
   &__month-caption {
     height: 2.5em;
     vertical-align: middle;
-  }
-
-  &__month-name {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    text-transform: capitalize;
-    pointer-events: none;
-    text-align: center;
-    font-weight: 500;
   }
 
   &__week-days {
@@ -858,135 +994,5 @@
     padding-bottom: 8px;
     color: var(--tuatara);
     text-align: center;
-  }
-
-  &__close-button {
-    appearance: none;
-    background: transparent;
-    border: 0;
-    color: var(--oil);
-    cursor: pointer;
-    font-size: 1.3125em;
-    font-weight: 700;
-    margin-top: 0;
-    outline: 0;
-    z-index: 10000;
-    position: fixed;
-    right: 0.7143em;
-    top: 0;
-    height: 2.286em;
-    line-height: 2.286em;
-
-    i {
-      display: block;
-      font-style: inherit;
-      transform: rotate(45deg);
-    }
-  }
-
-  &__clear-button {
-    appearance: none;
-
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    height: 100%;
-    text-align: right;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 1px;
-    justify-content: flex-end;
-    margin-left: auto;
-
-    svg {
-      fill: var(--zambezi-grey);
-      width: 13px;
-      stroke-linecap: round;
-      stroke-width: 6px;
-      stroke: var(--tuatara);
-
-      path {
-        stroke: var(--zambezi-grey);
-      }
-    }
-
-    @include focusStyle();
-  }
-}
-
-.-cico__is-hidden {
-  display: none;
-}
-
-.cico__parent-bullet {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: -1;
-
-  .cico__bullet {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 4px;
-    transition: opacity ease 0.3s;
-    @media screen and ($desktop) {
-      top: 50%;
-    }
-
-    &.cico__checkInCheckOut,
-    &.cico__checkIn,
-    &.cico__checkOut {
-      width: 0.5em;
-      height: 1.125em;
-      border-radius: 0.625em;
-
-      &.cico__bullet--small {
-        height: 0.375em;
-        width: 0.875em;
-      }
-    }
-
-    &.cico__checkInCheckOut {
-      left: calc(50% - 1em);
-    }
-  }
-
-  .cico__pipe {
-    display: block;
-    width: 100%;
-    height: 4px;
-    position: absolute;
-    top: 60%;
-    transform: translateY(-50%);
-    transition: opacity ease 0.3s;
-    @media screen and ($desktop) {
-      top: 50%;
-    }
-
-    &.pipe--small {
-      height: calc(#{4px} * 0.75);
-    }
-
-    &.cico__checkIn {
-      left: calc(50% + #{4px});
-      width: calc(50% - #{4px});
-    }
-
-    &.cico__checkOut {
-      left: 0px;
-      width: calc(50% - #{4px});
-    }
-
-    &.cico__checkInCheckOut {
-      width: calc(50% - 1.1875rem);
-    }
   }
 }
