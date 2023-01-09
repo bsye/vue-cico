@@ -304,6 +304,12 @@ export default {
         return
       }
 
+      if (this.checkIn && this.compareDay(this.checkIn, date) === 1) {
+        this.$emit('valid-day-hovered', null)
+
+        return
+      }
+
       this.$emit('valid-day-hovered', date)
     },
   },

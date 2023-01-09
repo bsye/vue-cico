@@ -3301,8 +3301,8 @@ var Monthvue_type_template_id_0f7f9457_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=0f7f9457&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=6eb41725&
-var Dayvue_type_template_id_6eb41725_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=b6eee9b2&
+var Dayvue_type_template_id_b6eee9b2_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('button', {
@@ -3340,9 +3340,9 @@ var Dayvue_type_template_id_6eb41725_render = function render() {
     }
   })], 1)])]);
 };
-var Dayvue_type_template_id_6eb41725_staticRenderFns = [];
+var Dayvue_type_template_id_b6eee9b2_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=6eb41725&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=b6eee9b2&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3845,6 +3845,10 @@ var component = normalizeComponent(
         this.$emit('valid-day-hovered', null);
         return;
       }
+      if (this.checkIn && this.compareDay(this.checkIn, date) === 1) {
+        this.$emit('valid-day-hovered', null);
+        return;
+      }
       this.$emit('valid-day-hovered', date);
     }
   }
@@ -3861,8 +3865,8 @@ var component = normalizeComponent(
 
 var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_6eb41725_render,
-  Dayvue_type_template_id_6eb41725_staticRenderFns,
+  Dayvue_type_template_id_b6eee9b2_render,
+  Dayvue_type_template_id_b6eee9b2_staticRenderFns,
   false,
   null,
   null,
