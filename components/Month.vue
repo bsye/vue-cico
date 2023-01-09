@@ -7,6 +7,7 @@
     <week-row :i18n="i18n" :weekKey="weekKey" :firstDayOfWeek="firstDayOfWeek" />
     <div class="cico__square-wrapper">
       <div
+        :class="{ 'disabled__from-another-month': !day.belongsToThisMonth }"
         class="cico__square"
         v-for="(day, dayIndex) in month.days"
         :key="`${dayKey}-${dayIndex}`"

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <button
     class="cico__input"
     @keyup.enter.stop.prevent="toggleDatepicker"
     data-qa="cicoInput"
@@ -7,7 +7,7 @@
     :tabindex="tabIndex"
   >
     {{ text }}
-  </div>
+  </button>
 </template>
 
 <script>
