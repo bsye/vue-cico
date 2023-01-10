@@ -1,7 +1,8 @@
 <template>
-  <button @click.prevent.stop="dayClicked($event, date)">
+  <button>
     <div
       class="cico__month-day"
+      @click.prevent.stop="dayClicked($event, date)"
       :day="date"
       :ref="date"
       @mouseenter="validDayHovered(date)"
