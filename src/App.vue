@@ -58,12 +58,10 @@
           :startDate="startDate"
           :minNights="3"
           :checkInDate="new Date('2023-10-09')"
+          :checkOutDate="new Date('2023-10-24')"
           :maxNights="20"
           :i18n="i18n"
-          :prices="[
-            { date: '2023-01-04', price: '120' },
-            { date: '2023-01-05', price: '1000' },
-          ]"
+          :minDate="new Date('2023-01-01')"
           class="cico__style-search"
         />
       </div>

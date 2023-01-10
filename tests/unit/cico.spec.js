@@ -180,4 +180,34 @@ describe('Cico Component', () => {
     expect(wrapper.vm.isOpen).to.eql(false)
     expect(wrapper.emitted('cico-closed').length).to.not.eql(0)
   })
+
+  it('should automatically scroll to the new checkIn month when I reopen the calendar', async () => {
+    await wrapper.setProps({
+      checkInDate: new Date('2023-10-10'),
+    })
+
+    await wrapper.find('.cico__dummy-wrapper').trigger('click')
+    expect(wrapper.vm.isOpen).to.eql(true)
+    expect(wrapper.vm.activeMonthIndex).to.eql(10)
+
+    await wrapper.find('.cico__dummy-wrapper').trigger('click')
+    expect(wrapper.vm.isOpen).to.eql(false)
+    await wrapper.setProps({
+      checkInDate: new Date('2023-07-10'),
+    })
+
+    await wrapper.find('.cico__dummy-wrapper').trigger('click')
+    expect(wrapper.vm.isOpen).to.eql(true)
+    expect(wrapper.vm.activeMonthIndex).to.eql(7)
+
+    await wrapper.find('.cico__dummy-wrapper').trigger('click')
+    expect(wrapper.vm.isOpen).to.eql(false)
+    await wrapper.setProps({
+      checkInDate: null,
+    })
+
+    await wrapper.find('.cico__dummy-wrapper').trigger('click')
+    expect(wrapper.vm.isOpen).to.eql(true)
+    expect(wrapper.vm.activeMonthIndex).to.eql(0)
+  })
 })

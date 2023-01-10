@@ -242,7 +242,9 @@ export default {
 
     maxDate: {
       type: [Date, String, Number],
-      default: Infinity,
+      default() {
+        return Helpers.addDays(new Date(), 730)
+      },
     },
 
     maxNights: {
@@ -443,7 +445,6 @@ export default {
   created() {
     this.configureI18n()
     this.generateInitialMonths()
-    this.selectCorrectMonth()
   },
 
   mounted() {
@@ -474,7 +475,6 @@ export default {
       if (isDesktop !== this.isDesktop) {
         this.activeMonthIndex = 0
         this.generateInitialMonths()
-        this.selectCorrectMonth()
       }
     },
 
@@ -493,16 +493,33 @@ export default {
     },
 
     selectCorrectMonth() {
-      if (!this.checkIn) return
+      if (!this.checkIn) {
+        this.activeMonthIndex = 0
 
-      for (let i = 0; i < this.getMonthDiff(this.minDate, this.checkIn); i++) {
-        const firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(
-          (day) => day.belongsToThisMonth === true,
-        )
-        const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date)
+        return
+      }
 
-        this.createMonth(nextMonth)
-        this.activeMonthIndex++
+      const monthDiff = this.getMonthDiff(
+        this.get(this.months[this.activeMonthIndex + 1], 'days[15].date'),
+        this.checkIn,
+      )
+
+      if (typeof monthDiff !== 'number') return
+
+      if (monthDiff > 0) {
+        for (let i = 0; i < monthDiff; i++) {
+          const firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(
+            (day) => day.belongsToThisMonth === true,
+          )
+          const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date)
+
+          this.createMonth(nextMonth)
+          this.activeMonthIndex++
+        }
+      } else {
+        for (let i = 0; i > monthDiff; i--) {
+          this.activeMonthIndex--
+        }
       }
     },
 
@@ -563,8 +580,8 @@ export default {
 
     generateInitialMonths() {
       this.months = []
-
-      let date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate)
+      const { minDate } = this
+      let date = this.isDesktop ? this.getPreviousMonth(new Date(minDate)) : new Date(minDate)
 
       for (let i = 0; i < this.numberOfMonths; i++) {
         this.createMonth(date)
@@ -668,11 +685,6 @@ export default {
       this.checkOut = null
       this.reRender()
       this.$emit('clear-selection')
-
-      // Binded to the close animation length
-      setTimeout(() => {
-        this.activeMonthIndex = 0
-      }, 200)
     },
 
     hideDatepicker() {
@@ -684,11 +696,12 @@ export default {
 
     showDatepicker() {
       this.isOpen = true
+      this.adjustScrollOnMobile()
+      this.selectCorrectMonth()
+
       this.$nextTick(() => {
         this.$emit('cico-opened')
       })
-
-      this.adjustScrollOnMobile()
     },
 
     adjustScrollOnMobile() {

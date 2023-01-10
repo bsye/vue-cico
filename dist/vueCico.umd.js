@@ -2588,7 +2588,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=032dd0f2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=6c3a5619&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2825,7 +2825,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=032dd0f2&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=6c3a5619&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -4637,7 +4637,9 @@ var CallToAction_component = normalizeComponent(
     },
     maxDate: {
       type: [Date, String, Number],
-      default: Infinity
+      default() {
+        return src_helpers.addDays(new Date(), 730);
+      }
     },
     maxNights: {
       type: [Number, null],
@@ -4787,7 +4789,6 @@ var CallToAction_component = normalizeComponent(
   created() {
     this.configureI18n();
     this.generateInitialMonths();
-    this.selectCorrectMonth();
   },
   mounted() {
     this.$nextTick(() => {
@@ -4812,7 +4813,6 @@ var CallToAction_component = normalizeComponent(
       if (isDesktop !== this.isDesktop) {
         this.activeMonthIndex = 0;
         this.generateInitialMonths();
-        this.selectCorrectMonth();
       }
     },
     configureI18n() {
@@ -4829,12 +4829,23 @@ var CallToAction_component = normalizeComponent(
       });
     },
     selectCorrectMonth() {
-      if (!this.checkIn) return;
-      for (let i = 0; i < this.getMonthDiff(this.minDate, this.checkIn); i++) {
-        const firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(day => day.belongsToThisMonth === true);
-        const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date);
-        this.createMonth(nextMonth);
-        this.activeMonthIndex++;
+      if (!this.checkIn) {
+        this.activeMonthIndex = 0;
+        return;
+      }
+      const monthDiff = this.getMonthDiff(this.get(this.months[this.activeMonthIndex + 1], 'days[15].date'), this.checkIn);
+      if (typeof monthDiff !== 'number') return;
+      if (monthDiff > 0) {
+        for (let i = 0; i < monthDiff; i++) {
+          const firstDayOfLastMonth = this.months[this.months.length - 1].days.filter(day => day.belongsToThisMonth === true);
+          const nextMonth = this.getNextMonth(firstDayOfLastMonth[0].date);
+          this.createMonth(nextMonth);
+          this.activeMonthIndex++;
+        }
+      } else {
+        for (let i = 0; i > monthDiff; i--) {
+          this.activeMonthIndex--;
+        }
       }
     },
     mobileActionSelected() {
@@ -4881,7 +4892,10 @@ var CallToAction_component = normalizeComponent(
     },
     generateInitialMonths() {
       this.months = [];
-      let date = this.isDesktop ? this.getPreviousMonth(new Date(this.minDate)) : new Date(this.minDate);
+      const {
+        minDate
+      } = this;
+      let date = this.isDesktop ? this.getPreviousMonth(new Date(minDate)) : new Date(minDate);
       for (let i = 0; i < this.numberOfMonths; i++) {
         this.createMonth(date);
         date = this.getNextMonth(new Date(date));
@@ -4959,11 +4973,6 @@ var CallToAction_component = normalizeComponent(
       this.checkOut = null;
       this.reRender();
       this.$emit('clear-selection');
-
-      // Binded to the close animation length
-      setTimeout(() => {
-        this.activeMonthIndex = 0;
-      }, 200);
     },
     hideDatepicker() {
       this.isOpen = false;
@@ -4973,10 +4982,11 @@ var CallToAction_component = normalizeComponent(
     },
     showDatepicker() {
       this.isOpen = true;
+      this.adjustScrollOnMobile();
+      this.selectCorrectMonth();
       this.$nextTick(() => {
         this.$emit('cico-opened');
       });
-      this.adjustScrollOnMobile();
     },
     adjustScrollOnMobile() {
       if (this.isDesktop) return;
