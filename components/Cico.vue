@@ -243,7 +243,7 @@ export default {
     maxDate: {
       type: [Date, String, Number],
       default() {
-        return Helpers.addDays(new Date(), 730)
+        return Helpers.addDays(new Date(), 324)
       },
     },
 
