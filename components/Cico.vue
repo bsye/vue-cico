@@ -1,6 +1,6 @@
 <template>
   <div class="cico__wrapper cico__root" :ref="`DatePicker-${hash}`">
-    <button class="cico__close-button" v-if="isOpen && !isDesktop" @click="hideDatepicker()">
+    <button class="cico__close-button" v-if="isOpen && !isDesktop" @click="mobileActionSelected()">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
         <title>x</title>
         <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
