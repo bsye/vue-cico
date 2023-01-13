@@ -2588,7 +2588,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=45b6d6ed&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=38c4ac42&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2661,7 +2661,9 @@ var render = function render() {
       "tabindex": "0"
     },
     on: {
-      "click": _vm.clearSelection
+      "click": function ($event) {
+        return _vm.dummyWrapperClearSelection();
+      }
     }
   }, [_c('div', {
     staticClass: "cico__clear-button-inner"
@@ -2825,7 +2827,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=45b6d6ed&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=38c4ac42&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -4963,6 +4965,10 @@ var CallToAction_component = normalizeComponent(
       this.datepickerDayKey += 1;
       this.datepickerMonthKey += 1;
       this.datepickerWeekKey += 1;
+    },
+    dummyWrapperClearSelection() {
+      if (!this.isDesktop) this.$emit('mobile-clear-selection');
+      this.clearSelection();
     },
     clearSelection() {
       this.hoveringDate = null;

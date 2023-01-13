@@ -37,7 +37,12 @@
           />
         </div>
       </div>
-      <button class="cico__clear-button" tabindex="0" @click="clearSelection" v-if="showClearSelectionButton">
+      <button
+        class="cico__clear-button"
+        tabindex="0"
+        @click="dummyWrapperClearSelection()"
+        v-if="showClearSelectionButton"
+      >
         <div class="cico__clear-button-inner">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
             <title>x</title>
@@ -677,6 +682,11 @@ export default {
       this.datepickerDayKey += 1
       this.datepickerMonthKey += 1
       this.datepickerWeekKey += 1
+    },
+
+    dummyWrapperClearSelection() {
+      if (!this.isDesktop) this.$emit('mobile-clear-selection')
+      this.clearSelection()
     },
 
     clearSelection() {

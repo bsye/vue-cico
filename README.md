@@ -204,6 +204,7 @@ export default {
 |`day-clicked`| `Date` | sent when a day is clicked
 |`enter-month`| `String` | sent when a day of a month is hovered
 |`clear-selection`| `null` | sent when the clear selection button is clicked or check-in and check-out are cleared for unavailability
+|`clear-selection-mobile`| `null` | sent when the clear selection button is clicked on mobile. It serves as a way of refreshing the view without any buttons.
 |`cico-closed`| `null` | sent when the picker is closed
 |`cico-opened`| `null` | sent when the picker is opened
 |`previous-month-rendered`| `String` | sent when the previous month button is clicked, returns the month
