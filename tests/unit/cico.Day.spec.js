@@ -45,6 +45,74 @@ describe('Day Component', () => {
     })
   })
 
+  describe('isDayInDisabledRange', () => {
+    let wrapper
+    let wrapper2
+    let wrapper3
+    let wrapper4
+    let wrapper5
+
+    beforeEach(() => {
+      wrapper = shallowMount(Day, {
+        propsData: {
+          disabledDateRanges: [{ start: new Date('2023-02-12'), end: new Date('2023-02-10') }],
+          date: new Date('2023-02-11'),
+        },
+      })
+
+      wrapper2 = shallowMount(Day, {
+        propsData: {
+          disabledDateRanges: [{ end: new Date('2023-02-10') }],
+          date: new Date('2023-02-11'),
+        },
+      })
+
+      wrapper3 = shallowMount(Day, {
+        propsData: {
+          disabledDateRanges: [{ start: new Date('2023-02-01'), end: new Date('2023-02-10') }],
+          date: new Date('2023-02-04'),
+        },
+      })
+
+      wrapper4 = shallowMount(Day, {
+        propsData: {
+          disabledDateRanges: [{ start: new Date('2023-02-01') }],
+          date: new Date('2023-02-04'),
+        },
+      })
+
+      wrapper5 = shallowMount(Day, {
+        propsData: {
+          disabledDateRanges: [
+            { start: new Date('2023-02-01'), end: new Date('2023-02-03') },
+            { start: new Date('2023-02-10') },
+          ],
+          date: new Date('2023-02-15'),
+        },
+      })
+    })
+
+    it('should return null because the end date is before the start date in the disabled range', () => {
+      expect(wrapper.vm.isDayInDisabledRange).to.equal(null)
+    })
+
+    it('should return null because no start date in the disabled range is set', () => {
+      expect(wrapper2.vm.isDayInDisabledRange).to.equal(null)
+    })
+
+    it('should return "disabled__not-available" because the day is in the disabled range', () => {
+      expect(wrapper3.vm.isDayInDisabledRange).to.equal('disabled__not-available')
+    })
+
+    it('should return "disabled__not-available" because the day is after the start date and no end date is set', () => {
+      expect(wrapper4.vm.isDayInDisabledRange).to.equal('disabled__not-available')
+    })
+
+    it('should return "disabled__not-available" because the day is after the start date in one of the elements of the disabled date ranges array', () => {
+      expect(wrapper5.vm.isDayInDisabledRange).to.equal('disabled__not-available')
+    })
+  })
+
   describe('isAfterMaxNights', () => {
     let wrapper
     let wrapper2

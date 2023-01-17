@@ -46,12 +46,13 @@
       </div>
       <div class="picker">
         <Cico
-          :startDate="startDate"
-          :minNights="3"
-          position="right"
-          :maxNights="20"
-          :i18n="i18n"
           class="cico__style-landing"
+          :checkInDate="null"
+          position="bottom"
+          :checkOutDate="null"
+          :disabledDateRanges="[{ start: new Date('2023-02-12') }]"
+          :minNights="2"
+          :maxNights="15"
         />
         <Cico
           style="margin-top: 2rem"

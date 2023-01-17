@@ -2588,7 +2588,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=38c4ac42&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=7694ce38&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2798,7 +2798,8 @@ var render = function render() {
         "minNightCount": _vm.minNights,
         "maxNights": _vm.maxNights,
         "disabledWeekDays": _vm.disabledWeekDays,
-        "disabledDates": _vm.disabledDates
+        "disabledDates": _vm.disabledDates,
+        "disabledDateRanges": _vm.disabledDateRanges
       },
       on: {
         "clear-selection": _vm.clearSelection,
@@ -2827,7 +2828,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=38c4ac42&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=7694ce38&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -3241,8 +3242,8 @@ var fecha = {
 var lodash_get = __webpack_require__("c832");
 var lodash_get_default = /*#__PURE__*/__webpack_require__.n(lodash_get);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=c15da084&
-var Monthvue_type_template_id_c15da084_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Month.vue?vue&type=template&id=16ddea22&
+var Monthvue_type_template_id_16ddea22_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -3282,6 +3283,7 @@ var Monthvue_type_template_id_c15da084_render = function render() {
         "checkIn": _vm.checkIn,
         "checkOut": _vm.checkOut,
         "disabledDates": _vm.disabledDates,
+        "disabledDateRanges": _vm.disabledDateRanges,
         "date": day.date,
         "belongsToThisMonth": day.belongsToThisMonth,
         "hoveringDate": _vm.hoveringDate,
@@ -3300,18 +3302,18 @@ var Monthvue_type_template_id_c15da084_render = function render() {
     })], 1);
   }), 0)], 1);
 };
-var Monthvue_type_template_id_c15da084_staticRenderFns = [];
+var Monthvue_type_template_id_16ddea22_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=c15da084&
+// CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=16ddea22&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=d98aa242&
-var Dayvue_type_template_id_d98aa242_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=4fc114fc&
+var Dayvue_type_template_id_4fc114fc_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('button', [_c('div', {
     ref: _vm.date,
     staticClass: "cico__month-day",
-    class: [_vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isAfterMaxNights, _vm.isDayNotAvailable, _vm.isCheckInDay, _vm.isSelectionCheckInDay, _vm.isBeforeMinDate, _vm.isAfterEndDate, _vm.isInTheRange, _vm.isCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.isValidDay, _vm.hoverIsBeforeCheckIn, _vm.hoverIsCheckInDay, _vm.hoverIsInTheRange, _vm.hoverIsCheckOutDay, _vm.hoverIsCurrentDay],
+    class: [_vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isAfterMaxNights, _vm.isDayNotAvailable, _vm.isDayInDisabledRange, _vm.isCheckInDay, _vm.isSelectionCheckInDay, _vm.isBeforeMinDate, _vm.isAfterEndDate, _vm.isInTheRange, _vm.isCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.isValidDay, _vm.hoverIsBeforeCheckIn, _vm.hoverIsCheckInDay, _vm.hoverIsInTheRange, _vm.hoverIsCheckOutDay, _vm.hoverIsCurrentDay],
     attrs: {
       "day": _vm.date
     },
@@ -3340,9 +3342,9 @@ var Dayvue_type_template_id_d98aa242_render = function render() {
     }
   })], 1)])]);
 };
-var Dayvue_type_template_id_d98aa242_staticRenderFns = [];
+var Dayvue_type_template_id_4fc114fc_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=d98aa242&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=4fc114fc&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3674,6 +3676,10 @@ var component = normalizeComponent(
       type: Array,
       default: () => []
     },
+    disabledDateRanges: {
+      type: Array,
+      default: () => []
+    },
     disabledWeekDays: {
       type: Object
     },
@@ -3715,6 +3721,23 @@ var component = normalizeComponent(
         return 'disabled__not-available';
       }
       return null;
+    },
+    isDayInDisabledRange() {
+      if (!this.disabledDateRanges || !this.disabledDateRanges.length === 0) return null;
+      let isDayInDisabledRange = null;
+      this.disabledDateRanges.forEach(range => {
+        if (range.start && !range.end) {
+          if (this.compareDay(range.start, this.date) !== 1) {
+            isDayInDisabledRange = 'disabled__not-available';
+            return;
+          }
+        }
+        if (this.compareDay(range.start, range.end) > -1) return;
+        if (this.compareDay(range.start, this.date) !== this.compareDay(range.end, this.date)) {
+          isDayInDisabledRange = 'disabled__not-available';
+        }
+      });
+      return isDayInDisabledRange;
     },
     isAfterMaxNights() {
       if (!this.checkIn || typeof this.maxNights !== 'number' || this.checkOut) return null;
@@ -3807,7 +3830,7 @@ var component = normalizeComponent(
       return null;
     },
     isValidDay() {
-      if (!this.isADisabledDayOfTheWeek && !this.isCheckOutDay && !this.isBeforeMinDate && !this.isDayNotAvailable && !this.isADisabledDayOfTheWeek && !this.isCheckInDay && !this.isAfterEndDate && !this.dayBelongToThisMonth && !this.isAfterMaxNights && !this.beforeFirstValidDate) return 'is-valid-day';
+      if (!this.isADisabledDayOfTheWeek && !this.isCheckOutDay && !this.isBeforeMinDate && !this.isDayNotAvailable && !this.isADisabledDayOfTheWeek && !this.isDayInDisabledRange && !this.isCheckInDay && !this.isAfterEndDate && !this.dayBelongToThisMonth && !this.isAfterMaxNights && !this.beforeFirstValidDate) return 'is-valid-day';
       return null;
     },
     isADisabledDay() {
@@ -3865,8 +3888,8 @@ var component = normalizeComponent(
 
 var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_d98aa242_render,
-  Dayvue_type_template_id_d98aa242_staticRenderFns,
+  Dayvue_type_template_id_4fc114fc_render,
+  Dayvue_type_template_id_4fc114fc_staticRenderFns,
   false,
   null,
   null,
@@ -4017,6 +4040,10 @@ var WeekRow_component = normalizeComponent(
     disabledDates: {
       type: Array,
       default: () => []
+    },
+    disabledDateRanges: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {
@@ -4068,8 +4095,8 @@ var WeekRow_component = normalizeComponent(
 
 var Month_component = normalizeComponent(
   components_Monthvue_type_script_lang_js_,
-  Monthvue_type_template_id_c15da084_render,
-  Monthvue_type_template_id_c15da084_staticRenderFns,
+  Monthvue_type_template_id_16ddea22_render,
+  Monthvue_type_template_id_16ddea22_staticRenderFns,
   false,
   null,
   null,
@@ -4593,6 +4620,12 @@ var CallToAction_component = normalizeComponent(
       default: true
     },
     disabledDates: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    disabledDateRanges: {
       type: Array,
       default() {
         return [];
