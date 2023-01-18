@@ -12,6 +12,7 @@
         dayBelongToThisMonth,
         isAfterMaxNights,
         isDayNotAvailable,
+        isDayInDisabledRange,
         isCheckInDay,
         isSelectionCheckInDay,
         isBeforeMinDate,
@@ -62,6 +63,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    disabledDateRanges: {
+      type: Array,
+      default: () => [],
+    },
     disabledWeekDays: {
       type: Object,
     },
@@ -105,6 +110,30 @@ export default {
       }
 
       return null
+    },
+
+    isDayInDisabledRange() {
+      if (!this.disabledDateRanges || !this.disabledDateRanges.length === 0) return null
+
+      let isDayInDisabledRange = null
+
+      this.disabledDateRanges.forEach((range) => {
+        if (range.start && !range.end) {
+          if (this.compareDay(range.start, this.date) !== 1) {
+            isDayInDisabledRange = 'disabled__not-available'
+
+            return
+          }
+        }
+
+        if (this.compareDay(range.start, range.end) > -1) return
+
+        if (this.compareDay(range.start, this.date) !== this.compareDay(range.end, this.date)) {
+          isDayInDisabledRange = 'disabled__not-available'
+        }
+      })
+
+      return isDayInDisabledRange
     },
 
     isAfterMaxNights() {
@@ -246,6 +275,7 @@ export default {
         !this.isBeforeMinDate &&
         !this.isDayNotAvailable &&
         !this.isADisabledDayOfTheWeek &&
+        !this.isDayInDisabledRange &&
         !this.isCheckInDay &&
         !this.isAfterEndDate &&
         !this.dayBelongToThisMonth &&

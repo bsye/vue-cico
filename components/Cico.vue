@@ -134,6 +134,7 @@
               :maxNights="maxNights"
               :disabledWeekDays="disabledWeekDays"
               :disabledDates="disabledDates"
+              :disabledDateRanges="disabledDateRanges"
               @clear-selection="clearSelection"
               @day-clicked="handleDayClick"
               @valid-day-hovered="validDayHovered"
@@ -196,6 +197,13 @@ export default {
     },
 
     disabledDates: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+
+    disabledDateRanges: {
       type: Array,
       default() {
         return []

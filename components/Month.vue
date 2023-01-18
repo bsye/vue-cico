@@ -19,6 +19,7 @@
           :checkIn="checkIn"
           :checkOut="checkOut"
           :disabledDates="disabledDates"
+          :disabledDateRanges="disabledDateRanges"
           :date="day.date"
           :belongsToThisMonth="day.belongsToThisMonth"
           :hoveringDate="hoveringDate"
@@ -107,6 +108,10 @@ export default {
       type: Object,
     },
     disabledDates: {
+      type: Array,
+      default: () => [],
+    },
+    disabledDateRanges: {
       type: Array,
       default: () => [],
     },
