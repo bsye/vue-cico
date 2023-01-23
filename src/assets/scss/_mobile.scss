@@ -183,12 +183,6 @@
         
                 .cico__square-wrapper {
                     order: 2;
-
-                    .cico__square {
-                        &.disabled__from-another-month {
-                            display: none;
-                        }
-                    }
                 }
         
                 &:first-child {
