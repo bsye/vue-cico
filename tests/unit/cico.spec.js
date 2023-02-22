@@ -19,6 +19,21 @@ describe('Cico Component', () => {
     expect(wrapper.html()).to.not.equal(null)
   })
 
+  it('should output the interface after mounted', async () => {
+    expect(wrapper.emitted('interface').length).to.not.eql(0)
+    const returnedInterface = wrapper.emitted('interface')[0][0]
+    const interfaceEvents = ['hideDatepicker', 'showDatepicker']
+    const foundEvents = []
+
+    Object.keys(returnedInterface).forEach((key) => {
+      interfaceEvents.forEach((event) => {
+        if (key === event) foundEvents.push(key)
+      })
+    })
+
+    expect(interfaceEvents.sort()).to.eql(foundEvents.sort())
+  })
+
   it('should verify that the calendar opens correctly', async () => {
     await wrapper.find('.cico__dummy-wrapper').trigger('click')
     expect(wrapper.vm.isOpen).to.eql(true)
