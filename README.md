@@ -194,9 +194,9 @@ export default {
 
 ## Named Slots
 | Name |
-| before-call-to-action |
-| before-calendar |
-| after-calendar |
+| before-call-to-action 
+| before-calendar 
+| after-calendar 
 
 ## Events
 
