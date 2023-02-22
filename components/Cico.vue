@@ -60,6 +60,7 @@
       }"
     >
       <div class="cico__inner">
+        <slot name="before-call-to-action"></slot>
         <CallToAction
           :minNights="minNights"
           :checkIn="checkIn"
@@ -67,6 +68,7 @@
           :validHoveredDate="validHoveredDate"
           :i18n="i18n"
         />
+        <slot name="before-calendar"></slot>
         <div ref="scroller" class="cico__months">
           <div
             v-if="isDesktop"
@@ -143,6 +145,7 @@
             />
           </div>
         </div>
+        <slot name="after-calendar"></slot>
         <MobileActions
           @reset="clearSelection()"
           @selected="mobileActionSelected()"
@@ -456,6 +459,7 @@ export default {
   },
 
   created() {
+    this.emitInterface()
     this.configureI18n()
     this.generateInitialMonths()
   },
@@ -479,6 +483,13 @@ export default {
   methods: {
     ...Helpers,
     get,
+
+    emitInterface() {
+      this.$emit('interface', {
+        showDatepicker: () => this.showDatepicker(),
+        hideDatepicker: () => this.hideDatepicker(),
+      })
+    },
 
     handleResize() {
       const { isDesktop } = this
