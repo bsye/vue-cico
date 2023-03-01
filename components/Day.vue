@@ -1,7 +1,8 @@
 <template>
   <button>
     <div
-      :data-testid="isValidDay ? 'cico-valid-day' : ''"
+      :data-testid="isValidDay"
+      :data-testvalue="date"
       class="cico__month-day"
       @click.prevent.stop="dayClicked($event, date)"
       :day="date"
