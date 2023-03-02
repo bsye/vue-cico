@@ -2,7 +2,7 @@
   <button
     class="cico__input"
     @keyup.enter.stop.prevent="toggleDatepicker"
-    data-qa="cicoInput"
+    data-testid="cicoInput"
     :class="inputClass"
     :tabindex="tabIndex"
   >
