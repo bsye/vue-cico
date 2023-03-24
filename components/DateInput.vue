@@ -39,6 +39,14 @@ export default {
       type: Object,
       required: true,
     },
+    inputSize: {
+      type: String,
+      required: true,
+    },
+    otherInputDate: {
+      type: String,
+      default: null,
+    },
   },
   computed: {
     inputClass() {
@@ -52,6 +60,18 @@ export default {
 
       if (this.inputDateType === 'check-in') plain = this.get(this.i18n, 'activity.filter.action')
       if (this.inputDateType === 'check-out') plain = this.get(this.i18n, 'activity.filter.action')
+
+      if (this.inputDateType === 'check-in' && this.inputSize === 'extra-short' && this.inputDate !== null) {
+        const checkInDateArray = this.inputDate.split(' ')
+        const checkOutDateArray = this.otherInputDate.split(' ')
+        const checkInMonth = checkInDateArray[1]
+        const checkInDay = checkInDateArray[0]
+        const checkOutMonth = checkOutDateArray[1]
+
+        if (checkInMonth === checkOutMonth) {
+          return checkInDay
+        }
+      }
 
       return this.inputDate || plain
     },

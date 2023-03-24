@@ -20,9 +20,11 @@
             :class="{ focused: !checkIn && isOpen }"
             :is-open="isOpen"
             :toggle-datepicker="toggleDatepicker"
+            :input-size="inputSize"
+            :other-input-date="responsiveFormatter(this.checkOut, this.fieldsFormat)"
           />
         </div>
-        <IconArrow />
+        <DateInputDivider :input-size="inputSize" />
         <div class="cico__dummy-wrapper-input-wrapper departure">
           <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
             {{ get(i18n, 'activity.filter.checkOut') }}
@@ -34,6 +36,8 @@
             input-date-type="check-out"
             :is-open="isOpen"
             :toggle-datepicker="toggleDatepicker"
+            :input-size="inputSize"
+            :other-input-date="responsiveFormatter(this.checkIn, this.fieldsFormat)"
           />
         </div>
       </div>
@@ -163,10 +167,10 @@ import get from 'lodash.get'
 import Month from './Month.vue'
 import MobileActions from './MobileActions.vue'
 import IconCalendar from './icons/IconCalendar.vue'
-import IconArrow from './icons/IconArrow.vue'
 import DateInput from './DateInput.vue'
 import CallToAction from './CallToAction.vue'
 import Helpers from '../src/helpers'
+import DateInputDivider from './DateInputDivider.vue'
 // eslint-disable-next-line import/no-named-as-default
 import i18nDefaults from '../public/i18n/en'
 
@@ -177,7 +181,7 @@ export default {
     CallToAction,
     MobileActions,
     IconCalendar,
-    IconArrow,
+    DateInputDivider,
     DateInput,
   },
   props: {
@@ -235,8 +239,8 @@ export default {
       type: [Object, String],
       default: () => {
         return {
-          mobile: 'DD MMM',
-          desktop: 'ddd DD MMM',
+          short: 'DD MMM',
+          long: 'ddd DD MMM',
         }
       },
     },
@@ -294,6 +298,7 @@ export default {
       months: [],
       open: false,
       windowWidth: window.innerWidth,
+      inputWidth: null,
     }
   },
   computed: {
@@ -405,6 +410,13 @@ export default {
     isDesktop() {
       return this.windowWidth > 767
     },
+
+    inputSize() {
+      if (this.inputWidth >= 300) return 'long'
+      if (this.inputWidth < 300 && this.inputWidth > 225) return 'short'
+
+      return 'extra-short'
+    },
   },
   watch: {
     checkIn(newDate) {
@@ -467,6 +479,8 @@ export default {
 
     document.addEventListener('click', this.handleClickOutside, false)
     document.addEventListener('keyup', this.escFunction, false)
+
+    this.inputWidth = document.querySelector('.cico__dummy-wrapper').clientWidth
   },
 
   destroyed() {
@@ -484,6 +498,7 @@ export default {
       const { isDesktop } = this
 
       this.windowWidth = window.innerWidth
+      this.inputWidth = document.querySelector('.cico__dummy-wrapper').clientWidth
 
       if (isDesktop !== this.isDesktop) {
         this.activeMonthIndex = 0
@@ -567,9 +582,9 @@ export default {
     responsiveFormatter(date) {
       if (typeof this.fieldsFormat === 'string') return this.dateFormatter(date, this.fieldsFormat)
 
-      if (this.isDesktop) {
+      if (this.inputSize === 'long') {
         try {
-          if (this.get(this.fieldsFormat, 'desktop')) return this.dateFormatter(date, this.fieldsFormat.desktop)
+          if (this.get(this.fieldsFormat, 'long')) return this.dateFormatter(date, this.fieldsFormat.long)
         } catch (error) {
           return this.dateFormatter(date, 'ddd DD MMM')
         }
@@ -577,12 +592,15 @@ export default {
         return this.dateFormatter(date, 'ddd DD MMM')
       }
 
-      if (this.get(this.fieldsFormat, 'mobile'))
+      if (this.inputSize === 'short' || this.inputSize === 'extra-short') {
         try {
-          return this.dateFormatter(date, this.fieldsFormat.mobile)
+          if (this.get(this.fieldsFormat, 'short')) return this.dateFormatter(date, this.fieldsFormat.short)
         } catch (error) {
           return this.dateFormatter(date, 'DD MMM')
         }
+
+        return this.dateFormatter(date, 'DD MMM')
+      }
 
       return this.dateFormatter(date, 'DD MMM')
     },
