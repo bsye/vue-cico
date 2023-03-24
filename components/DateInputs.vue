@@ -1,7 +1,11 @@
 <template>
   <div class="cico__dummy-wrapper-scroll">
     <div class="cico__dummy-wrapper-input-wrapper">
-      <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-arrival">
+      <span
+        v-if="get(i18n, 'activity.filter.checkOut')"
+        v-show="showExtendedPlaceholder"
+        class="cico__dummy-wrapper-arrival"
+      >
         {{ get(i18n, 'activity.filter.checkIn') }}
       </span>
       <DateInputCheckIn
@@ -15,12 +19,17 @@
         :class="{ focused: !checkIn && isOpen }"
       />
     </div>
-    <DateInputDivider :input-size="inputSize" />
+    <DateInputDivider :input-size="inputSize" v-if="showExtendedPlaceholder" />
     <div class="cico__dummy-wrapper-input-wrapper departure">
-      <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
+      <span
+        v-if="get(i18n, 'activity.filter.checkOut')"
+        v-show="showExtendedPlaceholder"
+        class="cico__dummy-wrapper-departure"
+      >
         {{ get(i18n, 'activity.filter.checkOut') }}
       </span>
       <DateInputCheckOut
+        v-if="showExtendedPlaceholder"
         :is-open="isOpen"
         :toggle-datepicker="toggleDatepicker"
         :i18n="i18n"
@@ -30,17 +39,6 @@
         :checkOut="checkOut"
         :class="{ focused: !checkIn && isOpen }"
       />
-      <!-- <DateInputCheckOut
-        :checkoutFieldFormat="checkoutFieldFormat"
-        :i18n="i18n"
-        :class="{ focused: checkIn && !checkOut && isOpen }"
-        :input-date="responsiveFormatter(this.checkOut, this.fieldsFormat)"
-        input-date-type="check-out"
-        :is-open="isOpen"
-        :toggle-datepicker="toggleDatepicker"
-        :input-size="inputSize"
-        :other-input-date="responsiveFormatter(this.checkIn, this.fieldsFormat)"
-      /> -->
     </div>
   </div>
 </template>
@@ -106,6 +104,10 @@ export default {
       if (this.inputWidth < 300 && this.inputWidth > 225) return 'short'
 
       return 'extra-short'
+    },
+
+    showExtendedPlaceholder() {
+      return !(this.checkIn === null && this.inputSize !== 'long')
     },
   },
 
