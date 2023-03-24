@@ -52,7 +52,6 @@ export default {
     inputClass() {
       return {
         'cico__input--is-active': this.isOpen && this.inputDate == null,
-        'cico__input--single-date': this.singleDaySelection,
       }
     },
     text() {
@@ -61,16 +60,18 @@ export default {
       if (this.inputDateType === 'check-in') plain = this.get(this.i18n, 'activity.filter.action')
       if (this.inputDateType === 'check-out') plain = this.get(this.i18n, 'activity.filter.action')
 
-      if (this.inputDateType === 'check-in' && this.inputSize === 'extra-short' && this.inputDate !== null) {
-        const checkInDateArray = this.inputDate.split(' ')
-        const checkOutDateArray = this.otherInputDate.split(' ')
-        const checkInMonth = checkInDateArray[1]
-        const checkInDay = checkInDateArray[0]
-        const checkOutMonth = checkOutDateArray[1]
+      if (this.inputDateType !== 'check-in') return this.inputDate || plain
+      if (this.inputSize !== 'extra-short') return this.inputDate || plain
+      if (this.inputDate === null) return this.inputDate || plain
 
-        if (checkInMonth === checkOutMonth) {
-          return checkInDay
-        }
+      const checkInDateArray = this.inputDate.split(' ')
+      const checkOutDateArray = this.otherInputDate.split(' ')
+      const checkInMonth = checkInDateArray[1]
+      const checkInDay = checkInDateArray[0]
+      const checkOutMonth = checkOutDateArray[1]
+
+      if (checkInMonth === checkOutMonth) {
+        return checkInDay
       }
 
       return this.inputDate || plain

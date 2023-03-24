@@ -6,41 +6,17 @@
         <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
       </svg>
     </button>
-    <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
+    <div @click="toggleDatepicker()" class="cico__dummy-wrapper" ref="cico__wrapper">
       <IconCalendar />
-      <div class="cico__dummy-wrapper-scroll">
-        <div class="cico__dummy-wrapper-input-wrapper">
-          <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-arrival">
-            {{ get(i18n, 'activity.filter.checkIn') }}
-          </span>
-          <date-input
-            :i18n="i18n"
-            :input-date="responsiveFormatter(this.checkIn, this.fieldsFormat)"
-            input-date-type="check-in"
-            :class="{ focused: !checkIn && isOpen }"
-            :is-open="isOpen"
-            :toggle-datepicker="toggleDatepicker"
-            :input-size="inputSize"
-            :other-input-date="responsiveFormatter(this.checkOut, this.fieldsFormat)"
-          />
-        </div>
-        <DateInputDivider :input-size="inputSize" />
-        <div class="cico__dummy-wrapper-input-wrapper departure">
-          <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
-            {{ get(i18n, 'activity.filter.checkOut') }}
-          </span>
-          <date-input
-            :i18n="i18n"
-            :class="{ focused: checkIn && !checkOut && isOpen }"
-            :input-date="responsiveFormatter(this.checkOut, this.fieldsFormat)"
-            input-date-type="check-out"
-            :is-open="isOpen"
-            :toggle-datepicker="toggleDatepicker"
-            :input-size="inputSize"
-            :other-input-date="responsiveFormatter(this.checkIn, this.fieldsFormat)"
-          />
-        </div>
-      </div>
+      <DateInputs
+        :check-in="checkIn"
+        :i18n="i18n"
+        :isOpen="isOpen"
+        :checkinFieldFormat="checkinFieldFormat"
+        :checkoutFieldFormat="checkoutFieldFormat"
+        :check-out="checkOut"
+        :toggleDatepicker="toggleDatepicker"
+      />
       <button
         class="cico__clear-button"
         tabindex="0"
@@ -167,10 +143,9 @@ import get from 'lodash.get'
 import Month from './Month.vue'
 import MobileActions from './MobileActions.vue'
 import IconCalendar from './icons/IconCalendar.vue'
-import DateInput from './DateInput.vue'
+import DateInputs from './DateInputs.vue'
 import CallToAction from './CallToAction.vue'
 import Helpers from '../src/helpers'
-import DateInputDivider from './DateInputDivider.vue'
 // eslint-disable-next-line import/no-named-as-default
 import i18nDefaults from '../public/i18n/en'
 
@@ -181,8 +156,7 @@ export default {
     CallToAction,
     MobileActions,
     IconCalendar,
-    DateInputDivider,
-    DateInput,
+    DateInputs,
   },
   props: {
     checkInDate: {
@@ -230,12 +204,16 @@ export default {
       default: true,
     },
 
-    outputFormat: {
+    eventFormat: {
       type: String,
       default: 'YYYY-MM-DD',
     },
 
-    fieldsFormat: {
+    checkinFieldFormat: {
+      type: String,
+    },
+
+    checkoutFieldFormat: {
       type: [Object, String],
       default: () => {
         return {
@@ -420,7 +398,7 @@ export default {
   },
   watch: {
     checkIn(newDate) {
-      this.$emit('check-in-selected', this.dateFormatter(newDate, this.outputFormat))
+      this.$emit('check-in-selected', this.dateFormatter(newDate, this.eventFormat))
 
       this.reRender()
     },
@@ -431,7 +409,7 @@ export default {
         this.reRender()
       }
 
-      this.$emit('check-out-selected', this.dateFormatter(newDate, this.outputFormat))
+      this.$emit('check-out-selected', this.dateFormatter(newDate, this.eventFormat))
       this.reRender()
     },
 
@@ -480,7 +458,7 @@ export default {
     document.addEventListener('click', this.handleClickOutside, false)
     document.addEventListener('keyup', this.escFunction, false)
 
-    this.inputWidth = document.querySelector('.cico__dummy-wrapper').clientWidth
+    this.inputWidth = this.$refs.cico__wrapper.clientWidth
   },
 
   destroyed() {
@@ -498,7 +476,7 @@ export default {
       const { isDesktop } = this
 
       this.windowWidth = window.innerWidth
-      this.inputWidth = document.querySelector('.cico__dummy-wrapper').clientWidth
+      this.inputWidth = this.$refs.cico__wrapper.clientWidth
 
       if (isDesktop !== this.isDesktop) {
         this.activeMonthIndex = 0
@@ -579,32 +557,6 @@ export default {
       return null
     },
 
-    responsiveFormatter(date) {
-      if (typeof this.fieldsFormat === 'string') return this.dateFormatter(date, this.fieldsFormat)
-
-      if (this.inputSize === 'long') {
-        try {
-          if (this.get(this.fieldsFormat, 'long')) return this.dateFormatter(date, this.fieldsFormat.long)
-        } catch (error) {
-          return this.dateFormatter(date, 'ddd DD MMM')
-        }
-
-        return this.dateFormatter(date, 'ddd DD MMM')
-      }
-
-      if (this.inputSize === 'short' || this.inputSize === 'extra-short') {
-        try {
-          if (this.get(this.fieldsFormat, 'short')) return this.dateFormatter(date, this.fieldsFormat.short)
-        } catch (error) {
-          return this.dateFormatter(date, 'DD MMM')
-        }
-
-        return this.dateFormatter(date, 'DD MMM')
-      }
-
-      return this.dateFormatter(date, 'DD MMM')
-    },
-
     validDayHovered(date) {
       this.validHoveredDate = date
     },
@@ -629,7 +581,7 @@ export default {
     },
 
     formatDate(date) {
-      return this.dateFormatter(date, this.outputFormat)
+      return this.dateFormatter(date, this.eventFormat)
     },
 
     enterMonth(event, month) {
@@ -659,7 +611,7 @@ export default {
 
       this.hoveringDate = null
       this.hoveringDate = date
-      this.$emit('day-clicked', this.dateFormatter(date, this.outputFormat))
+      this.$emit('day-clicked', this.dateFormatter(date, this.eventFormat))
 
       if (this.checkIn == null) {
         this.checkIn = date
@@ -671,8 +623,8 @@ export default {
         this.checkOut = date
         this.$emit(
           'period-selected',
-          this.dateFormatter(this.checkIn, this.outputFormat),
-          this.dateFormatter(this.checkOut, this.outputFormat),
+          this.dateFormatter(this.checkIn, this.eventFormat),
+          this.dateFormatter(this.checkOut, this.eventFormat),
         )
 
         return

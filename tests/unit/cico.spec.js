@@ -57,7 +57,7 @@ describe('Cico Component', () => {
 
   it('should emit the check in date in the YYYY-MM format', async () => {
     await wrapper.setProps({
-      outputFormat: 'YYYY-MM',
+      eventFormat: 'YYYY-MM',
     })
 
     await wrapper.find('.is-valid-day').trigger('click')
