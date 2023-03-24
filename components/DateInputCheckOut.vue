@@ -6,30 +6,19 @@
     :class="inputClass"
     :tabindex="tabIndex"
   >
-    {{ text }}
+    {{ inputDate || get(i18n, 'activity.filter.action') }}
   </button>
 </template>
 
 <script>
 import get from 'lodash.get'
+import helpers from '../src/helpers'
 
 export default {
   props: {
     isOpen: {
       type: Boolean,
       required: true,
-    },
-    inputDate: {
-      type: String,
-      default: null,
-    },
-    inputDateType: {
-      type: String,
-      default: 'check-in',
-    },
-    singleDaySelection: {
-      type: Boolean,
-      default: false,
     },
     toggleDatepicker: {
       type: Function,
@@ -43,8 +32,15 @@ export default {
       type: String,
       required: true,
     },
-    otherInputDate: {
+    checkoutFieldFormat: {
       type: String,
+    },
+    checkIn: {
+      type: [Date, null],
+      default: null,
+    },
+    checkOut: {
+      type: [Date, null],
       default: null,
     },
   },
@@ -54,28 +50,18 @@ export default {
         'cico__input--is-active': this.isOpen && this.inputDate == null,
       }
     },
-    text() {
-      let plain = null
 
-      if (this.inputDateType === 'check-in') plain = this.get(this.i18n, 'activity.filter.action')
-      if (this.inputDateType === 'check-out') plain = this.get(this.i18n, 'activity.filter.action')
+    inputDate() {
+      if (this.checkOut === null) return null
 
-      if (this.inputDateType !== 'check-in') return this.inputDate || plain
-      if (this.inputSize !== 'extra-short') return this.inputDate || plain
-      if (this.inputDate === null) return this.inputDate || plain
+      if (this.checkoutFieldFormat) return helpers.dateFormatter(this.checkOut, this.checkoutFieldFormat)
 
-      const checkInDateArray = this.inputDate.split(' ')
-      const checkOutDateArray = this.otherInputDate.split(' ')
-      const checkInMonth = checkInDateArray[1]
-      const checkInDay = checkInDateArray[0]
-      const checkOutMonth = checkOutDateArray[1]
+      if (this.inputSize === 'long') return helpers.dateFormatter(this.checkOut, 'ddd DD MMM')
+      if (this.inputSize === 'short') return helpers.dateFormatter(this.checkOut, 'DD MMM')
 
-      if (checkInMonth === checkOutMonth) {
-        return checkInDay
-      }
-
-      return this.inputDate || plain
+      return helpers.dateFormatter(this.checkOut, 'DD MMM')
     },
+
     tabIndex() {
       return this.inputDateType === 'check-in' ? 0 : -1
     },

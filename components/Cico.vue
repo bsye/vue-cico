@@ -214,13 +214,7 @@ export default {
     },
 
     checkoutFieldFormat: {
-      type: [Object, String],
-      default: () => {
-        return {
-          short: 'DD MMM',
-          long: 'ddd DD MMM',
-        }
-      },
+      type: String,
     },
 
     i18n: {

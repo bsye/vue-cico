@@ -20,6 +20,16 @@
       <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
         {{ get(i18n, 'activity.filter.checkOut') }}
       </span>
+      <DateInputCheckOut
+        :is-open="isOpen"
+        :toggle-datepicker="toggleDatepicker"
+        :i18n="i18n"
+        :input-size="inputSize"
+        :checkoutFieldFormat="checkoutFieldFormat"
+        :checkIn="checkIn"
+        :checkOut="checkOut"
+        :class="{ focused: !checkIn && isOpen }"
+      />
       <!-- <DateInputCheckOut
         :checkoutFieldFormat="checkoutFieldFormat"
         :i18n="i18n"
@@ -36,7 +46,7 @@
 </template>
 <script>
 import get from 'lodash.get'
-// import DateInputCheckOut from './DateInputCheckOut.vue'
+import DateInputCheckOut from './DateInputCheckOut.vue'
 import DateInputCheckIn from './DateInputCheckIn.vue'
 import DateInputDivider from './DateInputDivider.vue'
 import helpers from '../src/helpers'
@@ -45,7 +55,7 @@ export default {
   name: 'DateInputs',
   components: {
     DateInputCheckIn,
-    // DateInputCheckOut,
+    DateInputCheckOut,
     DateInputDivider,
   },
 
@@ -56,13 +66,11 @@ export default {
     },
 
     checkinFieldFormat: {
-      type: [String, Object],
-      required: true,
+      type: String,
     },
 
     checkoutFieldFormat: {
-      type: [String, Object],
-      required: true,
+      type: String,
     },
 
     checkOut: {
