@@ -488,6 +488,7 @@ export default {
       this.$emit('interface', {
         showDatepicker: () => this.showDatepicker(),
         hideDatepicker: () => this.hideDatepicker(),
+        clearSelection: () => this.clearSelection(),
       })
     },
 

@@ -44,13 +44,13 @@
           />
         </svg>
       </div>
+      <button @click="$options.clearSelection()">as</button>
       <div class="picker">
         <Cico
           class="cico__style-landing"
           :checkInDate="null"
           position="bottom"
           :checkOutDate="null"
-          :disabledDateRanges="[{ start: new Date('2023-02-12') }]"
           :minNights="2"
           :maxNights="15"
           @interface="getInterface"
