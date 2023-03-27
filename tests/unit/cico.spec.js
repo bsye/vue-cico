@@ -22,7 +22,7 @@ describe('Cico Component', () => {
   it('should output the interface after mounted', async () => {
     expect(wrapper.emitted('interface').length).to.not.eql(0)
     const returnedInterface = wrapper.emitted('interface')[0][0]
-    const interfaceEvents = ['hideDatepicker', 'showDatepicker']
+    const interfaceEvents = ['hideDatepicker', 'showDatepicker', 'clearSelection']
     const foundEvents = []
 
     Object.keys(returnedInterface).forEach((key) => {
