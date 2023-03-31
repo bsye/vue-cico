@@ -6,7 +6,7 @@
         <path d="M6.5 6.5l55 55m0-55l-55 55" stroke="#000" fill="none" stroke-linecap="square" />
       </svg>
     </button>
-    <div @click="toggleDatepicker()" class="cico__dummy-wrapper" ref="cico__wrapper">
+    <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
       <IconCalendar />
       <DateInputs
         :check-in="checkIn"
@@ -270,7 +270,6 @@ export default {
       months: [],
       open: false,
       windowWidth: window.innerWidth,
-      inputWidth: null,
     }
   },
   computed: {
@@ -382,13 +381,6 @@ export default {
     isDesktop() {
       return this.windowWidth > 767
     },
-
-    inputSize() {
-      if (this.inputWidth >= 300) return 'long'
-      if (this.inputWidth < 300 && this.inputWidth > 225) return 'short'
-
-      return 'extra-short'
-    },
   },
   watch: {
     checkIn(newDate) {
@@ -451,8 +443,6 @@ export default {
 
     document.addEventListener('click', this.handleClickOutside, false)
     document.addEventListener('keyup', this.escFunction, false)
-
-    this.inputWidth = this.$refs.cico__wrapper.clientWidth
   },
 
   destroyed() {
@@ -470,7 +460,6 @@ export default {
       const { isDesktop } = this
 
       this.windowWidth = window.innerWidth
-      this.inputWidth = this.$refs.cico__wrapper.clientWidth
 
       if (isDesktop !== this.isDesktop) {
         this.activeMonthIndex = 0

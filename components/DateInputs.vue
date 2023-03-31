@@ -1,5 +1,5 @@
 <template>
-  <div class="cico__dummy-wrapper-scroll">
+  <div class="cico__dummy-wrapper-scroll" ref="input_wrapper">
     <div class="cico__dummy-wrapper-input-wrapper">
       <span
         v-if="get(i18n, 'activity.filter.checkOut')"
@@ -102,8 +102,8 @@ export default {
     inputSize() {
       if (!this.inputWidth) return 'long'
 
-      if (this.inputWidth >= 300) return 'long'
-      if (this.inputWidth < 300 && this.inputWidth > 225) return 'short'
+      if (this.inputWidth >= 235) return 'long'
+      if (this.inputWidth < 235 && this.inputWidth > 150) return 'short'
 
       return 'extra-short'
     },
@@ -114,11 +114,13 @@ export default {
   },
 
   mounted() {
-    if (!get(this, '$parent.$refs.cico__wrapper', null)) return
+    if (!get(this, '$refs.input_wrapper', null)) return
+
     window.addEventListener('resize', () => {
-      this.inputWidth = this.$parent.$refs.cico__wrapper.clientWidth
+      this.inputWidth = this.$refs.input_wrapper.clientWidth
     })
-    this.inputWidth = this.$parent.$refs.cico__wrapper.clientWidth
+
+    this.inputWidth = this.$refs.input_wrapper.clientWidth
   },
 
   methods: {
