@@ -100,6 +100,8 @@ export default {
 
   computed: {
     inputSize() {
+      if (!this.inputWidth) return 'long'
+
       if (this.inputWidth >= 300) return 'long'
       if (this.inputWidth < 300 && this.inputWidth > 225) return 'short'
 
@@ -111,11 +113,12 @@ export default {
     },
   },
 
-  async mounted() {
-    this.inputWidth = this.$parent.$refs.cico__wrapper.clientWidth
+  mounted() {
+    if (!get(this, '$parent.$refs.cico__wrapper', null)) return
     window.addEventListener('resize', () => {
       this.inputWidth = this.$parent.$refs.cico__wrapper.clientWidth
     })
+    this.inputWidth = this.$parent.$refs.cico__wrapper.clientWidth
   },
 
   methods: {
