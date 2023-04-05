@@ -51,12 +51,6 @@
                 height: 18px;
                 margin-right: 6px;
 
-                * {
-                    fill: transparent;
-                    stroke: #393939;
-                }
-
-
                 @media screen and ($up-to-tablet) {
                     position: relative;
                     bottom: 1px;
