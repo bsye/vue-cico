@@ -4186,8 +4186,8 @@ var MobileActions_component = normalizeComponent(
 )
 
 /* harmony default export */ var MobileActions = (MobileActions_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/icons/IconCalendar.vue?vue&type=template&id=63e8431c&
-var IconCalendarvue_type_template_id_63e8431c_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/icons/IconCalendar.vue?vue&type=template&id=6423fb8c&
+var IconCalendarvue_type_template_id_6423fb8c_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('svg', {
@@ -4206,7 +4206,7 @@ var IconCalendarvue_type_template_id_63e8431c_render = function render() {
       "width": "13.3333",
       "height": "13.3333",
       "rx": "2",
-      "stroke": "#EB5F40",
+      "stroke": "#393939",
       "stroke-width": "1.5",
       "stroke-linecap": "round",
       "stroke-linejoin": "round"
@@ -4214,7 +4214,7 @@ var IconCalendarvue_type_template_id_63e8431c_render = function render() {
   }), _c('path', {
     attrs: {
       "d": "M13.3333 2.5V5.83333",
-      "stroke": "#EB5F40",
+      "stroke": "#393939",
       "stroke-width": "1.5",
       "stroke-linecap": "round",
       "stroke-linejoin": "round"
@@ -4222,7 +4222,7 @@ var IconCalendarvue_type_template_id_63e8431c_render = function render() {
   }), _c('path', {
     attrs: {
       "d": "M6.66667 2.5V5.83333",
-      "stroke": "#EB5F40",
+      "stroke": "#393939",
       "stroke-width": "1.5",
       "stroke-linecap": "round",
       "stroke-linejoin": "round"
@@ -4230,7 +4230,7 @@ var IconCalendarvue_type_template_id_63e8431c_render = function render() {
   }), _c('path', {
     attrs: {
       "d": "M3.33334 9.16667H16.6667",
-      "stroke": "#EB5F40",
+      "stroke": "#393939",
       "stroke-width": "1.5",
       "stroke-linecap": "round",
       "stroke-linejoin": "round"
@@ -4241,16 +4241,16 @@ var IconCalendarvue_type_template_id_63e8431c_render = function render() {
       "y": "13",
       "width": "1",
       "height": "1",
-      "stroke": "#EB5F40",
+      "stroke": "#393939",
       "stroke-width": "2",
       "stroke-linecap": "round",
       "stroke-linejoin": "round"
     }
   })]);
 };
-var IconCalendarvue_type_template_id_63e8431c_staticRenderFns = [];
+var IconCalendarvue_type_template_id_6423fb8c_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/icons/IconCalendar.vue?vue&type=template&id=63e8431c&
+// CONCATENATED MODULE: ./components/icons/IconCalendar.vue?vue&type=template&id=6423fb8c&
 
 // CONCATENATED MODULE: ./components/icons/IconCalendar.vue
 
@@ -4261,8 +4261,8 @@ var script = {}
 
 var IconCalendar_component = normalizeComponent(
   script,
-  IconCalendarvue_type_template_id_63e8431c_render,
-  IconCalendarvue_type_template_id_63e8431c_staticRenderFns,
+  IconCalendarvue_type_template_id_6423fb8c_render,
+  IconCalendarvue_type_template_id_6423fb8c_staticRenderFns,
   false,
   null,
   null,
