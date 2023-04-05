@@ -52,8 +52,10 @@
                 margin-right: 6px;
 
                 * {
-                    fill: var(--zambezi-grey);
+                    fill: transparent;
+                    stroke: #393939;
                 }
+
 
                 @media screen and ($up-to-tablet) {
                     position: relative;

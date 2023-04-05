@@ -2588,7 +2588,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=7694ce38&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=1a5cd6b6&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2690,7 +2690,7 @@ var render = function render() {
     }
   }, [_c('div', {
     staticClass: "cico__inner"
-  }, [_c('CallToAction', {
+  }, [_vm._t("before-call-to-action"), _c('CallToAction', {
     attrs: {
       "minNights": _vm.minNights,
       "checkIn": _vm.checkIn,
@@ -2698,7 +2698,7 @@ var render = function render() {
       "validHoveredDate": _vm.validHoveredDate,
       "i18n": _vm.i18n
     }
-  }), _c('div', {
+  }), _vm._t("before-calendar"), _c('div', {
     ref: "scroller",
     staticClass: "cico__months"
   }, [_vm.isDesktop ? _c('div', {
@@ -2809,7 +2809,7 @@ var render = function render() {
         "enter-month": _vm.enterMonth
       }
     });
-  }), 1)]), !_vm.isDesktop ? _c('MobileActions', {
+  }), 1)]), _vm._t("after-calendar"), !_vm.isDesktop ? _c('MobileActions', {
     attrs: {
       "displayClearButton": _vm.displayClearButton,
       "isClearDisabled": !(_vm.checkIn || _vm.checkOut),
@@ -2824,11 +2824,11 @@ var render = function render() {
         return _vm.mobileActionSelected();
       }
     }
-  }) : _vm._e()], 1)])]);
+  }) : _vm._e()], 2)])]);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=7694ce38&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=1a5cd6b6&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -3306,8 +3306,8 @@ var Monthvue_type_template_id_16ddea22_staticRenderFns = [];
 
 // CONCATENATED MODULE: ./components/Month.vue?vue&type=template&id=16ddea22&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=4fc114fc&
-var Dayvue_type_template_id_4fc114fc_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Day.vue?vue&type=template&id=4ede4338&
+var Dayvue_type_template_id_4ede4338_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('button', [_c('div', {
@@ -3315,6 +3315,8 @@ var Dayvue_type_template_id_4fc114fc_render = function render() {
     staticClass: "cico__month-day",
     class: [_vm.beforeFirstValidDate, _vm.dayBelongToThisMonth, _vm.isAfterMaxNights, _vm.isDayNotAvailable, _vm.isDayInDisabledRange, _vm.isCheckInDay, _vm.isSelectionCheckInDay, _vm.isBeforeMinDate, _vm.isAfterEndDate, _vm.isInTheRange, _vm.isCheckOutDay, _vm.isADisabledDayOfTheWeek, _vm.isValidDay, _vm.hoverIsBeforeCheckIn, _vm.hoverIsCheckInDay, _vm.hoverIsInTheRange, _vm.hoverIsCheckOutDay, _vm.hoverIsCurrentDay],
     attrs: {
+      "data-testid": _vm.isValidDay,
+      "data-testvalue": _vm.date,
       "day": _vm.date
     },
     on: {
@@ -3342,9 +3344,9 @@ var Dayvue_type_template_id_4fc114fc_render = function render() {
     }
   })], 1)])]);
 };
-var Dayvue_type_template_id_4fc114fc_staticRenderFns = [];
+var Dayvue_type_template_id_4ede4338_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=4fc114fc&
+// CONCATENATED MODULE: ./components/Day.vue?vue&type=template&id=4ede4338&
 
 // CONCATENATED MODULE: ./src/helpers.js
 
@@ -3888,8 +3890,8 @@ var component = normalizeComponent(
 
 var Day_component = normalizeComponent(
   components_Dayvue_type_script_lang_js_,
-  Dayvue_type_template_id_4fc114fc_render,
-  Dayvue_type_template_id_4fc114fc_staticRenderFns,
+  Dayvue_type_template_id_4ede4338_render,
+  Dayvue_type_template_id_4ede4338_staticRenderFns,
   false,
   null,
   null,
@@ -4184,8 +4186,8 @@ var MobileActions_component = normalizeComponent(
 )
 
 /* harmony default export */ var MobileActions = (MobileActions_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/icons/IconCalendar.vue?vue&type=template&id=68fbd690&
-var IconCalendarvue_type_template_id_68fbd690_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/icons/IconCalendar.vue?vue&type=template&id=63e8431c&
+var IconCalendarvue_type_template_id_63e8431c_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('svg', {
@@ -4197,18 +4199,58 @@ var IconCalendarvue_type_template_id_68fbd690_render = function render() {
       "fill": "none",
       "xmlns": "http://www.w3.org/2000/svg"
     }
-  }, [_c('path', {
+  }, [_c('rect', {
     attrs: {
-      "fill-rule": "evenodd",
-      "clip-rule": "evenodd",
-      "d": "M5.69231 1.62069C5.69231 1.27789 5.96782 1 6.30769 1C6.64756 1 6.92308 1.27789 6.92308 1.62069V2.86207H9.38462V1.62069C9.38462 1.27789 9.66013 1 10 1C10.3399 1 10.6154 1.27789 10.6154 1.62069V2.86207H13.0769V1.62069C13.0769 1.27789 13.3524 1 13.6923 1C14.0322 1 14.3077 1.27789 14.3077 1.62069V2.86207H16.2483C17.2159 2.86207 18 3.65296 18 4.62886V7.82759V17.2332C18 18.2091 17.2159 19 16.2483 19H3.75169C2.78413 19 2 18.2091 2 17.2332V7.82759V4.62886C2 3.65296 2.78413 2.86207 3.75169 2.86207H5.69231V1.62069ZM3.23077 8.44828V17.2332C3.23077 17.5235 3.46387 17.7586 3.75169 17.7586H16.2483C16.5361 17.7586 16.7692 17.5235 16.7692 17.2332V8.44828H3.23077ZM16.7692 7.2069H3.23077V4.62886C3.23077 4.33856 3.46387 4.10345 3.75169 4.10345H5.69231V5.34483C5.69231 5.68762 5.96782 5.96552 6.30769 5.96552C6.64756 5.96552 6.92308 5.68762 6.92308 5.34483V4.10345H9.38462V5.34483C9.38462 5.68762 9.66013 5.96552 10 5.96552C10.3399 5.96552 10.6154 5.68762 10.6154 5.34483V4.10345H13.0769V5.34483C13.0769 5.68762 13.3524 5.96552 13.6923 5.96552C14.0322 5.96552 14.3077 5.68762 14.3077 5.34483V4.10345H16.2483C16.5361 4.10345 16.7692 4.33856 16.7692 4.62886V7.2069ZM6.30769 11.5517C6.64738 11.5517 6.92308 11.2737 6.92308 10.931C6.92308 10.5884 6.64738 10.3103 6.30769 10.3103C5.968 10.3103 5.69231 10.5884 5.69231 10.931C5.69231 11.2737 5.968 11.5517 6.30769 11.5517ZM9.38462 10.931C9.38462 11.2737 9.10892 11.5517 8.76923 11.5517C8.42954 11.5517 8.15385 11.2737 8.15385 10.931C8.15385 10.5884 8.42954 10.3103 8.76923 10.3103C9.10892 10.3103 9.38462 10.5884 9.38462 10.931ZM11.2308 11.5517C11.5705 11.5517 11.8462 11.2737 11.8462 10.931C11.8462 10.5884 11.5705 10.3103 11.2308 10.3103C10.8911 10.3103 10.6154 10.5884 10.6154 10.931C10.6154 11.2737 10.8911 11.5517 11.2308 11.5517ZM14.3077 10.931C14.3077 11.2737 14.032 11.5517 13.6923 11.5517C13.3526 11.5517 13.0769 11.2737 13.0769 10.931C13.0769 10.5884 13.3526 10.3103 13.6923 10.3103C14.032 10.3103 14.3077 10.5884 14.3077 10.931ZM6.30769 14.0345C6.64738 14.0345 6.92308 13.7564 6.92308 13.4138C6.92308 13.0712 6.64738 12.7931 6.30769 12.7931C5.968 12.7931 5.69231 13.0712 5.69231 13.4138C5.69231 13.7564 5.968 14.0345 6.30769 14.0345ZM9.38462 13.4138C9.38462 13.7564 9.10892 14.0345 8.76923 14.0345C8.42954 14.0345 8.15385 13.7564 8.15385 13.4138C8.15385 13.0712 8.42954 12.7931 8.76923 12.7931C9.10892 12.7931 9.38462 13.0712 9.38462 13.4138ZM11.2308 14.0345C11.5705 14.0345 11.8462 13.7564 11.8462 13.4138C11.8462 13.0712 11.5705 12.7931 11.2308 12.7931C10.8911 12.7931 10.6154 13.0712 10.6154 13.4138C10.6154 13.7564 10.8911 14.0345 11.2308 14.0345Z",
-      "fill": "black"
+      "x": "3.33334",
+      "y": "4.16663",
+      "width": "13.3333",
+      "height": "13.3333",
+      "rx": "2",
+      "stroke": "#EB5F40",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }
+  }), _c('path', {
+    attrs: {
+      "d": "M13.3333 2.5V5.83333",
+      "stroke": "#EB5F40",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }
+  }), _c('path', {
+    attrs: {
+      "d": "M6.66667 2.5V5.83333",
+      "stroke": "#EB5F40",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }
+  }), _c('path', {
+    attrs: {
+      "d": "M3.33334 9.16667H16.6667",
+      "stroke": "#EB5F40",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }
+  }), _c('rect', {
+    attrs: {
+      "x": "7",
+      "y": "13",
+      "width": "1",
+      "height": "1",
+      "stroke": "#EB5F40",
+      "stroke-width": "2",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
     }
   })]);
 };
-var IconCalendarvue_type_template_id_68fbd690_staticRenderFns = [];
+var IconCalendarvue_type_template_id_63e8431c_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/icons/IconCalendar.vue?vue&type=template&id=68fbd690&
+// CONCATENATED MODULE: ./components/icons/IconCalendar.vue?vue&type=template&id=63e8431c&
 
 // CONCATENATED MODULE: ./components/icons/IconCalendar.vue
 
@@ -4219,8 +4261,8 @@ var script = {}
 
 var IconCalendar_component = normalizeComponent(
   script,
-  IconCalendarvue_type_template_id_68fbd690_render,
-  IconCalendarvue_type_template_id_68fbd690_staticRenderFns,
+  IconCalendarvue_type_template_id_63e8431c_render,
+  IconCalendarvue_type_template_id_63e8431c_staticRenderFns,
   false,
   null,
   null,
@@ -4278,15 +4320,15 @@ var IconArrow_component = normalizeComponent(
 )
 
 /* harmony default export */ var IconArrow = (IconArrow_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/DateInput.vue?vue&type=template&id=acf4a450&
-var DateInputvue_type_template_id_acf4a450_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1c774231-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/DateInput.vue?vue&type=template&id=0dfefddb&
+var DateInputvue_type_template_id_0dfefddb_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('button', {
     staticClass: "cico__input",
     class: _vm.inputClass,
     attrs: {
-      "data-qa": "cicoInput",
+      "data-testid": "cicoInput",
       "tabindex": _vm.tabIndex
     },
     on: {
@@ -4299,9 +4341,9 @@ var DateInputvue_type_template_id_acf4a450_render = function render() {
     }
   }, [_vm._v(" " + _vm._s(_vm.text) + " ")]);
 };
-var DateInputvue_type_template_id_acf4a450_staticRenderFns = [];
+var DateInputvue_type_template_id_0dfefddb_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/DateInput.vue?vue&type=template&id=acf4a450&
+// CONCATENATED MODULE: ./components/DateInput.vue?vue&type=template&id=0dfefddb&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/DateInput.vue?vue&type=script&lang=js&
 
@@ -4365,8 +4407,8 @@ var DateInputvue_type_template_id_acf4a450_staticRenderFns = [];
 
 var DateInput_component = normalizeComponent(
   components_DateInputvue_type_script_lang_js_,
-  DateInputvue_type_template_id_acf4a450_render,
-  DateInputvue_type_template_id_acf4a450_staticRenderFns,
+  DateInputvue_type_template_id_0dfefddb_render,
+  DateInputvue_type_template_id_0dfefddb_staticRenderFns,
   false,
   null,
   null,
@@ -4819,6 +4861,7 @@ var CallToAction_component = normalizeComponent(
     }
   },
   created() {
+    this.emitInterface();
     this.configureI18n();
     this.generateInitialMonths();
   },
@@ -4837,6 +4880,13 @@ var CallToAction_component = normalizeComponent(
   methods: {
     ...src_helpers,
     get: lodash_get_default.a,
+    emitInterface() {
+      this.$emit('interface', {
+        showDatepicker: () => this.showDatepicker(),
+        hideDatepicker: () => this.hideDatepicker(),
+        clearSelection: () => this.clearSelection()
+      });
+    },
     handleResize() {
       const {
         isDesktop

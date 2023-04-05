@@ -85,7 +85,8 @@
                     margin-right: 12px;
 
                     * {
-                        fill: white;
+                        fill: transparent;
+                        stroke: #fff;
                     }
 
                     @media screen and ($up-to-tablet) {

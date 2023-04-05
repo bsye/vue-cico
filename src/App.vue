@@ -44,16 +44,23 @@
           />
         </svg>
       </div>
+      <button @click="$options.clearSelection()">as</button>
       <div class="picker">
         <Cico
           class="cico__style-landing"
           :checkInDate="null"
           position="bottom"
           :checkOutDate="null"
-          :disabledDateRanges="[{ start: new Date('2023-02-12') }]"
           :minNights="2"
           :maxNights="15"
-        />
+          @interface="getInterface"
+        >
+          <template v-slot:after-calendar>
+            <div class="cico__check-availability">
+              <button @click="$options.hideDatepicker()">check vail</button>
+            </div>
+          </template>
+        </Cico>
         <Cico
           style="margin-top: 2rem"
           :startDate="startDate"
@@ -92,6 +99,12 @@ export default {
 
     i18n() {
       return en
+    },
+  },
+
+  methods: {
+    getInterface(events) {
+      this.$options = events
     },
   },
 }

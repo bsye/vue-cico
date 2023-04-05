@@ -192,11 +192,18 @@ export default {
 }
 ```
 
+## Named Slots
+| Name |
+|---|
+| before-call-to-action |
+| before-calendar |
+| after-calendar |
 
 ## Events
 
 | Name | Params | Description |
 |--|--|--|
+|`interface`| `Object` | This is emitted on created. it emits an object containing interface functions that can be used to change the state of the component from outside. The functions currently emitted inside the passed objects are: showDatepicker(), hideDatepicker(), clearSelection()
 |`check-in-selected`| `Date` | Emitted every time a new check in date is selected with the new date as payload.
 |`check-out-selected`| `Date` | Emitted every time a new check out date is selected with the new date as payload.
 |`period-selected`| `Date` | Emitted every time both check-in and check-out date are selected
