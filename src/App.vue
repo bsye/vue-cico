@@ -45,25 +45,8 @@
         </svg>
       </div>
       <div class="picker">
-        <Cico
-          class="cico__style-landing"
-          :checkInDate="null"
-          position="bottom"
-          :checkOutDate="null"
-          :minNights="2"
-          :maxNights="15"
-        />
-        <Cico
-          style="margin-top: 2rem"
-          :startDate="startDate"
-          :minNights="3"
-          :checkInDate="new Date('2023-10-09')"
-          :checkOutDate="new Date('2023-10-24')"
-          :maxNights="20"
-          :i18n="i18n"
-          :minDate="new Date('2023-01-01')"
-          class="cico__style-search"
-        />
+        <Cico class="cico__style-landing" />
+        <Cico class="cico__style-search" />
       </div>
     </div>
   </div>
@@ -91,6 +74,12 @@ export default {
 
     i18n() {
       return en
+    },
+  },
+
+  methods: {
+    getInterface(events) {
+      this.$options = events
     },
   },
 }
