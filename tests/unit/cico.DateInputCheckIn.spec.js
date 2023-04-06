@@ -2,6 +2,7 @@ import { shallowMount } from '@vue/test-utils'
 import DateInputCheckIn from '../../components/DateInputCheckIn.vue'
 import helpers from '../../src/helpers'
 import i18n from '../../public/i18n/en'
+import get from 'lodash.get'
 
 describe('DateInputCheckIn Component', () => {
   describe('checkInDateDisplay', () => {
@@ -37,7 +38,7 @@ describe('DateInputCheckIn Component', () => {
       expect(wrapper.html()).toContain(helpers.dateFormatter(wrapper.vm.checkIn, 'DD'))
     })
     it('should display the placeholder message when no check-in is selected', async () => {
-      expect(wrapper2.html()).toContain('Add dates')
+      expect(wrapper2.html()).toContain(get(i18n, 'activity.filter.action'))
     })
   })
 
