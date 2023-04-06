@@ -1,11 +1,7 @@
 <template>
   <div class="cico__dummy-inputs-wrapper" ref="inputs_wrapper">
     <div class="cico__dummy-wrapper-input-wrapper">
-      <span
-        v-if="get(i18n, 'activity.filter.checkOut')"
-        v-show="showExtendedPlaceholder"
-        class="cico__dummy-wrapper-arrival"
-      >
+      <span v-if="get(i18n, 'activity.filter.checkOut')" v-show="showInputLabels" class="cico__dummy-wrapper-arrival">
         {{ get(i18n, 'activity.filter.checkIn') }}
       </span>
       <DateInputCheckIn
@@ -21,11 +17,7 @@
     </div>
     <DateInputDivider :input-size="inputSize" v-if="showExtendedPlaceholder" />
     <div class="cico__dummy-wrapper-input-wrapper departure">
-      <span
-        v-if="get(i18n, 'activity.filter.checkOut')"
-        v-show="showExtendedPlaceholder"
-        class="cico__dummy-wrapper-departure"
-      >
+      <span v-if="get(i18n, 'activity.filter.checkOut')" v-show="showInputLabels" class="cico__dummy-wrapper-departure">
         {{ get(i18n, 'activity.filter.checkOut') }}
       </span>
       <DateInputCheckOut
@@ -110,6 +102,13 @@ export default {
 
     showExtendedPlaceholder() {
       return !(this.checkIn === null && this.inputSize !== 'long')
+    },
+
+    showInputLabels() {
+      if (this.inputSize === 'long') return true
+      if (this.inputSize === 'short' && this.checkIn !== null) return true
+
+      return false
     },
   },
 
