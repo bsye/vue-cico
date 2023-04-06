@@ -50,7 +50,6 @@
           :checkInDate="null"
           position="bottom"
           :checkOutDate="null"
-          :disabledDateRanges="[{ start: new Date('2023-02-12') }]"
           :minNights="2"
           :maxNights="15"
         />

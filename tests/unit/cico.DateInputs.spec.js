@@ -4,7 +4,7 @@ import DateInputs from '../../components/DateInputs.vue'
 describe('DateInputs Component', () => {
   const wrapper = mount(DateInputs, {
     propsData: {
-      toggleDatepicker: () => true,
+      toggleDatepicker: () => false,
       i18n: {}, 
       checkIn:null
     }
