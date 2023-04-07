@@ -3,7 +3,6 @@
     class="cico__input"
     @keyup.enter.stop.prevent="toggleDatepicker"
     data-testid="cicoInput"
-    :class="inputClass"
     :tabindex="tabIndex"
   >
     {{ inputDate || get(i18n, 'activity.filter.action') }}
@@ -45,12 +44,6 @@ export default {
     },
   },
   computed: {
-    inputClass() {
-      return {
-        'cico__input--is-active': this.isOpen && this.inputDate == null,
-      }
-    },
-
     inputDate() {
       if (this.checkOut === null) return null
 

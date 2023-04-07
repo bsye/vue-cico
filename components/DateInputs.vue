@@ -29,7 +29,7 @@
         :checkoutFieldFormat="checkoutFieldFormat"
         :checkIn="checkIn"
         :checkOut="checkOut"
-        :class="{ focused: !checkIn && isOpen }"
+        :class="{ focused: checkIn && !checkOut && isOpen }"
       />
     </div>
   </div>
