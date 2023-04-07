@@ -1,10 +1,5 @@
 <template>
-  <button
-    class="cico__input"
-    @keyup.enter.stop.prevent="toggleDatepicker"
-    data-testid="cicoInput"
-    :tabindex="tabIndex"
-  >
+  <button class="cico__input" @keyup.enter.stop.prevent="toggleDatepicker" data-testid="cicoInput" :tabindex="tabIndex">
     {{ inputDate || get(i18n, 'activity.filter.action') }}
   </button>
 </template>
