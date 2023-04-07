@@ -57,8 +57,8 @@ export default {
 |**disabledDaysOfWeek**|`Array`|`[]`|Let's you set days of the weeks that are disabled by name. es. ['monday', 'tuesday']
 |**displayClearButton**|`Boolean`|`true`|Hide or not the clear button
 |**eventFormat**|`String`|`YYYY-MM-DD`|The date format of the events.
-|**checkinFieldFormat**|`[String]`|`'ddd DD MMM'`| The input fields format, if the type is string then it applies it for desktop and mobile, otherwise you can pass an object with different formats as in the defaults.
-|**checkoutFieldFormat**|`[String]`|`'ddd DD MMM'`| The input fields format, if the type is string then it applies it for desktop and mobile, otherwise you can pass an object with different formats as in the defaults.
+|**checkinFieldFormat**|`[String]`|`'ddd DD MMM'`| Checkin date field format. If unset, dynamically changes based on input size to avoid showing scrollbars.
+|**checkoutFieldFormat**|`[String]`|`'ddd DD MMM'`| Checkout date field format. If unset, dynamically changes based on input size to avoid showing scrollbars.
 |**i18n**|`Object`|`i18nDefaults.json`|If it isn't set, it defaults to the english translation file present in the project
 |**minDate**|`[Date, String]`|`new Date()`|Minimum date for the check-in/check.out
 |**maxDate**|`[Date, String]`|`Infinity`|Maximum date for the check-in/check.out
