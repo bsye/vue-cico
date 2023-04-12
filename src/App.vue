@@ -45,8 +45,15 @@
         </svg>
       </div>
       <div class="picker">
-        <Cico class="cico__style-landing" />
-        <Cico class="cico__style-search" />
+        <Cico :minNights="2" :maxNights="5" class="cico__style-landing" />
+        <Cico
+          :minNights="2"
+          @check-in-selected="checkInSelected"
+          @clear-selection="cleanCheckIn"
+          @clear-selection-mobile="cleanCheckIn"
+          :disabledDateRanges="afterMaxNights"
+          class="cico__style-search"
+        />
       </div>
     </div>
   </div>
@@ -56,6 +63,7 @@
 import './assets/scss/index.scss'
 import Cico from '../components/Cico.vue'
 import en from '../public/i18n/en'
+import helpers from './helpers'
 
 export default {
   name: 'Examples',
@@ -63,13 +71,21 @@ export default {
     Cico,
   },
 
+  data() {
+    return {
+      checkIn: null,
+    }
+  },
+
   computed: {
-    startDate() {
-      const currentDate = new Date()
+    afterMaxNights() {
+      if (!this.checkIn) return null
 
-      currentDate.setDate(currentDate.getDate() + 1)
-
-      return currentDate
+      return [
+        {
+          start: helpers.addDays(this.checkIn, 5),
+        },
+      ]
     },
 
     i18n() {
@@ -78,8 +94,13 @@ export default {
   },
 
   methods: {
-    getInterface(events) {
-      this.$options = events
+    checkInSelected(day) {
+      if (!day) return
+      this.checkIn = new Date(day)
+    },
+
+    cleanCheckIn() {
+      this.checkIn = null
     },
   },
 }
