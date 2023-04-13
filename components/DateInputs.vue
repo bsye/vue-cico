@@ -116,6 +116,7 @@ export default {
     if (!get(this, '$refs.inputs_wrapper', null)) return
 
     window.addEventListener('resize', () => {
+      if (!get(this, '$refs.inputs_wrapper', null)) return
       this.inputWidth = this.$refs.inputs_wrapper.clientWidth
     })
 
