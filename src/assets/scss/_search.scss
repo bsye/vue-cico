@@ -37,9 +37,10 @@
 
         svg {
             &.arrow-icon {
-                margin-bottom: 1px;
+                margin-bottom: 2px;
                 margin-left: 6px;
                 margin-right: 6px;
+                display:flex;
 
                 * {
                     stroke: var(--silver-mid);
