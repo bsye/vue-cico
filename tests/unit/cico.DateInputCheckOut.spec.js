@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
+import get from 'lodash.get'
 import DateInputCheckOut from '../../components/DateInputCheckOut.vue'
 import helpers from '../../src/helpers'
 import i18n from '../../public/i18n/en'
-import get from 'lodash.get'
 
 describe('DateInputCheckOut Component', () => {
   describe('checkOutDateDisplay', () => {
@@ -14,11 +14,11 @@ describe('DateInputCheckOut Component', () => {
         propsData: {
           isOpen: false,
           toggleDatepicker: () => false,
-          i18n: i18n,
-          inputSize:'',
+          i18n,
+          inputSize: '',
           checkoutFieldFormat: '',
           checkIn: new Date('2022-12-12'),
-          checkOut: new Date('2022-12-13')
+          checkOut: new Date('2022-12-13'),
         },
       })
 
@@ -26,11 +26,11 @@ describe('DateInputCheckOut Component', () => {
         propsData: {
           isOpen: false,
           toggleDatepicker: () => false,
-          i18n: i18n,
-          inputSize:'',
+          i18n,
+          inputSize: '',
           checkoutFieldFormat: '',
           checkIn: null,
-          checkOut: null
+          checkOut: null,
         },
       })
     })
@@ -52,11 +52,11 @@ describe('DateInputCheckOut Component', () => {
         propsData: {
           isOpen: false,
           toggleDatepicker: () => false,
-          i18n: i18n,
-          inputSize:'long',
+          i18n,
+          inputSize: 'long',
           checkoutFieldFormat: '',
           checkIn: new Date('2022-12-12'),
-          checkOut: new Date('2022-12-13')
+          checkOut: new Date('2022-12-13'),
         },
       })
 
@@ -64,11 +64,11 @@ describe('DateInputCheckOut Component', () => {
         propsData: {
           isOpen: false,
           toggleDatepicker: () => false,
-          i18n: i18n,
-          inputSize:'short',
+          i18n,
+          inputSize: 'short',
           checkoutFieldFormat: '',
           checkIn: new Date('2022-12-12'),
-          checkOut: new Date('2022-12-13')
+          checkOut: new Date('2022-12-13'),
         },
       })
 
@@ -76,27 +76,30 @@ describe('DateInputCheckOut Component', () => {
         propsData: {
           isOpen: false,
           toggleDatepicker: () => false,
-          i18n: i18n,
-          inputSize:'extra-short',
+          i18n,
+          inputSize: 'extra-short',
           checkoutFieldFormat: '',
           checkIn: new Date('2022-12-12'),
-          checkOut: new Date('2022-12-13')
+          checkOut: new Date('2022-12-13'),
         },
       })
     })
     it('should use the format ddd DD MMM when input is long', async () => {
-      let button = wrapper.find('.cico__input');
-      expect(button.text()).toBe(helpers.dateFormatter(wrapper.vm.checkOut, 'ddd DD MMM'));
+      const button = wrapper.find('.cico__input')
+
+      expect(button.text()).toBe(helpers.dateFormatter(wrapper.vm.checkOut, 'ddd DD MMM'))
     })
-    
+
     it('should use the format DD MMM when input is short', async () => {
-      let button = wrapper2.find('.cico__input');
-      expect(button.text()).toBe(helpers.dateFormatter(wrapper.vm.checkOut, 'DD MMM'));
+      const button = wrapper2.find('.cico__input')
+
+      expect(button.text()).toBe(helpers.dateFormatter(wrapper.vm.checkOut, 'DD MMM'))
     })
-    
+
     it('should use the format DD MMM when input is extra-short', async () => {
-      let button = wrapper3.find('.cico__input');
-      expect(button.text()).toBe(helpers.dateFormatter(wrapper.vm.checkOut, 'DD MMM'));
+      const button = wrapper3.find('.cico__input')
+
+      expect(button.text()).toBe(helpers.dateFormatter(wrapper.vm.checkOut, 'DD MMM'))
     })
   })
 })
