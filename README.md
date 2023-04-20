@@ -56,8 +56,9 @@ export default {
 |**disabledDateRanges**|`Array of Objects`|`[{}]`| Let's you pass ranges of dates to disable. Every object has to have a start parameter of type Date. If no end parameter is specified, every date after the start will be disabled. Es. `[{ start: new Date('2023-02-12')}]` will disable all dates after 2023-02-12 Es2. `[{ start: new Date('2023-02-12'), end: new Date('2023-02-16')}]` will disable all dates in between 2023-02-12 and 2023-02-16 Es3. `[{ start: new Date('2023-02-12'), end: new Date('2023-02-16')}, { start: new Date('2023-02-20'), end: new Date('2023-02-25')}]` will disable all dates between 2023-02-12 and 2023-02-16 and also all the dates in between 2023-02-20 and 2023-02-25. For sanity reasons, ranges in which the end date is before the start date are scraped and not considered.
 |**disabledDaysOfWeek**|`Array`|`[]`|Let's you set days of the weeks that are disabled by name. es. ['monday', 'tuesday']
 |**displayClearButton**|`Boolean`|`true`|Hide or not the clear button
-|**outputFormat**|`String`|`YYYY-MM-DD`|The date format of the events.
-|**fieldsFormat**|`[Object, String]`|`{ mobile: 'DD MMM' desktop: 'ddd DD MMM' }`|The input fields format, if the type is string then it applies it for desktop and mobile, otherwise you can pass an object with different formats as in the defaults.
+|**eventFormat**|`String`|`YYYY-MM-DD`|The date format of the events.
+|**checkinFieldFormat**|`[String]`|`'ddd DD MMM'`| Checkin date field format. If unset, dynamically changes based on input size to avoid showing scrollbars.
+|**checkoutFieldFormat**|`[String]`|`'ddd DD MMM'`| Checkout date field format. If unset, dynamically changes based on input size to avoid showing scrollbars.
 |**i18n**|`Object`|`i18nDefaults.json`|If it isn't set, it defaults to the english translation file present in the project
 |**minDate**|`[Date, String]`|`new Date()`|Minimum date for the check-in/check.out
 |**maxDate**|`[Date, String]`|`Infinity`|Maximum date for the check-in/check.out

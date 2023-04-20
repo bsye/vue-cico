@@ -8,35 +8,15 @@
     </button>
     <div @click="toggleDatepicker()" class="cico__dummy-wrapper">
       <IconCalendar />
-      <div class="cico__dummy-wrapper-scroll">
-        <div class="cico__dummy-wrapper-input-wrapper">
-          <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-arrival">
-            {{ get(i18n, 'activity.filter.checkIn') }}
-          </span>
-          <date-input
-            :i18n="i18n"
-            :input-date="responsiveFormatter(this.checkIn, this.fieldsFormat)"
-            input-date-type="check-in"
-            :class="{ focused: !checkIn && isOpen }"
-            :is-open="isOpen"
-            :toggle-datepicker="toggleDatepicker"
-          />
-        </div>
-        <IconArrow />
-        <div class="cico__dummy-wrapper-input-wrapper departure">
-          <span v-if="get(i18n, 'activity.filter.checkOut')" class="cico__dummy-wrapper-departure">
-            {{ get(i18n, 'activity.filter.checkOut') }}
-          </span>
-          <date-input
-            :i18n="i18n"
-            :class="{ focused: checkIn && !checkOut && isOpen }"
-            :input-date="responsiveFormatter(this.checkOut, this.fieldsFormat)"
-            input-date-type="check-out"
-            :is-open="isOpen"
-            :toggle-datepicker="toggleDatepicker"
-          />
-        </div>
-      </div>
+      <DateInputs
+        :check-in="checkIn"
+        :i18n="i18n"
+        :isOpen="isOpen"
+        :checkinFieldFormat="checkinFieldFormat"
+        :checkoutFieldFormat="checkoutFieldFormat"
+        :check-out="checkOut"
+        :toggleDatepicker="toggleDatepicker"
+      />
       <button
         class="cico__clear-button"
         tabindex="0"
@@ -166,8 +146,7 @@ import get from 'lodash.get'
 import Month from './Month.vue'
 import MobileActions from './MobileActions.vue'
 import IconCalendar from './icons/IconCalendar.vue'
-import IconArrow from './icons/IconArrow.vue'
-import DateInput from './DateInput.vue'
+import DateInputs from './DateInputs.vue'
 import CallToAction from './CallToAction.vue'
 import Helpers from '../src/helpers'
 // eslint-disable-next-line import/no-named-as-default
@@ -180,8 +159,7 @@ export default {
     CallToAction,
     MobileActions,
     IconCalendar,
-    IconArrow,
-    DateInput,
+    DateInputs,
   },
   props: {
     checkInDate: {
@@ -229,19 +207,17 @@ export default {
       default: true,
     },
 
-    outputFormat: {
+    eventFormat: {
       type: String,
       default: 'YYYY-MM-DD',
     },
 
-    fieldsFormat: {
-      type: [Object, String],
-      default: () => {
-        return {
-          mobile: 'DD MMM',
-          desktop: 'ddd DD MMM',
-        }
-      },
+    checkinFieldFormat: {
+      type: String,
+    },
+
+    checkoutFieldFormat: {
+      type: String,
     },
 
     i18n: {
@@ -411,7 +387,7 @@ export default {
   },
   watch: {
     checkIn(newDate) {
-      this.$emit('check-in-selected', this.dateFormatter(newDate, this.outputFormat))
+      this.$emit('check-in-selected', this.dateFormatter(newDate, this.eventFormat))
 
       this.reRender()
     },
@@ -422,7 +398,7 @@ export default {
         this.reRender()
       }
 
-      this.$emit('check-out-selected', this.dateFormatter(newDate, this.outputFormat))
+      this.$emit('check-out-selected', this.dateFormatter(newDate, this.eventFormat))
       this.reRender()
     },
 
@@ -576,29 +552,6 @@ export default {
       return null
     },
 
-    responsiveFormatter(date) {
-      if (typeof this.fieldsFormat === 'string') return this.dateFormatter(date, this.fieldsFormat)
-
-      if (this.isDesktop) {
-        try {
-          if (this.get(this.fieldsFormat, 'desktop')) return this.dateFormatter(date, this.fieldsFormat.desktop)
-        } catch (error) {
-          return this.dateFormatter(date, 'ddd DD MMM')
-        }
-
-        return this.dateFormatter(date, 'ddd DD MMM')
-      }
-
-      if (this.get(this.fieldsFormat, 'mobile'))
-        try {
-          return this.dateFormatter(date, this.fieldsFormat.mobile)
-        } catch (error) {
-          return this.dateFormatter(date, 'DD MMM')
-        }
-
-      return this.dateFormatter(date, 'DD MMM')
-    },
-
     validDayHovered(date) {
       this.validHoveredDate = date
     },
@@ -623,7 +576,7 @@ export default {
     },
 
     formatDate(date) {
-      return this.dateFormatter(date, this.outputFormat)
+      return this.dateFormatter(date, this.eventFormat)
     },
 
     enterMonth(event, month) {
@@ -653,7 +606,7 @@ export default {
 
       this.hoveringDate = null
       this.hoveringDate = date
-      this.$emit('day-clicked', this.dateFormatter(date, this.outputFormat))
+      this.$emit('day-clicked', this.dateFormatter(date, this.eventFormat))
 
       if (this.checkIn == null) {
         this.checkIn = date
@@ -665,8 +618,8 @@ export default {
         this.checkOut = date
         this.$emit(
           'period-selected',
-          this.dateFormatter(this.checkIn, this.outputFormat),
-          this.dateFormatter(this.checkOut, this.outputFormat),
+          this.dateFormatter(this.checkIn, this.eventFormat),
+          this.dateFormatter(this.checkOut, this.eventFormat),
         )
 
         return
