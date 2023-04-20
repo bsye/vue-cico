@@ -125,7 +125,6 @@
       margin: 0;
       padding-top: 16px;
       padding-bottom: 16px;
-      text-transform: capitalize;
       pointer-events: none;
       text-align: center;
       font-weight: 500;
@@ -369,10 +368,6 @@
 
       display: block;
     }
-  }
-  &__checkin,
-  &__checkout {
-    text-transform: capitalize;
   }
   &__nights-info {
     margin-bottom: 1rem;
