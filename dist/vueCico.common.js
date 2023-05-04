@@ -4247,8 +4247,8 @@ var IconCalendar_component = normalizeComponent(
 )
 
 /* harmony default export */ var IconCalendar = (IconCalendar_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"23c53eee-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/DateInputs.vue?vue&type=template&id=15f7f0d8&
-var DateInputsvue_type_template_id_15f7f0d8_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"23c53eee-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/DateInputs.vue?vue&type=template&id=065e7310&
+var DateInputsvue_type_template_id_065e7310_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -4306,9 +4306,9 @@ var DateInputsvue_type_template_id_15f7f0d8_render = function render() {
     }
   }) : _vm._e()], 1)], 1);
 };
-var DateInputsvue_type_template_id_15f7f0d8_staticRenderFns = [];
+var DateInputsvue_type_template_id_065e7310_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/DateInputs.vue?vue&type=template&id=15f7f0d8&
+// CONCATENATED MODULE: ./components/DateInputs.vue?vue&type=template&id=065e7310&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"23c53eee-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/DateInputCheckOut.vue?vue&type=template&id=11c2eeb2&
 var DateInputCheckOutvue_type_template_id_11c2eeb2_render = function render() {
@@ -4668,8 +4668,8 @@ var DateInputDivider_component = normalizeComponent(
   computed: {
     inputSize() {
       if (!this.inputWidth) return 'long';
-      if (this.inputWidth >= 235) return 'long';
-      if (this.inputWidth < 235 && this.inputWidth > 150) return 'short';
+      if (this.inputWidth >= 216) return 'long';
+      if (this.inputWidth < 216 && this.inputWidth > 150) return 'short';
       return 'extra-short';
     },
     showExtendedPlaceholder() {
@@ -4706,8 +4706,8 @@ var DateInputDivider_component = normalizeComponent(
 
 var DateInputs_component = normalizeComponent(
   components_DateInputsvue_type_script_lang_js_,
-  DateInputsvue_type_template_id_15f7f0d8_render,
-  DateInputsvue_type_template_id_15f7f0d8_staticRenderFns,
+  DateInputsvue_type_template_id_065e7310_render,
+  DateInputsvue_type_template_id_065e7310_staticRenderFns,
   false,
   null,
   null,
