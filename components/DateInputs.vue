@@ -94,8 +94,8 @@ export default {
     inputSize() {
       if (!this.inputWidth) return 'long'
 
-      if (this.inputWidth >= 235) return 'long'
-      if (this.inputWidth < 235 && this.inputWidth > 150) return 'short'
+      if (this.inputWidth >= 216) return 'long'
+      if (this.inputWidth < 216 && this.inputWidth > 150) return 'short'
 
       return 'extra-short'
     },
