@@ -28,7 +28,7 @@ describe('DateInputs Component', () => {
     wrapper.vm.inputWidth = 400
     expect(wrapper.vm.inputSize).toBe('long')
 
-    wrapper.vm.inputWidth = 234
+    wrapper.vm.inputWidth = 215
     expect(wrapper.vm.inputSize).toBe('short')
 
     wrapper.vm.inputWidth = 149
