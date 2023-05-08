@@ -1,6 +1,6 @@
 {
   "name": "vue-cico",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Smartbox version of check-in check-out",
   "author": "Smartbox",
   "main": "dist/vueCico.common.js",
