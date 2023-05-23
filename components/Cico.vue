@@ -462,9 +462,9 @@ export default {
 
     emitInterface() {
       this.$emit('interface', {
-        showDatepicker: () => this.showDatepicker(),
-        hideDatepicker: () => this.hideDatepicker(),
-        clearSelection: () => this.clearSelection(),
+        showDatepicker: (event) => this.showDatepicker(event),
+        hideDatepicker: (event) => this.hideDatepicker(event),
+        clearSelection: (event) => this.clearSelection(event),
       })
     },
 
@@ -662,28 +662,28 @@ export default {
       this.clearSelection()
     },
 
-    clearSelection() {
+    clearSelection(event = null) {
       this.hoveringDate = null
       this.checkIn = null
       this.checkOut = null
       this.reRender()
-      this.$emit('clear-selection')
+      this.$emit('clear-selection', event)
     },
 
-    hideDatepicker() {
+    hideDatepicker(event = null) {
       this.isOpen = false
       this.$nextTick(() => {
-        this.$emit('cico-closed')
+        this.$emit('cico-closed', event)
       })
     },
 
-    showDatepicker() {
+    showDatepicker(event = null) {
       this.isOpen = true
       this.adjustScrollOnMobile()
       this.selectCorrectMonth()
 
       this.$nextTick(() => {
-        this.$emit('cico-opened')
+        this.$emit('cico-opened', event)
       })
     },
 

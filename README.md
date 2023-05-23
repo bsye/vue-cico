@@ -146,7 +146,7 @@ export default {
 
 | Name | Params | Description |
 |--|--|--|
-|`interface`| `Object` | This is emitted on created. it emits an object containing interface functions that can be used to change the state of the component from outside. The functions currently emitted inside the passed objects are: showDatepicker(), hideDatepicker(), clearSelection()
+|`interface`| `Object` | This is emitted on created. it emits an object containing interface functions that can be used to change the state of the component from outside. The functions currently emitted inside the passed objects are: showDatepicker(event), hideDatepicker(event), clearSelection(event)
 |`check-in-selected`| `Date` | Emitted every time a new check in date is selected with the new date as payload.
 |`check-out-selected`| `Date` | Emitted every time a new check out date is selected with the new date as payload.
 |`period-selected`| `Date` | Emitted every time both check-in and check-out date are selected
@@ -154,9 +154,9 @@ export default {
 |`enter-day`| `Date` | sent when a day is hovered
 |`day-clicked`| `Date` | sent when a day is clicked
 |`enter-month`| `String` | sent when a day of a month is hovered
-|`clear-selection`| `null` | sent when the clear selection button is clicked or check-in and check-out are cleared for unavailability
+|`clear-selection`| `Event` | sent when the clear selection button is clicked or check-in and check-out are cleared for unavailability
 |`clear-selection-mobile`| `null` | sent when the clear selection button is clicked on mobile. It serves as a way of refreshing the view without any buttons.
-|`cico-closed`| `null` | sent when the picker is closed
-|`cico-opened`| `null` | sent when the picker is opened
+|`cico-closed`| `Event` | sent when the picker is closed
+|`cico-opened`| `Event` | sent when the picker is opened
 |`previous-month-rendered`| `String` | sent when the previous month button is clicked, returns the month
 |`next-month-rendered`| `String` | sent when the next month button is clicked, returns the month

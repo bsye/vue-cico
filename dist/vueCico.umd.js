@@ -2595,7 +2595,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"23c53eee-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=7044275d&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"23c53eee-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Cico.vue?vue&type=template&id=764fc633&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -2813,7 +2813,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=7044275d&
+// CONCATENATED MODULE: ./components/Cico.vue?vue&type=template&id=764fc633&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -5185,9 +5185,9 @@ var CallToAction_component = normalizeComponent(
     get: lodash_get_default.a,
     emitInterface() {
       this.$emit('interface', {
-        showDatepicker: () => this.showDatepicker(),
-        hideDatepicker: () => this.hideDatepicker(),
-        clearSelection: () => this.clearSelection()
+        showDatepicker: event => this.showDatepicker(event),
+        hideDatepicker: event => this.hideDatepicker(event),
+        clearSelection: event => this.clearSelection(event)
       });
     },
     handleResize() {
@@ -5339,25 +5339,25 @@ var CallToAction_component = normalizeComponent(
       if (!this.isDesktop) this.$emit('mobile-clear-selection');
       this.clearSelection();
     },
-    clearSelection() {
+    clearSelection(event = null) {
       this.hoveringDate = null;
       this.checkIn = null;
       this.checkOut = null;
       this.reRender();
-      this.$emit('clear-selection');
+      this.$emit('clear-selection', event);
     },
-    hideDatepicker() {
+    hideDatepicker(event = null) {
       this.isOpen = false;
       this.$nextTick(() => {
-        this.$emit('cico-closed');
+        this.$emit('cico-closed', event);
       });
     },
-    showDatepicker() {
+    showDatepicker(event = null) {
       this.isOpen = true;
       this.adjustScrollOnMobile();
       this.selectCorrectMonth();
       this.$nextTick(() => {
-        this.$emit('cico-opened');
+        this.$emit('cico-opened', event);
       });
     },
     adjustScrollOnMobile() {
