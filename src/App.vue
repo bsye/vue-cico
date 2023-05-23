@@ -62,17 +62,23 @@ export default {
     Cico,
   },
 
+  data() {
+    return {
+      interfaceEvents: null,
+    }
+  },
+
   methods: {
     clearSelectionHandled(event) {
       console.log(event)
     },
 
     getInterface(events) {
-      this.$options = events
+      this.interfaceEvents = events
     },
 
     clearSelectionTrigger() {
-      this.$options.clearSelection(false)
+      this.interfaceEvents.clearSelection(false)
     },
   },
 }
