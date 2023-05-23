@@ -662,7 +662,7 @@ export default {
       this.clearSelection()
     },
 
-    clearSelection(event = null) {
+    clearSelection(event) {
       this.hoveringDate = null
       this.checkIn = null
       this.checkOut = null
@@ -670,14 +670,14 @@ export default {
       this.$emit('clear-selection', event)
     },
 
-    hideDatepicker(event = null) {
+    hideDatepicker(event) {
       this.isOpen = false
       this.$nextTick(() => {
         this.$emit('cico-closed', event)
       })
     },
 
-    showDatepicker(event = null) {
+    showDatepicker(event) {
       this.isOpen = true
       this.adjustScrollOnMobile()
       this.selectCorrectMonth()
