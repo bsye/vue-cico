@@ -45,8 +45,8 @@
         </svg>
       </div>
       <div class="picker">
-        <Cico class="cico__style-landing" />
-        <Cico class="cico__style-search" />
+        <Cico @clear-selection="clearSelectionHandled" @interface="getInterface" class="cico__style-landing" />
+        <button @click="clearSelectionTrigger">TRIGGER Clear selection</button>
       </div>
     </div>
   </div>
@@ -55,7 +55,6 @@
 <script>
 import './assets/scss/index.scss'
 import Cico from '../components/Cico.vue'
-import en from '../public/i18n/en'
 
 export default {
   name: 'Examples',
@@ -63,23 +62,17 @@ export default {
     Cico,
   },
 
-  computed: {
-    startDate() {
-      const currentDate = new Date()
-
-      currentDate.setDate(currentDate.getDate() + 1)
-
-      return currentDate
-    },
-
-    i18n() {
-      return en
-    },
-  },
-
   methods: {
+    clearSelectionHandled(event) {
+      console.log(event)
+    },
+
     getInterface(events) {
       this.$options = events
+    },
+
+    clearSelectionTrigger() {
+      this.$options.clearSelection(false)
     },
   },
 }
