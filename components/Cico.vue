@@ -48,6 +48,13 @@
           :validHoveredDate="validHoveredDate"
           :i18n="i18n"
         />
+        <MonthSelector
+          @month-selected="renderNewMonths"
+          :activeMonthIndex="activeMonthIndex"
+          :firstDayOfWeek="firstDayOfWeek"
+          :minDate="minDate"
+          :maxDate="maxDate"
+        />
         <slot name="before-calendar"></slot>
         <div ref="scroller" class="cico__months">
           <div
@@ -60,8 +67,8 @@
               type="button"
               class="cico__month-button cico__month-button--prev"
               :class="{ disabled: activeMonthIndex === 0 || animateClass !== null }"
-              @click="renderPreviousMonth"
-              @keyup.enter.stop.prevent="renderPreviousMonth"
+              @click="animatePreviousMonth"
+              @keyup.enter.stop.prevent="animatePreviousMonth"
               :tabindex="isOpen ? 0 : -1"
               :disabled="activeMonthIndex === 0"
             >
@@ -79,8 +86,8 @@
               type="button"
               class="cico__month-button cico__month-button--next"
               :class="{ disabled: animateClass !== null }"
-              @click="renderNextMonth"
-              @keyup.enter.stop.prevent="renderNextMonth"
+              @click="animateNextMonth"
+              @keyup.enter.stop.prevent="animateNextMonth"
               :disabled="isPreventedMaxMonth"
               :tabindex="isOpen ? 0 : -1"
             >
@@ -149,6 +156,7 @@ import IconCalendar from './icons/IconCalendar.vue'
 import DateInputs from './DateInputs.vue'
 import CallToAction from './CallToAction.vue'
 import Helpers from '../src/helpers'
+import MonthSelector from './MonthSelector.vue'
 // eslint-disable-next-line import/no-named-as-default
 import i18nDefaults from '../public/i18n/en'
 
@@ -156,6 +164,7 @@ export default {
   name: 'Cico',
   components: {
     Month,
+    MonthSelector,
     CallToAction,
     MobileActions,
     IconCalendar,
@@ -708,9 +717,13 @@ export default {
       this[this.isOpen ? 'hideDatepicker' : 'showDatepicker']()
     },
 
-    async renderPreviousMonth() {
+    async animatePreviousMonth() {
       await this.handleAnimation('enter-previous-animation')
 
+      this.renderPreviousMonth()
+    },
+
+    renderPreviousMonth() {
       if (this.activeMonthIndex >= 1) {
         const firstDayOfLastMonth = this.months[this.activeMonthIndex].days.filter(
           (day) => day.belongsToThisMonth === true,
@@ -723,9 +736,13 @@ export default {
       }
     },
 
-    async renderNextMonth() {
+    async animateNextMonth() {
       await this.handleAnimation('enter-next-animation')
 
+      this.renderNextMonth()
+    },
+
+    renderNextMonth() {
       if (this.activeMonthIndex < this.months.length - this.numberOfMonths) {
         this.activeMonthIndex++
 
@@ -740,6 +757,21 @@ export default {
       this.createMonth(nextMonth)
       this.activeMonthIndex++
       this.$emit('next-month-rendered', nextMonth)
+    },
+
+    async renderNewMonths(initialDate) {
+      const lastAvailable = this.months[this.activeMonthIndex + 1].days[15].date
+      const monthDiff = this.getMonthDiff(lastAvailable, initialDate)
+
+      if (monthDiff >= 0) {
+        for (let i = 0; i < monthDiff; i++) {
+          this.renderNextMonth()
+        }
+      } else {
+        for (let i = 0; i > monthDiff; i--) {
+          this.renderPreviousMonth()
+        }
+      }
     },
 
     async handleAnimation(elementClass) {
