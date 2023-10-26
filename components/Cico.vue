@@ -671,6 +671,7 @@ export default {
     },
 
     hideDatepicker(event) {
+      if (this.isOpen === false) return
       this.isOpen = false
       this.$nextTick(() => {
         this.$emit('cico-closed', event)
@@ -678,6 +679,7 @@ export default {
     },
 
     showDatepicker(event) {
+      if (this.isOpen === true) return
       this.isOpen = true
       this.adjustScrollOnMobile()
       this.selectCorrectMonth()
