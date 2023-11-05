@@ -525,7 +525,7 @@ export default {
     },
 
     mobileActionSelected() {
-      this.isOpen = !this.isOpen
+      this.toggleDatepicker()
       this.$emit('search-mobile-triggered')
     },
 
