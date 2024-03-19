@@ -1,5 +1,5 @@
 <template>
-  <div class="cico__wrapper cico__root" :ref="`DatePicker-${hash}`">
+  <div class="cico__wrapper cico__root" :class="{ highlighted: open }" :ref="`DatePicker-${hash}`">
     <button class="cico__close-button" v-if="isOpen && !isDesktop" @click="mobileActionSelected()">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" role="img" aria-label="x">
         <title>x</title>
@@ -399,6 +399,15 @@ export default {
       }
 
       this.$emit('check-out-selected', this.dateFormatter(newDate, this.eventFormat))
+
+      if (this.checkIn) {
+        this.$emit(
+          'period-selected',
+          this.dateFormatter(this.checkIn, this.eventFormat),
+          this.dateFormatter(newDate, this.eventFormat),
+        )
+      }
+
       this.reRender()
     },
 

@@ -47,6 +47,9 @@
       <div class="picker">
         <Cico class="cico__style-landing" />
         <Cico class="cico__style-search" />
+        <section>
+          <Cico class="cico__style-detail" />
+        </section>
       </div>
     </div>
   </div>
@@ -286,6 +289,11 @@ body {
     gap: 2rem;
     flex-direction: column;
     justify-content: center;
+  }
+
+  section {
+    padding: 16px;
+    background-color: white;
   }
 }
 </style>
