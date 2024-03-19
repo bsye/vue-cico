@@ -12,10 +12,11 @@ npm install git+ssh://git@gitlab.production.smartbox.com:npm/vue-cico.git
 
 #### CSS
 
-There are two styles already set up, which you can select by adding the class to the component:
+There are three styles already set up, which you can select by adding the class to the component:
 
 Search Page: `.cico__style-search`
 Landing Page: `.cico__style-landing`
+Detail Page: `.cico__style-detail`
 
 The style is only related to the appearance of the inputs.
 
