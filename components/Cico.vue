@@ -399,15 +399,6 @@ export default {
       }
 
       this.$emit('check-out-selected', this.dateFormatter(newDate, this.eventFormat))
-
-      if (this.checkIn) {
-        this.$emit(
-          'period-selected',
-          this.dateFormatter(this.checkIn, this.eventFormat),
-          this.dateFormatter(newDate, this.eventFormat),
-        )
-      }
-
       this.reRender()
     },
 
@@ -657,6 +648,12 @@ export default {
 
       if (this.checkIn && !this.checkOut) {
         this.checkOut = this.addDays(this.checkIn, this.minNights)
+
+        this.$emit(
+          'period-selected',
+          this.dateFormatter(this.checkIn, this.eventFormat),
+          this.dateFormatter(this.checkOut, this.eventFormat),
+        )
       }
     },
 
