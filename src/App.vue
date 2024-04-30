@@ -58,32 +58,11 @@
 <script>
 import './assets/scss/index.scss'
 import Cico from '../components/Cico.vue'
-import en from '../public/i18n/en'
 
 export default {
   name: 'Examples',
   components: {
     Cico,
-  },
-
-  computed: {
-    startDate() {
-      const currentDate = new Date()
-
-      currentDate.setDate(currentDate.getDate() + 1)
-
-      return currentDate
-    },
-
-    i18n() {
-      return en
-    },
-  },
-
-  methods: {
-    getInterface(events) {
-      this.$options = events
-    },
   },
 }
 </script>

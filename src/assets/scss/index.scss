@@ -267,7 +267,7 @@
   overflow: hidden;
 
   @media screen and (min-width: 768px) {
-    height: 400px;
+    height: 465px;
 
     &--closed {
       &.bottom {
@@ -881,6 +881,10 @@
     flex-grow: 1;
     position: relative;
     height: 100%;
+
+    @media screen and ($desktop) {
+        width: 630px;
+    }
   }
 
   &__months-wrapper {
