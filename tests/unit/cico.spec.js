@@ -64,6 +64,7 @@ describe('Cico Component', () => {
     expect(wrapper.find('.cico--open').exists()).to.eql(true)
     expect(wrapper.emitted('cico-opened').length).to.not.eql(0)
     expect(wrapper.find('.cico__month-day').exists()).to.eql(true)
+    expect(wrapper.find('.cico__months-selector').exists()).to.eql(true)
   })
 
   const testCheckIn = new Date('2022-12-28')
@@ -248,5 +249,11 @@ describe('Cico Component', () => {
     await wrapper.find('.cico__dummy-wrapper').trigger('click')
     expect(wrapper.vm.isOpen).to.eql(true)
     expect(wrapper.vm.activeMonthIndex).to.eql(0)
+  })
+    
+  it('Should not display the fast month selector on mobile', async () => {
+      wrapper.vm.windowWidth = 760
+      await wrapper.vm.$nextTick()
+      expect(wrapper.find('.cico__months-selector').exists()).to.eql(false)
   })
 })

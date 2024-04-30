@@ -54,6 +54,7 @@
           :firstDayOfWeek="firstDayOfWeek"
           :minDate="minDate"
           :maxDate="maxDate"
+          v-if="isDesktop"
         />
         <slot name="before-calendar"></slot>
         <div ref="scroller" class="cico__months">

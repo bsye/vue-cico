@@ -4,6 +4,7 @@
       <button
         @click="index <= maxMonth ? $emit('month-selected', month.days[15].date) : null"
         v-for="(month, index) in months"
+        :data-testid="`cico__months-selector--month-${index}`"
         :key="getUniqueKey(month)"
         :class="{
           'cico__months-selector--disabled': index > maxMonth,
@@ -11,7 +12,7 @@
           'cico__months-selector--next': index === activeMonthIndex + 1,
         }"
       >
-        <p v-if="getIsNewYear(month)">
+        <p :data-testid="'cico__months-selector--newyear-' + formatMonth(month, 'YYYY')" v-if="getIsNewYear(month)">
           {{ formatMonth(month, 'YYYY') }}
         </p>
         <span>
